@@ -3,6 +3,7 @@
     ".husky/": true,
     ".next/": true,
     "node_modules/": true,
+    ".eslingignore": true,
     ".eslintrc": true,
     ".gitignore": true,
     ".prettierrc": true,
