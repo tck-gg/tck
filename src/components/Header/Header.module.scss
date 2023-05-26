@@ -1,0 +1,35 @@
+.root {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  margin: auto;
+  width: 100%;
+  max-width: 1258px;
+
+  padding: 20px 1em;
+}
+
+.headerGroup {
+  display: flex;
+  flex: 1;
+
+  align-items: center;
+}
+.headerGroup:first-child {
+  justify-content: start;
+}
+.headerGroup:nth-child(2) {
+  justify-content: center;
+  gap: 20px;
+
+  color: #9391C9;
+  font-weight: bold;
+}
+.headerGroup:last-child {
+  justify-content: end;
+}
+
+.active {
+  color: #ffffff;
+}

@@ -1,0 +1,58 @@
+import Image from 'next/image';
+import { useRouter } from 'next/router';
+import Link from 'next/link';
+
+import RewardsHeaderItem from '../RewardsHeaderItem/RewardsHeaderItem';
+
+import classes from './Header.module.scss';
+
+interface HeaderItem {
+  href: string;
+  label: string;
+  component?: React.ReactNode;
+}
+
+const headerItems: HeaderItem[] = [
+  { href: '/', label: 'HOME' },
+  { href: '/videos', label: 'VIDEOS' },
+  { href: '/stream', label: 'STREAM' },
+  { href: '/rewards', label: 'REWARDS', component: <RewardsHeaderItem /> },
+  { href: '/merch', label: 'MERCH' }
+];
+
+function Header() {
+  const { pathname } = useRouter();
+
+  return (
+    <div className={classes.root}>
+      <div className={classes.headerGroup}>
+        <Image
+          width={77}
+          height={35}
+          src='/img/logo.png'
+          alt='logo'
+          style={{ objectFit: 'contain' }}
+        />
+      </div>
+      <div className={classes.headerGroup}>
+        {headerItems.map(({ href, label, component }) => {
+          const isActive = pathname === href;
+
+          return component ? (
+            <Link href={href}>{component}</Link>
+          ) : (
+            <Link href={href} className={isActive ? classes.active : ''} key={label}>
+              {label}
+            </Link>
+          );
+        })}
+      </div>
+      <div className={classes.headerGroup}>
+        <p>ratio</p>
+        <p>ratio</p>
+      </div>
+    </div>
+  );
+}
+
+export default Header;
