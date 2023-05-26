@@ -32,3 +32,11 @@ a {
   display: flex;
   flex-direction: column;
 }
+
+.fa-events-icons-loading .fa-fw {
+  display: inline-block;
+  width: 1.28571429em;
+}
+.fa-events-icons-loading .fa-fw::before {
+  content: "";
+}
