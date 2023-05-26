@@ -48,8 +48,9 @@ function Header() {
         })}
       </div>
       <div className={classes.headerGroup}>
-        <p>ratio</p>
-        <p>ratio</p>
+        {/* TODO: Need backend. */}
+        <p>COINS</p>
+        <p>PROFILE</p>
       </div>
     </div>
   );

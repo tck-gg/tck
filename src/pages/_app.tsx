@@ -1,9 +1,11 @@
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 
-import '../styles/globals.scss';
 import Header from '@/components/Header/Header';
 import Footer from '@/components/Footer/Footer';
+
+import '../styles/globals.scss';
+import classes from './_app.module.scss';
 
 function App({ Component, pageProps }: AppProps) {
   return (
@@ -13,7 +15,7 @@ function App({ Component, pageProps }: AppProps) {
       </Head>
       <>
         <Header />
-        <div id='content'>
+        <div className={classes.content}>
           <Component {...pageProps} />
         </div>
         <Footer />

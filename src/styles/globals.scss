@@ -7,6 +7,7 @@
 
 html, body {
   height: 100%;
+  color: #ffffff;
 }
 
 body {
@@ -30,8 +31,4 @@ a {
 
   display: flex;
   flex-direction: column;
-
-  #content {
-    flex-grow: 1;
-  }
 }
