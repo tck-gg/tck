@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@400;700;800&display=swap');
+
 html, body {
   height: 100%;
 }
@@ -5,4 +7,6 @@ html, body {
 html {
   margin: 0;
   padding: 0;
+  
+  font-family: 'Archivo', sans-serif;  
 }

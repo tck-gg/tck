@@ -1,10 +1,13 @@
 {
   "version": "0.2",
   "ignorePaths": [
-      ".eslintrc",
-      ".eslintrc.json",
-      ".prettierrc",
-      "cspell.json"
+    ".eslintrc",
+    ".eslintrc.json",
+    ".prettierrc",
+    "cspell.json"
   ],
-  "words": []
+  "words": [
+    "browserconfig",
+    "msapplication"
+  ]
 }

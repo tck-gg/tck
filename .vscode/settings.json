@@ -1,5 +1,6 @@
 {
   "files.exclude": {
+    ".husky/": true,
     ".next/": true,
     "node_modules/": true,
     ".eslintrc": true,
