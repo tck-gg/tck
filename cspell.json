@@ -1,0 +1,10 @@
+{
+  "version": "0.2",
+  "ignorePaths": [
+      ".eslintrc",
+      ".eslintrc.json",
+      ".prettierrc",
+      "cspell.json"
+  ],
+  "words": []
+}
