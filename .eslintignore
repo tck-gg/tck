@@ -1,5 +1,7 @@
 # Folders
 cypress/
+test/
 
 # Files
 cypress.config.ts
+jest.config.ts
