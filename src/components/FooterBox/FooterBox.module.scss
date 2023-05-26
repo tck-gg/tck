@@ -1,0 +1,99 @@
+.root {
+  background-color: #11111f;
+
+  width: 100%;
+  max-width: 1256px;
+  
+  margin: 50px auto;
+  padding: 24px 0;
+
+  border-radius: 10px;
+
+  display: flex;
+  flex-direction: column;
+
+  z-index: 1;
+}
+
+.top {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+
+  padding: 0 24px;
+}
+
+.firstRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.brand {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+
+  p {
+    // Copyright.
+
+    color: #525174;
+    font-size: 14px;
+    line-height: 15px;
+  }
+}
+
+.socialButtons {
+  display: flex;
+  gap: 5px;
+}
+
+.secondRow {
+  display: flex;
+  gap: 20px;
+
+  font-weight: bold;
+  color: #9391c9;
+  font-size: 14px;
+
+  a {
+    min-width: 150px;
+  }
+}
+
+.divider {
+  width: 100%;
+  height: 2px;
+  background-color: #03030B;
+
+  margin: 24px 0;
+}
+
+.bottom {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+
+  padding: 0 24px;
+}
+
+.responsibleGamblingBox {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+
+  color: #525174;
+  font-weight: bold;
+  font-size: 12px;
+
+  padding: 15px;
+
+  background-color: #1a1a2b;
+  border-radius: 8px;
+}
+
+.disclaimer {
+  color: #525174;
+  line-height: 19px;
+  font-size: 14px;
+  font-weight: 500;
+}

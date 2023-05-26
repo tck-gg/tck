@@ -17,5 +17,6 @@
     "package-lock.json": true,
     "NEXT.md": true,
     "tsconfig.json": true
-  }
+  },
+  "discord.enabled": false
 }
