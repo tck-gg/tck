@@ -16,6 +16,6 @@
     "next.config.js": true,
     "package-lock.json": true,
     "NEXT.md": true,
-    "tsconfig.json": true
+    // "tsconfig.json": true
   }
 }

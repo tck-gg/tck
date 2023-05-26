@@ -39,7 +39,9 @@ function Header() {
           const isActive = pathname === href;
 
           return component ? (
-            <Link href={href}>{component}</Link>
+            <Link href={href} key={label}>
+              {component}
+            </Link>
           ) : (
             <Link href={href} className={isActive ? classes.active : ''} key={label}>
               {label}
