@@ -6,5 +6,9 @@
     "types": ["cypress", "node"],
     "isolatedModules": false
   },
-  "include": ["**/*.cy.ts"]
+  "include": [
+    "**/*.cy.ts",
+    "**/*.cy.tsx",
+    "./support/component.ts"
+  ]
 }

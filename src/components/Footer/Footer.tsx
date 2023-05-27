@@ -1,9 +1,15 @@
-import './Footer.module.scss';
+import FooterBackground from '../FooterBackground/FooterBackground';
+import FooterBox from '../FooterBox/FooterBox';
+
+import classes from './Footer.module.scss';
 
 function Footer() {
   return (
     <>
-      <p>Footer</p>
+      <div className={classes.background}>
+        <FooterBackground />
+      </div>
+      <FooterBox />
     </>
   );
 }

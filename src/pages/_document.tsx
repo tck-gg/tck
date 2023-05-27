@@ -1,5 +1,10 @@
 import { Html, Head, Main, NextScript } from 'next/document';
 
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { fab } from '@fortawesome/free-brands-svg-icons';
+
+library.add(fab);
+
 // TODO: Make this a thing.
 const DESCRIPTION = 'The most rewarding website.';
 

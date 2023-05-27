@@ -26,13 +26,15 @@ function Header() {
   return (
     <div className={classes.root}>
       <div className={classes.headerGroup}>
-        <Image
-          width={77}
-          height={35}
-          src='/img/logo.png'
-          alt='logo'
-          style={{ objectFit: 'contain' }}
-        />
+        <Link href='/'>
+          <Image
+            width={77}
+            height={35}
+            src='/img/logo.png'
+            alt='logo'
+            style={{ objectFit: 'contain' }}
+          />
+        </Link>
       </div>
       <div className={classes.headerGroup}>
         {headerItems.map(({ href, label, component }) => {

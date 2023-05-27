@@ -4,7 +4,9 @@ import Head from 'next/head';
 import Header from '@/components/Header/Header';
 import Footer from '@/components/Footer/Footer';
 
+import '@fortawesome/fontawesome-svg-core/styles.css';
 import '../styles/globals.scss';
+
 import classes from './_app.module.scss';
 
 function App({ Component, pageProps }: AppProps) {
