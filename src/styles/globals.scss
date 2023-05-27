@@ -28,17 +28,14 @@ a {
   text-decoration: none;
 }
 
+// This might be a problem later.
+a:hover {
+  color: #696882;
+}
+
 #__next {
   height: 100%;
 
   display: flex;
   flex-direction: column;
-}
-
-.fa-events-icons-loading .fa-fw {
-  display: inline-block;
-  width: 1.28571429em;
-}
-.fa-events-icons-loading .fa-fw::before {
-  content: "";
 }

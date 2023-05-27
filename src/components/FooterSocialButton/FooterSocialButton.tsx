@@ -1,14 +1,15 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
+import { motion } from 'framer-motion';
 
 import classes from './FooterSocialButton.module.scss';
 
 function FooterSocialButton({ icon, href }: { icon: IconDefinition; href: string }) {
   return (
     <a href={href} target='_blank'>
-      <div className={classes.root}>
+      <motion.div whileHover={{ y: -2 }} className={classes.root}>
         <FontAwesomeIcon icon={icon} />
-      </div>
+      </motion.div>
     </a>
   );
 }
