@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbo -p 8000",
-    "build": "next build",
+    "build:next": "next build",
+    "build": "turbo build:next",
     "start": "next start",
     "lint": "next lint",
     "cypress": "cypress open",
@@ -40,6 +41,7 @@
     "sass": "^1.62.1",
     "ts-jest": "^29.1.0",
     "ts-node": "^10.9.1",
+    "turbo": "^1.9.9",
     "typescript": "^5.0.4"
   }
 }
