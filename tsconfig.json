@@ -28,7 +28,7 @@
   "include": [
     "src",
     ".next/types/**/*.ts"
-  ],
+, "cypress/component/FooterSocialButton.cy.tsx"  ],
   "exclude": [
     "node_modules",
     "**/*.spec.ts"

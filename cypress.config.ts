@@ -2,13 +2,7 @@ import { defineConfig } from "cypress";
 
 export default defineConfig({
   e2e: {
-    setupNodeEvents(on, config) {}
-  },
-  component: {
-    devServer: {
-      framework: "react",
-      bundler: "webpack",
-    }
+    setupNodeEvents(on, config) {},
   },
   video: false,
   screenshotOnRunFailure: false,
@@ -16,5 +10,12 @@ export default defineConfig({
   requestTimeout: 100000,
   defaultCommandTimeout: 100000,
   responseTimeout: 100000,
-  taskTimeout: 100000
+  taskTimeout: 100000,
+
+  component: {
+    devServer: {
+      framework: "next",
+      bundler: "webpack",
+    },
+  },
 });
