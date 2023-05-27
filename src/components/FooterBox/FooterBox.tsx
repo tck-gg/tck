@@ -15,7 +15,6 @@ import GamblingAwareBox from '../GamblingAwareBox/GamblingAwareBox';
 
 import classes from './FooterBox.module.scss';
 
-// TODO: Get links.
 const footerSocialItems: { icon: IconDefinition; href: string }[] = [
   {
     icon: faDiscord,
@@ -39,7 +38,7 @@ const footerSocialItems: { icon: IconDefinition; href: string }[] = [
   },
   {
     icon: faTiktok,
-    href: 'https://www.tiktok.com/@thecasinokings'
+    href: 'https://www.tiktok.com/@tckhighlights'
   }
 ];
 
