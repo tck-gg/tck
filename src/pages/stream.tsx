@@ -1,9 +1,10 @@
 import Layout from '@/components/Layout';
+import PageHeader from '@/components/PageHeader/PageHeader';
 
 function Stream() {
   return (
     <Layout title='Stream'>
-      <h1>Stream</h1>
+      <PageHeader title='Stream' />
     </Layout>
   );
 }

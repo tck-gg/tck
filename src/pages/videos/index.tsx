@@ -1,9 +1,10 @@
 import Layout from '@/components/Layout';
+import PageHeader from '@/components/PageHeader/PageHeader';
 
 function Videos() {
   return (
     <Layout title='Videos'>
-      <h1>Videos</h1>
+      <PageHeader title='Videos' />
     </Layout>
   );
 }

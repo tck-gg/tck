@@ -1,9 +1,10 @@
 import Layout from '@/components/Layout';
+import PageHeader from '@/components/PageHeader/PageHeader';
 
 function Rewards() {
   return (
     <Layout title='Rewards'>
-      <h1>Rewards</h1>
+      <PageHeader title='Rewards' />
     </Layout>
   );
 }
