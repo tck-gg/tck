@@ -2,6 +2,7 @@
   "files.exclude": {
     ".husky/": true,
     ".next/": true,
+    ".turbo/": true,
     "node_modules/": true,
     ".eslintignore": true,
     ".eslintrc": true,
@@ -16,7 +17,8 @@
     "next.config.js": true,
     "package-lock.json": true,
     "NEXT.md": true,
-    // "tsconfig.json": true
+    "tsconfig.json": true,
+    "turbo.json": true
   },
   "discord.enabled": true
 }

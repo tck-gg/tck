@@ -17,14 +17,17 @@
     "@fortawesome/fontawesome-svg-core": "^6.4.0",
     "@fortawesome/free-brands-svg-icons": "^6.4.0",
     "@fortawesome/react-fontawesome": "^0.2.0",
+    "@reverse/array": "^1.7.3",
     "clsx": "^1.2.1",
     "cypress-real-events": "^1.8.1",
+    "dateformat": "^5.0.3",
     "framer-motion": "^10.12.16",
     "next": "13.4.4",
     "react": "18.2.0",
     "react-dom": "18.2.0"
   },
   "devDependencies": {
+    "@types/dateformat": "^5.0.0",
     "@types/jest": "^29.5.1",
     "@types/node": "20.2.4",
     "@types/react": "18.2.7",

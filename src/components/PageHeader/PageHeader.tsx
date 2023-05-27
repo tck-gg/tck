@@ -24,8 +24,8 @@ function PageHeader({ title }: { title: string }) {
               y2='6.05529'
               gradientUnits='userSpaceOnUse'
             >
-              <stop stop-color='#18A9FF' />
-              <stop offset='1' stop-color='#9229FF' />
+              <stop stopColor='#18A9FF' />
+              <stop offset='1' stopColor='#9229FF' />
             </linearGradient>
           </defs>
         </svg>

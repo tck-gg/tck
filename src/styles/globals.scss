@@ -11,7 +11,7 @@ html, body {
 body {
   background-color: #03030A;
 
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
 html {
@@ -32,7 +32,10 @@ a:hover {
 }
 
 #__next {
-  height: 100%;
+  height: fit-content;
+  min-height: 100%;
+
+  position: relative;
 
   display: flex;
   flex-direction: column;

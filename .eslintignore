@@ -4,4 +4,5 @@ test/
 
 # Files
 cypress.config.ts
+next.config.js
 jest.config.ts
