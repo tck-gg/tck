@@ -1,0 +1,27 @@
+.root {
+  color: #525174;
+  
+  svg {
+    fill: #525174;
+  }
+}
+.root:hover svg {
+  fill: #696882;  
+}
+
+.responsibleGamblingBox {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+
+  font-weight: bold;
+  font-size: 12px;
+
+  padding: 15px;
+
+  background-color: #1a1a2b;
+  border-radius: 8px;
+
+  width: min-content;
+}
+

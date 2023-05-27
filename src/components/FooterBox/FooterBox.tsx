@@ -10,8 +10,8 @@ import {
   faTiktok
 } from '@fortawesome/free-brands-svg-icons';
 
-import AgeWarning from '../svg/AgeWarning';
 import FooterSocialButton from '../FooterSocialButton/FooterSocialButton';
+import GamblingAwareBox from '../GamblingAwareBox/GamblingAwareBox';
 
 import classes from './FooterBox.module.scss';
 
@@ -72,10 +72,7 @@ function FooterBox() {
       </div>
       <div className={classes.divider}></div>
       <div className={classes.bottom}>
-        <div className={classes.responsibleGamblingBox}>
-          <AgeWarning />
-          <p>Responsible Gambling</p>
-        </div>
+        <GamblingAwareBox />
         <p className={classes.disclaimer}>
           We do not take responsibility for any losses from gambling in casinos and betting sites
           which are linked or promoted on our website(s). As a player, you are responsible for your
