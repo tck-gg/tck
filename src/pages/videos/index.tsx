@@ -12,14 +12,17 @@ import VideoBox from '@/components/VideoBox/VideoBox';
 
 const fetchedYouTubeChannels = ['UCJZcsYCqoQ13KtCtApTfLaQ' /* TCK */];
 
+const fetchedTwitchChannels = ['livetck'];
+
 export async function getServerSideProps({ req, res }: { req: any; res: any }) {
+  // TODO: Test if this works.
   res.setHeader('Cache-Control', 'public, s-maxage=59, stale-while-revalidate=299');
 
+  // YouTube
   // This uses 4 credits out of 10000 daily, making for 2500 daily requests.
   let youtubeVideos: YouTubeVideo[] = [];
   const youtubeViews: { [key: string]: number } = {};
   const youtubeProfilePictures: { [key: string]: string } = {};
-
   for (let i = 0; i < fetchedYouTubeChannels.length; i++) {
     // Get uploads.
     const contentDetails = await fetch(
@@ -66,7 +69,6 @@ export async function getServerSideProps({ req, res }: { req: any; res: any }) {
         channelData.items[i].snippet.thumbnails.default.url;
     }
   }
-
   youtubeVideos = youtubeVideos.flat().sort((a, b) => {
     return (
       new Date(b.contentDetails.videoPublishedAt).valueOf() -
@@ -74,12 +76,46 @@ export async function getServerSideProps({ req, res }: { req: any; res: any }) {
     );
   });
 
+  // Twitch
+  let twitchVideos: any[] = [];
+  const twitchProfilePictures: { [key: string]: string } = {};
+  for (let i = 0; i < fetchedTwitchChannels.length; i++) {
+    const loginResponse = await fetch(
+      `https://api.twitch.tv/helix/users?login=${fetchedTwitchChannels[i]}`,
+      {
+        headers: {
+          'Client-Id': process.env.TWITCH_CLIENT_ID || '',
+          Authorization: `Bearer ${process.env.TWITCH_ACCESS_TOKEN}`
+        }
+      }
+    );
+    const loginData = await loginResponse.json();
+    const userId = loginData.data[0].id;
+    twitchProfilePictures[loginData.data[0].display_name] = loginData.data[0].profile_image_url;
+
+    const twitchVideosResponse = await fetch(
+      `https://api.twitch.tv/helix/videos?user_id=${userId}&type=highlight&first=12`,
+      {
+        headers: {
+          'Client-Id': process.env.TWITCH_CLIENT_ID || '',
+          Authorization: `Bearer ${process.env.TWITCH_ACCESS_TOKEN}`
+        }
+      }
+    );
+    const twitchVideosData = await twitchVideosResponse.json();
+    twitchVideos.push(twitchVideosData.data);
+  }
+  twitchVideos = twitchVideos.flat().sort((a, b) => {
+    return new Date(b.published_at).valueOf() - new Date(a.published_at).valueOf();
+  });
+
   return {
     props: {
       youtubeVideos,
       youtubeViews,
       youtubeProfilePictures,
-      date: new Date().toISOString()
+      twitchVideos,
+      twitchProfilePictures
     }
   };
 }
@@ -88,14 +124,17 @@ function Videos({
   youtubeVideos,
   youtubeViews,
   youtubeProfilePictures,
-  date
+  twitchVideos,
+  twitchProfilePictures
 }: {
   youtubeVideos: YouTubeVideo[];
   youtubeViews: { [key: string]: number };
   youtubeProfilePictures: { [key: string]: string };
-  date: string;
+  twitchVideos: any[];
+  twitchProfilePictures: { [key: string]: string };
 }) {
   const [youtubePage, setYoutubePage] = useState<number>(1);
+  const [twitchPage, setTwitchPage] = useState<number>(1);
 
   return (
     <Layout title='Videos'>
@@ -106,7 +145,6 @@ function Videos({
             <FontAwesomeIcon icon={faYoutube} className={classes.icon} color='#f81e1e' />
             YouTube
           </p>
-          <div>This page is generated on {date}</div>
           <div className={classes.videoWrapper}>
             {youtubeVideos
               .map((video) => {
@@ -127,7 +165,7 @@ function Videos({
           </div>
         </div>
 
-        <div className={classes.section}>
+        {/* <div className={classes.section}>
           <p className={classes.social}>
             <FontAwesomeIcon icon={faTiktok} className={classes.icon} color='#ff1f64' />
             TikTok
@@ -135,14 +173,32 @@ function Videos({
           <div className={classes.videoWrapper}>
             <p>Stuff</p>
           </div>
-        </div>
+        </div> */}
+
         <div className={classes.section}>
           <p className={classes.social}>
             <FontAwesomeIcon icon={faTwitch} className={classes.icon} color='#8f46fb' />
             Twitch
           </p>
           <div className={classes.videoWrapper}>
-            <p>Stuff</p>
+            {twitchVideos
+              .map((video) => {
+                return (
+                  <VideoBox
+                    thumbnail={video.thumbnail_url
+                      .replace('%{width}', '320')
+                      .replace('%{height}', '180')}
+                    title={video.title}
+                    views={video.view_count}
+                    avatar={twitchProfilePictures[video.user_name]}
+                    author={video.user_name}
+                    date={video.published_at}
+                    key={video.id}
+                    link={`https://www.twitch.tv/videos/${video.id}`}
+                  />
+                );
+              })
+              .splice((twitchPage - 1) * 5, 5)}
           </div>
         </div>
       </div>
