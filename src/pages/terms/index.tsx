@@ -10,7 +10,6 @@ function Terms() {
     <Layout title='Terms of Service'>
       <div className={classes.root}>
         <PageHeader title='Terms of Service' />
-
         <p className={classes.effectiveDate}>Effective Date: May 29, 2023</p>
 
         <p>
