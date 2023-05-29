@@ -1,3 +1,5 @@
+const CONTACT_EMAIL = 'contact@tck.gg';
+
 function Terms() {
   return (
     <>
