@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react';
 import { faYoutube, faTwitch } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 

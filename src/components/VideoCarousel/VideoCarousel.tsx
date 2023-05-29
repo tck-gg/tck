@@ -46,6 +46,7 @@ function VideoCarousel({
       // TODO: Make this better.
       setPage(1);
     }
+    handleResize();
 
     window.addEventListener('resize', lodash.throttle(handleResize, 200));
     return function () {
