@@ -15,14 +15,6 @@
   z-index: 1;
 }
 
-.top {
-  display: flex;
-  flex-direction: column;
-  gap: 28px;
-
-  padding: 0 24px;
-}
-
 .firstRow {
   display: flex;
   justify-content: space-between;
@@ -39,6 +31,8 @@
     color: #525174;
     font-size: 14px;
     line-height: 15px;
+
+    margin-right: 1em;
   }
 }
 
@@ -50,6 +44,7 @@
 .secondRow {
   display: flex;
   gap: 20px;
+  flex-wrap: wrap;
 
   font-weight: bold;
   color: #9391c9;
@@ -81,4 +76,39 @@
   line-height: 19px;
   font-size: 14px;
   font-weight: 500;
+}
+
+.top {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+
+  padding: 0 24px;
+}
+
+@media screen and (max-width: 1256px) {
+  .root {
+    border-radius: 0;
+    margin-bottom: 0;
+  }  
+}
+@media screen and (max-width: 635px) {
+  .firstRow {
+    justify-content: center;
+
+    flex-wrap: wrap;
+    row-gap: 1em;
+  }
+  .socialButtons {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .secondRow {
+    justify-content: center;
+    text-align: center;
+  }
+  .bottom {
+    justify-content: center;
+    flex-direction: column-reverse;
+  }
 }
