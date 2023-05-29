@@ -1,16 +1,12 @@
-import { useState } from 'react';
 import Layout from '@/components/Layout';
 import PageHeader from '@/components/PageHeader/PageHeader';
-import { faYoutube, faTiktok, faTwitch } from '@fortawesome/free-brands-svg-icons';
-import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
-('@fortawesome/free-solid-svg-icons');
+import { faYoutube, faTwitch } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { unique } from '@reverse/array';
 
-import SmallButton from '@/components/SmallButton/SmallButton';
-import VideoBox from '@/components/VideoBox/VideoBox';
+import VideoCarousel from '@/components/VideoCarousel/VideoCarousel';
 
 import { YouTubeVideo } from '@/types/youtube';
+import { Video } from '@/types/video';
 
 import classes from './videos.module.scss';
 
@@ -23,10 +19,8 @@ export async function getServerSideProps({ req, res }: { req: any; res: any }) {
   res.setHeader('Cache-Control', 'public, s-maxage=59, stale-while-revalidate=299');
 
   // YouTube
-  // This uses 4 credits out of 10000 daily, making for 2500 daily requests.
-  let youtubeVideos: YouTubeVideo[] = [];
-  const youtubeViews: { [key: string]: number } = {};
-  const youtubeProfilePictures: { [key: string]: string } = {};
+  // This uses 2 credits per channel + 2 credits out of 10000 daily.
+  let fetchedYoutubeVideos: YouTubeVideo[] = [];
   for (let i = 0; i < fetchedYouTubeChannels.length; i++) {
     // Get uploads.
     const contentDetails = await fetch(
@@ -40,48 +34,60 @@ export async function getServerSideProps({ req, res }: { req: any; res: any }) {
       `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet,contentDetails&maxResults=15&playlistId=${uploadsPlaylistId}&key=${process.env.YOUTUBE_API_KEY}`
     );
     const videoData = await videos.json();
-    youtubeVideos.push(videoData.items);
-
-    // Get views.
-    const videoIds = videoData.items
-      .map((video: YouTubeVideo) => {
-        return video.contentDetails.videoId;
-      })
-      .join(',');
-    const statisticsResponse = await fetch(
-      `https://youtube.googleapis.com/youtube/v3/videos?part=statistics&id=${videoIds}&key=${process.env.YOUTUBE_API_KEY}`
-    );
-    const statisticsData = await statisticsResponse.json();
-    for (let i = 0; i < statisticsData.items.length; i++) {
-      youtubeViews[statisticsData.items[i].id] = parseInt(
-        statisticsData.items[i].statistics.viewCount
-      );
-    }
-
-    // Get profile pictures.
-    const channelIds = unique(
-      (videoData.items as YouTubeVideo[]).map((video) => {
-        return video.snippet.channelId;
-      })
-    ).join(',');
-    const channelResponse = await fetch(
-      `https://www.googleapis.com/youtube/v3/channels?part=snippet&id=${channelIds}&key=${process.env.YOUTUBE_API_KEY}`
-    );
-    const channelData = await channelResponse.json();
-    for (let i = 0; i < channelData.items.length; i++) {
-      youtubeProfilePictures[channelData.items[i].id] =
-        channelData.items[i].snippet.thumbnails.default.url;
-    }
+    fetchedYoutubeVideos.push(videoData.items);
   }
-  youtubeVideos = youtubeVideos.flat().sort((a, b) => {
+  fetchedYoutubeVideos = fetchedYoutubeVideos.flat().sort((a, b) => {
     return (
       new Date(b.contentDetails.videoPublishedAt).valueOf() -
       new Date(a.contentDetails.videoPublishedAt).valueOf()
     );
   });
 
+  // Get views.
+  const youtubeViews: { [key: string]: number } = {};
+  const videoIds = fetchedYoutubeVideos
+    .map((video: YouTubeVideo) => {
+      return video.contentDetails.videoId;
+    })
+    .join(',');
+  const statisticsResponse = await fetch(
+    `https://youtube.googleapis.com/youtube/v3/videos?part=statistics&id=${videoIds}&key=${process.env.YOUTUBE_API_KEY}`
+  );
+  const statisticsData = await statisticsResponse.json();
+  for (let i = 0; i < statisticsData.items.length; i++) {
+    youtubeViews[statisticsData.items[i].id] = parseInt(
+      statisticsData.items[i].statistics.viewCount
+    );
+  }
+
+  // Get profile pictures.
+  const youtubeProfilePictures: { [key: string]: string } = {};
+  const channelIds = fetchedYouTubeChannels.join(',');
+  const channelResponse = await fetch(
+    `https://www.googleapis.com/youtube/v3/channels?part=snippet&id=${channelIds}&key=${process.env.YOUTUBE_API_KEY}`
+  );
+  const channelData = await channelResponse.json();
+  for (let i = 0; i < channelData.items.length; i++) {
+    youtubeProfilePictures[channelData.items[i].id] =
+      channelData.items[i].snippet.thumbnails.default.url;
+  }
+
+  // Builder
+  const youtubeVideos: Video[] = fetchedYoutubeVideos.map((video: YouTubeVideo) => {
+    const videoId = video.contentDetails.videoId;
+    return {
+      title: video.snippet.title,
+      thumbnail: `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`,
+      views: youtubeViews[videoId],
+      avatar: youtubeProfilePictures[video.snippet.channelId],
+      author: video.snippet.channelTitle,
+      date: video.contentDetails.videoPublishedAt,
+      link: `https://www.youtube.com/watch?v=${video.contentDetails.videoId}`
+    };
+  });
+
   // Twitch
-  let twitchVideos: any[] = [];
+  let fetchedTwitchVideos: any[] = [];
   const twitchProfilePictures: { [key: string]: string } = {};
   for (let i = 0; i < fetchedTwitchChannels.length; i++) {
     const loginResponse = await fetch(
@@ -107,10 +113,23 @@ export async function getServerSideProps({ req, res }: { req: any; res: any }) {
       }
     );
     const twitchVideosData = await twitchVideosResponse.json();
-    twitchVideos.push(twitchVideosData.data);
+    fetchedTwitchVideos.push(twitchVideosData.data);
   }
-  twitchVideos = twitchVideos.flat().sort((a, b) => {
+  fetchedTwitchVideos = fetchedTwitchVideos.flat().sort((a, b) => {
     return new Date(b.published_at).valueOf() - new Date(a.published_at).valueOf();
+  });
+
+  // Builder
+  const twitchVideos: Video[] = fetchedTwitchVideos.map((video: any) => {
+    return {
+      title: video.title,
+      thumbnail: video.thumbnail_url.replace('%{width}', '320').replace('%{height}', '180'),
+      views: video.view_count,
+      avatar: twitchProfilePictures[video.user_name],
+      author: video.user_name,
+      date: video.published_at,
+      link: `https://www.twitch.tv/videos/${video.id}`
+    };
   });
 
   return {
@@ -126,137 +145,27 @@ export async function getServerSideProps({ req, res }: { req: any; res: any }) {
 
 function Videos({
   youtubeVideos,
-  youtubeViews,
-  youtubeProfilePictures,
-  twitchVideos,
-  twitchProfilePictures
+  twitchVideos
 }: {
-  youtubeVideos: YouTubeVideo[];
-  youtubeViews: { [key: string]: number };
-  youtubeProfilePictures: { [key: string]: string };
-  twitchVideos: any[];
-  twitchProfilePictures: { [key: string]: string };
+  youtubeVideos: Video[];
+  twitchVideos: Video[];
 }) {
-  const [youtubePage, setYoutubePage] = useState<number>(1);
-  const [twitchPage, setTwitchPage] = useState<number>(1);
-
-  function handleControlClick(direction: 'left' | 'right', type: 'youtube' | 'tiktok' | 'twitch') {
-    if (type === 'youtube') {
-      if (direction === 'left') {
-        setYoutubePage(youtubePage - 1);
-      } else {
-        setYoutubePage(youtubePage + 1);
-      }
-    } else if (type === 'twitch') {
-      if (direction === 'left') {
-        setTwitchPage(twitchPage - 1);
-      } else {
-        setTwitchPage(twitchPage + 1);
-      }
-    }
-  }
-
   return (
     <Layout title='Videos'>
       <PageHeader title='Videos' />
       <div className={classes.sectionWrapper}>
-        <div className={classes.section}>
-          <div className={classes.sectionHeader}>
-            <p className={classes.social}>
-              <FontAwesomeIcon icon={faYoutube} className={classes.icon} color='#f81e1e' />
-              YouTube
-            </p>
-            <div className={classes.controls}>
-              <SmallButton
-                icon={faArrowLeft}
-                disabled={youtubePage === 1}
-                onClick={() => {
-                  handleControlClick('left', 'youtube');
-                }}
-              />
-              <SmallButton
-                icon={faArrowRight}
-                disabled={youtubePage === Math.ceil(youtubeVideos.length / 5)}
-                onClick={() => {
-                  handleControlClick('right', 'youtube');
-                }}
-              />
-            </div>
-          </div>
-          <div className={classes.videoWrapper}>
-            {youtubeVideos
-              .map((video) => {
-                return (
-                  <VideoBox
-                    thumbnail={`https://img.youtube.com/vi/${video.contentDetails.videoId}/mqdefault.jpg`}
-                    title={video.snippet.title}
-                    views={youtubeViews[video.contentDetails.videoId]}
-                    avatar={youtubeProfilePictures[video.snippet.channelId]}
-                    author={video.snippet.channelTitle}
-                    date={video.contentDetails.videoPublishedAt}
-                    key={video.contentDetails.videoId}
-                    link={`https://www.youtube.com/watch?v=${video.contentDetails.videoId}`}
-                  />
-                );
-              })
-              .splice((youtubePage - 1) * 5, 5)}
-          </div>
-        </div>
-
-        {/* <div className={classes.section}>
-          <p className={classes.social}>
-            <FontAwesomeIcon icon={faTiktok} className={classes.icon} color='#ff1f64' />
-            TikTok
-          </p>
-          <div className={classes.videoWrapper}>
-            <p>Stuff</p>
-          </div>
-        </div> */}
-
-        <div className={classes.section}>
-          <div className={classes.sectionHeader}>
-            <p className={classes.social}>
-              <FontAwesomeIcon icon={faTwitch} className={classes.icon} color='#8f46fb' />
-              Twitch
-            </p>
-            <div className={classes.controls}>
-              <SmallButton
-                icon={faArrowLeft}
-                disabled={twitchPage === 1}
-                onClick={() => {
-                  handleControlClick('left', 'twitch');
-                }}
-              />
-              <SmallButton
-                icon={faArrowRight}
-                disabled={twitchPage === Math.ceil(twitchVideos.length / 5)}
-                onClick={() => {
-                  handleControlClick('right', 'twitch');
-                }}
-              />
-            </div>
-          </div>
-          <div className={classes.videoWrapper}>
-            {twitchVideos
-              .map((video) => {
-                return (
-                  <VideoBox
-                    thumbnail={video.thumbnail_url
-                      .replace('%{width}', '320')
-                      .replace('%{height}', '180')}
-                    title={video.title}
-                    views={video.view_count}
-                    avatar={twitchProfilePictures[video.user_name]}
-                    author={video.user_name}
-                    date={video.published_at}
-                    key={video.id}
-                    link={`https://www.twitch.tv/videos/${video.id}`}
-                  />
-                );
-              })
-              .splice((twitchPage - 1) * 5, 5)}
-          </div>
-        </div>
+        <VideoCarousel
+          icon={<FontAwesomeIcon icon={faYoutube} className={classes.icon} color='#f81e1e' />}
+          name='YouTube'
+          videos={youtubeVideos}
+          display={5}
+        />
+        <VideoCarousel
+          icon={<FontAwesomeIcon icon={faTwitch} className={classes.icon} color='#8f46fb' />}
+          name='Twitch'
+          videos={twitchVideos}
+          display={5}
+        />
       </div>
     </Layout>
   );
