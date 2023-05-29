@@ -17,7 +17,7 @@ const headerItems: HeaderItem[] = [
   { href: '/videos', label: 'VIDEOS' },
   { href: '/stream', label: 'STREAM' },
   { href: '/rewards', label: 'REWARDS', component: <RewardsHeaderItem /> },
-  { href: '/merch', label: 'MERCH' }
+  { href: '/leaderboards', label: 'LEADERBOARDS' }
 ];
 
 function Header() {
