@@ -2,13 +2,17 @@ import { useState } from 'react';
 import Layout from '@/components/Layout';
 import PageHeader from '@/components/PageHeader/PageHeader';
 import { faYoutube, faTiktok, faTwitch } from '@fortawesome/free-brands-svg-icons';
+import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
+('@fortawesome/free-solid-svg-icons');
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { unique } from '@reverse/array';
+
+import SmallButton from '@/components/SmallButton/SmallButton';
+import VideoBox from '@/components/VideoBox/VideoBox';
 
 import { YouTubeVideo } from '@/types/youtube';
 
 import classes from './videos.module.scss';
-import VideoBox from '@/components/VideoBox/VideoBox';
 
 const fetchedYouTubeChannels = ['UCJZcsYCqoQ13KtCtApTfLaQ' /* TCK */];
 
@@ -33,7 +37,7 @@ export async function getServerSideProps({ req, res }: { req: any; res: any }) {
 
     // Get video info.
     const videos = await fetch(
-      `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet,contentDetails&maxResults=12&playlistId=${uploadsPlaylistId}&key=${process.env.YOUTUBE_API_KEY}`
+      `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet,contentDetails&maxResults=15&playlistId=${uploadsPlaylistId}&key=${process.env.YOUTUBE_API_KEY}`
     );
     const videoData = await videos.json();
     youtubeVideos.push(videoData.items);
@@ -94,7 +98,7 @@ export async function getServerSideProps({ req, res }: { req: any; res: any }) {
     twitchProfilePictures[loginData.data[0].display_name] = loginData.data[0].profile_image_url;
 
     const twitchVideosResponse = await fetch(
-      `https://api.twitch.tv/helix/videos?user_id=${userId}&type=highlight&first=12`,
+      `https://api.twitch.tv/helix/videos?user_id=${userId}&type=highlight&first=15`,
       {
         headers: {
           'Client-Id': process.env.TWITCH_CLIENT_ID || '',
@@ -136,15 +140,49 @@ function Videos({
   const [youtubePage, setYoutubePage] = useState<number>(1);
   const [twitchPage, setTwitchPage] = useState<number>(1);
 
+  function handleControlClick(direction: 'left' | 'right', type: 'youtube' | 'tiktok' | 'twitch') {
+    if (type === 'youtube') {
+      if (direction === 'left') {
+        setYoutubePage(youtubePage - 1);
+      } else {
+        setYoutubePage(youtubePage + 1);
+      }
+    } else if (type === 'twitch') {
+      if (direction === 'left') {
+        setTwitchPage(twitchPage - 1);
+      } else {
+        setTwitchPage(twitchPage + 1);
+      }
+    }
+  }
+
   return (
     <Layout title='Videos'>
       <PageHeader title='Videos' />
       <div className={classes.sectionWrapper}>
         <div className={classes.section}>
-          <p className={classes.social}>
-            <FontAwesomeIcon icon={faYoutube} className={classes.icon} color='#f81e1e' />
-            YouTube
-          </p>
+          <div className={classes.sectionHeader}>
+            <p className={classes.social}>
+              <FontAwesomeIcon icon={faYoutube} className={classes.icon} color='#f81e1e' />
+              YouTube
+            </p>
+            <div className={classes.controls}>
+              <SmallButton
+                icon={faArrowLeft}
+                disabled={youtubePage === 1}
+                onClick={() => {
+                  handleControlClick('left', 'youtube');
+                }}
+              />
+              <SmallButton
+                icon={faArrowRight}
+                disabled={youtubePage === Math.ceil(youtubeVideos.length / 5)}
+                onClick={() => {
+                  handleControlClick('right', 'youtube');
+                }}
+              />
+            </div>
+          </div>
           <div className={classes.videoWrapper}>
             {youtubeVideos
               .map((video) => {
@@ -176,10 +214,28 @@ function Videos({
         </div> */}
 
         <div className={classes.section}>
-          <p className={classes.social}>
-            <FontAwesomeIcon icon={faTwitch} className={classes.icon} color='#8f46fb' />
-            Twitch
-          </p>
+          <div className={classes.sectionHeader}>
+            <p className={classes.social}>
+              <FontAwesomeIcon icon={faTwitch} className={classes.icon} color='#8f46fb' />
+              Twitch
+            </p>
+            <div className={classes.controls}>
+              <SmallButton
+                icon={faArrowLeft}
+                disabled={twitchPage === 1}
+                onClick={() => {
+                  handleControlClick('left', 'twitch');
+                }}
+              />
+              <SmallButton
+                icon={faArrowRight}
+                disabled={twitchPage === Math.ceil(twitchVideos.length / 5)}
+                onClick={() => {
+                  handleControlClick('right', 'twitch');
+                }}
+              />
+            </div>
+          </div>
           <div className={classes.videoWrapper}>
             {twitchVideos
               .map((video) => {
