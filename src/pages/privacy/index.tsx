@@ -13,12 +13,11 @@ function Privacy() {
         <p className={classes.effectiveDate}>Effective Date: May 29, 2023</p>
 
         <p>
-          This Privacy Policy ("Policy") describes how [Your Affiliate Website] ("we," "us," or
-          "our") collects, uses, and protects the personal information of users ("you" or "users")
-          who visit and interact with our affiliate website ("Website") related to gambling
-          services. We are committed to ensuring the privacy and security of your personal
-          information. By using our Website, you consent to the terms and practices outlined in this
-          Policy.
+          This Privacy Policy ("Policy") describes how TCK ("we," "us," or "our") collects, uses,
+          and protects the personal information of users ("you" or "users") who visit and interact
+          with our affiliate website ("Website") related to gambling services. We are committed to
+          ensuring the privacy and security of your personal information. By using our Website, you
+          consent to the terms and practices outlined in this Policy.
         </p>
 
         <p className={classes.sectionHeader}>Information We Collect</p>
