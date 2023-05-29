@@ -15,6 +15,8 @@ import GamblingAwareBox from '../GamblingAwareBox/GamblingAwareBox';
 
 import classes from './FooterBox.module.scss';
 
+import tckLogo from '../../../public/img/logo.png';
+
 const footerSocialItems: { icon: IconDefinition; href: string }[] = [
   {
     icon: faDiscord,
@@ -51,7 +53,7 @@ function FooterBox() {
             <Image
               width={77}
               height={35}
-              src='/img/logo.png'
+              src={tckLogo}
               alt='logo'
               style={{ objectFit: 'contain' }}
             />

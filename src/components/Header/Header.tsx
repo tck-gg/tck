@@ -6,6 +6,8 @@ import RewardsHeaderItem from '../RewardsHeaderItem/RewardsHeaderItem';
 
 import classes from './Header.module.scss';
 
+import tckLogo from '../../../public/img/logo.png';
+
 interface HeaderItem {
   href: string;
   label: string;
@@ -27,13 +29,7 @@ function Header() {
     <div className={classes.root}>
       <div className={classes.headerGroup}>
         <Link href='/'>
-          <Image
-            width={77}
-            height={35}
-            src='/img/logo.png'
-            alt='logo'
-            style={{ objectFit: 'contain' }}
-          />
+          <Image width={77} height={35} src={tckLogo} alt='logo' style={{ objectFit: 'contain' }} />
         </Link>
       </div>
       <div className={classes.headerGroup}>
