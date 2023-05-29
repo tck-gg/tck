@@ -1,9 +1,10 @@
-import Layout from '@/components/Layout';
-import PageHeader from '@/components/PageHeader/PageHeader';
+import { useState, useEffect } from 'react';
 import { faYoutube, faTwitch } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import VideoCarousel from '@/components/VideoCarousel/VideoCarousel';
+import Layout from '@/components/Layout';
+import PageHeader from '@/components/PageHeader/PageHeader';
 
 import { getLatestUploads } from '@/util/youtube';
 import { getLatestHighlights } from '@/util/twitch';
@@ -45,13 +46,11 @@ function Videos({
           icon={<FontAwesomeIcon icon={faYoutube} className={classes.icon} color='#f81e1e' />}
           name='YouTube'
           videos={youtubeVideos}
-          display={5}
         />
         <VideoCarousel
           icon={<FontAwesomeIcon icon={faTwitch} className={classes.icon} color='#8f46fb' />}
           name='Twitch'
           videos={twitchVideos}
-          display={5}
         />
       </div>
     </Layout>

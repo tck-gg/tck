@@ -1,8 +1,11 @@
+import Layout from '@/components/Layout';
+import PageHeader from '@/components/PageHeader/PageHeader';
+
 function Faq() {
   return (
-    <>
-      <h1>Frequently Asked Questions</h1>
-    </>
+    <Layout title='FAQ'>
+      <PageHeader title='FAQ' />
+    </Layout>
   );
 }
 

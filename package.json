@@ -23,6 +23,7 @@
     "cypress-real-events": "^1.8.1",
     "dateformat": "^5.0.3",
     "framer-motion": "^10.12.16",
+    "lodash": "^4.17.21",
     "next": "13.4.4",
     "react": "18.2.0",
     "react-dom": "18.2.0"
@@ -30,6 +31,7 @@
   "devDependencies": {
     "@types/dateformat": "^5.0.0",
     "@types/jest": "^29.5.1",
+    "@types/lodash": "^4.14.195",
     "@types/node": "20.2.4",
     "@types/react": "18.2.7",
     "@types/react-dom": "18.2.4",

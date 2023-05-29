@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import lodash from 'lodash';
 
 import SmallButton from '../SmallButton/SmallButton';
 import VideoBox from '../VideoBox/VideoBox';
@@ -11,15 +12,46 @@ import classes from './VideoCarousel.module.scss';
 function VideoCarousel({
   icon,
   name,
-  videos,
-  display
+  videos
 }: {
   icon: React.ReactNode;
   name: string;
   videos: Video[];
-  display: number;
 }) {
-  const [page, setPage] = useState(0);
+  const [page, setPage] = useState(1);
+
+  // TODO: Add skeleton loaders.
+  const [display, setDisplay] = useState(0);
+
+  function getDisplayCount() {
+    // This feels like cheating.
+    if (Math.min(window.innerWidth, window.screen.width) < 600) {
+      return 1;
+    }
+    if (Math.min(window.innerWidth, window.screen.width) < 900) {
+      return 2;
+    }
+    if (Math.min(window.innerWidth, window.screen.width) < 1200) {
+      return 3;
+    }
+    if (Math.min(window.innerWidth, window.screen.width) < 1500) {
+      return 4;
+    }
+    return 5;
+  }
+
+  useEffect(() => {
+    function handleResize() {
+      setDisplay(getDisplayCount());
+      // TODO: Make this better.
+      setPage(1);
+    }
+
+    window.addEventListener('resize', lodash.throttle(handleResize, 200));
+    return function () {
+      return window.removeEventListener('resize', lodash.throttle(handleResize, 200));
+    };
+  }, []);
 
   function handleNext() {
     setPage(page + 1);
