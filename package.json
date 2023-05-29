@@ -6,7 +6,7 @@
     "dev": "next dev --turbo -p 8000",
     "build:next": "next build",
     "build": "turbo build:next",
-    "start": "next start",
+    "start": "next start -p 8007",
     "lint": "next lint",
     "cypress": "cypress open",
     "cypress:headless": "cypress run",
