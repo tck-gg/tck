@@ -20,5 +20,6 @@
     "tsconfig.json": true,
     "turbo.json": true
   },
-  "discord.enabled": true
+  "discord.enabled": true,
+  "jest.jestCommandLine": "npm run jest --"
 }
