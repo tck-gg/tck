@@ -2,7 +2,7 @@ import Image from 'next/image';
 import dateformat from 'dateformat';
 
 import classes from './VideoBox.module.scss';
-import ViewsIcon from '../ViewsIcon/ViewsIcon';
+import ViewsIcon from '../svg/ViewsIcon/ViewsIcon';
 
 function VideoBox({
   thumbnail,
