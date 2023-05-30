@@ -112,3 +112,9 @@
     flex-direction: column-reverse;
   }
 }
+@media screen and (max-width: 400px) {
+  .brand {
+    flex-direction: column;
+  }
+}
+

@@ -1,9 +1,12 @@
 .root {
   opacity: 0.33;
+  overflow-x: hidden;
 
   position: relative;
   min-width: 1920px;
   height: 280px;
+
+  flex-grow: 1;
 }
 
 .layer1 {

@@ -1,7 +1,18 @@
-.background {
+.background {  
+  display: flex;
+  justify-content: center;
+  
   position: absolute;
   bottom: 0;
 
   left: 0;
   right: 0;
+
+  overflow-x: hidden;
+}
+
+@media screen and (max-width: 1256px) {
+  .background {
+    visibility: hidden;
+  }
 }
