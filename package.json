@@ -19,7 +19,10 @@
     "@fortawesome/free-solid-svg-icons": "^6.4.0",
     "@fortawesome/react-fontawesome": "^0.2.0",
     "@reverse/array": "^1.7.3",
+    "axios": "^1.4.0",
+    "bcrypt": "^5.1.0",
     "clsx": "^1.2.1",
+    "crypto": "^1.0.1",
     "cypress-real-events": "^1.8.1",
     "dateformat": "^5.0.3",
     "dotenv": "^16.0.3",
@@ -29,10 +32,12 @@
     "mongoose": "^7.2.1",
     "next": "13.4.4",
     "react": "18.2.0",
+    "react-cookie": "^4.1.1",
     "react-dom": "18.2.0",
     "uuid": "^9.0.0"
   },
   "devDependencies": {
+    "@types/bcrypt": "^5.0.0",
     "@types/dateformat": "^5.0.0",
     "@types/jest": "^29.5.1",
     "@types/lodash": "^4.14.195",
