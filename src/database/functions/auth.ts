@@ -21,7 +21,7 @@ export async function tryLoginWithUsername(
   }
 
   // Check if password matches.
-  const success = await bcrypt.compare(password, user.password as string);
+  const success = await bcrypt.compare(password, user.password);
   if (!success) {
     return null;
   }
@@ -49,7 +49,7 @@ export async function tryLoginWithEmail(
   }
 
   // Check if password matches.
-  const success = await bcrypt.compare(password, user.password as string);
+  const success = await bcrypt.compare(password, user.password);
   if (!success) {
     return null;
   }

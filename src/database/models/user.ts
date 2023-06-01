@@ -23,6 +23,7 @@ const userSchema = new Schema<IUser>({
   email: { type: String, unique: true },
   apiKey: { type: String, required: true, unique: true },
   createdAt: { type: Date, required: true, default: Date.now },
+  password: { type: String, required: true },
 
   displayName: { type: String, required: false },
   accounts: {

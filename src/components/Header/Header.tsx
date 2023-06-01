@@ -4,6 +4,8 @@ import Link from 'next/link';
 
 import RewardsHeaderItem from '../RewardsHeaderItem/RewardsHeaderItem';
 
+import { useAuth } from '@/hooks/auth';
+
 import classes from './Header.module.scss';
 
 import tckLogo from '../../../public/img/logo.png';
@@ -23,6 +25,8 @@ const headerItems: HeaderItem[] = [
 ];
 
 function Header() {
+  const auth = useAuth();
+
   const { pathname } = useRouter();
 
   return (
@@ -48,9 +52,17 @@ function Header() {
         })}
       </div>
       <div className={classes.headerGroup}>
-        {/* TODO: Need backend. */}
-        <p>COINS</p>
-        <p>PROFILE</p>
+        {auth.user ? (
+          <div>
+            <p>Coins</p>
+            <p>Profile</p>
+          </div>
+        ) : (
+          <div>
+            <Link href='/register'>Register</Link>
+            <Link href='/login'>Login</Link>
+          </div>
+        )}
       </div>
     </div>
   );
