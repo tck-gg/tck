@@ -7,7 +7,7 @@ import { useAuth } from '@/hooks/auth';
 
 import { ISafeUser } from '@/database/models/user';
 
-function Layout({ title, children }: { title?: string; children: React.ReactNode }) {
+function Page({ title, children }: { title?: string; children: React.ReactNode }) {
   const auth = useAuth();
 
   const [cookie, setCookie] = useCookies(['authorization']);
@@ -43,4 +43,4 @@ function Layout({ title, children }: { title?: string; children: React.ReactNode
   );
 }
 
-export default Layout;
+export default Page;

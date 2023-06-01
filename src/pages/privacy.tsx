@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 
-import Layout from '@/components/Layout';
+import Layout from '@/components/Layout/Layout';
 import PageHeader from '@/components/PageHeader/PageHeader';
 
 import classes from '../styles/legal.module.scss';

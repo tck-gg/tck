@@ -2,7 +2,7 @@ import { faYoutube, faTwitch } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import VideoCarousel from '@/components/VideoCarousel/VideoCarousel';
-import Layout from '@/components/Layout';
+import Layout from '@/components/Layout/Layout';
 import PageHeader from '@/components/PageHeader/PageHeader';
 
 import { getLatestUploads } from '@/util/youtube';
