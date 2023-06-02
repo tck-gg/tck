@@ -9,6 +9,7 @@ import { useAuth } from '@/hooks/auth';
 import classes from './Header.module.scss';
 
 import tckLogo from '../../../public/img/logo.png';
+import Button from '../Button/Button';
 
 interface HeaderItem {
   href: string;
@@ -26,6 +27,7 @@ const headerItems: HeaderItem[] = [
 
 function Header() {
   const auth = useAuth();
+  const router = useRouter();
 
   const { pathname } = useRouter();
 
@@ -58,9 +60,25 @@ function Header() {
             <p>Profile</p>
           </div>
         ) : (
-          <div>
-            <Link href='/register'>Register</Link>
-            <Link href='/login'>Login</Link>
+          <div className={classes.buttonGroup}>
+            <Button
+              variant='secondary'
+              borderRadius={5}
+              onClick={() => {
+                router.push('/register');
+              }}
+            >
+              Register
+            </Button>
+            <Button
+              variant='primary'
+              borderRadius={5}
+              onClick={() => {
+                router.push('/login');
+              }}
+            >
+              Log in
+            </Button>
           </div>
         )}
       </div>

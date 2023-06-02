@@ -46,3 +46,9 @@
 .active:hover {
   color: #ffffff;
 }
+
+.buttonGroup {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
