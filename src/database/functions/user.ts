@@ -1,11 +1,10 @@
 import { v4 as uuidv4 } from 'uuid';
 import bcrypt from 'bcrypt';
 import crypto from 'crypto';
+import { Action } from '@prisma/client';
 
-import { connect } from '../database';
-
-import User, { IUser } from '../models/user';
 import { isValidEmail } from '@/util/email';
+import prisma from '../database';
 
 /**
  * Gets a user from the database by their UUID.
@@ -13,7 +12,7 @@ import { isValidEmail } from '@/util/email';
  * @returns The user, `null` if the user doesn't exist.
  */
 export async function getUserById(id: string) {
-  return await User.findOne({ id });
+  return await prisma.user.findUnique({ where: { id } });
 }
 
 /**
@@ -21,10 +20,8 @@ export async function getUserById(id: string) {
  * @param username The username to get the user for.
  * @returns The user, `null` if the user doesn't exist.
  */
-export async function getUserByUsername(username: string): Promise<IUser | null> {
-  await connect();
-
-  return await User.findOne({ username });
+export async function getUserByUsername(username: string) {
+  return await prisma.user.findUnique({ where: { username } });
 }
 
 /**
@@ -32,10 +29,8 @@ export async function getUserByUsername(username: string): Promise<IUser | null>
  * @param email The email to look for.
  * @returns The user, `null` if the user doesn't exist.
  */
-export async function getUserByEmail(email: string): Promise<IUser | null> {
-  await connect();
-
-  return await User.findOne({ email });
+export async function getUserByEmail(email: string) {
+  return await prisma.user.findUnique({ where: { email } });
 }
 
 /**
@@ -50,8 +45,6 @@ export async function createUser(
   email: string,
   password: string
 ): Promise<boolean> {
-  await connect();
-
   const existingUsernameUser = await getUserByUsername(username);
   const existingEmailUser = await getUserByEmail(email);
 
@@ -74,14 +67,27 @@ export async function createUser(
   }
 
   // Create the user.
-  const user = new User({
-    id: uuidv4(),
-    username,
-    email,
-    password: await bcrypt.hash(password, 12),
-    apiKey: crypto.randomBytes(32).toString('hex'),
-    createdAt: new Date()
+  await prisma.user.create({
+    data: {
+      username,
+      email,
+      apiKey: crypto.randomBytes(32).toString('hex'),
+      actions: {
+        create: {
+          action: Action.ACCOUNT_CREATE,
+          timestamp: Date.now()
+        }
+      },
+      password: await bcrypt.hash(password, 12),
+      displayName: username,
+      accounts: {
+        create: {
+          twitch: null,
+          discord: null
+        }
+      }
+    }
   });
-  await user.save();
+
   return true;
 }

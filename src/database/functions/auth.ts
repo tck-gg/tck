@@ -1,7 +1,5 @@
 import bcrypt from 'bcrypt';
 
-import { ISafeUser } from '../models/user';
-
 import { getUserByEmail, getUserByUsername } from './user';
 
 /**
@@ -10,10 +8,7 @@ import { getUserByEmail, getUserByUsername } from './user';
  * @param password The password provided.
  * @returns Returns a user object if the login was successful, `false` otherwise.
  */
-export async function tryLoginWithUsername(
-  username: string,
-  password: string
-): Promise<ISafeUser | null> {
+export async function tryLoginWithUsername(username: string, password: string) {
   // Check if the user exists.
   const user = await getUserByUsername(username);
   if (!user) {
@@ -38,10 +33,7 @@ export async function tryLoginWithUsername(
  * @param password The password provided.
  * @returns Returns a user object if the login was successful, `false` otherwise.
  */
-export async function tryLoginWithEmail(
-  email: string,
-  password: string
-): Promise<ISafeUser | null> {
+export async function tryLoginWithEmail(email: string, password: string) {
   // Check if the user exists.
   const user = await getUserByEmail(email);
   if (!user) {

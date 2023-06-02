@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import { createUser } from '../../../../database/functions/user';
+import { createUser } from '@/database/functions/user';
+
 import { isValidEmail } from '../../../../util/email';
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -9,7 +10,6 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     email: string;
     password: string;
   } = req.body;
-
   // Data validation.
   if (data.username.length < 3 || data.username.length > 32) {
     // Username must be between 3 and 32 characters long.
@@ -26,7 +26,6 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     res.status(400).end();
     return;
   }
-
   // Create the user.
   const success = await createUser(data.username, data.email, data.password);
   if (success) {

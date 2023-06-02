@@ -1,0 +1,48 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+enum Action {
+  ACCOUNT_CREATE
+  ACCOUNT_BAN
+  ACCOUNT_UNBAN
+}
+
+model UserAction {
+  id     String @id @default(auto()) @map("_id") @db.ObjectId
+  user   User   @relation(fields: [userId], references: [id])
+  userId String @db.ObjectId
+
+  action    Action
+  ip        String
+  timestamp Int
+}
+
+model UserAccounts {
+  id     String @id @default(auto()) @map("_id") @db.ObjectId
+  user   User   @relation(fields: [userId], references: [id])
+  userId String @unique @db.ObjectId
+
+  twitch  String?
+  discord String?
+}
+
+model User {
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  username String @unique
+  email    String @unique
+  password String
+  apiKey   String @unique
+
+  accounts    UserAccounts?
+  actions     UserAction[]
+  displayName String
+  isAdmin     Boolean       @default(false)
+  isBanned    Boolean       @default(false)
+  isVerified  Boolean       @default(false)
+}

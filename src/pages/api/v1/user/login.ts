@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import { tryLoginWithEmail } from '../../../../database/functions/auth';
+import { tryLoginWithEmail } from '@/database/functions/auth';
+
 import { isValidEmail } from '../../../../util/email';
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -8,7 +9,6 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     email: string;
     password: string;
   } = req.body;
-
   let user;
   if (isValidEmail(data.email)) {
     user = await tryLoginWithEmail(data.email, data.password);
@@ -16,12 +16,10 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     res.status(400).end();
     return;
   }
-
   if (!user) {
     res.status(401).end();
     return;
   }
-
   res.send({ user });
 }
 export default handler;

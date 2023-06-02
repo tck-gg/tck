@@ -11,7 +11,10 @@
     "cypress": "cypress open",
     "cypress:headless": "cypress run",
     "jest": "jest --maxWorkers=50% --coverage",
-    "test": "npm run jest"
+    "test": "npm run jest",
+    "prisma:format": "prisma format",
+    "prima:generate": "prisma generate",
+    "prisma:migrate": "prisma db push"
   },
   "dependencies": {
     "@emotion/react": "^11.11.0",
@@ -24,6 +27,7 @@
     "@mantine/form": "^6.0.13",
     "@mantine/hooks": "^6.0.13",
     "@mantine/next": "^6.0.13",
+    "@prisma/client": "^4.15.0",
     "@reverse/array": "^1.7.3",
     "axios": "^1.4.0",
     "bcrypt": "^5.1.0",
@@ -39,6 +43,7 @@
     "mongoose": "^7.2.1",
     "next": "13.4.4",
     "npm": "^9.6.7",
+    "prisma": "^4.15.0",
     "react": "18.2.0",
     "react-cookie": "^4.1.1",
     "react-dom": "18.2.0",
