@@ -1,0 +1,35 @@
+.root {
+  box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+
+  padding: 15px 18px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+
+  width: fit-content;
+  min-width: 90px;
+
+  cursor: pointer;
+}
+
+.text {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 15px;
+  text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.primary {
+  color: #000000;
+  
+  background: #ffffff;
+}
+.secondary {
+  background: #26263a;
+}
+.gradient {
+  background: linear-gradient(90deg, #18a9ff 0%, #7e06ff 100%);
+}
