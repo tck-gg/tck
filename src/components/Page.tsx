@@ -3,11 +3,9 @@
 import { useEffect } from 'react';
 import Head from 'next/head';
 import { useCookies } from 'react-cookie';
-import axios, { AxiosResponse } from 'axios';
+import axios from 'axios';
 
 import { useAuth } from '@/hooks/auth';
-
-import { ISafeUser } from '@/database/models/user';
 
 function Page({ title, children }: { title?: string; children: React.ReactNode }) {
   const auth = useAuth();
@@ -18,7 +16,7 @@ function Page({ title, children }: { title?: string; children: React.ReactNode }
     (async () => {
       if (cookie.authorization) {
         // Re-Login
-        let response: AxiosResponse<{ user: ISafeUser }>;
+        let response;
         try {
           response = await axios.post('/api/v1/user/validate-authorization', {
             authorization: cookie.authorization

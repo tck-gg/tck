@@ -5,6 +5,8 @@ import { createUser } from '@/database/functions/user';
 import { isValidEmail } from '../../../../util/email';
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
+  const ip = req.socket.remoteAddress || 'Unknown';
+
   const data: {
     username: string;
     email: string;
@@ -27,7 +29,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     return;
   }
   // Create the user.
-  const success = await createUser(data.username, data.email, data.password);
+  const success = await createUser(data.username, data.email, data.password, ip);
   if (success) {
     res.status(201).end();
     return;

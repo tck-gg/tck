@@ -2,16 +2,14 @@ import { useState, useContext, createContext } from 'react';
 import axios, { AxiosResponse } from 'axios';
 import { useCookies } from 'react-cookie';
 
-import { ISafeUser } from '@/database/models/user';
-
 // Context
 const AuthContext = createContext(null as any);
 
 // Our hook.
 export function useAuth(): {
-  user: ISafeUser | null;
-  setNewUser: (user: ISafeUser) => void;
-  login: (email: string, password: string) => Promise<ISafeUser | null>;
+  user: any | null;
+  setNewUser: (user: any) => void;
+  login: (email: string, password: string) => Promise<any | null>;
   logOut: () => void;
 } {
   return useContext(AuthContext);
@@ -21,14 +19,14 @@ export function useAuth(): {
 function useProvideAuth() {
   const [cookie, setCookie] = useCookies(['authorization']);
 
-  const [user, setUser] = useState<ISafeUser | null>(null);
+  const [user, setUser] = useState<any | null>(null);
 
-  function setNewUser(user: ISafeUser) {
+  function setNewUser(user: any) {
     setUser(user);
   }
 
-  async function login(email: string, password: string): Promise<ISafeUser | null> {
-    let response: AxiosResponse<{ user: ISafeUser }>;
+  async function login(email: string, password: string): Promise<any | null> {
+    let response: AxiosResponse<{ user: any }>;
     try {
       response = await axios.post('/api/v1/user/login', {
         email,

@@ -13,7 +13,7 @@
     "jest": "jest --maxWorkers=50% --coverage",
     "test": "npm run jest",
     "prisma:format": "prisma format",
-    "prima:generate": "prisma generate",
+    "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma db push"
   },
   "dependencies": {
@@ -37,18 +37,14 @@
     "dateformat": "^5.0.3",
     "dotenv": "^16.0.3",
     "framer-motion": "^10.12.16",
-    "i": "^0.3.7",
     "lodash": "^4.17.21",
     "log-type": "^1.0.0",
-    "mongoose": "^7.2.1",
     "next": "13.4.4",
-    "npm": "^9.6.7",
     "prisma": "^4.15.0",
     "react": "18.2.0",
     "react-cookie": "^4.1.1",
     "react-dom": "18.2.0",
-    "react-ga4": "^2.1.0",
-    "uuid": "^9.0.0"
+    "react-ga4": "^2.1.0"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",

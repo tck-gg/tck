@@ -11,6 +11,7 @@ enum Action {
   ACCOUNT_CREATE
   ACCOUNT_BAN
   ACCOUNT_UNBAN
+  ACCOUNT_LOGIN
 }
 
 model UserAction {

@@ -43,7 +43,8 @@ export async function getUserByEmail(email: string) {
 export async function createUser(
   username: string,
   email: string,
-  password: string
+  password: string,
+  ip: string
 ): Promise<boolean> {
   const existingUsernameUser = await getUserByUsername(username);
   const existingEmailUser = await getUserByEmail(email);
@@ -75,6 +76,7 @@ export async function createUser(
       actions: {
         create: {
           action: Action.ACCOUNT_CREATE,
+          ip,
           timestamp: Date.now()
         }
       },
