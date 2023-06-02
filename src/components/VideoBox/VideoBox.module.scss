@@ -4,6 +4,8 @@
   width: 244px;
 
   user-select: none;
+  
+  transition: opacity 0.15s ease-in-out;
 }
 
 .root:hover {

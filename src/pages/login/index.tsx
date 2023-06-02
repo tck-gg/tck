@@ -117,6 +117,7 @@ function Login() {
             {...form.getInputProps('password')}
             disabled={loading}
             mt='sm'
+            onKeyDown={getHotkeyHandler([['Enter', handleSubmit]])}
           />
           <Checkbox label='Remember me' {...form.getInputProps('rememberMe')} mt='sm' />
           <Button fullWidth onClick={handleSubmit} disabled={loading} mt='sm'>
