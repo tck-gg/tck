@@ -8,6 +8,7 @@ import { ProvideAuth } from '@/hooks/auth';
 
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import '../styles/globals.scss';
+import { MantineProvider } from '@mantine/core';
 
 function App({ Component, pageProps }: AppProps) {
   // useEffect(() => {
@@ -28,7 +29,14 @@ function App({ Component, pageProps }: AppProps) {
       </Head>
       <CookiesProvider>
         <ProvideAuth>
-          <Component {...pageProps} />
+          <MantineProvider
+            theme={{
+              colorScheme: 'dark',
+              fontFamily: 'Archivo, sans-serif'
+            }}
+          >
+            <Component {...pageProps} />
+          </MantineProvider>
         </ProvideAuth>
       </CookiesProvider>
     </>

@@ -4,6 +4,19 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useForm } from '@mantine/form';
 import axios from 'axios';
+import {
+  Anchor,
+  Button,
+  Checkbox,
+  Container,
+  Paper,
+  PasswordInput,
+  Text,
+  TextInput,
+  Title
+} from '@mantine/core';
+import { getHotkeyHandler } from '@mantine/hooks';
+import Link from 'next/link';
 
 import Page from '@/components/Page';
 
@@ -16,6 +29,7 @@ function Register() {
   const auth = useAuth();
 
   const [loading, setLoading] = useState(false);
+  // const
 
   const form = useForm({
     initialValues: {
@@ -126,47 +140,66 @@ function Register() {
 
   return (
     <Page title='Register'>
-      <input
-        type='text'
-        name='username'
-        placeholder='Username'
-        {...form.getInputProps('username')}
-        disabled={loading}
-      />
-      <input
-        type='text'
-        name='email'
-        placeholder='Email'
-        {...form.getInputProps('email')}
-        disabled={loading}
-      />
-      <input
-        type='password'
-        name='password'
-        placeholder='Password'
-        {...form.getInputProps('password')}
-        disabled={loading}
-      />
-      <input
-        type='password'
-        name='confirmPassword'
-        placeholder='Confirm Password'
-        {...form.getInputProps('confirmPassword')}
-        disabled={loading}
-      />
-      <div>
-        <input
-          type='checkbox'
-          name='terms'
-          placeholder='Terms'
-          {...form.getInputProps('terms', { type: 'checkbox' })}
-          disabled={loading}
-        />
-        <label>Agree</label>
-      </div>
-      <button onClick={handleSubmit} disabled={loading}>
-        Register
-      </button>
+      <Container w='stretch' size={350} my='5em'>
+        <Title align='center'>Register</Title>
+        <Text color='dimmed' size='sm' align='center' mt='0.25em'>
+          Already have an account?{' '}
+          <Anchor href='/login' component={Link}>
+            Log in
+          </Anchor>
+        </Text>
+
+        <Paper withBorder shadow='md' p='xl' mt={30} radius='md' bg='#11111f'>
+          <TextInput
+            placeholder='Username'
+            {...form.getInputProps('username')}
+            disabled={loading}
+            onKeyDown={getHotkeyHandler([['Enter', handleSubmit]])}
+          />
+          <TextInput
+            placeholder='Email'
+            {...form.getInputProps('email')}
+            disabled={loading}
+            mt='sm'
+            onKeyDown={getHotkeyHandler([['Enter', handleSubmit]])}
+          />
+          <PasswordInput
+            placeholder='Password'
+            {...form.getInputProps('password')}
+            disabled={loading}
+            mt='sm'
+            onKeyDown={getHotkeyHandler([['Enter', handleSubmit]])}
+          />
+          <PasswordInput
+            placeholder='Confirm Password'
+            {...form.getInputProps('confirmPassword')}
+            disabled={loading}
+            mt='sm'
+            onKeyDown={getHotkeyHandler([['Enter', handleSubmit]])}
+          />
+          <Checkbox
+            label={
+              <span>
+                I agree to the <Anchor href='/terms'>Terms of Service</Anchor> and the{' '}
+                <Anchor href='/privacy'>Privacy Policy</Anchor>
+              </span>
+            }
+            placeholder='Terms'
+            {...form.getInputProps('terms', { type: 'checkbox' })}
+            disabled={loading}
+            mt='sm'
+          />
+          <Button onClick={handleSubmit} disabled={loading} fullWidth mt='sm'>
+            Register
+          </Button>
+        </Paper>
+
+        <Text mt='sm' size='sm'>
+          <Anchor href='/' color='dimmed' component={Link}>
+            Back to home
+          </Anchor>
+        </Text>
+      </Container>
     </Page>
   );
 }

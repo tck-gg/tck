@@ -5,6 +5,19 @@ import { useAuth } from '@/hooks/auth';
 import { useRouter } from 'next/router';
 import { useCookies } from 'react-cookie';
 import { useForm } from '@mantine/form';
+import {
+  Anchor,
+  Button,
+  Checkbox,
+  Container,
+  Paper,
+  PasswordInput,
+  Text,
+  TextInput,
+  Title
+} from '@mantine/core';
+import { getHotkeyHandler } from '@mantine/hooks';
+import Link from 'next/link';
 
 import Page from '@/components/Page';
 
@@ -83,24 +96,40 @@ function Login() {
 
   return (
     <Page title='Login'>
-      <input type='email' placeholder='Email' {...form.getInputProps('email')} disabled={loading} />
-      <input
-        type='password'
-        placeholder='Password'
-        {...form.getInputProps('password')}
-        disabled={loading}
-      />
-      <div>
-        <input
-          type='checkbox'
-          {...form.getInputProps('rememberMe', { type: 'checkbox' })}
-          disabled={loading}
-        />
-        <label>Remember Me</label>
-      </div>
-      <button onClick={handleSubmit} disabled={loading}>
-        Login
-      </button>
+      <Container w='stretch' size={350} my='5em'>
+        <Title align='center'>Welcome back!</Title>
+        <Text color='dimmed' size='sm' align='center' mt='0.25em'>
+          Don{"'"}t have an account yet?{' '}
+          <Anchor href='/register' component={Link}>
+            Create account
+          </Anchor>
+        </Text>
+
+        <Paper withBorder shadow='md' p='xl' mt={30} radius='md' bg='#11111f'>
+          <TextInput
+            placeholder='Email'
+            {...form.getInputProps('email')}
+            disabled={loading}
+            onKeyDown={getHotkeyHandler([['Enter', handleSubmit]])}
+          />
+          <PasswordInput
+            placeholder='Password'
+            {...form.getInputProps('password')}
+            disabled={loading}
+            mt='sm'
+          />
+          <Checkbox label='Remember me' {...form.getInputProps('rememberMe')} mt='sm' />
+          <Button fullWidth onClick={handleSubmit} disabled={loading} mt='sm'>
+            Log in
+          </Button>
+        </Paper>
+
+        <Text mt='sm' size='sm'>
+          <Anchor href='/' color='dimmed' component={Link}>
+            Back to home
+          </Anchor>
+        </Text>
+      </Container>
     </Page>
   );
 }

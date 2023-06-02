@@ -21,13 +21,12 @@ html {
   font-family: 'Archivo', sans-serif;
 }
 
-// This might be a problem later.
 a {
-  color: #9391c9;
+  color: #4dabf7;
   text-decoration: none;
 }
 a:hover {
-  color: #696882;
+  text-decoration: underline;
 }
 
 #__next {
