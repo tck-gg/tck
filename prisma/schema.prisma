@@ -44,6 +44,8 @@ model User {
   actions     UserAction[]
   displayName String
 
+  points Int @default(0)
+
   isAdmin    Boolean @default(false)
   isBanned   Boolean @default(false)
   isVerified Boolean @default(false)
