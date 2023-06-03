@@ -10,9 +10,10 @@
   gap: 8px;
 
   width: fit-content;
-  min-width: 70px;
+  min-width: 35px;
 
   cursor: pointer;
+  user-select: none;
 
   transition: opacity 0.15s ease-in-out;
 }

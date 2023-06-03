@@ -19,7 +19,7 @@ interface HeaderItem {
 
 const headerItems: HeaderItem[] = [
   { href: '/', label: 'HOME' },
-  { href: '/rewards', label: 'REWARDS', component: <RewardsHeaderItem /> },
+  { href: '/affiliates', label: 'REWARDS', component: <RewardsHeaderItem /> },
   { href: '/leaderboards', label: 'LEADERBOARDS' },
   { href: '/videos', label: 'VIDEOS' },
   { href: '/store', label: 'STORE' }

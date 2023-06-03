@@ -1,0 +1,28 @@
+.root {
+  background: rgba(3, 3, 10, 0.5);
+  border-radius: 6px;
+
+  display: flex;
+  align-items: center;
+
+  flex-grow: 1;
+
+  height: 100%;
+
+  padding: 0 12px;
+
+  svg {
+    cursor: pointer;
+  }
+  svg:hover {
+    opacity: 0.85;
+  }
+}
+
+.code {
+  font-weight: 700;
+  font-size: 14px;
+
+
+  flex-grow: 1;
+}

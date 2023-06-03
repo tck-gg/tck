@@ -6,12 +6,12 @@ import { IAffiliate } from '@/types/affiliate';
 
 import { AFFILIATES } from '@/data/affiliates';
 
-import classes from './rewards.module.scss';
+import classes from './affiliates.module.scss';
 
-function Rewards() {
+function Affiliates() {
   return (
-    <Layout title='Rewards'>
-      <PageHeader title='Rewards' />
+    <Layout title='Affiliates'>
+      <PageHeader title='Affiliates' />
 
       <div className={classes.affiliateWrapper}>
         {AFFILIATES.map((affiliate: IAffiliate) => {
@@ -33,4 +33,4 @@ function Rewards() {
   );
 }
 
-export default Rewards;
+export default Affiliates;
