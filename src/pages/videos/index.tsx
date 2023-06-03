@@ -10,10 +10,9 @@ import { getLatestHighlights } from '@/util/twitch';
 
 import { Video } from '@/types/video';
 
-import classes from './videos.module.scss';
+import { TWITCH_CHANNELS, YOUTUBE_CHANNELS } from '@/data/videos';
 
-const YOUTUBE_CHANNELS = ['UCJZcsYCqoQ13KtCtApTfLaQ' /* TCK */];
-const TWITCH_CHANNELS = ['livetck'];
+import classes from './videos.module.scss';
 
 export async function getServerSideProps({ req, res }: { req: any; res: any }) {
   // TODO: Test if this works.

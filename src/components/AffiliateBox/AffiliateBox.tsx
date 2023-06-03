@@ -1,8 +1,9 @@
 import Image from 'next/image';
 import FeaturedBadge from '../FeaturedBadge/FeaturedBadge';
-import classes from './AffiliateBox.module.scss';
 
-export type Tag = 'Slots' | 'Live Games' | 'Originals' | 'Crypto' | 'Battles';
+import { AffiliateTag } from '@/types/affiliate';
+
+import classes from './AffiliateBox.module.scss';
 
 function AffiliateBox({
   image,
@@ -18,7 +19,7 @@ function AffiliateBox({
   name: string;
   code: string;
   link: string;
-  tags: Tag[];
+  tags: AffiliateTag[];
   featured?: boolean;
 }) {
   return (
