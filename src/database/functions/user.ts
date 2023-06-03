@@ -38,6 +38,7 @@ export async function getUserByEmail(email: string) {
  * @param username The username to create.
  * @param email The email to create.
  * @param password The password associated with the account.
+ * @param ip The IP address of the user.
  * @returns `true` if the user was created, `false` otherwise.
  */
 export async function createUser(

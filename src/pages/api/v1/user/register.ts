@@ -2,16 +2,18 @@ import { NextApiRequest, NextApiResponse } from 'next';
 
 import { createUser } from '@/database/functions/user';
 
-import { isValidEmail } from '../../../../util/email';
+import { getIp } from '@/util/ip';
+import { isValidEmail } from '@/util/email';
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
-  const ip = req.socket.remoteAddress || 'Unknown';
+  const ip = getIp(req);
 
   const data: {
     username: string;
     email: string;
     password: string;
   } = req.body;
+
   // Data validation.
   if (data.username.length < 3 || data.username.length > 32) {
     // Username must be between 3 and 32 characters long.

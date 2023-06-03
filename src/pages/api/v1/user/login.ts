@@ -4,9 +4,12 @@ import { Action } from '@prisma/client';
 import prisma from '@/database/database';
 import { tryLoginWithEmail } from '@/database/functions/auth';
 
-import { isValidEmail } from '../../../../util/email';
+import { getIp } from '@/util/ip';
+import { isValidEmail } from '@/util/email';
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
+  const ip = getIp(req);
+
   const data: {
     email: string;
     password: string;
@@ -30,7 +33,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
       actions: {
         create: {
           action: Action.ACCOUNT_LOGIN,
-          ip: req.socket.remoteAddress || 'Unknown',
+          ip,
           timestamp: Date.now()
         }
       }

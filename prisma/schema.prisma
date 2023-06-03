@@ -43,7 +43,8 @@ model User {
   accounts    UserAccounts?
   actions     UserAction[]
   displayName String
-  isAdmin     Boolean       @default(false)
-  isBanned    Boolean       @default(false)
-  isVerified  Boolean       @default(false)
+
+  isAdmin    Boolean @default(false)
+  isBanned   Boolean @default(false)
+  isVerified Boolean @default(false)
 }
