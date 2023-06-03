@@ -6,6 +6,7 @@ import ReactGA from 'react-ga4';
 import { MantineProvider } from '@mantine/core';
 
 import ReAuth from '@/components/ReAuth';
+import BanBanner from '@/components/BanBanner/BanBanner';
 
 import { ProvideAuth } from '@/hooks/auth';
 
@@ -38,6 +39,7 @@ function App({ Component, pageProps }: AppProps) {
                 fontFamily: 'Archivo, sans-serif'
               }}
             >
+              <BanBanner />
               <Component {...pageProps} />
             </MantineProvider>
           </ReAuth>

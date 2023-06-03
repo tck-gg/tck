@@ -1,15 +1,18 @@
 import { useState, useContext, createContext } from 'react';
 import axios, { AxiosResponse } from 'axios';
 import { useCookies } from 'react-cookie';
+import { User } from '@prisma/client';
+
+type SafeUser = Omit<User, 'password'>;
 
 // Context
 const AuthContext = createContext(null as any);
 
 // Our hook.
 export function useAuth(): {
-  user: any | null;
-  setNewUser: (user: any) => void;
-  login: (email: string, password: string) => Promise<any | null>;
+  user: SafeUser | null;
+  setNewUser: (user: SafeUser) => void;
+  login: (email: string, password: string) => Promise<SafeUser | null>;
   logOut: () => void;
 } {
   return useContext(AuthContext);
@@ -19,14 +22,14 @@ export function useAuth(): {
 function useProvideAuth() {
   const [cookie, setCookie] = useCookies(['authorization']);
 
-  const [user, setUser] = useState<any | null>(null);
+  const [user, setUser] = useState<SafeUser | null>(null);
 
-  function setNewUser(user: any) {
+  function setNewUser(user: SafeUser) {
     setUser(user);
   }
 
-  async function login(email: string, password: string): Promise<any | null> {
-    let response: AxiosResponse<{ user: any }>;
+  async function login(email: string, password: string): Promise<SafeUser | null> {
+    let response: AxiosResponse<{ user: SafeUser }>;
     try {
       response = await axios.post('/api/v1/user/login', {
         email,
