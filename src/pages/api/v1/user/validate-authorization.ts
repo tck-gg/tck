@@ -5,16 +5,20 @@ import { getIp } from '@/util/ip';
 
 import prisma from '@/database/database';
 import { validateAuthorization } from '@/database/functions/auth';
-import { getUserByUsername } from '@/database/functions/user';
+import { getUserByAuthorization, getUserByUsername } from '@/database/functions/user';
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
   const ip = getIp(req);
 
   const data: { authorization: string } = req.body;
   const isValid = await validateAuthorization(data.authorization);
-  const username = data.authorization.split('@')[0];
-  const user = await getUserByUsername(username);
-  if (!user || !isValid) {
+  if (!isValid) {
+    res.status(401).end();
+    return;
+  }
+
+  const user = await getUserByAuthorization(data.authorization);
+  if (!user) {
     res.status(401).end();
     return;
   }

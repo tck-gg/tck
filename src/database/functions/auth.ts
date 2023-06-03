@@ -1,6 +1,7 @@
 import bcrypt from 'bcrypt';
 
 import { getUserByEmail, getUserByUsername } from './user';
+import prisma from '../database';
 
 /**
  * Tries to login a user with their username.
@@ -54,17 +55,11 @@ export async function tryLoginWithEmail(email: string, password: string) {
 
 /**
  * Checks if a user's authorization is valid.
- * @param authorization The user's authorization formatted as `USERNAME@API_KEY`.
+ * @param authorization The user's authorization/API key.
  * @returns True if the authorization is valid, false otherwise.
  */
 export async function validateAuthorization(authorization: string): Promise<boolean> {
-  const username = authorization.split('@')[0];
-  const apiKey = authorization.split('@')[1];
+  const user = prisma.user.findUnique({ where: { apiKey: authorization } });
 
-  const user = await getUserByUsername(username);
-  if (!user || apiKey !== user.apiKey) {
-    // If the user doesn't exist or if the API key doesn't match.
-    return false;
-  }
-  return true;
+  return user !== null;
 }

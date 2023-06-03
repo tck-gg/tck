@@ -189,7 +189,14 @@ function Register() {
             disabled={loading}
             mt='sm'
           />
-          <Button onClick={handleSubmit} disabled={loading} fullWidth mt='sm'>
+          <Button
+            onClick={handleSubmit}
+            disabled={loading}
+            fullWidth
+            mt='sm'
+            loading={loading}
+            loaderPosition='right'
+          >
             Register
           </Button>
         </Paper>

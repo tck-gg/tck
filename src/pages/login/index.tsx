@@ -74,7 +74,7 @@ function Login() {
         if (user) {
           // If "Remember me" is checked.
           if (form.values.rememberMe) {
-            setCookie('authorization', `${user.username}@${user.apiKey}`, {
+            setCookie('authorization', user.apiKey, {
               maxAge: 3600
             });
           }
@@ -120,7 +120,14 @@ function Login() {
             onKeyDown={getHotkeyHandler([['Enter', handleSubmit]])}
           />
           <Checkbox label='Remember me' {...form.getInputProps('rememberMe')} mt='sm' />
-          <Button fullWidth onClick={handleSubmit} disabled={loading} mt='sm'>
+          <Button
+            fullWidth
+            onClick={handleSubmit}
+            disabled={loading}
+            loading={loading}
+            loaderPosition='right'
+            mt='sm'
+          >
             Log in
           </Button>
         </Paper>

@@ -34,6 +34,15 @@ export async function getUserByEmail(email: string) {
 }
 
 /**
+ * Gets a user from the database by their authorization/API key.
+ * @param authorization The user's API key/authorization.
+ * @returns The user, `null` if the user doesn't exist.
+ */
+export async function getUserByAuthorization(authorization: string) {
+  return await prisma.user.findUnique({ where: { apiKey: authorization } });
+}
+
+/**
  * Tries to create a user and add it to the database. Checks if there is an existing user with the username and email provided.
  * @param username The username to create.
  * @param email The email to create.
