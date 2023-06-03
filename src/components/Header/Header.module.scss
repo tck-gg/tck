@@ -20,11 +20,6 @@
   flex: 1;
 
   align-items: center;
-
-  a {
-    color: #9391c9;
-    text-decoration: none;
-  }
 }
 .headerGroup:first-child {
   justify-content: start;
@@ -40,11 +35,19 @@
   justify-content: end;
 }
 
+.link {
+  color: #9391c9;
+}
+.link:hover {
+  text-decoration: none;
+
+  &:not(.active) {
+    opacity: 0.85;
+  }
+}
 .active {
   color: #ffffff;
-}
-.active:hover {
-  color: #ffffff;
+  opacity: 1;
 }
 
 .buttonGroup {

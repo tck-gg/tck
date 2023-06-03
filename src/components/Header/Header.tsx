@@ -10,6 +10,7 @@ import classes from './Header.module.scss';
 
 import tckLogo from '../../../public/img/logo.png';
 import Button from '../Button/Button';
+import clsx from 'clsx';
 
 interface HeaderItem {
   href: string;
@@ -42,13 +43,13 @@ function Header() {
         {headerItems.map(({ href, label, component }) => {
           const isActive = pathname === href;
 
-          return component ? (
-            <Link href={href} key={label}>
-              {component}
-            </Link>
-          ) : (
-            <Link href={href} className={isActive ? classes.active : ''} key={label}>
-              {label}
+          return (
+            <Link
+              href={href}
+              key={label}
+              className={clsx(classes.link, isActive ? classes.active : '')}
+            >
+              {component || label}
             </Link>
           );
         })}
