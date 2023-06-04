@@ -31,6 +31,7 @@ model UserAccounts {
 
   twitch  String?
   discord String?
+  kick    String?
 }
 
 model User {
@@ -41,12 +42,22 @@ model User {
   apiKey   String @unique
 
   accounts    UserAccounts?
-  actions     UserAction[]
   displayName String
+  isAnonymous Boolean @default(false)
 
+  actions     UserAction[]
   points Int @default(0)
 
   isAdmin    Boolean @default(false)
   isBanned   Boolean @default(false)
   isVerified Boolean @default(false)
+}
+
+model BannedIp {
+  id         String @id @default(auto()) @map("_id") @db.ObjectId
+  ip         String @unique
+  bannedBy   String
+  bannedById String @db.ObjectId
+  reason     String
+  timestamp  Int    @default(0)
 }

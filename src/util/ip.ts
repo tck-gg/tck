@@ -12,5 +12,5 @@ export function getIp(request: NextApiRequest): string {
   if (!ip && forwardedFor) {
     ip = forwardedFor?.split(',').at(0) ?? 'Unknown';
   }
-  return ip === '::' ? 'Unknown' : ip;
+  return ip.includes('::') ? 'Unknown' : ip;
 }

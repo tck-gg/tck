@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
+import prisma from '@/database/database';
 import { createUser } from '@/database/functions/user';
 
 import { getIp } from '@/util/ip';
@@ -7,6 +8,15 @@ import { isValidEmail } from '@/util/email';
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
   const ip = getIp(req);
+
+  // Check if IP is banned.
+  if (ip !== 'Unknown') {
+    const bannedIP = await prisma.bannedIp.findUnique({ where: { ip } });
+    if (bannedIP) {
+      res.status(403).end();
+      return;
+    }
+  }
 
   const data: {
     username: string;

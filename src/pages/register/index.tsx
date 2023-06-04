@@ -120,6 +120,12 @@ function Register() {
           form.setErrors({ username: 'Account already exists', email: 'Account already exists' });
           return;
         }
+        if (response.status === 403) {
+          // User has been IP banned.
+          form.setErrors({
+            terms: 'Your IP has been banned and you are no longer able to create new accounts.'
+          });
+        }
         // If the account was't created for some other reason, like invalid email or password.
         form.setErrors({ terms: 'There was an error creating your account. Try again.' });
       }
