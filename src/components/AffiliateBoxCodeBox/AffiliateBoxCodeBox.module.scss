@@ -1,5 +1,4 @@
 .root {
-  background: rgba(3, 3, 10, 0.5);
   border-radius: 6px;
 
   display: flex;
@@ -11,12 +10,23 @@
 
   padding: 0 12px;
 
-  svg {
-    cursor: pointer;
-  }
-  svg:hover {
-    opacity: 0.85;
-  }
+  position: relative;
+}
+
+.background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+}
+
+.copy {
+  cursor: pointer;
+}
+.copy:hover {
+  opacity: 0.85;
 }
 
 .code {
@@ -25,4 +35,25 @@
 
 
   flex-grow: 1;
+}
+
+.copy {
+  border-radius: 50%;
+  background: rgba(152, 158, 174, 0.33);
+
+  width: 6px;
+  height: 6px;
+  padding: 6px;
+
+  position: relative;
+
+  svg {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    margin: 6px;
+  }
 }
