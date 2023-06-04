@@ -35,6 +35,12 @@
   justify-content: end;
 }
 
+.profileGroup {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
 .link {
   color: #9391c9;
 }

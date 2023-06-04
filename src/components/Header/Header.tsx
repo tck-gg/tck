@@ -56,7 +56,7 @@ function Header() {
       </div>
       <div className={classes.headerGroup}>
         {auth.user ? (
-          <div>
+          <div className={classes.profileGroup}>
             <p>Coins</p>
             <p>Profile</p>
           </div>
