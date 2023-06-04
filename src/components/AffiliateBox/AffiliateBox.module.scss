@@ -20,8 +20,8 @@
 .top {
   display: flex;
   flex-direction: column;
-  align-content: space-around ;
-  justify-content: center;
+  justify-content: space-around;
+  align-items: center;
 
   flex-grow: 1;
 }
@@ -30,18 +30,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-
-  flex-grow: 1;
-}
-
-.content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 35px;
-
-  flex-grow: 1.5;
 }
 
 .info {
@@ -54,6 +42,7 @@
 .reward {
   font-weight: 700;
   font-size: 14px;
+  text-align: center;
 }
 
 .name {
@@ -61,6 +50,15 @@
   color: #989EAE;
 }
 
+.redeemWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  width: -moz-available;
+  width: -webkit-fill-available;
+  width: stretch;
+}
 .redeem {
   display: flex;
   justify-content: center;
@@ -68,9 +66,6 @@
   gap: 12px;
 
   padding: 0 32px;
-  width: -moz-available;
-  width: -webkit-fill-available;
-  width: stretch;
 }
 
 .bottom {

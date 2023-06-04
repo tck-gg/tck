@@ -21,8 +21,7 @@ function Affiliates() {
               image={affiliate.image}
               reward={affiliate.reward}
               name={affiliate.name}
-              code={affiliate.code}
-              link={affiliate.link}
+              codes={affiliate.codes}
               tags={affiliate.tags}
               featured={affiliate.featured}
             />
