@@ -8,7 +8,7 @@ import { useAuth } from '@/hooks/auth';
 
 import classes from './Header.module.scss';
 
-import tckLogo from '../../../public/img/logo.png';
+import tckLogo from '@/images/logo.png';
 import Button from '../Button/Button';
 import clsx from 'clsx';
 

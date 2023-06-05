@@ -1,14 +1,14 @@
 import { IAffiliate } from '@/types/affiliate';
 
-import gamdomLogo from '../../public/img/affiliates/gamdom.png';
-import stakeLogo from '../../public/img/affiliates/stake.png';
-import hypeDropLogo from '../../public/img/affiliates/hypedrop.png';
-import csgorollLogo from '../../public/img/affiliates/csgoroll.png';
+import gamdomLogo from '../images/affiliates/gamdom.png';
+import stakeLogo from '../images/affiliates/stake.png';
+import hypeDropLogo from '../images/affiliates/hypedrop.png';
+import csgorollLogo from '../images/affiliates/csgoroll.png';
 
-import datDropLogo from '../../public/img/affiliates/datdrop.png';
-import rollbitLogo from '../../public/img/affiliates/rollbit.png';
-import roobetLogo from '../../public/img/affiliates/roobet.png';
-import csgo500Logo from '../../public/img/affiliates/csgo500.png';
+import datDropLogo from '../images/affiliates/datdrop.png';
+import rollbitLogo from '../images/affiliates/rollbit.png';
+import roobetLogo from '../images/affiliates/roobet.png';
+import csgo500Logo from '../images/affiliates/csgo500.png';
 
 /**
  * The affiliates to display on the affiliates page.

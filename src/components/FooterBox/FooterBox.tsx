@@ -15,7 +15,7 @@ import GamblingAwareBox from '../GamblingAwareBox/GamblingAwareBox';
 
 import classes from './FooterBox.module.scss';
 
-import tckLogo from '../../../public/img/logo.png';
+import tckLogo from '@/images/logo.png';
 
 const footerSocialItems: { icon: IconDefinition; href: string }[] = [
   {
