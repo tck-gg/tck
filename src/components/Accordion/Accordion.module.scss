@@ -1,0 +1,58 @@
+.root {
+  background: radial-gradient(94.58% 94.58% at 50% 5.42%, rgba(29, 29, 47, 0.2) 0%, rgba(0, 0, 0, 0) 100%, rgba(22, 22, 37, 0) 100%), rgba(22, 22, 37, 0.8);
+  backdrop-filter: blur(45px);
+
+  border-radius: 8px;
+
+  width: 100%;
+  max-width: 800px;
+
+  justify-self: center;
+}
+
+.top {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  flex-grow: 1;
+
+  font-size: 18px;
+  font-weight: 500;
+
+  padding: 16px;
+
+  cursor: pointer;
+}
+
+.icon {  
+  transition: transform 0.15s ease-out;
+}
+.openIcon {
+  transform: rotate(180deg);
+}
+
+.bottom {
+  background: rgba(3, 3, 11, 0.33);
+  border-radius: 0 0 8px 8px;
+
+  border-top: 2px solid #03030B;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+
+  overflow: hidden;
+}
+
+.content {
+  padding: 16px;
+
+  line-height: 1.5;
+
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
