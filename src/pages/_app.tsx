@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
-import { CookiesProvider, useCookies } from 'react-cookie';
+import { CookiesProvider } from 'react-cookie';
 import ReactGA from 'react-ga4';
 import { MantineProvider } from '@mantine/core';
 
