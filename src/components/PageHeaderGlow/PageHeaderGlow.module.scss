@@ -1,0 +1,22 @@
+.root {
+  position: relative;
+
+  opacity: 0.5;
+  
+  z-index: -1;
+
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+  svg {
+    position: fixed;
+    top: -420px;
+    
+    min-width: 2496px;
+    max-width: 2496px;
+
+    min-height: 1404px;
+    max-height: 1404px;
+  }  
+}
