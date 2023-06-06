@@ -100,10 +100,6 @@ export const AFFILIATES: IAffiliate[] = [
       {
         code: 'TCK',
         link: 'https://rollbit.com/referral/TCK'
-      },
-      {
-        code: 'Bonushunt',
-        link: 'https://rollbit.com/referral/Bonushunt'
       }
     ],
     tags: ['Slots', 'Live Games', 'Originals', 'Crypto'],

@@ -34,7 +34,7 @@ function AffiliateBox({
       {featured && <AffiliateBoxFeaturedBadge />}
       <div className={classes.top}>
         <div className={classes.image}>
-          <Image src={image} alt={name} width={200} height={100} style={{ objectFit: 'contain' }} />
+          <Image src={image} alt={name} width={200} height={75} style={{ objectFit: 'contain' }} />
         </div>
         <div className={classes.info}>
           <div className={classes.reward}>{reward}</div>
