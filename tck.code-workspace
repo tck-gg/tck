@@ -8,6 +8,10 @@
 			"path": "apps/website"
 		},
 		{
+			"name": "admin",
+			"path": "apps/admin"
+		},
+		{
 			"name": "eslint-config-tck",
 			"path": "packages/config/eslint-config-tck"
 		}
@@ -25,7 +29,8 @@
 		},
 		"jest.disabledWorkspaceFolders": [
 			"tck",
-			"eslint-config-tck"
+			"eslint-config-tck",
+			"admin"
 		]
 	}
 }
