@@ -10,7 +10,8 @@
     "dev": "turbo run dev --parallel",
     "build": "turbo run build",
     "lint": "turbo run lint",
-    "test": "turbo run test --concurrency=1"
+    "test": "turbo run test --concurrency=1",
+    "start": "turbo run start"
   },
   "devDependencies": {
     "eslint-config-tck": "workspace:*",
