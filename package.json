@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbo -p 8000",
+    "prebuild": "npm run prisma:generate",
     "build:next": "next build",
     "build": "turbo build:next",
     "start": "next start -p 8007",
@@ -44,7 +45,8 @@
     "react": "18.2.0",
     "react-cookie": "^4.1.1",
     "react-dom": "18.2.0",
-    "react-ga4": "^2.1.0"
+    "react-ga4": "^2.1.0",
+    "sharp": "^0.32.1"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
