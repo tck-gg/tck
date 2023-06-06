@@ -16,6 +16,8 @@
   user-select: none;
 
   transition: opacity 0.15s ease-in-out;
+
+  white-space: nowrap;
 }
 .root:hover {
   opacity: 0.85;

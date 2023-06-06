@@ -1,8 +1,8 @@
 import clsx from 'clsx';
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import classes from './Button.module.scss';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 type ButtonVariants = 'primary' | 'secondary' | 'gradient';
 
