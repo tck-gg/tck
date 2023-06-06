@@ -10,8 +10,6 @@ html, body {
 
 body {
   background-color: #03030A;
-
-  overflow-x: hidden;
 }
 
 html {
@@ -37,4 +35,6 @@ a:hover {
 
   display: flex;
   flex-direction: column;
+
+  overflow: hidden;
 }
