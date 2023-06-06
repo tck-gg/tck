@@ -1,0 +1,31 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"name": "website",
+			"path": "apps/website"
+		},
+		{
+			"name": "eslint-config-tck",
+			"path": "packages/config/eslint-config-tck"
+		}
+	],
+	"settings": {
+		"discord.enabled": true,
+		"files.exclude": {
+			"**/.next": true,
+			"**/.turbo": true,
+			"**/coverage": true,
+			"**/next-env.d.ts": true,
+			"**/NEXT.md": true,
+			"**/node_modules": true,
+			"**/package-lock.json": true,
+		},
+		"jest.disabledWorkspaceFolders": [
+			"tck",
+			"eslint-config-tck"
+		]
+	}
+}

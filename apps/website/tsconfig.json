@@ -23,10 +23,12 @@
         "./src/*"
       ]
     },
-    "incremental": true
+    "incremental": true,
+    "types": ["jest", "node"]
   },
   "include": [
     "src",
+    "test",
     ".next/types/**/*.ts"
   ],
   "exclude": [
