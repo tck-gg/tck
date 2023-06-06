@@ -1,31 +1,11 @@
 .root {
-  opacity: 0.33;
-  overflow-x: hidden;
+  overflow: hidden;
 
   position: relative;
   min-width: 1920px;
   height: 280px;
 
   flex-grow: 1;
-}
 
-.layer1 {
-  z-index: -3;
-
-  position: absolute;
-  bottom: 0;
-}
-
-.layer2 {
-  z-index: -2;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-}
-
-.layer3 {
   z-index: -1;
-  position: absolute;
-  top: 20px;
-  right: 0;
 }
