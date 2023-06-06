@@ -1,15 +1,11 @@
 {
   "version": "0.2",
-  "ignorePaths": [
-    ".eslintrc",
-    ".eslintrc.json",
-    ".prettierrc",
-    "cspell.json"
-  ],
+  "ignorePaths": [],
   "words": [
     "Bonushunt",
     "browserconfig",
     "clsx",
+    "cond",
     "csgo",
     "csgoempire",
     "csgoroll",
@@ -20,6 +16,7 @@
     "gamdom",
     "ggpht",
     "hypedrop",
+    "isnan",
     "jtvnw",
     "leaderboard",
     "LEADERBOARDS",
@@ -29,6 +26,7 @@
     "MERCH",
     "msapplication",
     "pageview",
+    "Parens",
     "Rakeback",
     "rollbit",
     "roobet",

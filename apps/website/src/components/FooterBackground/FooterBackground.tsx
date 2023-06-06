@@ -27,8 +27,8 @@ function FooterBackground() {
             y2='140.5'
             gradientUnits='userSpaceOnUse'
           >
-            <stop stop-color='#1B1B2E' />
-            <stop offset='1' stop-color='#0D0D17' />
+            <stop stopColor='#1B1B2E' />
+            <stop offset='1' stopColor='#0D0D17' />
           </linearGradient>
           <linearGradient
             id='paint1_linear_31_60'
@@ -38,8 +38,8 @@ function FooterBackground() {
             y2='281'
             gradientUnits='userSpaceOnUse'
           >
-            <stop stop-color='#28283D' />
-            <stop offset='1' stop-color='#28283D' stop-opacity='0.6' />
+            <stop stopColor='#28283D' />
+            <stop offset='1' stopColor='#28283D' stopOpacity='0.6' />
           </linearGradient>
           <linearGradient
             id='paint2_linear_31_60'
@@ -49,8 +49,8 @@ function FooterBackground() {
             y2='-25.0002'
             gradientUnits='userSpaceOnUse'
           >
-            <stop stop-color='#28283D' />
-            <stop offset='1' stop-color='#28283D' stop-opacity='0' />
+            <stop stopColor='#28283D' />
+            <stop offset='1' stopColor='#28283D' stopOpacity='0' />
           </linearGradient>
         </defs>
       </svg>
