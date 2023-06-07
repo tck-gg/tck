@@ -6,7 +6,7 @@ import { useAuth } from '@/hooks/auth';
 
 import classes from './HeaderProfileGroup.module.scss';
 
-function HeaderProfileGroup({ styles }: { styles: React.CSSProperties }) {
+function HeaderProfileGroup({ styles }: { styles?: React.CSSProperties }) {
   const auth = useAuth();
 
   return auth.user ? (
