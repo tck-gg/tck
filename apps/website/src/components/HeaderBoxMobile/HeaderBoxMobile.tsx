@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import clsx from 'clsx';
 
 import Button from '../Button/Button';
-import CoinsDisplay from '../CoinsDisplay/CoinsDisplay';
+import HeaderProfileGroup from '../HeaderProfileGroup/HeaderProfileGroup';
 
 import { HEADER_ITEMS } from '@/data/header';
 
@@ -27,10 +27,11 @@ function HeaderBoxMobile({ ref }: { ref?: React.RefObject<HTMLDivElement> }) {
       ref={ref}
     >
       {auth.user && (
-        <div className={classes.profileGroup}>
-          <CoinsDisplay />
-          <p>Profile</p>
-        </div>
+        <HeaderProfileGroup
+          styles={{
+            padding: '1em 1em 0.5em 1em'
+          }}
+        />
       )}
       {HEADER_ITEMS.map(({ href, label, component }) => {
         const isActive = router.pathname === href;

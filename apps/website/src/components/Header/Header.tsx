@@ -9,7 +9,7 @@ import { faBars } from '@fortawesome/free-solid-svg-icons';
 
 import HeaderBoxMobile from '../HeaderBoxMobile/HeaderBoxMobile';
 import Button from '../Button/Button';
-import CoinsDisplay from '../CoinsDisplay/CoinsDisplay';
+import HeaderProfileGroup from '../HeaderProfileGroup/HeaderProfileGroup';
 
 import { HEADER_ITEMS } from '@/data/header';
 
@@ -59,10 +59,7 @@ function Header() {
       </div>
       <div className={classes.headerGroup}>
         {auth.user ? (
-          <div className={classes.profileGroup}>
-            <CoinsDisplay />
-            <p>Profile</p>
-          </div>
+          <HeaderProfileGroup />
         ) : (
           <div className={classes.buttonGroup}>
             <Button
