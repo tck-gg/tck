@@ -1,0 +1,11 @@
+.link:hover {
+  text-decoration: none;
+
+  &:not(.active) {
+    opacity: 0.85;
+  }
+}
+.active {
+  color: #ffffff;
+  opacity: 1;
+}

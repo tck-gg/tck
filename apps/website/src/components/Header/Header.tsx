@@ -1,36 +1,38 @@
+import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import clsx from 'clsx';
+import { AnimatePresence } from 'framer-motion';
 
-import RewardsHeaderItem from '../RewardsHeaderItem/RewardsHeaderItem';
+import HeaderBoxMobile from '../HeaderBoxMobile/HeaderBoxMobile';
+import Button from '../Button/Button';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBars } from '@fortawesome/free-solid-svg-icons';
+
+import { HEADER_ITEMS } from '@/data/header';
 
 import { useAuth } from '@/hooks/auth';
 
 import classes from './Header.module.scss';
 
 import tckLogo from '@/images/logo.png';
-import Button from '../Button/Button';
-import clsx from 'clsx';
-
-interface HeaderItem {
-  href: string;
-  label: string;
-  component?: React.ReactNode;
-}
-
-const headerItems: HeaderItem[] = [
-  { href: '/', label: 'HOME' },
-  { href: '/affiliates', label: 'REWARDS', component: <RewardsHeaderItem /> },
-  { href: '/leaderboards', label: 'LEADERBOARDS' },
-  { href: '/videos', label: 'VIDEOS' },
-  { href: '/store', label: 'STORE' }
-];
 
 function Header() {
   const auth = useAuth();
   const router = useRouter();
 
-  const { pathname } = useRouter();
+  const boxRef = useRef<HTMLDivElement>(null);
+  const [mobileBoxOpen, setMobileBoxOpen] = useState(false);
+
+  useEffect(() => {
+    const handler = (event: MouseEvent) => {
+      if (boxRef.current && !boxRef.current.contains(event.target as Node)) {
+        setMobileBoxOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handler);
+  });
 
   return (
     <div className={classes.root}>
@@ -40,8 +42,8 @@ function Header() {
         </Link>
       </div>
       <div className={classes.headerGroup}>
-        {headerItems.map(({ href, label, component }) => {
-          const isActive = pathname === href;
+        {HEADER_ITEMS.map(({ href, label, component }) => {
+          const isActive = router.pathname === href;
 
           return (
             <Link
@@ -82,6 +84,16 @@ function Header() {
             </Button>
           </div>
         )}
+      </div>
+      <FontAwesomeIcon
+        icon={faBars}
+        className={classes.hamburger}
+        onClick={() => {
+          setMobileBoxOpen(!mobileBoxOpen);
+        }}
+      />
+      <div ref={boxRef}>
+        <AnimatePresence>{mobileBoxOpen && <HeaderBoxMobile />}</AnimatePresence>
       </div>
     </div>
   );

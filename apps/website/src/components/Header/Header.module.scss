@@ -1,7 +1,11 @@
+@use 'header';
+
 .root {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
+  gap: 8px;
 
   margin: auto;
   max-width: 1258px;
@@ -27,12 +31,9 @@
 .headerGroup:nth-child(2) {
   justify-content: center;
   gap: 20px;
-
-  color: #9391C9;
-  font-weight: bold;
 }
-.headerGroup:last-child {
-  justify-content: end;
+.headerGroup:nth-child(3) {
+  justify-content: flex-end;
 }
 
 .profileGroup {
@@ -42,22 +43,37 @@
 }
 
 .link {
-  color: #9391c9;
-}
-.link:hover {
-  text-decoration: none;
-
-  &:not(.active) {
-    opacity: 0.85;
-  }
-}
-.active {
-  color: #ffffff;
-  opacity: 1;
+  color: #9391C9;
+  font-weight: bold;
 }
 
 .buttonGroup {
   display: flex;
   align-items: center;
   gap: 8px;
+}
+
+.hamburger {
+  height: 24px;
+  
+  display: none;
+
+  cursor: pointer;
+}
+
+@media screen and (max-width: 950px) {
+  .hamburger {
+    display: block;
+  }
+
+  .headerGroup:first-child {
+    justify-content: center;
+    margin-left: 29px; // Width of hamburger + gap.
+  }
+  .headerGroup:nth-child(2) {
+    display: none;
+  }
+  .headerGroup:nth-child(3) {
+    display: none;
+  }
 }
