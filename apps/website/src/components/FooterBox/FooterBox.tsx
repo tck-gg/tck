@@ -13,6 +13,8 @@ import {
 import FooterSocialButton from '../FooterSocialButton/FooterSocialButton';
 import GamblingAwareBox from '../GamblingAwareBox/GamblingAwareBox';
 
+import { useAuth } from '@/hooks/auth';
+
 import classes from './FooterBox.module.scss';
 
 import tckLogo from '@/images/logo.png';
@@ -45,6 +47,7 @@ const footerSocialItems: { icon: IconDefinition; href: string }[] = [
 ];
 
 function FooterBox() {
+  const auth = useAuth();
   return (
     <div className={classes.root}>
       <div className={classes.top}>
@@ -69,6 +72,18 @@ function FooterBox() {
           <Link href='terms'>TERMS OF SERVICE</Link>
           <Link href='faq'>FREQUENTLY ASKED</Link>
           <Link href='privacy'>PRIVACY POLICY</Link>
+          {auth.user?.isAdmin && (
+            <a
+              href={
+                process.env.NODE_ENV === 'development'
+                  ? 'http://localhost:8001/'
+                  : 'https://admin.tck.hunterparcells.com'
+              }
+              target='_blank'
+            >
+              ADMIN PANEL
+            </a>
+          )}
         </div>
       </div>
       <div className={classes.divider}></div>

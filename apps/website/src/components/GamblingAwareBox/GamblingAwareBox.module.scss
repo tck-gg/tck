@@ -5,8 +5,13 @@
     fill: #525174;
   }
 }
-.root:hover svg {
-  fill: #696882;  
+.root:hover {
+  text-decoration: none;
+  color: #696882;
+
+  svg {
+    fill: #696882;
+  }
 }
 
 .responsibleGamblingBox {
