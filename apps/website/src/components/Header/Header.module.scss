@@ -1,4 +1,4 @@
-@use 'header';
+@use 'header' as header;
 
 .root {
   display: flex;
@@ -42,11 +42,6 @@
   gap: 16px;
 }
 
-.link {
-  color: #9391C9;
-  font-weight: bold;
-}
-
 .buttonGroup {
   display: flex;
   align-items: center;
@@ -61,7 +56,7 @@
   cursor: pointer;
 }
 
-@media screen and (max-width: 950px) {
+@media screen and (max-width: header.$breakpoint) {
   .hamburger {
     display: block;
   }

@@ -1,4 +1,4 @@
-@use 'header';
+@use 'header' as header;
 
 .root {
   max-width: 250px;
@@ -22,11 +22,6 @@
 }
 
 .link {
-  color: #9391C9;
-  font-weight: bold;
-
-  cursor: pointer;
-
   padding: 0.5em 1em;
 }
 .link:first-child {
@@ -44,7 +39,6 @@
   @extend .group;
 
   justify-content: space-between;
-  gap: 16px;
 }
 .buttonGroup {
   @extend .group;
@@ -53,7 +47,7 @@
   gap: 8px;
 }
 
-@media screen and (min-width: 950px) {
+@media screen and (min-width: header.$breakpoint) {
   .root {
     display: none;
   }
