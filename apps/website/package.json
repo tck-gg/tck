@@ -12,9 +12,9 @@
     "cypress:headless": "cypress run",
     "jest": "jest --maxWorkers=50% --coverage",
     "test": "npm run jest",
-    "prisma:format": "prisma format",
-    "prisma:generate": "prisma generate",
-    "prisma:migrate": "prisma db push"
+    "db:format": "prisma format",
+    "db:generate": "prisma generate",
+    "db:migrate": "prisma db push"
   },
   "dependencies": {
     "@emotion/react": "^11.11.0",
