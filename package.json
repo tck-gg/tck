@@ -14,7 +14,7 @@
     "start": "turbo run start"
   },
   "devDependencies": {
-    "eslint-config-tck": "workspace:*",
+    "eslint-config-tck": "file:*",
     "prettier": "^2.8.8",
     "turbo": "^1.10.1"
   },
