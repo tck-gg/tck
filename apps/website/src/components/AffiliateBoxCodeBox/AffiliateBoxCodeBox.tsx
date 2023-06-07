@@ -1,11 +1,12 @@
+import { useEffect, useState } from 'react';
+import clsx from 'clsx';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
+
 import Copy from '../svg/Copy';
 import Jagged from '../svg/Jagged';
 
 import classes from './AffiliateBoxCodeBox.module.scss';
-import { faCheck } from '@fortawesome/free-solid-svg-icons';
-import { useEffect, useState } from 'react';
-import clsx from 'clsx';
 
 function AffiliateBoxCodeBox({ children }: { children: string }) {
   const [hasCopied, setHasCopied] = useState(false);

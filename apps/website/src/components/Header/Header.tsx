@@ -4,11 +4,12 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import clsx from 'clsx';
 import { AnimatePresence } from 'framer-motion';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBars } from '@fortawesome/free-solid-svg-icons';
 
 import HeaderBoxMobile from '../HeaderBoxMobile/HeaderBoxMobile';
 import Button from '../Button/Button';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars } from '@fortawesome/free-solid-svg-icons';
+import CoinsDisplay from '../CoinsDisplay/CoinsDisplay';
 
 import { HEADER_ITEMS } from '@/data/header';
 
@@ -59,7 +60,7 @@ function Header() {
       <div className={classes.headerGroup}>
         {auth.user ? (
           <div className={classes.profileGroup}>
-            <p>Coins</p>
+            <CoinsDisplay />
             <p>Profile</p>
           </div>
         ) : (

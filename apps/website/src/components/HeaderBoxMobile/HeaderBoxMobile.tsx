@@ -4,11 +4,13 @@ import { useRouter } from 'next/router';
 import clsx from 'clsx';
 
 import Button from '../Button/Button';
+import CoinsDisplay from '../CoinsDisplay/CoinsDisplay';
 
 import { HEADER_ITEMS } from '@/data/header';
 
-import classes from './HeaderBoxMobile.module.scss';
 import { useAuth } from '@/hooks/auth';
+
+import classes from './HeaderBoxMobile.module.scss';
 
 function HeaderBoxMobile({ ref }: { ref?: React.RefObject<HTMLDivElement> }) {
   const auth = useAuth();
@@ -26,7 +28,7 @@ function HeaderBoxMobile({ ref }: { ref?: React.RefObject<HTMLDivElement> }) {
     >
       {auth.user && (
         <div className={classes.profileGroup}>
-          <p>Coins</p>
+          <CoinsDisplay />
           <p>Profile</p>
         </div>
       )}
