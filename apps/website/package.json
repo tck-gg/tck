@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbo -p 8000",
-    "prebuild": "npm run prisma:generate",
+    "prebuild": "npm run db:generate",
     "build": "next build",
     "start": "next start -p 8007",
     "lint": "next lint",
