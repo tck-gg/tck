@@ -1,0 +1,68 @@
+.hero {
+  height: 450px;
+
+  justify-content: center;
+}
+
+.big {
+  font-weight: 800;
+  font-size: 66px;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
+  text-align: center;
+}
+
+.description {
+  font-size: 14px;
+  color: #9391C9;
+
+  text-align: center;
+  text-wrap: balance;
+}
+
+.splashGroup {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+
+  margin-bottom: 35px;
+}
+.buttonGroup {
+  display: flex;
+  gap: 22px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.sectionDescription {
+  background: linear-gradient(90deg, #18A9FF 0%, #9229FF 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+
+  font-weight: 700;
+  font-size: 16px;
+  text-align: center;
+
+  margin-bottom: 5px;
+}
+
+.sectionWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 125px;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sectionTitle {
+  font-weight: 800;
+  font-size: 38px;
+  text-align: center;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
+}
