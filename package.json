@@ -7,13 +7,14 @@
     "packages/*"
   ],
   "scripts": {
-    "dev": "turbo run dev --parallel",
+    "dev": "dotenv -- turbo run dev --parallel",
     "build": "turbo run build",
     "lint": "turbo run lint",
     "test": "turbo run test --concurrency=1",
-    "start": "turbo run start"
+    "start": "dotenv -- turbo run start"
   },
   "devDependencies": {
+    "dotenv-cli": "^7.2.1",
     "eslint-config-custom": "*",
     "prettier": "^2.8.8",
     "turbo": "^1.10.2"
