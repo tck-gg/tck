@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 import clsx from 'clsx';
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
@@ -5,12 +6,15 @@ import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import Layout from '@/components/Layout/Layout';
 import Button from '@/components/Button/Button';
 import AffiliateBox from '@/components/AffiliateBox/AffiliateBox';
+import SocialBox from '@/components/SocialBox/SocialBox';
 
 import { AFFILIATES } from '@/data/affiliates';
+import { SOCIALS_DATA } from '@/data/socials';
 
 import classes from './index.module.scss';
-import { SOCIALS_DATA } from '@/data/socials';
-import SocialBox from '@/components/SocialBox/SocialBox';
+
+import ak from '@/images/ak.png';
+import knife from '@/images/knife.png';
 
 function Home() {
   const router = useRouter();
@@ -18,6 +22,18 @@ function Home() {
     <Layout>
       <div className={classes.sectionWrapper}>
         <div className={clsx(classes.section, classes.hero)}>
+          <div className={classes.ak}>
+            <Image src={ak} width={280} height={80} alt='ak' style={{ objectFit: 'contain' }} />
+          </div>
+          <div className={classes.knife}>
+            <Image
+              src={knife}
+              width={250}
+              height={133}
+              alt='knife'
+              style={{ objectFit: 'contain' }}
+            />
+          </div>
           <div className={classes.heroTop}>
             <p className={classes.sectionDescription}>Claim Free Rewards</p>
             <p className={classes.big}>The Most Rewarding Website</p>

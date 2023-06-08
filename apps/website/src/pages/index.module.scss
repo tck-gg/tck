@@ -52,6 +52,8 @@
   flex-direction: column;
   gap: 125px;
   margin-bottom: 125px;
+
+  position: relative;
 }
 
 .section {
@@ -105,4 +107,44 @@
   transform: scale(0.95);
 
   filter: blur(2px);
+
+  user-select: none;
+}
+
+.image {
+  position: absolute;
+
+  z-index: -1;
+  opacity: 0.75;
+
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% {
+    transform: skew(-15deg, 15deg) translate(0px, 0px) scale(1);
+  }
+  50% {
+    transform: skew(-20deg, 20deg) translate(0px, 20px) scale(1.03);
+  }
+  100% {
+    transform: skew(-15deg, 15deg) translate(0px, 0px) scale(1);
+  }
+}
+
+
+.ak {
+  @extend .image;
+
+  top: 270px;
+  left: 5%;
+}
+
+.knife {
+  @extend .image;
+
+  top: 70px;
+  right: 0;
+
+  animation-delay: -2s;
 }
