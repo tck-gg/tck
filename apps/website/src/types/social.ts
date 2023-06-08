@@ -1,3 +1,5 @@
+import { StaticImageData } from 'next/image';
+
 export enum Social {
   FACEBOOK = 'facebook',
   TWITTER = 'twitter',
@@ -7,7 +9,7 @@ export enum Social {
 }
 
 export interface ISocial {
-  image: string;
+  image: StaticImageData;
   name: string;
   type: Social;
   url: string;

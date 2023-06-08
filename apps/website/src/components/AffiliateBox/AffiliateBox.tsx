@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import Image, { StaticImageData } from 'next/image';
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import clsx from 'clsx';
 
@@ -18,7 +18,7 @@ function AffiliateBox({
   tags,
   featured
 }: {
-  image: string;
+  image: StaticImageData;
   reward: string;
   name: string;
   codes: IAffiliateCode[];

@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "workspaces": [
     "apps/*",
-    "packages/config/*"
+    "packages/*"
   ],
   "scripts": {
     "dev": "turbo run dev --parallel",
@@ -14,7 +14,7 @@
     "start": "turbo run start"
   },
   "devDependencies": {
-    "eslint-config-tck": "file:*",
+    "eslint-config-custom": "*",
     "prettier": "^2.8.8",
     "turbo": "^1.10.2"
   },

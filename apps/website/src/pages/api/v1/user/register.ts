@@ -1,7 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import prisma from '@/database/database';
-import { createUser } from '@/database/functions/user';
+import { prisma, createUser } from 'database';
 
 import { getIp } from '@/util/ip';
 import { isValidEmail } from '@/util/email';

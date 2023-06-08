@@ -7,8 +7,8 @@ import { useAuth } from '@/hooks/auth';
 
 import classes from './CoinsDisplay.module.scss';
 
-import staticCoin from '../../images/coin.png';
-import animatedCoin from '../../images/coin.gif';
+import staticCoin from '@/images/coin.png';
+import animatedCoin from '@/images/coin.gif';
 
 function CoinsDisplay() {
   const [ref, hovering] = useHover();

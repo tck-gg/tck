@@ -1,8 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { Action } from '@prisma/client';
-
-import prisma from '@/database/database';
-import { tryLoginWithEmail } from '@/database/functions/auth';
+import { prisma, tryLoginWithEmail } from 'database';
 
 import { getIp } from '@/util/ip';
 import { isValidEmail } from '@/util/email';

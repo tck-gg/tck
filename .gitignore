@@ -1,4 +1,6 @@
 # Folders
 .turbo/
 node_modules/
-.turbo
+
+# Files
+.env

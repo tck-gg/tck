@@ -58,7 +58,7 @@ function useProvideAuth() {
 }
 
 // The context we provide.
-export function ProvideAuth({ children }: { children: React.ReactNode }) {
+export function ProvideAuth({ children }: { children: any }) {
   const auth = useProvideAuth();
 
   return <AuthContext.Provider value={auth}>{children}</AuthContext.Provider>;

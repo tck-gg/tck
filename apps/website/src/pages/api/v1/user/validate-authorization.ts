@@ -1,11 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { Action } from '@prisma/client';
+import { getUserByAuthorization, prisma, validateAuthorization } from 'database';
 
 import { getIp } from '@/util/ip';
-
-import prisma from '@/database/database';
-import { validateAuthorization } from '@/database/functions/auth';
-import { getUserByAuthorization, getUserByUsername } from '@/database/functions/user';
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
   const ip = getIp(req);

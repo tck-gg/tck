@@ -12,8 +12,16 @@
 			"path": "apps/admin"
 		},
 		{
-			"name": "eslint-config-tck",
-			"path": "packages/config/eslint-config-tck"
+			"name": "database",
+			"path": "packages/database"
+		},
+		{
+			"name": "eslint-config-custom",
+			"path": "packages/eslint-config-custom"
+		},
+		{
+			"name": "tsconfig",
+			"path": "packages/tsconfig"
 		}
 	],
 	"settings": {
@@ -29,8 +37,10 @@
 		},
 		"jest.disabledWorkspaceFolders": [
 			"tck",
-			"eslint-config-tck",
-			"admin"
+			"admin",
+			"database",
+			"eslint-config-custom",
+			"tsconfig"
 		]
 	}
 }
