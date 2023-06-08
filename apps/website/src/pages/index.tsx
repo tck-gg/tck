@@ -9,6 +9,8 @@ import AffiliateBox from '@/components/AffiliateBox/AffiliateBox';
 import { AFFILIATES } from '@/data/affiliates';
 
 import classes from './index.module.scss';
+import { SOCIALS_DATA } from '@/data/socials';
+import SocialBox from '@/components/SocialBox/SocialBox';
 
 function Home() {
   const router = useRouter();
@@ -149,8 +151,10 @@ function Home() {
             <p className={classes.sectionDescription}>Stay Up to Date</p>
             <p className={classes.sectionTitle}>More TCK Content</p>
           </div>
-          <div>
-            <p>TODO</p>
+          <div className={classes.boxWrapper}>
+            {SOCIALS_DATA.map((social) => {
+              return <SocialBox key={social.name} social={social} />;
+            })}
           </div>
         </div>
       </div>

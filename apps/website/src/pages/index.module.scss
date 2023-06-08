@@ -81,14 +81,19 @@
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
 }
 
-.affiliateWrapper {
+.boxWrapper {
   display: flex;
   justify-content: center;
-  align-items: flex-end;
   flex-wrap: wrap;
-
   gap: 8px;
 }
+
+.affiliateWrapper {
+  @extend .boxWrapper;
+
+  align-items: flex-end;
+}
+
 .fadedAffiliateWrapper {
   position: absolute;
   top: 210px;
