@@ -13,6 +13,15 @@ html, body {
 body {
   background-color: #03030A;
 }
+html {
+  scrollbar-width: none;
+}
+body::-webkit-scrollbar {
+  display: none;
+}
+body {
+  -ms-overflow-style: none;
+}
 
 html {
   margin: 0;
