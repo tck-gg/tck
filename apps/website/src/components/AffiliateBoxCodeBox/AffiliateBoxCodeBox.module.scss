@@ -30,9 +30,6 @@
   opacity: 0.5;
 }
 
-.copy {
-  cursor: pointer;
-}
 .copy:hover {
   opacity: 0.85;
 }
@@ -45,12 +42,13 @@
 }
 
 .copy {
+  cursor: pointer;
+
   border-radius: 50%;
   background: rgba(152, 158, 174, 0.33);
 
-  width: 6px;
-  height: 6px;
-  padding: 6px;
+  width: 18px;
+  height: 18px;
 
   position: relative;
 
@@ -61,7 +59,7 @@
     bottom: 0;
     left: 0;
 
-    margin: 6px;
+    margin: auto;
   }
 }
 .copied {
