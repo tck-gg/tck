@@ -18,14 +18,12 @@
   text-align: center;
 }
 
-.splashGroup {
+.heroTop {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 10px;
-
-  margin-bottom: 35px;
 }
 .buttonGroup {
   display: flex;
@@ -54,18 +52,28 @@
   flex-direction: column;
   gap: 125px;
 }
+
 .section {
   display: flex;
   flex-direction: column;
   align-items: center;
 
   gap: 35px;
+
+  position: relative;
 }
 .sectionHeader {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
+
+.sectionHeaderSvg {
+  position: absolute;
+  top: 0px;
+  z-index: -1;
+}
+
 .sectionTitle {
   font-weight: 800;
   font-size: 38px;
@@ -80,4 +88,13 @@
   flex-wrap: wrap;
 
   gap: 8px;
+}
+.fadedAffiliateWrapper {
+  position: absolute;
+  top: 210px;
+
+  opacity: 0.3;
+  z-index: -1;
+
+  transform: scale(0.95);
 }
