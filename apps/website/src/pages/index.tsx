@@ -18,6 +18,7 @@ import knife from '@/images/knife.png';
 
 function Home() {
   const router = useRouter();
+
   return (
     <Layout>
       <div className={classes.sectionWrapper}>
@@ -61,6 +62,27 @@ function Home() {
             >
               Watch
             </Button>
+          </div>
+        </div>
+        <div className={clsx(classes.section, classes.rafflesBox)}>
+          <div className={classes.rafflesLeft}>
+            <p className={classes.raffleTitle}>Join Raffles</p>
+            <p className={classes.paragraph}>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+              incididunt ut labore et dolore magna aliqua.
+            </p>
+            <Button
+              rightIcon={faAngleRight}
+              onClick={() => {
+                router.push('/raffles');
+              }}
+              variant='gradient'
+            >
+              Join Raffles
+            </Button>
+          </div>
+          <div className={classes.rafflesRight}>
+            <p>Nice</p>
           </div>
         </div>
         <div className={classes.section}>
