@@ -34,7 +34,7 @@ function Login() {
     initialValues: {
       email: '',
       password: '',
-      rememberMe: true
+      rememberMe: false
     },
     validate: {
       email: (value) => {
@@ -65,7 +65,6 @@ function Login() {
   function handleSubmit(
     event: React.MouseEvent<HTMLButtonElement> | React.KeyboardEvent<HTMLElement> | KeyboardEvent
   ) {
-    form.setFieldValue('rememberMe', true);
     event.preventDefault();
 
     // Unfocus the text input.

@@ -77,7 +77,7 @@ function FooterBox() {
               href={
                 process.env.NODE_ENV === 'development'
                   ? 'http://localhost:8001/'
-                  : 'https://admin.tck.hunterparcells.com'
+                  : 'https://tckadmin.hunterparcells.com'
               }
               target='_blank'
             >
