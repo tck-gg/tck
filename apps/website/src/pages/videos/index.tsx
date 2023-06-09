@@ -14,7 +14,10 @@ import { TWITCH_CHANNELS, YOUTUBE_CHANNELS } from '@/data/videos';
 
 import classes from './videos.module.scss';
 
-export async function getStaticProps() {
+export async function getServerSideProps({ req, res }: { req: any; res: any }) {
+  // TODO: Test if this works.
+  res.setHeader('Cache-Control', 'public, s-maxage=59, stale-while-revalidate=299');
+
   const youtubeVideos: Video[] = await getLatestUploads(YOUTUBE_CHANNELS, 15);
   const twitchVideos: Video[] = await getLatestHighlights(TWITCH_CHANNELS, 15);
 
@@ -22,8 +25,7 @@ export async function getStaticProps() {
     props: {
       youtubeVideos,
       twitchVideos
-    },
-    revalidate: 60
+    }
   };
 }
 
