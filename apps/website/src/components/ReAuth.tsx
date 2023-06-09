@@ -21,10 +21,13 @@ function ReAuth({ children }: { children: React.ReactNode }) {
             authorization: cookie.authorization
           });
         } catch (error) {
-          setCookie('authorization', '', { maxAge: 0 });
+          setCookie('authorization', '', { maxAge: 0, domain: window.location.hostname });
           return;
         }
-        setCookie('authorization', cookie.authorization, { maxAge: 3600 });
+        setCookie('authorization', cookie.authorization, {
+          maxAge: 3600,
+          domain: window.location.hostname
+        });
         auth.setNewUser(response.data.user);
       }
     })();

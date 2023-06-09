@@ -34,7 +34,7 @@ function Login() {
     initialValues: {
       email: '',
       password: '',
-      rememberMe: false
+      rememberMe: true
     },
     validate: {
       email: (value) => {
@@ -58,9 +58,14 @@ function Login() {
     }
   }, [auth]);
 
+  useEffect(() => {
+    form.setFieldValue('rememberMe', router.query.rememberMe === 'true');
+  }, [router.query]);
+
   function handleSubmit(
     event: React.MouseEvent<HTMLButtonElement> | React.KeyboardEvent<HTMLElement> | KeyboardEvent
   ) {
+    form.setFieldValue('rememberMe', true);
     event.preventDefault();
 
     // Unfocus the text input.
@@ -75,10 +80,19 @@ function Login() {
           // If "Remember me" is checked.
           if (form.values.rememberMe) {
             setCookie('authorization', user.apiKey, {
-              maxAge: 3600
+              maxAge: 3600,
+              domain: window.location.hostname
             });
           }
-          router.push('/');
+          if (router.query.redirect) {
+            const redirect =
+              typeof router.query.redirect === 'string'
+                ? router.query.redirect
+                : router.query.redirect[0];
+            window.location.href = decodeURIComponent(redirect);
+          } else {
+            router.push('/');
+          }
 
           setLoading(false);
           return;
@@ -119,7 +133,13 @@ function Login() {
             mt='sm'
             onKeyDown={getHotkeyHandler([['Enter', handleSubmit]])}
           />
-          <Checkbox label='Remember me' {...form.getInputProps('rememberMe')} mt='sm' />
+          <Checkbox
+            label='Remember me'
+            {...form.getInputProps('rememberMe', {
+              type: 'checkbox'
+            })}
+            mt='sm'
+          />
           <Button
             fullWidth
             onClick={handleSubmit}

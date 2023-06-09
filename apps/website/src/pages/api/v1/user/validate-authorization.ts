@@ -1,10 +1,17 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { Action } from '@prisma/client';
 import { getUserByAuthorization, prisma, validateAuthorization } from 'database';
+import NextCors from 'nextjs-cors';
 
 import { getIp } from '@/util/ip';
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
+  await NextCors(req, res, {
+    methods: ['POST'],
+    origin: '*',
+    optionsSuccessStatus: 200
+  });
+
   const ip = getIp(req);
 
   const data: { authorization: string } = req.body;

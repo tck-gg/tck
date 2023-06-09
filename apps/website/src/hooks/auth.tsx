@@ -46,7 +46,7 @@ function useProvideAuth() {
 
   function logOut() {
     setUser(null);
-    setCookie('authorization', '', { maxAge: 0 });
+    setCookie('authorization', '', { maxAge: 0, domain: window.location.hostname });
   }
 
   return {
