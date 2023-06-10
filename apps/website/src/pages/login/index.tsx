@@ -80,7 +80,11 @@ function Login() {
           if (form.values.rememberMe) {
             setCookie('authorization', user.apiKey, {
               maxAge: 3600,
-              domain: 'hunterparcells.com'
+              domain:
+                process.env.NODE_ENV === 'production' &&
+                !window.location.hostname.includes('localhost')
+                  ? process.env.NEXT_PUBLIC_PRODUCTION_COOKIE_DOMAIN
+                  : 'localhost'
             });
           }
           if (router.query.redirect) {
@@ -134,6 +138,7 @@ function Login() {
           />
           <Checkbox
             label='Remember me'
+            disabled={loading}
             {...form.getInputProps('rememberMe', {
               type: 'checkbox'
             })}

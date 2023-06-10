@@ -75,11 +75,12 @@ function FooterBox() {
           {auth.user?.isAdmin && (
             <a
               href={
-                process.env.NODE_ENV === 'development'
-                  ? 'http://localhost:8001/'
-                  : 'https://tckadmin.hunterparcells.com'
+                process.env.NODE_ENV === 'production'
+                  ? window.location.hostname.includes('localhost')
+                    ? 'http://localhost:8008/'
+                    : 'https://tckadmin.hunterparcells.com/'
+                  : 'http://localhost:8001/'
               }
-              target='_blank'
             >
               ADMIN PANEL
             </a>

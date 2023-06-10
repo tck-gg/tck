@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+
 import { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
@@ -7,11 +9,21 @@ function Auth({ children }: { children: React.ReactNode }) {
 
   const [isAuth, setIsAuth] = useState(false);
 
+  function getUrl() {
+    if (process.env.NODE_ENV === 'production') {
+      if (!window.location.hostname.includes('localhost')) {
+        return 'https://tck.hunterparcells.com';
+      }
+      return 'http://localhost:8007';
+    }
+    if (process.env.NODE_ENV === 'development') {
+      return 'http://localhost:8000';
+    }
+    return '';
+  }
+
   function reject() {
-    window.location.href =
-      process.env.NODE_ENV === 'production'
-        ? 'http://tck.hunterparcells.com' || 'https://tck.gg'
-        : 'http://localhost:8000';
+    window.location.href = getUrl();
   }
 
   useEffect(() => {
@@ -19,18 +31,19 @@ function Auth({ children }: { children: React.ReactNode }) {
       if (cookie.authorization) {
         let response;
         try {
-          response = await axios.post(
-            `${
-              process.env.NODE_ENV === 'production'
-                ? 'http://tck.hunterparcells.com'
-                : 'http://localhost:8000'
-            }/api/v1/user/validate-authorization`,
-            {
-              authorization: cookie.authorization
-            }
-          );
+          const url = getUrl();
+          response = await axios.post(`${url}/api/v1/user/validate-authorization`, {
+            authorization: cookie.authorization
+          });
         } catch (error) {
-          setCookie('authorization', '', { maxAge: 0, domain: 'hunterparcells.com' });
+          setCookie('authorization', '', {
+            maxAge: 0,
+            domain:
+              process.env.NODE_ENV === 'production' &&
+              !window.location.hostname.includes('localhost')
+                ? process.env.NEXT_PUBLIC_PRODUCTION_COOKIE_DOMAIN
+                : 'localhost'
+          });
           reject();
           return;
         }
@@ -43,19 +56,20 @@ function Auth({ children }: { children: React.ReactNode }) {
 
         setCookie('authorization', cookie.authorization, {
           maxAge: 3600,
-          domain: 'hunterparcells.com'
+          domain:
+            process.env.NODE_ENV === 'production' && !window.location.hostname.includes('localhost')
+              ? process.env.NEXT_PUBLIC_PRODUCTION_COOKIE_DOMAIN
+              : 'localhost'
         });
 
         setIsAuth(true);
         return;
       }
-      window.location.href = `${
-        process.env.NODE_ENV === 'production'
-          ? 'https://tck.hunterparcells.com'
-          : 'http://localhost:8000'
-      }/login?redirect=${encodeURIComponent(window.location.href)}&rememberMe=true`;
+      window.location.href = `${getUrl()}/login?redirect=${encodeURIComponent(
+        window.location.href
+      )}&rememberMe=true`;
     })();
-  }, [cookie.authorization, setCookie]);
+  }, []);
 
   return <>{isAuth && children}</>;
 }

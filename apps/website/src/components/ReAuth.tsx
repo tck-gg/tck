@@ -21,12 +21,22 @@ function ReAuth({ children }: { children: React.ReactNode }) {
             authorization: cookie.authorization
           });
         } catch (error) {
-          setCookie('authorization', '', { maxAge: 0, domain: 'hunterparcells.com' });
+          setCookie('authorization', '', {
+            maxAge: 0,
+            domain:
+              process.env.NODE_ENV === 'production' &&
+              !window.location.hostname.includes('localhost')
+                ? process.env.NEXT_PUBLIC_PRODUCTION_COOKIE_DOMAIN
+                : 'localhost'
+          });
           return;
         }
         setCookie('authorization', cookie.authorization, {
           maxAge: 3600,
-          domain: 'hunterparcells.com'
+          domain:
+            process.env.NODE_ENV === 'production' && !window.location.hostname.includes('localhost')
+              ? process.env.NEXT_PUBLIC_PRODUCTION_COOKIE_DOMAIN
+              : 'localhost'
         });
         auth.setNewUser(response.data.user);
       }

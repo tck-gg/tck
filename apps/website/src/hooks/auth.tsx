@@ -46,7 +46,13 @@ function useProvideAuth() {
 
   function logOut() {
     setUser(null);
-    setCookie('authorization', '', { maxAge: 0, domain: 'hunterparcells.com' });
+    setCookie('authorization', '', {
+      maxAge: 0,
+      domain:
+        process.env.NODE_ENV === 'production' && !window.location.hostname.includes('localhost')
+          ? process.env.NEXT_PUBLIC_PRODUCTION_COOKIE_DOMAIN
+          : 'localhost'
+    });
   }
 
   return {
