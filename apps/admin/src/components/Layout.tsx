@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import { createStyles, Navbar, getStylesRef, rem } from '@mantine/core';
+import { createStyles, Navbar, getStylesRef, rem, AppShell } from '@mantine/core';
 import { IconArrowBack, IconDice5, IconGift, IconHome, IconUsers } from '@tabler/icons-react';
 import { useState } from 'react';
 import Link from 'next/link';
@@ -108,16 +108,29 @@ function Layout({ title, children }: { title?: string; children: React.ReactNode
       <Head>
         <title>{`${title ? `${title} - ` : ''}TCK Admin`}</title>
       </Head>
-      <Navbar width={{ sm: 300 }} p='md'>
-        <Navbar.Section grow>{links}</Navbar.Section>
-        <Navbar.Section className={classes.footer}>
-          <a href={getUrl()} className={classes.link}>
-            <IconArrowBack className={classes.linkIcon} stroke={1.5} />
-            <span>Back to TCK</span>
-          </a>
-        </Navbar.Section>
-      </Navbar>
-      {children}
+      <AppShell
+        navbar={
+          <Navbar width={{ sm: 300 }} p='md'>
+            <Navbar.Section grow>{links}</Navbar.Section>
+            <Navbar.Section className={classes.footer}>
+              <a href={getUrl()} className={classes.link}>
+                <IconArrowBack className={classes.linkIcon} stroke={1.5} />
+                <span>Back to TCK</span>
+              </a>
+            </Navbar.Section>
+          </Navbar>
+        }
+        styles={(theme) => {
+          return {
+            main: {
+              backgroundColor:
+                theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[0]
+            }
+          };
+        }}
+      >
+        {children}
+      </AppShell>
     </>
   );
 }
