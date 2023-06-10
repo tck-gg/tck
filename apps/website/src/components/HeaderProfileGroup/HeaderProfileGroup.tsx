@@ -23,8 +23,8 @@ function HeaderProfileGroup({ styles }: { styles?: React.CSSProperties }) {
         {(auth.user.displayName || auth.user.username)
           .split(' ')
           .splice(0, 2)
-          .map((name) => {
-            return name[0];
+          .map((name: string) => {
+            return name.split('')[0];
           })
           .join('')}
       </Avatar>

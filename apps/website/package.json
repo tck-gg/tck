@@ -59,5 +59,6 @@
     "ts-node": "^10.9.1",
     "tsconfig": "*",
     "typescript": "^5.0.4"
-  }
+  },
+  "packageManager": "npm@8.14.2"
 }

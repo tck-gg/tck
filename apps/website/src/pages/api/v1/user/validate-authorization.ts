@@ -1,6 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { Action } from '@prisma/client';
-import { getUserByAuthorization, prisma, validateAuthorization } from 'database';
+import { Action, getUserByAuthorization, prisma, validateAuthorization } from 'database';
 import NextCors from 'nextjs-cors';
 
 import { getIp } from '@/util/ip';

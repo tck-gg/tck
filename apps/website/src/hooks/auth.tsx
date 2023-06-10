@@ -1,7 +1,7 @@
 import { useState, useContext, createContext } from 'react';
 import axios, { AxiosResponse } from 'axios';
 import { useCookies } from 'react-cookie';
-import { User } from '@prisma/client';
+import { User } from 'database';
 
 type SafeUser = Omit<User, 'password'>;
 
