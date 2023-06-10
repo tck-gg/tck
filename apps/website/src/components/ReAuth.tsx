@@ -21,12 +21,12 @@ function ReAuth({ children }: { children: React.ReactNode }) {
             authorization: cookie.authorization
           });
         } catch (error) {
-          setCookie('authorization', '', { maxAge: 0, domain: window.location.hostname });
+          setCookie('authorization', '', { maxAge: 0, domain: 'hunterparcells.com' });
           return;
         }
         setCookie('authorization', cookie.authorization, {
           maxAge: 3600,
-          domain: window.location.hostname
+          domain: 'hunterparcells.com'
         });
         auth.setNewUser(response.data.user);
       }

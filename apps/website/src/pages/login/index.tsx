@@ -80,7 +80,7 @@ function Login() {
           if (form.values.rememberMe) {
             setCookie('authorization', user.apiKey, {
               maxAge: 3600,
-              domain: window.location.hostname
+              domain: 'hunterparcells.com'
             });
           }
           if (router.query.redirect) {

@@ -10,7 +10,7 @@ function Auth({ children }: { children: React.ReactNode }) {
   function reject() {
     window.location.href =
       process.env.NODE_ENV === 'production'
-        ? process.env.NEXT_PUBLIC_PRODUCTION_DOMAIN || 'https://tck.gg'
+        ? 'http://tck.hunterparcells.com' || 'https://tck.gg'
         : 'http://localhost:8000';
   }
 
@@ -22,7 +22,7 @@ function Auth({ children }: { children: React.ReactNode }) {
           response = await axios.post(
             `${
               process.env.NODE_ENV === 'production'
-                ? process.env.NEXT_PUBLIC_PRODUCTION_DOMAIN
+                ? 'http://tck.hunterparcells.com'
                 : 'http://localhost:8000'
             }/api/v1/user/validate-authorization`,
             {
@@ -30,7 +30,7 @@ function Auth({ children }: { children: React.ReactNode }) {
             }
           );
         } catch (error) {
-          setCookie('authorization', '', { maxAge: 0, domain: window.location.hostname });
+          setCookie('authorization', '', { maxAge: 0, domain: 'hunterparcells.com' });
           reject();
           return;
         }
@@ -43,7 +43,7 @@ function Auth({ children }: { children: React.ReactNode }) {
 
         setCookie('authorization', cookie.authorization, {
           maxAge: 3600,
-          domain: window.location.hostname
+          domain: 'hunterparcells.com'
         });
 
         setIsAuth(true);
@@ -51,7 +51,7 @@ function Auth({ children }: { children: React.ReactNode }) {
       }
       window.location.href = `${
         process.env.NODE_ENV === 'production'
-          ? process.env.NEXT_PUBLIC_PRODUCTION_DOMAIN
+          ? 'https://tck.hunterparcells.com'
           : 'http://localhost:8000'
       }/login?redirect=${encodeURIComponent(window.location.href)}&rememberMe=true`;
     })();
