@@ -24,6 +24,7 @@
     "@mantine/hooks": "^6.0.13",
     "@mantine/next": "^6.0.13",
     "@reverse/array": "^1.7.3",
+    "@uidotdev/usehooks": "^2.0.1",
     "axios": "^1.4.0",
     "clsx": "^1.2.1",
     "cypress-real-events": "^1.8.1",
