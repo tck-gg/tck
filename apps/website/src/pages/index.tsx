@@ -7,6 +7,7 @@ import Layout from '@/components/Layout/Layout';
 import Button from '@/components/Button/Button';
 import AffiliateBox from '@/components/AffiliateBox/AffiliateBox';
 import SocialBox from '@/components/SocialBox/SocialBox';
+import HomeSectionRaffles from '@/components/HomeSectionRaffles/HomeSectionRaffles';
 
 import { AFFILIATES } from '@/data/affiliates';
 import { SOCIALS_DATA } from '@/data/socials';
@@ -64,26 +65,8 @@ function Home() {
             </Button>
           </div>
         </div>
-        <div className={clsx(classes.section, classes.rafflesBox)}>
-          <div className={classes.rafflesLeft}>
-            <p className={classes.raffleTitle}>Join Raffles</p>
-            <p className={classes.paragraph}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-              incididunt ut labore et dolore magna aliqua.
-            </p>
-            <Button
-              rightIcon={faAngleRight}
-              onClick={() => {
-                router.push('/raffles');
-              }}
-              variant='gradient'
-            >
-              Join Raffles
-            </Button>
-          </div>
-          <div className={classes.rafflesRight}>
-            <p>Nice</p>
-          </div>
+        <div className={classes.section}>
+          <HomeSectionRaffles />
         </div>
         <div className={classes.section}>
           <svg
