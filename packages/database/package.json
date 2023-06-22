@@ -11,15 +11,15 @@
   "scripts": {
     "build": "tsup",
     "clean": "rimraf .turbo node_modules dist",
+    "db:format": "prisma format",
+    "db:generate": "prisma generate",
     "db:migrate:deploy": "prisma migrate deploy",
     "db:migrate:dev": "prisma migrate dev",
     "db:push": "prisma db push",
     "dev": "tsup --watch",
-    "format": "prisma format",
-    "generate": "prisma generate",
     "lint": "eslint \"src/**/*.ts\"",
     "prebuild": "npm run generate",
-    "predev": "npm run generate",
+    "predev": "npm run db:generate",
     "studio": "prisma studio"
   },
   "dependencies": {

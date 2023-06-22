@@ -43,10 +43,10 @@ model User {
 
   accounts    UserAccounts?
   displayName String
-  isAnonymous Boolean @default(false)
+  isAnonymous Boolean       @default(false)
 
-  actions     UserAction[]
-  points Int @default(0)
+  actions UserAction[]
+  points  Int          @default(0)
 
   isAdmin    Boolean @default(false)
   isBanned   Boolean @default(false)
@@ -60,4 +60,18 @@ model BannedIp {
   bannedById String @db.ObjectId
   reason     String
   timestamp  Int    @default(0)
+}
+
+model LeaderboardSpot {
+  id            String       @id @default(auto()) @map("_id") @db.ObjectId
+  username      String       @unique
+  amount        Int
+  leaderboard   Leaderboard? @relation(fields: [leaderboardId], references: [id])
+  leaderboardId String?      @db.ObjectId
+}
+
+model Leaderboard {
+  id    String            @id @default(auto()) @map("_id") @db.ObjectId
+  type  String            @unique
+  spots LeaderboardSpot[]
 }

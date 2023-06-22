@@ -1,6 +1,24 @@
 import Head from 'next/head';
-import { createStyles, Navbar, getStylesRef, rem, AppShell } from '@mantine/core';
-import { IconArrowBack, IconDice5, IconGift, IconHome, IconUsers } from '@tabler/icons-react';
+import {
+  createStyles,
+  Navbar,
+  getStylesRef,
+  rem,
+  AppShell,
+  Header,
+  MediaQuery,
+  Burger,
+  Text,
+  useMantineTheme
+} from '@mantine/core';
+import {
+  IconArrowBack,
+  IconDice5,
+  IconGift,
+  IconHome,
+  IconMedal,
+  IconUsers
+} from '@tabler/icons-react';
 import { useState } from 'react';
 import Link from 'next/link';
 
@@ -15,7 +33,6 @@ const useStyles = createStyles((theme) => {
     },
 
     footer: {
-      paddingTop: theme.spacing.md,
       marginTop: theme.spacing.md,
       borderTop: `${rem(1)} solid ${
         theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[2]
@@ -65,17 +82,21 @@ const useStyles = createStyles((theme) => {
 const data = [
   { link: '/', label: 'Home', icon: IconHome },
   { link: '/users', label: 'Users', icon: IconUsers },
+  { link: '/leaderboard', label: 'Leaderboard', icon: IconMedal },
   { link: '/raffles', label: 'Raffles', icon: IconDice5 },
   { link: '/giveaways', label: 'Giveaways', icon: IconGift }
 ];
 
 function Layout({ title, children }: { title?: string; children: React.ReactNode }) {
+  const theme = useMantineTheme();
+
   const { classes, cx } = useStyles();
   const [active, setActive] = useState(
     data.find((item) => {
       return item.label.toLowerCase() === window.location.pathname.replace('/', '');
     })?.label || 'Home'
   );
+  const [opened, setOpened] = useState(false);
 
   const links = data.map((item) => {
     return (
@@ -109,8 +130,10 @@ function Layout({ title, children }: { title?: string; children: React.ReactNode
         <title>{`${title ? `${title} - ` : ''}TCK Admin`}</title>
       </Head>
       <AppShell
+        navbarOffsetBreakpoint='sm'
+        asideOffsetBreakpoint='sm'
         navbar={
-          <Navbar width={{ sm: 300 }} p='md'>
+          <Navbar hiddenBreakpoint='sm' hidden={!opened} width={{ sm: 200, lg: 300 }}>
             <Navbar.Section grow>{links}</Navbar.Section>
             <Navbar.Section className={classes.footer}>
               <a href={getUrl()} className={classes.link}>
@@ -119,6 +142,27 @@ function Layout({ title, children }: { title?: string; children: React.ReactNode
               </a>
             </Navbar.Section>
           </Navbar>
+        }
+        header={
+          <Header height={{ base: 50, md: 70 }} p='md'>
+            <div style={{ display: 'flex', alignItems: 'center', height: '100%' }}>
+              <MediaQuery largerThan='sm' styles={{ display: 'none' }}>
+                <Burger
+                  opened={opened}
+                  onClick={() => {
+                    return setOpened((o) => {
+                      return !o;
+                    });
+                  }}
+                  size='sm'
+                  color={theme.colors.gray[6]}
+                  mr='xl'
+                />
+              </MediaQuery>
+
+              <Text>TCK Admin Panel</Text>
+            </div>
+          </Header>
         }
         styles={(theme) => {
           return {
