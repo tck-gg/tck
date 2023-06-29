@@ -97,53 +97,7 @@ function LeaderboardPage({
 
   return (
     <Layout>
-      <Title mb='lg'>Leaderboard</Title>
-      <Dropzone
-        onDrop={(files) => {
-          handleDrop(files[0]);
-        }}
-        maxSize={3 * 1024 ** 2}
-        accept={[MIME_TYPES.csv]}
-        maxFiles={1}
-        mb='md'
-      >
-        <Group
-          position='center'
-          spacing='xl'
-          style={{ minHeight: rem(100), pointerEvents: 'none' }}
-        >
-          <Dropzone.Accept>
-            <IconUpload
-              size='3.2rem'
-              stroke={1.5}
-              color={theme.colors[theme.primaryColor][theme.colorScheme === 'dark' ? 4 : 6]}
-            />
-          </Dropzone.Accept>
-          <Dropzone.Reject>
-            <IconX
-              size='3.2rem'
-              stroke={1.5}
-              color={theme.colors.red[theme.colorScheme === 'dark' ? 4 : 6]}
-            />
-          </Dropzone.Reject>
-          <Dropzone.Idle>
-            <IconFileSpreadsheet size='3.2rem' stroke={1.5} />
-          </Dropzone.Idle>
-
-          <div>
-            <Text size='xl' inline>
-              Drag CSV here or click to select file.
-            </Text>
-            <Text size='sm' color='dimmed' inline mt={7}>
-              Upload leaderboard CSV file. Max 5 MB.
-            </Text>
-          </div>
-        </Group>
-      </Dropzone>
-
-      <Title order={2} mb='sm'>
-        Current Leaderboard
-      </Title>
+      <Title mb='sm'>Leaderboard</Title>
       <SegmentedControl
         value={selectedLeaderboard}
         onChange={setSelectedLeaderboard}
@@ -155,6 +109,50 @@ function LeaderboardPage({
         ]}
         mb='sm'
       />
+      {selectedLeaderboard === 'stake' ? (
+        <Dropzone
+          onDrop={(files) => {
+            handleDrop(files[0]);
+          }}
+          maxSize={3 * 1024 ** 2}
+          accept={[MIME_TYPES.csv]}
+          maxFiles={1}
+          mb='md'
+        >
+          <Group
+            position='center'
+            spacing='xl'
+            style={{ minHeight: rem(100), pointerEvents: 'none' }}
+          >
+            <Dropzone.Accept>
+              <IconUpload
+                size='3.2rem'
+                stroke={1.5}
+                color={theme.colors[theme.primaryColor][theme.colorScheme === 'dark' ? 4 : 6]}
+              />
+            </Dropzone.Accept>
+            <Dropzone.Reject>
+              <IconX
+                size='3.2rem'
+                stroke={1.5}
+                color={theme.colors.red[theme.colorScheme === 'dark' ? 4 : 6]}
+              />
+            </Dropzone.Reject>
+            <Dropzone.Idle>
+              <IconFileSpreadsheet size='3.2rem' stroke={1.5} />
+            </Dropzone.Idle>
+
+            <div>
+              <Text size='xl' inline>
+                Drag CSV here or click to select file.
+              </Text>
+              <Text size='sm' color='dimmed' inline mt={7}>
+                Upload leaderboard CSV file. Max 5 MB.
+              </Text>
+            </div>
+          </Group>
+        </Dropzone>
+      ) : null}
       {leaderboards[selectedLeaderboard].spots.length > 0 ? (
         <>
           <Table striped highlightOnHover withBorder>

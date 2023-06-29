@@ -67,3 +67,12 @@ export async function getLeaderboard(type: LeaderboardType) {
     }
   });
 }
+
+export async function getAllLeaderboards() {
+  return {
+    stake: await getLeaderboard('stake'),
+    gamdom: await getLeaderboard('gamdom'),
+    csgoroll: await getLeaderboard('csgoroll'),
+    hypedrop: await getLeaderboard('hypedrop')
+  };
+}
