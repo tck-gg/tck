@@ -18,7 +18,7 @@
     "db:push": "prisma db push",
     "dev": "tsup --watch",
     "lint": "eslint \"src/**/*.ts\"",
-    "prebuild": "npm run generate",
+    "prebuild": "npm run db:generate",
     "predev": "npm run db:generate",
     "studio": "prisma studio"
   },
