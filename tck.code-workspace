@@ -16,6 +16,10 @@
 			"path": "packages/database"
 		},
 		{
+			"name": "types",
+			"path": "packages/types"
+		},
+		{
 			"name": "eslint-config-custom",
 			"path": "packages/eslint-config-custom"
 		},

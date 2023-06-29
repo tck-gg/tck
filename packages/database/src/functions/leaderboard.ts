@@ -1,10 +1,6 @@
 import { prisma } from '../client';
 
-type LeaderboardType = 'stake' | 'gamdom' | 'csgoroll' | 'hypedrop';
-interface leaderboardSpot {
-  username: string;
-  amount: number;
-}
+import { LeaderboardSpot, LeaderboardType } from 'types';
 
 async function ensureLeaderboard(type: LeaderboardType) {
   // Create the leaderboard if it doesn't exist.
@@ -25,7 +21,7 @@ async function ensureLeaderboard(type: LeaderboardType) {
   }
 }
 
-export async function updateLeaderboard(type: LeaderboardType, data: leaderboardSpot[]) {
+export async function updateLeaderboard(type: LeaderboardType, data: LeaderboardSpot[]) {
   await ensureLeaderboard(type);
 
   // Delete old leaderboard.

@@ -11,7 +11,7 @@ import Layout from '@/components/Layout';
 
 import { getContents } from '@/util/reader';
 
-type ILeaderboard = Prisma.LeaderboardGetPayload<{
+export type ILeaderboard = Prisma.LeaderboardGetPayload<{
   include: { spots: true };
 }>;
 

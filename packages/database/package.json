@@ -25,7 +25,8 @@
   "dependencies": {
     "@prisma/client": "^4.15.0",
     "bcrypt": "^5.1.0",
-    "crypto": "^1.0.1"
+    "crypto": "^1.0.1",
+    "types": "*"
   },
   "devDependencies": {
     "eslint-config-custom": "*",
