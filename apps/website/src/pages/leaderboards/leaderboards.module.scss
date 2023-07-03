@@ -18,3 +18,11 @@
 .tiltItem {
   position: inherit;
 }
+
+
+
+@media screen and (max-width: 950px) {
+  .tiltGroup {
+    display: none;
+  }
+}

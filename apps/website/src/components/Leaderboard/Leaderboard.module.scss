@@ -72,3 +72,9 @@
 .shrink {
   white-space: nowrap;
 }
+
+@media screen and (min-width: 950px) {
+  .podium {
+    display: none;
+  }
+}
