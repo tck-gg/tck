@@ -1,0 +1,53 @@
+.root {
+  background: radial-gradient(94.58% 94.58% at 50% 5.42%, rgba(29, 29, 47, 0.2) 0%, rgba(0, 0, 0, 0) 100%, rgba(22, 22, 37, 0) 100%), rgba(22, 22, 37, 0.8);
+
+  min-width: 300px;
+  min-height: 300px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.top {
+  flex-grow: 1;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.name {
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.bottom {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  position: relative;
+  margin: 1em;
+  padding: 1em;
+}
+
+.wagered {
+  color: #9391C9;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  width: 100%;
+  height: 100%;
+
+  z-index: -1;
+
+  fill: rgba(147, 145, 201, 0.15);
+}

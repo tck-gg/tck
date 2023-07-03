@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import { Prisma, getAllLeaderboards } from 'database';
 import { LeaderboardType } from 'types';
+import Tilt from 'react-parallax-tilt';
 
 import Layout from '@/components/Layout/Layout';
 
 import PageHeader from '@/components/PageHeader/PageHeader';
 import Leaderboard from '@/components/Leaderboard/Leaderboard';
+import LeaderboardPodiumBox from '@/components/LeaderboardPodiumBox/LeaderboardPodiumBox';
 
 import classes from './leaderboards.module.scss';
 
@@ -43,6 +45,39 @@ function Leaderboards({
           <option value='csgoroll'>CSGORoll</option>
           <option value='hypedrop'>HypeDrop</option>
         </select>
+
+        <div className={classes.tiltGroup}>
+          <Tilt
+            tiltAngleXInitial={5}
+            tiltAngleYInitial={-7}
+            className={classes.tiltItem}
+            style={{
+              top: 50
+            }}
+          >
+            <LeaderboardPodiumBox leaderboardSpot={leaderboards[selectedLeaderboard].spots[1]} />
+          </Tilt>
+          <Tilt
+            tiltAngleXInitial={5}
+            tiltAngleYInitial={9}
+            className={classes.tiltItem}
+            style={{
+              top: 0
+            }}
+          >
+            <LeaderboardPodiumBox leaderboardSpot={leaderboards[selectedLeaderboard].spots[0]} />
+          </Tilt>
+          <Tilt
+            tiltAngleXInitial={9}
+            tiltAngleYInitial={9}
+            className={classes.tiltItem}
+            style={{
+              top: 75
+            }}
+          >
+            <LeaderboardPodiumBox leaderboardSpot={leaderboards[selectedLeaderboard].spots[2]} />
+          </Tilt>
+        </div>
 
         <Leaderboard leaderboard={leaderboards[selectedLeaderboard]} />
       </div>

@@ -5,3 +5,16 @@
   justify-content: center;
   align-items: center;
 }
+
+.tiltGroup {
+  display: flex;
+  gap: 1em;
+
+  margin-bottom: 120px;
+
+  position: relative;
+}
+
+.tiltItem {
+  position: inherit;
+}
