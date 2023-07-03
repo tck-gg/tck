@@ -13,11 +13,12 @@ export type ILeaderboard = Prisma.LeaderboardGetPayload<{
   include: { spots: true };
 }>;
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   return {
     props: {
       leaderboards: await getAllLeaderboards()
-    }
+    },
+    revalidate: 86400
   };
 }
 
