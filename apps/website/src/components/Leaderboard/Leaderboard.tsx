@@ -11,7 +11,7 @@ function Leaderboard({ leaderboard }: { leaderboard: ILeaderboard }) {
   return (
     <div className={classes.root}>
       <table>
-        <tr>
+        <tr className={classes.header}>
           <th>User</th>
           <th>Wagered</th>
         </tr>

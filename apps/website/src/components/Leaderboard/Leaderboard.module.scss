@@ -1,6 +1,8 @@
 .root {
   max-width: 760px;
   width: 100%;
+
+  padding: 0 22px 15px 22px;
   
   border-radius: 8px;
   background: radial-gradient(96.74% 96.74% at 50.00% 3.26%, rgba(52, 52, 84, 0.30) 0%, rgba(0, 0, 0, 0.00) 100%, rgba(22, 22, 37, 0.00) 100%), rgba(22, 22, 37, 0.90);
@@ -8,7 +10,7 @@
   backdrop-filter: blur(45px);
 
   table {
-    padding: 15px 22px;
+    border-collapse: collapse;
   }
   
   th {
@@ -16,12 +18,35 @@
     color: rgba(147, 145, 201, 0.33);
     font-size: 12px;
     font-weight: 600;
+    margin-bottom: 15px;
+  }
+
+  th:first-child, td:first-child {
+    padding-left: 8px;
+  }
+  td:last-child {
+    padding-right: 16px;
   }
 }
-.item {
-  height: 50px;
+
+.header {
+  height: 40px;
 }
 
+.item {
+  height: 50px;
+  padding: 0 16px;
+}
+.item:nth-child(even) {
+  background: rgba(11, 11, 23, 0.50);
+  
+  td:first-child {
+    border-radius: 7px 0 0 7px;
+  }
+  td:last-child {
+    border-radius: 0 7px 7px 0;
+  }
+}
 .spot {
   color: #989EAE;
   text-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.04);
