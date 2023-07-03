@@ -1,6 +1,9 @@
 import { Prisma } from 'database';
-import classes from './LeaderboardPodiumBox.module.scss';
+import { Avatar } from '@mantine/core';
+
 import Jagged from '../svg/Jagged';
+
+import classes from './LeaderboardPodiumBox.module.scss';
 
 function LeaderboardPodiumBox({
   leaderboardSpot
@@ -10,6 +13,15 @@ function LeaderboardPodiumBox({
   return (
     <div className={classes.root}>
       <div className={classes.top}>
+        <Avatar
+          style={{
+            border: '4px solid #131320',
+            backgroundColor: 'rgba(38, 38, 58, 0.75)',
+            borderRadius: '50%'
+          }}
+          h={100}
+          w={100}
+        />
         <p className={classes.name}>{leaderboardSpot.username}</p>
       </div>
       <div className={classes.bottom}>

@@ -46,40 +46,50 @@ function Leaderboards({
           <option value='hypedrop'>HypeDrop</option>
         </select>
 
-        <div className={classes.tiltGroup}>
-          <Tilt
-            tiltAngleXInitial={5}
-            tiltAngleYInitial={-7}
-            className={classes.tiltItem}
-            style={{
-              top: 50
-            }}
-          >
-            <LeaderboardPodiumBox leaderboardSpot={leaderboards[selectedLeaderboard].spots[1]} />
-          </Tilt>
-          <Tilt
-            tiltAngleXInitial={5}
-            tiltAngleYInitial={9}
-            className={classes.tiltItem}
-            style={{
-              top: 0
-            }}
-          >
-            <LeaderboardPodiumBox leaderboardSpot={leaderboards[selectedLeaderboard].spots[0]} />
-          </Tilt>
-          <Tilt
-            tiltAngleXInitial={9}
-            tiltAngleYInitial={9}
-            className={classes.tiltItem}
-            style={{
-              top: 75
-            }}
-          >
-            <LeaderboardPodiumBox leaderboardSpot={leaderboards[selectedLeaderboard].spots[2]} />
-          </Tilt>
-        </div>
+        {leaderboards[selectedLeaderboard].spots.length > 0 && (
+          <>
+            <div className={classes.tiltGroup}>
+              <Tilt
+                tiltAngleXInitial={5}
+                tiltAngleYInitial={-7}
+                className={classes.tiltItem}
+                style={{
+                  top: 50
+                }}
+              >
+                <LeaderboardPodiumBox
+                  leaderboardSpot={leaderboards[selectedLeaderboard].spots[1]}
+                />
+              </Tilt>
+              <Tilt
+                tiltAngleXInitial={5}
+                tiltAngleYInitial={9}
+                className={classes.tiltItem}
+                style={{
+                  top: 0
+                }}
+              >
+                <LeaderboardPodiumBox
+                  leaderboardSpot={leaderboards[selectedLeaderboard].spots[0]}
+                />
+              </Tilt>
+              <Tilt
+                tiltAngleXInitial={9}
+                tiltAngleYInitial={9}
+                className={classes.tiltItem}
+                style={{
+                  top: 75
+                }}
+              >
+                <LeaderboardPodiumBox
+                  leaderboardSpot={leaderboards[selectedLeaderboard].spots[2]}
+                />
+              </Tilt>
+            </div>
 
-        <Leaderboard leaderboard={leaderboards[selectedLeaderboard]} />
+            <Leaderboard leaderboard={leaderboards[selectedLeaderboard]} />
+          </>
+        )}
       </div>
     </Layout>
   );

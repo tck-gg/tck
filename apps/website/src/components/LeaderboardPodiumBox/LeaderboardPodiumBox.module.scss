@@ -1,8 +1,8 @@
 .root {
   background: radial-gradient(94.58% 94.58% at 50% 5.42%, rgba(29, 29, 47, 0.2) 0%, rgba(0, 0, 0, 0) 100%, rgba(22, 22, 37, 0) 100%), rgba(22, 22, 37, 0.8);
 
-  min-width: 300px;
-  min-height: 300px;
+  min-width: 250px;
+  min-height: 250px;
 
   display: flex;
   flex-direction: column;
@@ -14,6 +14,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
+  gap: 18px;
+
+  padding-top: 1em;
 }
 
 .name {
