@@ -52,6 +52,9 @@ function Leaderboards({
               <Tilt
                 tiltAngleXInitial={5}
                 tiltAngleYInitial={-7}
+                glareEnable
+                glareMaxOpacity={0.08}
+                glarePosition='bottom'
                 className={classes.tiltItem}
                 style={{
                   top: 50
@@ -64,6 +67,9 @@ function Leaderboards({
               <Tilt
                 tiltAngleXInitial={5}
                 tiltAngleYInitial={9}
+                glareEnable
+                glareMaxOpacity={0.08}
+                glarePosition='bottom'
                 className={classes.tiltItem}
                 style={{
                   top: 0
@@ -76,6 +82,9 @@ function Leaderboards({
               <Tilt
                 tiltAngleXInitial={9}
                 tiltAngleYInitial={9}
+                glareEnable
+                glareMaxOpacity={0.08}
+                glarePosition='bottom'
                 className={classes.tiltItem}
                 style={{
                   top: 75
