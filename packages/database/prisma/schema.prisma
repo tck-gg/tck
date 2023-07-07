@@ -51,6 +51,8 @@ model User {
   isAdmin    Boolean @default(false)
   isBanned   Boolean @default(false)
   isVerified Boolean @default(false)
+
+  giveawayEntries GiveawayEntry[]
 }
 
 model BannedIp {
@@ -74,4 +76,27 @@ model Leaderboard {
   id    String            @id @default(auto()) @map("_id") @db.ObjectId
   type  String            @unique
   spots LeaderboardSpot[]
+}
+
+model GiveawayEntry {
+  id        String @id @default(auto()) @map("_id") @db.ObjectId
+  timestamp Int
+
+  slot       Int
+  giveaway   Giveaway @relation(fields: [giveawayId], references: [id])
+  giveawayId String   @db.ObjectId
+  user       User     @relation(fields: [userId], references: [id])
+  userId     String   @db.ObjectId
+}
+
+model Giveaway {
+  id                String          @id @default(auto()) @map("_id") @db.ObjectId
+  name              String
+  brand             String
+  value             Int
+  maxEntries        Int
+  image             String
+  entries           GiveawayEntry[]
+  timestampCreation Int
+  timestampEnd      Int
 }

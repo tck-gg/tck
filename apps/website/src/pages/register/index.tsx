@@ -29,7 +29,6 @@ function Register() {
   const auth = useAuth();
 
   const [loading, setLoading] = useState(false);
-  // const
 
   const form = useForm({
     initialValues: {
