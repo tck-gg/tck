@@ -4,16 +4,11 @@ import { Button, Modal, NumberInput, Space, TextInput, Title } from '@mantine/co
 import { IconPlus } from '@tabler/icons-react';
 import { useDisclosure } from '@mantine/hooks';
 import { DateTimePicker } from '@mantine/dates';
-import { getAllGiveaways, Prisma } from 'database';
+import { getAllGiveaways } from 'database';
 import axios from 'axios';
+import { IGiveaway } from 'types';
 
 import Layout from '@/components/Layout';
-
-type IGiveaway = Prisma.GiveawayGetPayload<{
-  include: {
-    entries: true;
-  };
-}>;
 
 export async function getServerSideProps() {
   return {
