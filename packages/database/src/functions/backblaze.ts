@@ -9,9 +9,9 @@ if (process.env.B2_APPLICATION_KEY_ID && process.env.B2_APPLICATION_KEY) {
   });
 }
 
-export async function uploadProfilePicture(data: Buffer): Promise<boolean | string> {
+export async function uploadProfilePicture(data: Buffer): Promise<string> {
   if (!b2 || !process.env.B2_BUCKET_NAME) {
-    return false;
+    return '';
   }
 
   await b2.authorize();
@@ -40,7 +40,7 @@ export async function uploadProfilePicture(data: Buffer): Promise<boolean | stri
   });
 
   if ((response.status as unknown as number) !== 200) {
-    return false;
+    return '';
   }
 
   return fileName;

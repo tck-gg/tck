@@ -107,7 +107,6 @@ function Giveaways({
     );
 
     if (response.status === 200) {
-      console.log('this is a j');
       router.replace(router.asPath);
 
       close();
