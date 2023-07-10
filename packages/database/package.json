@@ -24,11 +24,14 @@
   },
   "dependencies": {
     "@prisma/client": "^4.15.0",
+    "backblaze-b2": "^1.7.0",
     "bcrypt": "^5.1.0",
     "crypto": "^1.0.1",
-    "types": "*"
+    "types": "*",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
+    "@types/backblaze-b2": "^1.5.2",
     "eslint-config-custom": "*",
     "prisma": "^4.15.0",
     "rimraf": "^3.0.2",

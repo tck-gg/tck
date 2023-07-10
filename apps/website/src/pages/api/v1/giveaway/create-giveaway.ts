@@ -1,4 +1,4 @@
-import { createGiveaway, validateAuthorization } from 'database';
+import { createGiveaway, uploadProfilePicture, validateAuthorization } from 'database';
 import { NextApiRequest, NextApiResponse } from 'next';
 import NextCors from 'nextjs-cors';
 
@@ -15,10 +15,15 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     return;
   }
 
-  // TODO: Add image upload.
+  const { name, brand, value, maxEntries, timestampEnd, image } = req.body;
 
-  const { name, brand, value, maxEntries, timestampEnd } = req.body;
-  await createGiveaway(name, brand, value, maxEntries, timestampEnd, '');
+  const fileName = await uploadProfilePicture(Buffer.from(image, 'base64'));
+  if (!fileName) {
+    res.status(500).end();
+    return;
+  }
+
+  await createGiveaway(name, brand, value, maxEntries, timestampEnd, fileName);
 
   res.status(200).end();
 }
