@@ -18,7 +18,7 @@ export type ILeaderboard = Prisma.LeaderboardGetPayload<{
 function getUrl() {
   if (process.env.NODE_ENV === 'production') {
     if (!window.location.hostname.includes('localhost')) {
-      return 'https://tck.hunterparcells.com';
+      return 'https://tck.gg';
     }
     return 'http://localhost:8007';
   }

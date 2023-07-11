@@ -78,7 +78,7 @@ function FooterBox() {
                 process.env.NODE_ENV === 'production'
                   ? window.location.hostname.includes('localhost')
                     ? 'http://localhost:8008/'
-                    : 'https://tckadmin.hunterparcells.com/'
+                    : 'https://admin.tck.gg/'
                   : 'http://localhost:8001/'
               }
             >
