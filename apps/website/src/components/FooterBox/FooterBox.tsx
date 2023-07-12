@@ -72,7 +72,7 @@ function FooterBox() {
           <Link href='terms'>TERMS OF SERVICE</Link>
           <Link href='faq'>FREQUENTLY ASKED</Link>
           <Link href='privacy'>PRIVACY POLICY</Link>
-          {auth.user?.isAdmin && (
+          {auth.user?.permissions.includes('ACCESS_ADMIN_PANEL') && (
             <a
               href={
                 process.env.NODE_ENV === 'production'

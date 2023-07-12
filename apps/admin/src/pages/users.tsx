@@ -103,7 +103,7 @@ function Users({ users }: { users: IUser[] }) {
                 </ActionIcon>
               </Menu.Target>
               <Menu.Dropdown>
-                {user.isAdmin ? (
+                {user.permissions.includes('ACCESS_ADMIN_PANEL') ? (
                   <Menu.Item icon={<IconUser size='1rem' stroke={1.5} />}>Remove Admin</Menu.Item>
                 ) : (
                   <Menu.Item icon={<IconGavel size='1rem' stroke={1.5} />}>Make Admin</Menu.Item>

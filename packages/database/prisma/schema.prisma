@@ -14,6 +14,14 @@ enum Action {
   ACCOUNT_LOGIN
 }
 
+enum Permission {
+  ADMIN
+  ACCESS_ADMIN_PANEL
+  MANAGE_USERS
+  MANAGE_GIVEAWAYS
+  MANAGE_LEADERBOARDS
+}
+
 model UserAction {
   id     String @id @default(auto()) @map("_id") @db.ObjectId
   user   User   @relation(fields: [userId], references: [id])
@@ -48,7 +56,8 @@ model User {
   actions UserAction[]
   points  Int          @default(0)
 
-  isAdmin    Boolean @default(false)
+  permissions Permission[]
+
   isBanned   Boolean @default(false)
   isVerified Boolean @default(false)
 

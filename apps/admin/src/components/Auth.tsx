@@ -49,7 +49,7 @@ function Auth({ children }: { children: React.ReactNode }) {
         }
 
         const user = response.data.user;
-        if (!user || !user?.isAdmin) {
+        if (!user || !user?.permissions.includes('ACCESS_ADMIN_PANEL')) {
           reject();
           return;
         }
