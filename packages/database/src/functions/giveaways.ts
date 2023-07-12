@@ -6,6 +6,12 @@ export async function getAllGiveaways() {
       timestampEnd: {
         gt: Date.now()
       }
+    },
+    include: {
+      entries: true
+    },
+    orderBy: {
+      timestampEnd: 'asc'
     }
   });
   const pastGiveaways = await prisma.giveaway.findMany({
@@ -13,6 +19,12 @@ export async function getAllGiveaways() {
       timestampEnd: {
         lt: Date.now()
       }
+    },
+    include: {
+      entries: true
+    },
+    orderBy: {
+      timestampEnd: 'desc'
     }
   });
 
@@ -39,6 +51,28 @@ export async function createGiveaway(
       timestampCreation: Date.now(),
       timestampEnd,
       image
+    }
+  });
+}
+
+export async function updateGiveaway(
+  id: string,
+  name: string,
+  brand: string,
+  value: number,
+  maxEntries: number,
+  timestampEnd: number
+) {
+  await prisma.giveaway.update({
+    where: {
+      id
+    },
+    data: {
+      name,
+      brand,
+      value,
+      maxEntries,
+      timestampEnd
     }
   });
 }
