@@ -2,7 +2,13 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['img.youtube.com', 'yt3.ggpht.com', 'static-cdn.jtvnw.net', 'via.placeholder.com']
+    domains: [
+      'img.youtube.com',
+      'yt3.ggpht.com',
+      'static-cdn.jtvnw.net',
+      'via.placeholder.com',
+      'cdn.tck.gg'
+    ]
   },
   sassOptions: {
     includePaths: [__dirname, 'src/styles']

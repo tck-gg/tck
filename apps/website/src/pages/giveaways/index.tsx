@@ -1,7 +1,12 @@
-import Layout from '@/components/Layout/Layout';
-import PageHeader from '@/components/PageHeader/PageHeader';
 import { getAllGiveaways } from 'database';
 import { IGiveaway } from 'types';
+import { IconHistoryToggle } from '@tabler/icons-react';
+
+import Layout from '@/components/Layout/Layout';
+import PageHeader from '@/components/PageHeader/PageHeader';
+import GiveawayBox from '@/components/GiveawayBox/GiveawayBox';
+
+import classes from './giveaways.module.scss';
 
 export async function getServerSideProps() {
   return {
@@ -21,8 +26,28 @@ function Giveaways({
 }) {
   return (
     <Layout title='Giveaways'>
-      <PageHeader title='Giveaways' />
-      <p>{JSON.stringify(giveaways)}</p>
+      <div className={classes.root}>
+        <div>
+          <PageHeader title='Giveaways' />
+          <div className={classes.giveawayBoxWrapper}>
+            {giveaways.currentGiveaways.map((giveaway) => {
+              return <GiveawayBox giveaway={giveaway} key={giveaway.id} />;
+            })}
+          </div>
+        </div>
+
+        <div>
+          <div className={classes.iconHeader}>
+            <IconHistoryToggle color='#989EAE' />
+            <p className={classes.header}>Finished Giveaways</p>
+          </div>
+          <div className={classes.giveawayBoxWrapper}>
+            {giveaways.pastGiveaways.map((giveaway) => {
+              return <GiveawayBox giveaway={giveaway} key={giveaway.id} />;
+            })}
+          </div>
+        </div>
+      </div>
     </Layout>
   );
 }

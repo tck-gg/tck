@@ -1,0 +1,22 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: 42px;
+}
+
+.iconHeader {
+  font-size: 22px;
+  font-weight: 700;
+
+  margin-bottom: 16px;
+
+  display: flex;
+  gap: 8px;
+}
+
+.giveawayBoxWrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  flex-wrap: wrap;
+}

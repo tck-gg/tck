@@ -62,6 +62,7 @@ model User {
   isVerified Boolean @default(false)
 
   giveawayEntries GiveawayEntry[]
+  giveawayWins        Giveaway[]
 }
 
 model BannedIp {
@@ -108,4 +109,6 @@ model Giveaway {
   entries           GiveawayEntry[]
   timestampCreation Int
   timestampEnd      Int
+  winner            User?           @relation(fields: [winnerId], references: [id])
+  winnerId          String?         @db.ObjectId
 }
