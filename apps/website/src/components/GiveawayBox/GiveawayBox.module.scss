@@ -1,4 +1,6 @@
 .root {
+  position: relative;
+  
   border-radius: 8px;
 
   width: 308px;
@@ -73,4 +75,43 @@
 
 .grey {
   color: #989EAE;
+}
+
+.valueWrapper {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+
+  height: 42px;
+}
+
+.valueBackground {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  width: 100%;
+  height: 100%;
+
+  fill: rgba(10, 10, 21, 0.66);
+}
+
+.valueContent {
+  position: relative;
+
+  height: 100%;
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 7px;
+
+  font-size: 14px;
+  font-weight: 800;
+
+  padding: 10px;
+  
+  z-index: 1;
 }

@@ -6,7 +6,11 @@ import { IGiveaway } from 'types';
 
 import Button from '../Button/Button';
 
+import Jagged from '../svg/Jagged';
+
 import classes from './GiveawayBox.module.scss';
+
+import giveawayCoinImage from '@/images/giveaway-coin.png';
 
 function GiveawayBox({ giveaway }: { giveaway: IGiveaway }) {
   const router = useRouter();
@@ -44,6 +48,13 @@ function GiveawayBox({ giveaway }: { giveaway: IGiveaway }) {
           <span className={classes.entries}>{giveaway.entries.length}</span>
           <span className={clsx(classes.maxEntries, classes.grey)}>/{giveaway.maxEntries}</span>
         </p>
+      </div>
+      <div className={classes.valueWrapper}>
+        <div className={classes.valueContent}>
+          <Image src={giveawayCoinImage} alt='value' width={18} height={18} />
+          <p>{giveaway.value.toLocaleString('en-US', { minimumFractionDigits: 2 })}</p>
+        </div>
+        <Jagged className={classes.valueBackground} />
       </div>
     </div>
   );
