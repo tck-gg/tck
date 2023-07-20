@@ -30,23 +30,35 @@ function Giveaways({
         <div>
           <PageHeader title='Giveaways' />
           <div className={classes.giveawayBoxWrapper}>
-            {giveaways.currentGiveaways.map((giveaway) => {
-              return <GiveawayBox giveaway={giveaway} key={giveaway.id} />;
-            })}
+            {giveaways.currentGiveaways.length > 0 ? (
+              giveaways.currentGiveaways.map((giveaway) => {
+                return <GiveawayBox giveaway={giveaway} key={giveaway.id} />;
+              })
+            ) : (
+              <p
+                style={{
+                  margin: 'auto'
+                }}
+              >
+                There are no active giveaways.
+              </p>
+            )}
           </div>
         </div>
 
-        <div>
-          <div className={classes.iconHeader}>
-            <IconHistoryToggle color='#989EAE' />
-            <p className={classes.header}>Finished Giveaways</p>
+        {giveaways.pastGiveaways.length > 0 && (
+          <div>
+            <div className={classes.iconHeader}>
+              <IconHistoryToggle color='#989EAE' />
+              <p className={classes.header}>Finished Giveaways</p>
+            </div>
+            <div className={classes.giveawayBoxWrapper}>
+              {giveaways.pastGiveaways.map((giveaway) => {
+                return <GiveawayBox giveaway={giveaway} key={giveaway.id} />;
+              })}
+            </div>
           </div>
-          <div className={classes.giveawayBoxWrapper}>
-            {giveaways.pastGiveaways.map((giveaway) => {
-              return <GiveawayBox giveaway={giveaway} key={giveaway.id} />;
-            })}
-          </div>
-        </div>
+        )}
       </div>
     </Layout>
   );
