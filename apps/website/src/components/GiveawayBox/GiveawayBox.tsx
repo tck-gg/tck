@@ -17,7 +17,7 @@ function GiveawayBox({ giveaway }: { giveaway: IGiveaway }) {
         <Image
           width={268}
           height={136}
-          src={`https://cdn.tck.gg/giveaways/${giveaway.image}.png`}
+          src={`https://cdn.tck.gg/giveaways/${giveaway.image}`}
           alt={giveaway.name}
           style={{
             objectFit: 'contain'
