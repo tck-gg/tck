@@ -1,4 +1,5 @@
 import { prisma } from '../client';
+import { deleteImage } from './backblaze';
 
 export async function getAllGiveaways() {
   const currentGiveaways = await prisma.giveaway.findMany({
@@ -75,4 +76,30 @@ export async function updateGiveaway(
       timestampEnd
     }
   });
+}
+
+export async function deleteGiveaway(id: string): Promise<boolean> {
+  const giveaway = await prisma.giveaway.findUnique({
+    where: {
+      id
+    }
+  });
+  if (!giveaway) {
+    return false;
+  }
+
+  // Delete the image.
+  const success = await deleteImage(giveaway.image, 'giveaways');
+  if (!success) {
+    return false;
+  }
+
+  // Delete the database entry.
+  await prisma.giveaway.delete({
+    where: {
+      id
+    }
+  });
+
+  return true;
 }

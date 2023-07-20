@@ -9,7 +9,7 @@ if (process.env.B2_APPLICATION_KEY_ID && process.env.B2_APPLICATION_KEY) {
   });
 }
 
-export async function uploadProfilePicture(data: Buffer): Promise<string> {
+export async function uploadImage(data: Buffer, path: string): Promise<string> {
   if (!b2 || !process.env.B2_BUCKET_NAME) {
     return '';
   }
@@ -35,7 +35,7 @@ export async function uploadProfilePicture(data: Buffer): Promise<string> {
   const response = await b2.uploadFile({
     uploadUrl: upload.uploadUrl,
     uploadAuthToken: upload.authorizationToken,
-    fileName: `giveaways/${fileName}`,
+    fileName: `${path}/${fileName}`,
     data
   });
 
@@ -44,4 +44,36 @@ export async function uploadProfilePicture(data: Buffer): Promise<string> {
   }
 
   return fileName;
+}
+
+export async function deleteImage(name: string, path: string): Promise<boolean> {
+  if (!b2 || !process.env.B2_BUCKET_NAME) {
+    return false;
+  }
+
+  await b2.authorize();
+
+  const bucket = await b2.getBucket({
+    bucketName: process.env.B2_BUCKET_NAME
+  });
+  const bucketId = bucket.data.buckets[0].bucketId;
+
+  const filesResponse = await b2.listFileNames({
+    bucketId,
+    startFileName: `${path}/${name}`,
+    maxFileCount: 1,
+    delimiter: '',
+    prefix: ''
+  });
+  const { files } = filesResponse.data;
+
+  const response = await b2.deleteFileVersion({
+    fileName: files[0].fileName,
+    fileId: files[0].fileId
+  });
+  if ((response.status as unknown as number) !== 200) {
+    return false;
+  }
+
+  return true;
 }

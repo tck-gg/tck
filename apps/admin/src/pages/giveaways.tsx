@@ -72,6 +72,8 @@ function Giveaways({
 
   const [editId, setEditId] = useState('');
 
+  const [confirmDelete, setConfirmDelete] = useState(false);
+
   useEffect(() => {
     setDisabled(
       !name ||
@@ -96,6 +98,8 @@ function Giveaways({
     setImages([]);
 
     setEditId('');
+
+    setConfirmDelete(false);
   }
 
   async function handleSubmitGiveaway() {
@@ -170,6 +174,34 @@ function Giveaways({
     setEditId(giveaway.id);
 
     open();
+  }
+
+  async function handleDeleteClick() {
+    if (!confirmDelete) {
+      setConfirmDelete(true);
+      return;
+    }
+
+    setDisabled(true);
+
+    const response = await axios.post(
+      `${getUrl()}/api/v1/giveaway/delete-giveaway`,
+      {
+        id: editId
+      },
+      {
+        validateStatus: () => {
+          return true;
+        }
+      }
+    );
+
+    if (response.status === 200) {
+      router.replace(router.asPath);
+      handleClose();
+    }
+
+    setDisabled(false);
   }
 
   return (
@@ -372,9 +404,19 @@ function Giveaways({
           })}
         </Flex>
 
-        <Button onClick={handleSubmitGiveaway} disabled={disabled} fullWidth>
+        <Button
+          onClick={handleSubmitGiveaway}
+          disabled={disabled}
+          fullWidth
+          mb={modalMode === 'edit' ? 'sm' : 0}
+        >
           {modalMode === 'create' ? 'Create' : 'Update'} Giveaway
         </Button>
+        {modalMode === 'edit' && (
+          <Button disabled={disabled} fullWidth color='red' onClick={handleDeleteClick}>
+            {confirmDelete ? 'Confirm?' : 'Delete Giveaway'}
+          </Button>
+        )}
       </Modal>
     </Layout>
   );
