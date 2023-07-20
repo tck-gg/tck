@@ -12,12 +12,12 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
   const authorization = req.headers.Authorization as string;
   if (!validateAuthorization(authorization)) {
     res.status(403).end();
+    return;
   }
 
   const { id } = req.body;
-
   if (!id) {
-    res.status(400).end();
+    res.status(404).end();
     return;
   }
 

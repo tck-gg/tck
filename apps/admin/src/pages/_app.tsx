@@ -2,6 +2,7 @@ import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import { MantineProvider } from '@mantine/core';
 import { CookiesProvider } from 'react-cookie';
+import { Notifications } from '@mantine/notifications';
 
 import Auth from '@/components/Auth';
 
@@ -20,6 +21,7 @@ function App({ Component, pageProps }: AppProps) {
           colorScheme: 'dark'
         }}
       >
+        <Notifications />
         <CookiesProvider>
           <Auth>
             <Component {...pageProps} />

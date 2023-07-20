@@ -15,7 +15,7 @@ import {
   Title,
   useMantineTheme
 } from '@mantine/core';
-import { IconPhoto, IconPlus, IconUpload, IconX } from '@tabler/icons-react';
+import { IconCheck, IconPhoto, IconPlus, IconUpload, IconX } from '@tabler/icons-react';
 import { useDisclosure } from '@mantine/hooks';
 import { DateTimePicker } from '@mantine/dates';
 import { getAllGiveaways } from 'database';
@@ -23,6 +23,7 @@ import axios from 'axios';
 import { IGiveaway } from 'types';
 import { Dropzone, FileWithPath, MIME_TYPES } from '@mantine/dropzone';
 import dateFormat from 'dateformat';
+import { notifications } from '@mantine/notifications';
 
 import Layout from '@/components/Layout';
 
@@ -150,10 +151,44 @@ function Giveaways({
       );
     }
 
+    if (response.status === 403) {
+      notifications.show({
+        title: 'Error',
+        message: 'You are not authorized to do this. Ask the developer for permission.',
+        color: 'red',
+        icon: <IconX />,
+        withBorder: true,
+        autoClose: 10000
+      });
+      return;
+    }
+
     if (response.status === 200) {
       router.replace(router.asPath);
 
+      notifications.show({
+        title: `Giveaway ${modalMode === 'create' ? 'created' : 'updated'}`,
+        message: `Giveaway for "${name}" has been ${
+          modalMode === 'create' ? 'created' : 'updated'
+        }.`,
+        color: 'teal',
+        icon: <IconCheck />,
+        withBorder: true,
+        autoClose: 10000
+      });
+
       handleClose();
+    } else {
+      notifications.show({
+        title: 'Error',
+        message: `An error occurred while ${
+          modalMode === 'create' ? 'creating' : 'updating'
+        } the giveaway.`,
+        color: 'red',
+        icon: <IconX />,
+        withBorder: true,
+        autoClose: 10000
+      });
     }
     setDisabled(false);
   }
@@ -196,9 +231,51 @@ function Giveaways({
       }
     );
 
+    if (response.status === 403) {
+      notifications.show({
+        title: 'Error',
+        message: 'You are not authorized to do this. Ask the developer for permission.',
+        color: 'red',
+        icon: <IconX />,
+        withBorder: true,
+        autoClose: 10000
+      });
+      return;
+    }
+    if (response.status === 404) {
+      notifications.show({
+        title: 'Error',
+        message: 'Giveaway not found. Notify the developer.',
+        color: 'red',
+        icon: <IconX />,
+        withBorder: true,
+        autoClose: 10000
+      });
+      return;
+    }
+
     if (response.status === 200) {
       router.replace(router.asPath);
+
+      notifications.show({
+        title: 'Giveaway deleted',
+        message: `Giveaway for "${name}" has been deleted.`,
+        color: 'teal',
+        icon: <IconCheck />,
+        withBorder: true,
+        autoClose: 10000
+      });
+
       handleClose();
+    } else {
+      notifications.show({
+        title: 'Error',
+        message: 'An error occurred while deleting the giveaway.',
+        color: 'red',
+        icon: <IconX />,
+        withBorder: true,
+        autoClose: 10000
+      });
     }
 
     setDisabled(false);
@@ -215,79 +292,87 @@ function Giveaways({
         New Giveaway
       </Button>
 
-      <Table highlightOnHover withBorder>
-        <thead>
-          <tr>
-            <th>Item</th>
-            <th>Brand</th>
-            <th>Value</th>
-            <th>Entries</th>
-            <th>End Date</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {giveaways.currentGiveaways.map((giveaway: IGiveaway) => {
-            return (
-              <tr key={giveaway.id}>
-                <td>{giveaway.name}</td>
-                <td>{giveaway.brand}</td>
-                <td>${giveaway.value.toLocaleString('en-US')}</td>
-                <td>
-                  {giveaway.entries.length}/{giveaway.maxEntries}
-                </td>
-                <td>
-                  {dateFormat(giveaway.timestampEnd, 'yyyy-mm-dd HH:mm:ss')} (in{' '}
-                  {Math.floor((giveaway.timestampEnd - Date.now()) / 1000 / 60 / 60 / 24)} days)
-                </td>
-                <td>
-                  <Anchor
-                    component='button'
-                    onClick={() => {
-                      handleEditClick(giveaway);
-                    }}
-                  >
-                    Edit
-                  </Anchor>
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </Table>
+      {giveaways.currentGiveaways.length > 0 ? (
+        <Table highlightOnHover withBorder>
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>Brand</th>
+              <th>Value</th>
+              <th>Entries</th>
+              <th>End Date</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {giveaways.currentGiveaways.map((giveaway: IGiveaway) => {
+              return (
+                <tr key={giveaway.id}>
+                  <td>{giveaway.name}</td>
+                  <td>{giveaway.brand}</td>
+                  <td>${giveaway.value.toLocaleString('en-US')}</td>
+                  <td>
+                    {giveaway.entries.length}/{giveaway.maxEntries}
+                  </td>
+                  <td>
+                    {dateFormat(giveaway.timestampEnd, 'yyyy-mm-dd HH:mm:ss')} (in{' '}
+                    {Math.floor((giveaway.timestampEnd - Date.now()) / 1000 / 60 / 60 / 24)} days)
+                  </td>
+                  <td>
+                    <Anchor
+                      component='button'
+                      onClick={() => {
+                        handleEditClick(giveaway);
+                      }}
+                    >
+                      Edit
+                    </Anchor>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </Table>
+      ) : (
+        <Text>No active giveaways.</Text>
+      )}
 
       <Space h='md' />
 
       <Title order={2} mb='sm'>
         Previous Giveaways
       </Title>
-      <Table highlightOnHover withBorder>
-        <thead>
-          <tr>
-            <th>Item</th>
-            <th>Brand</th>
-            <th>Value</th>
-            <th>Entries</th>
-            <th>End Date</th>
-            <th>Winner</th>
-          </tr>
-        </thead>
-        <tbody>
-          {giveaways.pastGiveaways.map((giveaway: IGiveaway) => {
-            return (
-              <tr key={giveaway.id}>
-                <td>{giveaway.name}</td>
-                <td>{giveaway.brand}</td>
-                <td>${giveaway.value}</td>
-                <td>
-                  {giveaway.entries.length}/{giveaway.maxEntries}
-                </td>
-                <td>{new Date(giveaway.timestampEnd).toLocaleString()}</td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </Table>
+      {giveaways.pastGiveaways.length > 0 ? (
+        <Table highlightOnHover withBorder>
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>Brand</th>
+              <th>Value</th>
+              <th>Entries</th>
+              <th>End Date</th>
+              <th>Winner</th>
+            </tr>
+          </thead>
+          <tbody>
+            {giveaways.pastGiveaways.map((giveaway: IGiveaway) => {
+              return (
+                <tr key={giveaway.id}>
+                  <td>{giveaway.name}</td>
+                  <td>{giveaway.brand}</td>
+                  <td>${giveaway.value}</td>
+                  <td>
+                    {giveaway.entries.length}/{giveaway.maxEntries}
+                  </td>
+                  <td>{new Date(giveaway.timestampEnd).toLocaleString()}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </Table>
+      ) : (
+        <Text>No previous giveaways.</Text>
+      )}
 
       <Modal
         opened={opened}
