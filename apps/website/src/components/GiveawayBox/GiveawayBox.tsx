@@ -1,10 +1,11 @@
-import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
+import { faAngleRight, faUser } from '@fortawesome/free-solid-svg-icons';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import clsx from 'clsx';
 import { IGiveaway } from 'types';
 
 import Button from '../Button/Button';
+import IconBubble from '../IconBubble/IconBubble';
 
 import Jagged from '../svg/Jagged';
 
@@ -43,7 +44,10 @@ function GiveawayBox({ giveaway }: { giveaway: IGiveaway }) {
         >{`${giveaway.winnerId ? 'View' : 'Enter'} Giveaway`}</Button>
       </div>
       <div className={classes.bottom}>
-        <p className={clsx(classes.spots, classes.grey)}>Spots</p>
+        <div className={classes.spotsDescription}>
+          <IconBubble icon={faUser} size={16} />
+          <p className={clsx(classes.spots, classes.grey)}>Spots</p>
+        </div>
         <p>
           <span className={classes.entries}>{giveaway.entries.length}</span>
           <span className={clsx(classes.maxEntries, classes.grey)}>
