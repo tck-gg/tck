@@ -28,3 +28,33 @@
 .middle, .bottom {
   padding: 24px 20px;
 }
+
+.infoSection {
+  width: 100%;
+}
+
+.entriesSection {
+  border-radius: 8px;
+  background: rgba(3, 3, 11, 0.33);
+  backdrop-filter: blur(45px);
+
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  
+  width: 100%;
+  padding: 16px 0;
+}
+
+.entriesCounter {
+  display: flex;
+  gap: 4px;
+}
+
+.giveawayEntriesDescription {
+  color: #989EAE;
+  font-size: 11px;
+  font-weight: 500;
+}

@@ -1,0 +1,15 @@
+.grey {
+  color: #989EAE;
+}
+.spotsText {
+  font-weight: 800;
+  text-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.05);
+}
+.entries {
+  @extend .spotsText;
+  font-size: 15px;
+}
+.maxEntries {
+  @extend .spotsText;
+  font-size: 11px;
+}

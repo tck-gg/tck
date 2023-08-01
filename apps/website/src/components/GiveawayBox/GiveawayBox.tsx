@@ -6,6 +6,7 @@ import { IGiveaway } from 'types';
 
 import Button from '../Button/Button';
 import IconBubble from '../IconBubble/IconBubble';
+import EntryCounter from '../EntryCounter/EntryCounter';
 
 import Jagged from '../svg/Jagged';
 
@@ -48,12 +49,7 @@ function GiveawayBox({ giveaway }: { giveaway: IGiveaway }) {
           <IconBubble icon={faUser} size={16} />
           <p className={clsx(classes.spots, classes.grey)}>Spots</p>
         </div>
-        <p>
-          <span className={classes.entries}>{giveaway.entries.length}</span>
-          <span className={clsx(classes.maxEntries, classes.grey)}>
-            /{giveaway.maxEntries.toLocaleString()}
-          </span>
-        </p>
+        <EntryCounter count={giveaway.entries.length} max={giveaway.maxEntries} />
       </div>
       <div className={classes.valueWrapper}>
         <div className={classes.valueContent}>

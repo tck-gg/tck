@@ -1,21 +1,20 @@
 import { IGiveaway } from 'types';
 import { useRouter } from 'next/router';
-
-import classes from './GiveawayInfobox.module.scss';
-import Button from '../Button/Button';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Image from 'next/image';
 import {
   faAngleLeft,
   faAngleRight,
   faBalanceScale,
-  faScaleBalanced
+  faUser
 } from '@fortawesome/free-solid-svg-icons';
-import SmallButton from '../SmallButton/SmallButton';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Image from 'next/image';
-import Jagged from '../svg/Jagged';
 
-import giveawayCoinImage from '@/images/giveaway-coin.png';
+import Button from '../Button/Button';
 import JaggedBackgroundItem from '../JaggedBackgroundItem/JaggedBackgroundItem';
+import IconBubble from '../IconBubble/IconBubble';
+import EntryCounter from '../EntryCounter/EntryCounter';
+
+import classes from './GiveawayInfobox.module.scss';
 
 function GiveawayInfobox({ giveaway }: { giveaway: IGiveaway }) {
   const router = useRouter();
@@ -51,10 +50,17 @@ function GiveawayInfobox({ giveaway }: { giveaway: IGiveaway }) {
           <p className={classes.brand}>{giveaway.brand}</p>
         </div>
 
-        <div>
+        <div className={classes.infoSection}>
           <JaggedBackgroundItem fill='#26263A' withShadow>
             <p>nice</p>
           </JaggedBackgroundItem>
+          <div className={classes.entriesSection}>
+            <div className={classes.entriesCounter}>
+              <IconBubble icon={faUser} size={16} />
+              <EntryCounter count={giveaway.entries.length} max={giveaway.maxEntries} />
+            </div>
+            <p className={classes.giveawayEntriesDescription}>Giveaway Entries</p>
+          </div>
         </div>
       </div>
       <div className={classes.bottom}>
