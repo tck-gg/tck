@@ -103,3 +103,14 @@ export async function deleteGiveaway(id: string): Promise<boolean> {
 
   return true;
 }
+
+export async function getGiveaway(id: string) {
+  return await prisma.giveaway.findUnique({
+    where: {
+      id
+    },
+    include: {
+      entries: true
+    }
+  });
+}

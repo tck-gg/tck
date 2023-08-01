@@ -15,7 +15,7 @@ function Button({
   fullWidth,
   onClick
 }: {
-  children: string;
+  children: string | JSX.Element;
   variant?: ButtonVariants;
   leftIcon?: IconDefinition;
   rightIcon?: IconDefinition;

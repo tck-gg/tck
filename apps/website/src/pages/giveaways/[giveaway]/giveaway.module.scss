@@ -1,0 +1,22 @@
+.root {
+  display: flex;
+  gap: 16px;
+}
+
+.left {
+  width: 308px;
+}
+
+.right {
+  flex-grow: 1;
+}
+
+@media screen and (max-width: 950px) {
+  .root {
+    flex-direction: column;
+  }
+
+  .left {
+    width: 100%;
+  }
+}

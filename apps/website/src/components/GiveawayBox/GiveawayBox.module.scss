@@ -1,3 +1,5 @@
+@use 'giveaway-item';
+
 .root {
   position: relative;
   
@@ -19,23 +21,6 @@
 
   height: 335px;
   padding: 26px 20px;
-}
-
-.info {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-}
-
-.name {
-  font-size: 16px;
-  font-weight: 700;
-}
-
-.brand {
-  color: #989EAE;
-  font-size: 13px;
 }
 
 .bottom {
