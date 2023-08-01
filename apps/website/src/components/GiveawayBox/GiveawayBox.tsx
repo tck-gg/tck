@@ -46,7 +46,9 @@ function GiveawayBox({ giveaway }: { giveaway: IGiveaway }) {
         <p className={clsx(classes.spots, classes.grey)}>Spots</p>
         <p>
           <span className={classes.entries}>{giveaway.entries.length}</span>
-          <span className={clsx(classes.maxEntries, classes.grey)}>/{giveaway.maxEntries}</span>
+          <span className={clsx(classes.maxEntries, classes.grey)}>
+            /{giveaway.maxEntries.toLocaleString()}
+          </span>
         </p>
       </div>
       <div className={classes.valueWrapper}>
