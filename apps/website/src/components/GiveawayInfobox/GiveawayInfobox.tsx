@@ -16,6 +16,8 @@ import EntryCounter from '../EntryCounter/EntryCounter';
 
 import classes from './GiveawayInfobox.module.scss';
 
+import giveawayCoinImage from '@/images/giveaway-coin.png';
+
 function GiveawayInfobox({ giveaway }: { giveaway: IGiveaway }) {
   const router = useRouter();
 
@@ -52,7 +54,10 @@ function GiveawayInfobox({ giveaway }: { giveaway: IGiveaway }) {
 
         <div className={classes.infoSection}>
           <JaggedBackgroundItem fill='#26263A' withShadow>
-            <p>nice</p>
+            <div className={classes.valueItems}>
+              <Image src={giveawayCoinImage} alt='value' width={18} height={18} />
+              <p>{giveaway.value.toLocaleString('en-US', { minimumFractionDigits: 2 })}</p>
+            </div>
           </JaggedBackgroundItem>
           <div className={classes.entriesSection}>
             <div className={classes.entriesCounter}>
