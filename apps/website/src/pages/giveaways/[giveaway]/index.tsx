@@ -5,6 +5,7 @@ import Layout from '@/components/Layout/Layout';
 import GiveawayInfobox from '@/components/GiveawayInfobox/GiveawayInfobox';
 
 import classes from './giveaway.module.scss';
+import GiveawayEntry from '@/components/GiveawayEntry/GiveawayEntry';
 
 export async function getServerSideProps(ctx: any) {
   const { giveaway } = ctx.params;
@@ -22,7 +23,19 @@ function GiveawayPage({ giveaway }: { giveaway: IGiveaway }) {
       <div className={classes.left}>
         <GiveawayInfobox giveaway={giveaway} />
       </div>
-      <div className={classes.right}>b</div>
+      <div className={classes.right}>
+        <GiveawayEntry position={1} />
+        <GiveawayEntry position={2} />
+        <GiveawayEntry position={1} />
+        <GiveawayEntry position={2} />
+        <GiveawayEntry position={1} />
+        <GiveawayEntry position={2} />
+        <GiveawayEntry position={1} />
+        <GiveawayEntry position={2} />
+        <GiveawayEntry position={1} />
+        <GiveawayEntry position={2} />
+        <GiveawayEntry position={3} />
+      </div>
     </Layout>
   );
 }
