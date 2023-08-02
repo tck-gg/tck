@@ -16,23 +16,23 @@ import classes from './videos.module.scss';
 
 export async function getStaticProps({ req, res }: { req: any; res: any }) {
   const youtubeVideos: Video[] = await getLatestUploads(YOUTUBE_CHANNELS, 15);
-  const twitchVideos: Video[] = await getLatestHighlights(TWITCH_CHANNELS, 15);
+  // const twitchVideos: Video[] = await getLatestHighlights(TWITCH_CHANNELS, 15);
 
   return {
     props: {
-      youtubeVideos,
-      twitchVideos
+      youtubeVideos
+      // twitchVideos
     },
     revalidate: 3600
   };
 }
 
 function Videos({
-  youtubeVideos,
-  twitchVideos
-}: {
+  youtubeVideos
+}: // twitchVideos
+{
   youtubeVideos: Video[];
-  twitchVideos: Video[];
+  // twitchVideos: Video[];
 }) {
   return (
     <Layout title='Videos'>
@@ -43,11 +43,11 @@ function Videos({
           name='YouTube'
           videos={youtubeVideos}
         />
-        <VideoCarousel
+        {/* <VideoCarousel
           icon={<FontAwesomeIcon icon={faTwitch} className={classes.icon} color='#8f46fb' />}
           name='Twitch'
           videos={twitchVideos}
-        />
+        /> */}
       </div>
     </Layout>
   );
