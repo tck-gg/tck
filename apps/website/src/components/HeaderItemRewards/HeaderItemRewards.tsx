@@ -1,4 +1,5 @@
 import { useRewardsContextMenu } from '@/hooks/rewards-context-menu';
+import { AnimatePresence } from 'framer-motion';
 
 import HeaderItemRewardsContextMenu from '../HeaderItemRewardsContextMenu/HeaderItemRewardsContextMenu';
 
@@ -6,7 +7,6 @@ import Dropdown from '../svg/Dropdown';
 import Gift from '../svg/Gift';
 
 import classes from './HeaderItemRewards.module.scss';
-import { AnimatePresence } from 'framer-motion';
 
 function HeaderItemRewards() {
   const rewardsContextMenu = useRewardsContextMenu();
@@ -16,10 +16,12 @@ function HeaderItemRewards() {
   }
 
   return (
-    <div className={classes.root} onClick={handleClick}>
-      <Gift />
-      <span>REWARDS</span>
-      <Dropdown />
+    <div className={classes.root}>
+      <div className={classes.display} onClick={handleClick}>
+        <Gift />
+        <span>REWARDS</span>
+        <Dropdown />
+      </div>
       <AnimatePresence>
         {rewardsContextMenu.isOpen && <HeaderItemRewardsContextMenu />}
       </AnimatePresence>
