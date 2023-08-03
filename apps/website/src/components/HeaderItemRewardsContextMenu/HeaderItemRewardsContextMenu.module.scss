@@ -1,0 +1,39 @@
+@use 'header' as header;
+
+.root {
+  position: absolute;
+  top: 28px;
+  left: 0%;
+
+  z-index: 1;
+
+  width: 196px;
+}
+
+.content {
+  padding: 8px 6px;
+
+  border-radius: 8px;
+  background: rgba(21, 21, 34, 0.66);
+  box-shadow: 0px 26px 40px 0px rgba(0, 0, 0, 0.33), 0px 1px 0px 0px rgba(0, 0, 0, 0.33);
+  backdrop-filter: blur(116.5px);
+
+  z-index: 1;
+
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.arrow {
+  position: absolute;
+  top: -11px;
+  left: calc(50% - 9px);
+  z-index: -1;
+}
+
+@media screen and (max-width: header.$breakpoint) {
+  .root {
+    width: 100%;
+  }
+}

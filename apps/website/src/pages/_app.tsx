@@ -9,6 +9,7 @@ import ReAuth from '@/components/ReAuth';
 import BanBanner from '@/components/BanBanner/BanBanner';
 
 import { ProvideAuth } from '@/hooks/auth';
+import { ProvideRewardsContextMenu } from '@/hooks/rewards-context-menu';
 
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import '../styles/globals.scss';
@@ -32,17 +33,19 @@ function App({ Component, pageProps }: AppProps) {
       </Head>
       <CookiesProvider>
         <ProvideAuth>
-          <ReAuth>
-            <MantineProvider
-              theme={{
-                colorScheme: 'dark',
-                fontFamily: 'Archivo, sans-serif'
-              }}
-            >
-              <BanBanner />
-              <Component {...pageProps} />
-            </MantineProvider>
-          </ReAuth>
+          <ProvideRewardsContextMenu>
+            <ReAuth>
+              <MantineProvider
+                theme={{
+                  colorScheme: 'dark',
+                  fontFamily: 'Archivo, sans-serif'
+                }}
+              >
+                <BanBanner />
+                <Component {...pageProps} />
+              </MantineProvider>
+            </ReAuth>
+          </ProvideRewardsContextMenu>
         </ProvideAuth>
       </CookiesProvider>
     </>

@@ -7,7 +7,7 @@ $breakpoint: 950px;
 .link:hover {
   text-decoration: none;
 
-  &:not(.active) {
+  &:not(.active):not(.component) {
     opacity: 0.85;
   }
 }

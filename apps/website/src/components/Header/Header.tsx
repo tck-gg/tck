@@ -48,9 +48,13 @@ function Header() {
 
           return (
             <Link
-              href={href}
+              href={href || ''}
               key={label}
-              className={clsx(classes.link, isActive ? classes.active : '')}
+              className={clsx(
+                classes.link,
+                isActive ? classes.active : '',
+                !href && classes.component
+              )}
             >
               {component || label}
             </Link>

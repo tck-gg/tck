@@ -39,8 +39,12 @@ function HeaderBoxMobile({ ref }: { ref?: React.RefObject<HTMLDivElement> }) {
         return (
           <Link
             key={label}
-            href={href}
-            className={clsx(classes.link, isActive ? classes.active : '')}
+            href={href || ''}
+            className={clsx(
+              classes.link,
+              isActive ? classes.active : '',
+              !href && classes.component
+            )}
           >
             {component || label}
           </Link>
