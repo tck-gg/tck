@@ -9,21 +9,19 @@ import classes from './HeaderItemRewardsContextMenuButton.module.scss';
 
 function HeaderItemRewardsContextMenuButton({
   children,
-  href
+  href,
+  onClick
 }: {
   children: React.ReactNode | any;
   href: string;
+  onClick: () => void;
 }) {
   const router = useRouter();
-  const rewardsContextMenu = useRewardsContextMenu();
 
   return (
     <div
       className={clsx(classes.root, router.pathname.includes(href) && classes.active)}
-      onClick={() => {
-        router.push(href);
-        rewardsContextMenu.close();
-      }}
+      onClick={onClick}
     >
       {children}
       <FontAwesomeIcon icon={faChevronRight} />

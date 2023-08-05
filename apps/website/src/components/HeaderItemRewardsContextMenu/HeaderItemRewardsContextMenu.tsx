@@ -1,14 +1,18 @@
 import { motion } from 'framer-motion';
 import ClickAwayListener from 'react-click-away-listener';
+import { useRouter } from 'next/router';
 
 import { useRewardsContextMenu } from '@/hooks/rewards-context-menu';
 
+import { useAgeVerification } from '@/hooks/age-verification';
 import HeaderItemRewardsContextMenuButton from '../HeaderItemRewardsContextMenuButton/HeaderItemRewardsContextMenuButton';
 
 import classes from './HeaderItemRewardsContextMenu.module.scss';
 
 function HeaderItemRewardsContextMenu() {
+  const router = useRouter();
   const rewardsContextMenu = useRewardsContextMenu();
+  const ageVerification = useAgeVerification();
 
   return (
     <ClickAwayListener onClickAway={rewardsContextMenu.close}>
@@ -20,13 +24,33 @@ function HeaderItemRewardsContextMenu() {
         transition={{ duration: 0.1 }}
       >
         <div className={classes.content}>
-          <HeaderItemRewardsContextMenuButton href='/affiliates'>
+          <HeaderItemRewardsContextMenuButton
+            onClick={() => {
+              ageVerification.verify(() => {
+                router.push('/affiliates');
+                rewardsContextMenu.close();
+              });
+            }}
+            href='/affiliates'
+          >
             Affiliates
           </HeaderItemRewardsContextMenuButton>
-          <HeaderItemRewardsContextMenuButton href='/raffles'>
+          <HeaderItemRewardsContextMenuButton
+            onClick={() => {
+              router.push('/raffles');
+              rewardsContextMenu.close();
+            }}
+            href='/raffles'
+          >
             Raffles
           </HeaderItemRewardsContextMenuButton>
-          <HeaderItemRewardsContextMenuButton href='/giveaways'>
+          <HeaderItemRewardsContextMenuButton
+            onClick={() => {
+              router.push('/giveaways');
+              rewardsContextMenu.close();
+            }}
+            href='/giveaways'
+          >
             Giveaways
           </HeaderItemRewardsContextMenuButton>
         </div>
