@@ -9,6 +9,8 @@ import AffiliateBox from '@/components/AffiliateBox/AffiliateBox';
 import SocialBox from '@/components/SocialBox/SocialBox';
 import HomeSectionRaffles from '@/components/HomeSectionRaffles/HomeSectionRaffles';
 
+import { useAgeVerification } from '@/hooks/age-verification';
+
 import { AFFILIATES } from '@/data/affiliates';
 import { SOCIALS_DATA } from '@/data/socials';
 
@@ -19,6 +21,7 @@ import knife from '@/images/knife.png';
 
 function Home() {
   const router = useRouter();
+  const ageVerification = useAgeVerification();
 
   return (
     <Layout>
@@ -49,7 +52,9 @@ function Home() {
               variant='gradient'
               rightIcon={faAngleRight}
               onClick={() => {
-                router.push('/affiliates');
+                ageVerification.verify(() => {
+                  router.push('/affiliates');
+                });
               }}
             >
               Explore Rewards
@@ -136,7 +141,9 @@ function Home() {
           <Button
             rightIcon={faAngleRight}
             onClick={() => {
-              router.push('/affiliates');
+              ageVerification.verify(() => {
+                router.push('/affiliates');
+              });
             }}
           >
             Discover More

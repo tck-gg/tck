@@ -10,6 +10,9 @@ import BanBanner from '@/components/BanBanner/BanBanner';
 
 import { ProvideAuth } from '@/hooks/auth';
 import { ProvideRewardsContextMenu } from '@/hooks/rewards-context-menu';
+import { ProvideAgeVerification } from '@/hooks/age-verification';
+import AgeVerification from '@/components/AgeVerification/AgeVerification';
+import { ProvideAgeVerificationCallback } from '@/hooks/age-verification-callback';
 
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import '../styles/globals.scss';
@@ -34,17 +37,22 @@ function App({ Component, pageProps }: AppProps) {
       <CookiesProvider>
         <ProvideAuth>
           <ProvideRewardsContextMenu>
-            <ReAuth>
-              <MantineProvider
-                theme={{
-                  colorScheme: 'dark',
-                  fontFamily: 'Archivo, sans-serif'
-                }}
-              >
-                <BanBanner />
-                <Component {...pageProps} />
-              </MantineProvider>
-            </ReAuth>
+            <ProvideAgeVerificationCallback>
+              <ProvideAgeVerification>
+                <ReAuth>
+                  <MantineProvider
+                    theme={{
+                      colorScheme: 'dark',
+                      fontFamily: 'Archivo, sans-serif'
+                    }}
+                  >
+                    <AgeVerification />
+                    <BanBanner />
+                    <Component {...pageProps} />
+                  </MantineProvider>
+                </ReAuth>
+              </ProvideAgeVerification>
+            </ProvideAgeVerificationCallback>
           </ProvideRewardsContextMenu>
         </ProvideAuth>
       </CookiesProvider>
