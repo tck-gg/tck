@@ -46,9 +46,9 @@ function Header() {
         {HEADER_ITEMS.map(({ href, label, component }) => {
           const isActive = router.pathname === href;
 
-          return (
+          return href ? (
             <Link
-              href={href || ''}
+              href={href}
               key={label}
               className={clsx(
                 classes.link,
@@ -58,6 +58,13 @@ function Header() {
             >
               {component || label}
             </Link>
+          ) : (
+            <span
+              key={label}
+              className={clsx(classes.link, isActive ? classes.active : '', classes.component)}
+            >
+              {component || label}
+            </span>
           );
         })}
       </div>

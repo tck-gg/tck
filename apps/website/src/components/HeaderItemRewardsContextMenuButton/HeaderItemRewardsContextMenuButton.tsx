@@ -3,8 +3,6 @@ import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { useRouter } from 'next/router';
 import clsx from 'clsx';
 
-import { useRewardsContextMenu } from '@/hooks/rewards-context-menu';
-
 import classes from './HeaderItemRewardsContextMenuButton.module.scss';
 
 function HeaderItemRewardsContextMenuButton({
