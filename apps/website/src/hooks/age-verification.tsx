@@ -52,6 +52,7 @@ function useProvideAgeVerification() {
     }
     callback();
   }
+
   return {
     isOpen,
     open,

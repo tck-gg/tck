@@ -33,7 +33,7 @@ function Affiliates() {
       <PageHeader title='Affiliates' />
 
       <div className={classes.affiliateWrapper}>
-        {isVerified &&
+        {isVerified ? (
           AFFILIATES.map((affiliate: IAffiliate) => {
             return (
               <AffiliateBox
@@ -46,7 +46,10 @@ function Affiliates() {
                 featured={affiliate.featured}
               />
             );
-          })}
+          })
+        ) : (
+          <p>You are not permitted to view this content.</p>
+        )}
       </div>
     </Layout>
   );

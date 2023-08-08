@@ -48,6 +48,10 @@
   cursor: pointer;
 }
 
+.component {
+  cursor: pointer;
+}
+
 @media screen and (max-width: header.$breakpoint) {
   .hamburger {
     display: block;
