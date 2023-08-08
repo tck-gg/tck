@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Prisma, getAllLeaderboards } from 'database';
 import { LeaderboardType } from 'types';
 import Tilt from 'react-parallax-tilt';
+import Image from 'next/image';
 
 import Layout from '@/components/Layout/Layout';
 
@@ -10,6 +11,12 @@ import Leaderboard from '@/components/Leaderboard/Leaderboard';
 import LeaderboardPodiumBox from '@/components/LeaderboardPodiumBox/LeaderboardPodiumBox';
 
 import classes from './leaderboards.module.scss';
+
+import gamdomLogo from '../../images/affiliate/gamdom.png';
+import stakeLogo from '../../images/affiliate/stake.png';
+import hypeDropLogo from '../../images/affiliate/hypedrop.png';
+import csgorollLogo from '../../images/affiliate/csgoroll.png';
+import clsx from 'clsx';
 
 export type ILeaderboard = Prisma.LeaderboardGetPayload<{
   include: { spots: true };
@@ -35,16 +42,70 @@ function Leaderboards({
     <Layout title='Leaderboards'>
       <div className={classes.root}>
         <PageHeader title='Leaderboards' />
-        <select
-          onChange={(e) => {
-            setSelectedLeaderboard(e.target.value as LeaderboardType);
-          }}
-        >
-          <option value='stake'>Stake</option>
-          <option value='gamdom'>Gamdom</option>
-          <option value='csgoroll'>CSGORoll</option>
-          <option value='hypedrop'>HypeDrop</option>
-        </select>
+
+        <div className={classes.affiliates}>
+          <Image
+            src={stakeLogo}
+            alt='Stake'
+            width={100}
+            height={60}
+            style={{
+              objectFit: 'contain'
+            }}
+            onClick={() => {
+              setSelectedLeaderboard('stake');
+            }}
+            className={clsx(classes.affiliate, selectedLeaderboard === 'stake' && classes.selected)}
+          />
+          <Image
+            src={gamdomLogo}
+            alt='Gamdom'
+            width={100}
+            height={60}
+            style={{
+              objectFit: 'contain'
+            }}
+            onClick={() => {
+              setSelectedLeaderboard('gamdom');
+            }}
+            className={clsx(
+              classes.affiliate,
+              selectedLeaderboard === 'gamdom' && classes.selected
+            )}
+          />
+          <Image
+            src={csgorollLogo}
+            alt='CSGORoll'
+            width={100}
+            height={60}
+            style={{
+              objectFit: 'contain'
+            }}
+            onClick={() => {
+              setSelectedLeaderboard('csgoroll');
+            }}
+            className={clsx(
+              classes.affiliate,
+              selectedLeaderboard === 'csgoroll' && classes.selected
+            )}
+          />
+          <Image
+            src={hypeDropLogo}
+            alt='HypeDrop'
+            width={100}
+            height={60}
+            style={{
+              objectFit: 'contain'
+            }}
+            onClick={() => {
+              setSelectedLeaderboard('hypedrop');
+            }}
+            className={clsx(
+              classes.affiliate,
+              selectedLeaderboard === 'hypedrop' && classes.selected
+            )}
+          />
+        </div>
 
         {leaderboards[selectedLeaderboard].spots.length > 0 && (
           <>
