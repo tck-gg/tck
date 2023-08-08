@@ -1,6 +1,7 @@
 import Image, { StaticImageData } from 'next/image';
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import clsx from 'clsx';
+import { useRouter } from 'next/router';
 
 import AffiliateBoxFeaturedBadge from '../AffiliateBoxFeaturedBadge/AffiliateBoxFeaturedBadge';
 import AffiliateBoxCodeBox from '../AffiliateBoxCodeBox/AffiliateBoxCodeBox';
@@ -16,7 +17,8 @@ function AffiliateBox({
   name,
   codes,
   tags,
-  featured
+  featured,
+  isOffPage
 }: {
   image: StaticImageData;
   reward: string;
@@ -24,8 +26,15 @@ function AffiliateBox({
   codes: IAffiliateCode[];
   tags: AffiliateTag[];
   featured?: boolean;
+  isOffPage?: boolean;
 }) {
+  const router = useRouter();
+
   function handleClick(link: string) {
+    if (isOffPage) {
+      router.push('/affiliates');
+      return;
+    }
     window.open(link, '_blank');
   }
 

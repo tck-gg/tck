@@ -114,6 +114,7 @@ function Home() {
                     codes={affiliate.codes}
                     tags={affiliate.tags}
                     featured={affiliate.featured}
+                    isOffPage
                   />
                 );
               })
@@ -133,6 +134,7 @@ function Home() {
                     codes={affiliate.codes}
                     tags={affiliate.tags}
                     featured={affiliate.featured}
+                    isOffPage
                   />
                 );
               })
