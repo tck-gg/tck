@@ -16,11 +16,9 @@
   border-image: linear-gradient(315deg, rgba(152, 158, 174, 0.25) 0%, rgba(25, 25, 39, 0.25) 100%);
   border-image-slice: 1;
   border-collapse: separate;
-  -webkit-mask: /*4*/
-     linear-gradient(#fff 0 0) padding-box, 
-     linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor; /*5'*/
-          mask-composite: exclude; /*5*/
+  -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
 }
 
 .position {
