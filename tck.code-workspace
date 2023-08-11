@@ -12,8 +12,16 @@
 			"path": "apps/admin"
 		},
 		{
+			"name": "discord-bot",
+			"path": "apps/discord-bot"
+		},
+		{
 			"name": "database",
 			"path": "packages/database"
+		},
+		{
+			"name": "startup",
+			"path": "apps/startup"
 		},
 		{
 			"name": "types",
@@ -42,6 +50,7 @@
 		"jest.disabledWorkspaceFolders": [
 			"tck",
 			"admin",
+			"discord-bot",
 			"database",
 			"eslint-config-custom",
 			"tsconfig"

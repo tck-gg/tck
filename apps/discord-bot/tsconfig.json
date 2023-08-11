@@ -1,0 +1,9 @@
+{
+	"extends": "@sapphire/ts-config",
+	"compilerOptions": {
+		"rootDir": "src",
+		"outDir": "dist",
+		"verbatimModuleSyntax": false
+	},
+	"include": ["src"]
+}

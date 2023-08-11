@@ -4,12 +4,12 @@
   "globalEnv": ["NODE_ENV"],
   "pipeline": {
     "dev": {
-      "dependsOn": ["^db:generate"],
+      "dependsOn": ["^db:generate", "startup"],
       "cache": false,
       "persistent": true
     },
     "build": {
-      "dependsOn": ["^build", "^db:generate"],
+      "dependsOn": ["^build", "^db:generate", "startup"],
       "outputs": ["dist/**", ".next/**", "!.next/cache/**"]
     },
     "db:format": {
@@ -28,10 +28,15 @@
     "lint": {
       "outputs": []
     },
-    "test": {
+    "start": {
       "outputs": []
     },
-    "start": {
+    "startup": {
+      "outputs": [
+        "dist/**"
+      ]
+    },
+    "test": {
       "outputs": []
     }
   }
