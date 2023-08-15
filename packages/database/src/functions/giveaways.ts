@@ -35,27 +35,6 @@ export async function getAllGiveaways() {
   };
 }
 
-export async function createGiveaway(
-  name: string,
-  brand: string,
-  value: number,
-  maxEntries: number,
-  timestampEnd: number,
-  image: string
-) {
-  await prisma.giveaway.create({
-    data: {
-      name,
-      brand,
-      value,
-      maxEntries,
-      timestampCreation: Date.now(),
-      timestampEnd,
-      image
-    }
-  });
-}
-
 export async function updateGiveaway(
   id: string,
   name: string,
@@ -113,4 +92,34 @@ export async function getGiveaway(id: string) {
       entries: true
     }
   });
+}
+
+export async function endGiveaway(id: string) {
+  console.log(id);
+}
+
+export async function createGiveaway(
+  name: string,
+  brand: string,
+  value: number,
+  maxEntries: number,
+  timestampEnd: number,
+  image: string
+) {
+  const giveaway = await prisma.giveaway.create({
+    data: {
+      name,
+      brand,
+      value,
+      maxEntries,
+      timestampCreation: Date.now(),
+      timestampEnd,
+      image
+    }
+  });
+
+  const timeout = timestampEnd - Date.now();
+  setTimeout(async () => {
+    await endGiveaway(giveaway.id);
+  }, timeout);
 }
