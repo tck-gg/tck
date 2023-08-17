@@ -3,7 +3,7 @@ import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import clsx from 'clsx';
 import { useRouter } from 'next/router';
 
-import AffiliateBoxFeaturedBadge from '../AffiliateBoxFeaturedBadge/AffiliateBoxFeaturedBadge';
+import BoxBadge from '../BoxBadge/BoxBadge';
 import AffiliateBoxCodeBox from '../AffiliateBoxCodeBox/AffiliateBoxCodeBox';
 import Button from '../Button/Button';
 
@@ -40,7 +40,7 @@ function AffiliateBox({
 
   return (
     <div className={clsx(classes.root, featured && classes.featured)}>
-      {featured && <AffiliateBoxFeaturedBadge />}
+      {featured && <BoxBadge>FEATURED</BoxBadge>}
       <div className={classes.top}>
         <div className={classes.image}>
           <Image src={image} alt={name} width={200} height={75} style={{ objectFit: 'contain' }} />

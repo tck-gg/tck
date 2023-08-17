@@ -1,3 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+
+import { useEffect, useState } from 'react';
 import { faAngleRight, faUser } from '@fortawesome/free-solid-svg-icons';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
@@ -10,15 +13,31 @@ import EntryCounter from '../EntryCounter/EntryCounter';
 
 import Jagged from '../svg/Jagged';
 
+import { useAuth } from '@/hooks/auth';
+
 import classes from './GiveawayBox.module.scss';
 
 import giveawayCoinImage from '@/images/giveaway-coin.png';
+import BoxBadge from '../BoxBadge/BoxBadge';
 
 function GiveawayBox({ giveaway }: { giveaway: IGiveaway }) {
   const router = useRouter();
+  const auth = useAuth();
+  const [isEntered, setIsEntered] = useState(false);
+
+  useEffect(() => {
+    setIsEntered(
+      giveaway.entries
+        .map((entry) => {
+          return entry.userId;
+        })
+        .includes(auth.user?.id || '')
+    );
+  }, [auth]);
 
   return (
     <div className={classes.root}>
+      {isEntered && <BoxBadge>ENTERED</BoxBadge>}
       <div className={classes.top}>
         <Image
           width={268}
