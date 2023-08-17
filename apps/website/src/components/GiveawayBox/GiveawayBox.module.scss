@@ -20,7 +20,7 @@
   border-radius: 8px 8px 0 0;
 
   height: 335px;
-  padding: 26px 20px;
+  padding: 26px 20px 10px 20px;
 }
 
 .bottom {
@@ -88,4 +88,15 @@
   padding: 10px;
   
   z-index: 1;
+}
+
+.buttonGroup {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.end {
+  @extend .brand;
 }

@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import clsx from 'clsx';
 import { IGiveaway } from 'types';
+import dateFormat from 'dateformat';
 
 import Button from '../Button/Button';
 import IconBubble from '../IconBubble/IconBubble';
@@ -54,16 +55,23 @@ function GiveawayBox({ giveaway }: { giveaway: IGiveaway }) {
           <p className={classes.brand}>{giveaway.brand}</p>
         </div>
 
-        <Button
-          rightIcon={faAngleRight}
-          variant={giveaway.winnerId ? 'secondary' : 'gradient'}
-          fullWidth
-          onClick={() => {
-            return router.push(`/giveaways/${giveaway.id}`);
-          }}
-        >
-          View Giveaway
-        </Button>
+        <div className={classes.buttonGroup}>
+          <Button
+            rightIcon={faAngleRight}
+            variant={giveaway.winnerId ? 'secondary' : 'gradient'}
+            fullWidth
+            onClick={() => {
+              return router.push(`/giveaways/${giveaway.id}`);
+            }}
+          >
+            View Giveaway
+          </Button>
+          {!giveaway.winnerId && (
+            <p className={classes.end}>
+              ends in {Math.floor((giveaway.timestampEnd - Date.now()) / 1000 / 60 / 60 / 24)} days
+            </p>
+          )}
+        </div>
       </div>
       <div className={classes.bottom}>
         <div className={classes.spotsDescription}>

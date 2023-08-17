@@ -128,6 +128,7 @@ function GiveawayInfobox({ giveaway }: { giveaway: IGiveaway }) {
         >
           {isEntered ? 'Already Entered' : hasMaxEntries ? 'Max Entries' : 'Enter Giveaway'}
         </Button>
+        <p className={classes.end}>Ends {new Date(giveaway.timestampEnd).toLocaleString()}</p>
       </div>
     </div>
   );

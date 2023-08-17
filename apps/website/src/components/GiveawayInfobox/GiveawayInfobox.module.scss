@@ -25,6 +25,14 @@
   gap: 26px;
 }
 
+.bottom {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
 .middle, .bottom {
   padding: 24px 20px;
 }
@@ -72,4 +80,9 @@
     font-size: 15px;
     font-weight: 800;
   }
+}
+
+
+.end {
+  @extend .brand;
 }
