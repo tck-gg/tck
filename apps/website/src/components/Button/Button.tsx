@@ -13,6 +13,7 @@ function Button({
   rightIcon,
   borderRadius,
   fullWidth,
+  disabled,
   onClick
 }: {
   children: string | JSX.Element;
@@ -21,6 +22,7 @@ function Button({
   rightIcon?: IconDefinition;
   borderRadius?: number;
   fullWidth?: boolean;
+  disabled?: boolean;
   onClick?: (props: any) => void;
 }) {
   function handleClick() {
@@ -29,7 +31,12 @@ function Button({
 
   return (
     <div
-      className={clsx(classes.root, classes[variant], fullWidth && classes.fullWidth)}
+      className={clsx(
+        classes.root,
+        classes[variant],
+        fullWidth && classes.fullWidth,
+        disabled && classes.disabled
+      )}
       onClick={handleClick}
       style={{ borderRadius }}
     >

@@ -121,6 +121,7 @@ function GiveawayInfobox({ giveaway }: { giveaway: IGiveaway }) {
           rightIcon={faAngleRight}
           onClick={handleEnterGiveaway}
           fullWidth
+          disabled={isEntered}
         >
           {isEntered ? 'Already Entered' : 'Enter Giveaway'}
         </Button>
