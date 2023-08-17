@@ -42,7 +42,9 @@ function GiveawayBox({ giveaway }: { giveaway: IGiveaway }) {
           onClick={() => {
             return router.push(`/giveaways/${giveaway.id}`);
           }}
-        >{`${giveaway.winnerId ? 'View' : 'Enter'} Giveaway`}</Button>
+        >
+          View Giveaway
+        </Button>
       </div>
       <div className={classes.bottom}>
         <div className={classes.spotsDescription}>

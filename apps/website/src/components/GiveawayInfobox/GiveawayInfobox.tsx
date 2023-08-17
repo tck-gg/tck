@@ -41,6 +41,9 @@ function GiveawayInfobox({ giveaway }: { giveaway: IGiveaway }) {
   const router = useRouter();
   const auth = useAuth();
   const [isEntered, setIsEntered] = useState(false);
+  const [hasMaxEntries, setHasMaxEntries] = useState(
+    giveaway.entries.length === giveaway.maxEntries
+  );
 
   useEffect(() => {
     setIsEntered(
@@ -53,7 +56,7 @@ function GiveawayInfobox({ giveaway }: { giveaway: IGiveaway }) {
   }, [auth]);
 
   async function handleEnterGiveaway() {
-    if (isEntered || auth.user?.isBanned) {
+    if (isEntered || hasMaxEntries || auth.user?.isBanned) {
       return;
     }
     await axios.post(
@@ -121,9 +124,9 @@ function GiveawayInfobox({ giveaway }: { giveaway: IGiveaway }) {
           rightIcon={faAngleRight}
           onClick={handleEnterGiveaway}
           fullWidth
-          disabled={isEntered}
+          disabled={isEntered || hasMaxEntries}
         >
-          {isEntered ? 'Already Entered' : 'Enter Giveaway'}
+          {isEntered ? 'Already Entered' : hasMaxEntries ? 'Max Entries' : 'Enter Giveaway'}
         </Button>
       </div>
     </div>

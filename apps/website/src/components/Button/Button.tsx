@@ -33,7 +33,7 @@ function Button({
     <div
       className={clsx(
         classes.root,
-        classes[variant],
+        disabled ? classes.secondary : classes[variant],
         fullWidth && classes.fullWidth,
         disabled && classes.disabled
       )}
