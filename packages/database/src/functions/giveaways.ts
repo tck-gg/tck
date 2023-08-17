@@ -1,4 +1,4 @@
-import { prisma } from '../client';
+import { prisma, User } from '../client';
 import { deleteImage } from './backblaze';
 
 export async function getAllGiveaways() {
@@ -33,27 +33,6 @@ export async function getAllGiveaways() {
     currentGiveaways,
     pastGiveaways
   };
-}
-
-export async function createGiveaway(
-  name: string,
-  brand: string,
-  value: number,
-  maxEntries: number,
-  timestampEnd: number,
-  image: string
-) {
-  await prisma.giveaway.create({
-    data: {
-      name,
-      brand,
-      value,
-      maxEntries,
-      timestampCreation: Date.now(),
-      timestampEnd,
-      image
-    }
-  });
 }
 
 export async function updateGiveaway(
@@ -111,6 +90,90 @@ export async function getGiveaway(id: string) {
     },
     include: {
       entries: true
+    }
+  });
+}
+
+export async function endGiveaway(id: string) {
+  const giveaway = await getGiveaway(id);
+
+  // TODO: Make sure this actually works.
+  const winner = giveaway?.entries[0] as any;
+
+  await prisma.giveaway.update({
+    where: {
+      id
+    },
+    data: {
+      winner
+    }
+  });
+}
+
+export async function createGiveaway(
+  name: string,
+  brand: string,
+  value: number,
+  maxEntries: number,
+  timestampEnd: number,
+  image: string
+) {
+  const giveaway = await prisma.giveaway.create({
+    data: {
+      name,
+      brand,
+      value,
+      maxEntries,
+      timestampCreation: Date.now(),
+      timestampEnd,
+      image
+    }
+  });
+
+  const timeout = timestampEnd - Date.now();
+  setTimeout(async () => {
+    await endGiveaway(giveaway.id);
+  }, timeout);
+}
+
+export async function enterGiveaway(user: User, giveawayId: string) {
+  const giveaway = await getGiveaway(giveawayId);
+
+  if (
+    giveaway?.entries
+      .map((entry) => {
+        return entry.userId;
+      })
+      .includes(user.id)
+  ) {
+    return;
+  }
+
+  let slot;
+  let attempts = -1;
+  do {
+    attempts++;
+    slot = (giveaway?.entries.length || 0) + attempts;
+  } while (
+    giveaway?.entries
+      .map((entry) => {
+        return entry.slot;
+      })
+      .includes(slot)
+  );
+
+  await prisma.giveaway.update({
+    where: {
+      id: giveawayId
+    },
+    data: {
+      entries: {
+        create: {
+          slot,
+          timestamp: Date.now(),
+          userId: user.id
+        }
+      }
     }
   });
 }

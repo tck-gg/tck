@@ -7,6 +7,10 @@
 		"start": "node dist/index.js",
 		"startup": "npm run build && npm run start"
   },
+  "dependencies": {
+    "database": "*",
+    "types": "*"
+  },
   "devDependencies": {
     "eslint-config-custom": "*",
     "tsconfig": "*"

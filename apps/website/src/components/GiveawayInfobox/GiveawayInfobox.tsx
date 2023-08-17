@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+
 import { IGiveaway } from 'types';
 import { useRouter } from 'next/router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -8,18 +10,63 @@ import {
   faBalanceScale,
   faUser
 } from '@fortawesome/free-solid-svg-icons';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 import Button from '../Button/Button';
 import JaggedBackgroundItem from '../JaggedBackgroundItem/JaggedBackgroundItem';
 import IconBubble from '../IconBubble/IconBubble';
 import EntryCounter from '../EntryCounter/EntryCounter';
 
+import { useAuth } from '@/hooks/auth';
+
 import classes from './GiveawayInfobox.module.scss';
 
 import giveawayCoinImage from '@/images/giveaway-coin.png';
 
+function getUrl() {
+  if (process.env.NODE_ENV === 'production') {
+    if (!window.location.hostname.includes('localhost')) {
+      return 'https://tck.gg';
+    }
+    return 'http://localhost:8007';
+  }
+  if (process.env.NODE_ENV === 'development') {
+    return 'http://localhost:8000';
+  }
+  return '';
+}
+
 function GiveawayInfobox({ giveaway }: { giveaway: IGiveaway }) {
   const router = useRouter();
+  const auth = useAuth();
+  const [isEntered, setIsEntered] = useState(false);
+
+  useEffect(() => {
+    setIsEntered(
+      giveaway.entries
+        .map((entry) => {
+          return entry.userId;
+        })
+        .includes(auth.user?.id || '')
+    );
+  }, [auth]);
+
+  async function handleEnterGiveaway() {
+    if (isEntered || auth.user?.isBanned) {
+      return;
+    }
+    await axios.post(
+      `${getUrl()}/api/v1/giveaway/${giveaway.id}/enter`,
+      {},
+      {
+        headers: {
+          Authorization: auth.user?.apiKey
+        }
+      }
+    );
+    router.reload();
+  }
 
   return (
     <div className={classes.root}>
@@ -69,8 +116,13 @@ function GiveawayInfobox({ giveaway }: { giveaway: IGiveaway }) {
         </div>
       </div>
       <div className={classes.bottom}>
-        <Button variant='gradient' rightIcon={faAngleRight} fullWidth>
-          Enter Giveaway
+        <Button
+          variant={isEntered ? 'secondary' : 'gradient'}
+          rightIcon={faAngleRight}
+          onClick={handleEnterGiveaway}
+          fullWidth
+        >
+          {isEntered ? 'Already Entered' : 'Enter Giveaway'}
         </Button>
       </div>
     </div>

@@ -24,6 +24,7 @@ function GiveawayPage({ giveaway }: { giveaway: IGiveaway }) {
         <GiveawayInfobox giveaway={giveaway} />
       </div>
       <div className={classes.right}>
+        {JSON.stringify(giveaway.entries)}
         <GiveawayEntry position={1} />
         <GiveawayEntry position={2} />
         <GiveawayEntry position={1} />

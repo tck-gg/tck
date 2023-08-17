@@ -62,7 +62,7 @@ model User {
   isVerified Boolean @default(false)
 
   giveawayEntries GiveawayEntry[]
-  giveawayWins        Giveaway[]
+  giveawayWins    Giveaway[]
 }
 
 model BannedIp {
