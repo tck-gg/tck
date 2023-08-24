@@ -103,7 +103,7 @@ model Giveaway {
   id                String          @id @default(auto()) @map("_id") @db.ObjectId
   name              String
   brand             String
-  value             Int
+  value             Float
   maxEntries        Int
   image             String
   entries           GiveawayEntry[]

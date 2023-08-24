@@ -407,6 +407,9 @@ function Giveaways({
           placeholder='549.00'
           withAsterisk
           mb='sm'
+          step={0.01}
+          min={0.01}
+          precision={2}
         />
         <NumberInput
           value={maxEntries}
