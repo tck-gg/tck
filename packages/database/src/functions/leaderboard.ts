@@ -69,6 +69,7 @@ export async function getAllLeaderboards() {
     stake: await getLeaderboard('stake'),
     gamdom: await getLeaderboard('gamdom'),
     csgoroll: await getLeaderboard('csgoroll'),
-    hypedrop: await getLeaderboard('hypedrop')
+    hypedrop: await getLeaderboard('hypedrop'),
+    clash: await getLeaderboard('clash')
   };
 }

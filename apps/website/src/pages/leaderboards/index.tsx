@@ -3,6 +3,7 @@ import { Prisma, getAllLeaderboards } from 'database';
 import { LeaderboardType } from 'types';
 import Tilt from 'react-parallax-tilt';
 import Image from 'next/image';
+import clsx from 'clsx';
 
 import Layout from '@/components/Layout/Layout';
 
@@ -16,7 +17,7 @@ import gamdomLogo from '../../images/affiliate/gamdom.png';
 import stakeLogo from '../../images/affiliate/stake.png';
 import hypeDropLogo from '../../images/affiliate/hypedrop.png';
 import csgorollLogo from '../../images/affiliate/csgoroll.png';
-import clsx from 'clsx';
+import clashLogo from '../../images/affiliate/clash.png';
 
 export type ILeaderboard = Prisma.LeaderboardGetPayload<{
   include: { spots: true };
@@ -104,6 +105,19 @@ function Leaderboards({
               classes.affiliate,
               selectedLeaderboard === 'hypedrop' && classes.selected
             )}
+          />
+          <Image
+            src={clashLogo}
+            alt='Clash'
+            width={100}
+            height={60}
+            style={{
+              objectFit: 'contain'
+            }}
+            onClick={() => {
+              setSelectedLeaderboard('clash');
+            }}
+            className={clsx(classes.affiliate, selectedLeaderboard === 'clash' && classes.selected)}
           />
         </div>
 
