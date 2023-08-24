@@ -139,8 +139,13 @@ export async function createGiveaway(
 export async function enterGiveaway(user: User, giveawayId: string): Promise<boolean> {
   const giveaway = await getGiveaway(giveawayId);
 
+  if (!giveaway) {
+    // If the giveaway doesn't exist.
+    return false;
+  }
+
   if (
-    giveaway?.entries
+    giveaway.entries
       .map((entry) => {
         return entry.userId;
       })
@@ -150,27 +155,19 @@ export async function enterGiveaway(user: User, giveawayId: string): Promise<boo
     return false;
   }
 
-  let slot;
-  let attempts = -1;
-  do {
-    attempts++;
-    slot = (giveaway?.entries.length || 0) + attempts;
-  } while (
-    giveaway?.entries
-      .map((entry) => {
-        return entry.slot;
-      })
-      .includes(slot)
-  );
+  if (giveaway.entries.length >= giveaway.maxEntries) {
+    // The giveaway is full.
+    return false;
+  }
 
-  const result = await prisma.giveaway.update({
+  await prisma.giveaway.update({
     where: {
       id: giveawayId
     },
     data: {
       entries: {
         create: {
-          slot,
+          slot: giveaway.entries.length,
           timestamp: Date.now(),
           userId: user.id
         }
