@@ -4,6 +4,7 @@ import Head from 'next/head';
 import { CookiesProvider } from 'react-cookie';
 import ReactGA from 'react-ga4';
 import { MantineProvider } from '@mantine/core';
+import { Notifications } from '@mantine/notifications';
 
 import ReAuth from '@/components/ReAuth';
 import BanBanner from '@/components/BanBanner/BanBanner';
@@ -46,6 +47,7 @@ function App({ Component, pageProps }: AppProps) {
                       fontFamily: 'Archivo, sans-serif'
                     }}
                   >
+                    <Notifications />
                     <AgeVerification />
                     <BanBanner />
                     <Component {...pageProps} />

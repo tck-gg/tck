@@ -86,6 +86,9 @@ function LeaderboardPage({
         {
           headers: {
             Authorization: cookie.authorization
+          },
+          validateStatus: () => {
+            return true;
           }
         }
       );

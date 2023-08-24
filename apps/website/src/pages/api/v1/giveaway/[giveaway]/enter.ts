@@ -17,13 +17,14 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
 
   const user = await getUserByAuthorization(authorization);
   if (!user) {
+    res.status(403).end();
     return;
   }
 
   const { giveaway } = req.query;
-  await enterGiveaway(user, giveaway as string);
+  const result = await enterGiveaway(user, giveaway as string);
 
-  res.status(200).end();
+  res.status(result ? 200 : 500).end();
 }
 
 export default handler;

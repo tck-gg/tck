@@ -136,7 +136,7 @@ export async function createGiveaway(
   }, timeout);
 }
 
-export async function enterGiveaway(user: User, giveawayId: string) {
+export async function enterGiveaway(user: User, giveawayId: string): Promise<boolean> {
   const giveaway = await getGiveaway(giveawayId);
 
   if (
@@ -146,7 +146,8 @@ export async function enterGiveaway(user: User, giveawayId: string) {
       })
       .includes(user.id)
   ) {
-    return;
+    // The user was already entered.
+    return false;
   }
 
   let slot;
@@ -162,7 +163,7 @@ export async function enterGiveaway(user: User, giveawayId: string) {
       .includes(slot)
   );
 
-  await prisma.giveaway.update({
+  const result = await prisma.giveaway.update({
     where: {
       id: giveawayId
     },
@@ -176,4 +177,6 @@ export async function enterGiveaway(user: User, giveawayId: string) {
       }
     }
   });
+
+  return true;
 }

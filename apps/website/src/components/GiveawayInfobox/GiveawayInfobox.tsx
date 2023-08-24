@@ -12,6 +12,8 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { notifications } from '@mantine/notifications';
+import { IconX } from '@tabler/icons-react';
 
 import Button from '../Button/Button';
 import JaggedBackgroundItem from '../JaggedBackgroundItem/JaggedBackgroundItem';
@@ -59,16 +61,30 @@ function GiveawayInfobox({ giveaway }: { giveaway: IGiveaway }) {
     if (isEntered || hasMaxEntries || auth.user?.isBanned) {
       return;
     }
-    await axios.post(
+    const response = await axios.post(
       `${getUrl()}/api/v1/giveaway/${giveaway.id}/enter`,
       {},
       {
         headers: {
           Authorization: auth.user?.apiKey
+        },
+        validateStatus: () => {
+          return true;
         }
       }
     );
-    router.reload();
+
+    if (response.status !== 200) {
+      router.reload();
+      return;
+    }
+    notifications.show({
+      title: 'Error entering giveaway',
+      message: 'There was an error entering the giveaway, please try again later.',
+      color: 'red',
+      withBorder: true,
+      icon: <IconX />
+    });
   }
 
   return (
