@@ -38,7 +38,7 @@ function GiveawayBox({ giveaway }: { giveaway: IGiveaway }) {
 
   return (
     <div className={classes.root}>
-      {isEntered && <BoxBadge>ENTERED</BoxBadge>}
+      {isEntered && !giveaway.winnerId && <BoxBadge>ENTERED</BoxBadge>}
       <div className={classes.top}>
         <Image
           width={268}
@@ -66,11 +66,11 @@ function GiveawayBox({ giveaway }: { giveaway: IGiveaway }) {
           >
             View Giveaway
           </Button>
-          {!giveaway.winnerId && (
-            <p className={classes.end}>
-              ends in {Math.floor((giveaway.timestampEnd - Date.now()) / 1000 / 60 / 60 / 24)} days
-            </p>
-          )}
+          <p className={classes.end}>
+            end{giveaway.winnerId && 'ed'} {!giveaway.winnerId && 'in'}{' '}
+            {Math.floor((giveaway.timestampEnd - Date.now()) / 1000 / 60 / 60 / 24)} days
+            {giveaway.winnerId && ' ago'}
+          </p>
         </div>
       </div>
       <div className={classes.bottom}>

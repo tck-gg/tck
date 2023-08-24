@@ -97,15 +97,19 @@ export async function getGiveaway(id: string) {
 export async function endGiveaway(id: string) {
   const giveaway = await getGiveaway(id);
 
-  // TODO: Make sure this actually works.
-  const winner = giveaway?.entries[0] as any;
+  if (!giveaway) {
+    return;
+  }
+
+  // TODO: Use a real random lol.
+  const winner = giveaway.entries[Math.floor(Math.random() * giveaway.entries.length)].userId;
 
   await prisma.giveaway.update({
     where: {
       id
     },
     data: {
-      winner
+      winnerId: winner
     }
   });
 }
@@ -141,6 +145,11 @@ export async function enterGiveaway(user: User, giveawayId: string): Promise<boo
 
   if (!giveaway) {
     // If the giveaway doesn't exist.
+    return false;
+  }
+
+  if (giveaway.winnerId || Date.now() > giveaway.timestampEnd) {
+    // If the giveaway has already ended.
     return false;
   }
 

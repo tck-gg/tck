@@ -142,9 +142,17 @@ function GiveawayInfobox({ giveaway }: { giveaway: IGiveaway }) {
           fullWidth
           disabled={isEntered || hasMaxEntries}
         >
-          {isEntered ? 'Already Entered' : hasMaxEntries ? 'Max Entries' : 'Enter Giveaway'}
+          {giveaway.winnerId
+            ? 'Giveaway Ended'
+            : isEntered
+            ? 'Already Entered'
+            : hasMaxEntries
+            ? 'Max Entries'
+            : 'Enter Giveaway'}
         </Button>
-        <p className={classes.end}>Ends {new Date(giveaway.timestampEnd).toLocaleString()}</p>
+        <p className={classes.end}>
+          End{giveaway.winnerId ? 'ed' : 's'} {new Date(giveaway.timestampEnd).toLocaleString()}
+        </p>
       </div>
     </div>
   );
