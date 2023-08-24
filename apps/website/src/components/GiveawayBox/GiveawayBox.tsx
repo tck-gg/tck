@@ -67,8 +67,13 @@ function GiveawayBox({ giveaway }: { giveaway: IGiveaway }) {
             View Giveaway
           </Button>
           <p className={classes.end}>
-            end{giveaway.winnerId && 'ed'} {!giveaway.winnerId && 'in'}{' '}
-            {Math.floor((giveaway.timestampEnd - Date.now()) / 1000 / 60 / 60 / 24)} days
+            end{giveaway.winnerId ? 'ed' : 's'} {!giveaway.winnerId && 'in'}{' '}
+            {giveaway.winnerId
+              ? Math.abs(Math.floor((giveaway.timestampEnd - Date.now()) / 1000 / 60 / 60 / 24))
+              : Math.floor((giveaway.timestampEnd - Date.now()) / 1000 / 60 / 60 / 24)}{' '}
+            day
+            {Math.abs(Math.floor((giveaway.timestampEnd - Date.now()) / 1000 / 60 / 60 / 24)) > 1 &&
+              's'}
             {giveaway.winnerId && ' ago'}
           </p>
         </div>
