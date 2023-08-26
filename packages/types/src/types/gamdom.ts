@@ -11,5 +11,5 @@ interface LeaderboardApiData {
 
 export interface LeaderboardApiResponse {
   success: boolean;
-  data: LeaderboardApiData;
+  data: LeaderboardApiData[];
 }

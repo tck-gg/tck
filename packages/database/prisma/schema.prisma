@@ -76,8 +76,8 @@ model BannedIp {
 
 model LeaderboardSpot {
   id            String       @id @default(auto()) @map("_id") @db.ObjectId
-  username      String       @unique
-  amount        Int
+  username      String
+  amount        Float
   leaderboard   Leaderboard? @relation(fields: [leaderboardId], references: [id])
   leaderboardId String?      @db.ObjectId
 }
