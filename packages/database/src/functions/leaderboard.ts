@@ -1,6 +1,7 @@
-import { prisma } from '../client';
+import axios from 'axios';
+import { LeaderboardApiResponse, LeaderboardSpot, LeaderboardType } from 'types';
 
-import { LeaderboardSpot, LeaderboardType } from 'types';
+import { prisma } from '../client';
 
 async function ensureLeaderboard(type: LeaderboardType) {
   // Create the leaderboard if it doesn't exist.
@@ -49,6 +50,13 @@ export async function updateLeaderboard(type: LeaderboardType, data: Leaderboard
 
 export async function getLeaderboard(type: LeaderboardType) {
   await ensureLeaderboard(type);
+
+  if (type === 'gamdom') {
+    const response = await axios.get(
+      `https://gamdom.com/api/affiliates/leaderboard?apikey=${process.env.GAMDOM_API_KEY}&after=2023-08-01`
+    );
+    const data: LeaderboardApiResponse = response.data;
+  }
 
   return await prisma.leaderboard.findUnique({
     where: {
