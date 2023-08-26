@@ -68,7 +68,7 @@ export async function getLeaderboard(type: LeaderboardType) {
       .map((spot) => {
         return {
           username: spot.username,
-          amount: +spot.wager_data[0].total_wager_usd.toFixed(2)
+          amount: Math.round(spot.wager_data[0].total_wager_usd)
         };
       });
   }
