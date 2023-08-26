@@ -58,7 +58,7 @@ function GiveawayInfobox({ giveaway }: { giveaway: IGiveaway }) {
   }, [auth]);
 
   async function handleEnterGiveaway() {
-    if (isEntered || hasMaxEntries || auth.user?.isBanned) {
+    if (!auth.user || isEntered || hasMaxEntries || auth.user.isBanned) {
       return;
     }
     const response = await axios.post(
@@ -136,19 +136,21 @@ function GiveawayInfobox({ giveaway }: { giveaway: IGiveaway }) {
       </div>
       <div className={classes.bottom}>
         <Button
-          variant={isEntered ? 'secondary' : 'gradient'}
+          variant={isEntered || !auth.user || auth.user.isBanned ? 'secondary' : 'gradient'}
           rightIcon={faAngleRight}
           onClick={handleEnterGiveaway}
           fullWidth
-          disabled={isEntered || hasMaxEntries}
+          disabled={isEntered || !auth.user || auth.user.isBanned || hasMaxEntries}
         >
           {giveaway.winnerId
             ? 'Giveaway Ended'
-            : isEntered
-            ? 'Already Entered'
-            : hasMaxEntries
-            ? 'Max Entries'
-            : 'Enter Giveaway'}
+            : auth.user
+            ? isEntered
+              ? 'Already Entered'
+              : hasMaxEntries
+              ? 'Max Entries'
+              : 'Enter Giveaway'
+            : 'Login to Enter'}
         </Button>
         <p className={classes.end}>
           End{giveaway.winnerId ? 'ed' : 's'} {new Date(giveaway.timestampEnd).toLocaleString()}
