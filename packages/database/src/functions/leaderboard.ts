@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosHeaders } from 'axios';
 import { LeaderboardApiResponse, LeaderboardSpot, LeaderboardType } from 'types';
 
 import { prisma } from '../client';
@@ -57,23 +57,44 @@ export async function getLeaderboard(type: LeaderboardType) {
     const response = await axios.get(
       `https://gamdom.com/api/affiliates/leaderboard?apikey=${process.env.GAMDOM_API_KEY}&after=${
         new Date(new Date().getFullYear(), new Date().getMonth(), 1).toISOString().split('T')[0]
-      }`
+      }`,
+      {
+        validateStatus: () => {
+          return true;
+        }
+      }
     );
-    const data: LeaderboardApiResponse = response.data;
-    spots = data.data
-      .sort((a, b) => {
-        return b.wager_data[0].total_wager_usd - a.wager_data[0].total_wager_usd;
-      })
-      .splice(0, 10)
-      .map((spot) => {
-        return {
-          username: spot.username,
-          amount: Math.round(spot.wager_data[0].total_wager_usd)
-        };
-      });
+
+    if (response.status === 200) {
+      const data: LeaderboardApiResponse = response.data;
+      spots = data.data
+        .sort((a, b) => {
+          return b.wager_data[0].total_wager_usd - a.wager_data[0].total_wager_usd;
+        })
+        .splice(0, 10)
+        .map((spot) => {
+          return {
+            username: spot.username,
+            amount: Math.round(spot.wager_data[0].total_wager_usd)
+          };
+        });
+    }
   }
 
-  if (type !== 'stake') {
+  if (type === 'clash') {
+    const response = await axios.get(
+      'https://api.clash.gg/affiliates/detailed-summary/v2/2023-01-01',
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.CLASH_API_KEY}`,
+          'Content-Type': 'application/json'
+        }
+      }
+    );
+    console.log(response.data);
+  }
+
+  if (type !== 'stake' && spots.length > 0) {
     await updateLeaderboard(type, spots);
   }
 
