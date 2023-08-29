@@ -1,4 +1,4 @@
-export type LeaderboardType = 'stake' | 'gamdom' | 'csgoroll' | 'hypedrop' | 'clash';
+export type LeaderboardType = 'stake' | 'gamdom' | 'clash';
 
 export interface LeaderboardSpot {
   username: string;

@@ -81,18 +81,18 @@ export async function getLeaderboard(type: LeaderboardType) {
     }
   }
 
-  if (type === 'clash') {
-    const response = await axios.get(
-      'https://api.clash.gg/affiliates/detailed-summary/v2/2023-01-01',
-      {
-        headers: {
-          Authorization: `Bearer ${process.env.CLASH_API_KEY}`,
-          'Content-Type': 'application/json'
-        }
-      }
-    );
-    console.log(response.data);
-  }
+  // if (type === 'clash') {
+  //   const response = await axios.get(
+  //     'https://api.clash.gg/affiliates/detailed-summary/v2/2023-01-01',
+  //     {
+  //       headers: {
+  //         Authorization: `Bearer ${process.env.CLASH_API_KEY}`,
+  //         'Content-Type': 'application/json'
+  //       }
+  //     }
+  //   );
+  //   console.log(response.data);
+  // }
 
   if (type !== 'stake' && spots.length > 0) {
     await updateLeaderboard(type, spots);
@@ -116,8 +116,6 @@ export async function getAllLeaderboards() {
   return {
     stake: await getLeaderboard('stake'),
     gamdom: await getLeaderboard('gamdom'),
-    csgoroll: await getLeaderboard('csgoroll'),
-    hypedrop: await getLeaderboard('hypedrop'),
     clash: await getLeaderboard('clash')
   };
 }
