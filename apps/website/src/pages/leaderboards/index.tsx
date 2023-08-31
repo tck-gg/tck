@@ -35,7 +35,7 @@ function Leaderboards({
 }: {
   leaderboards: { [key in LeaderboardType]: ILeaderboard };
 }) {
-  const [selectedLeaderboard, setSelectedLeaderboard] = useState<LeaderboardType>('stake');
+  const [selectedLeaderboard, setSelectedLeaderboard] = useState<LeaderboardType>('clash');
 
   return (
     <Layout title='Leaderboards'>
@@ -43,6 +43,19 @@ function Leaderboards({
         <PageHeader title='Leaderboards' />
 
         <div className={classes.affiliates}>
+          <Image
+            src={clashLogo}
+            alt='Clash'
+            width={100}
+            height={60}
+            style={{
+              objectFit: 'contain'
+            }}
+            onClick={() => {
+              setSelectedLeaderboard('clash');
+            }}
+            className={clsx(classes.affiliate, selectedLeaderboard === 'clash' && classes.selected)}
+          />
           <Image
             src={stakeLogo}
             alt='Stake'
@@ -71,19 +84,6 @@ function Leaderboards({
               classes.affiliate,
               selectedLeaderboard === 'gamdom' && classes.selected
             )}
-          />
-          <Image
-            src={clashLogo}
-            alt='Clash'
-            width={100}
-            height={60}
-            style={{
-              objectFit: 'contain'
-            }}
-            onClick={() => {
-              setSelectedLeaderboard('clash');
-            }}
-            className={clsx(classes.affiliate, selectedLeaderboard === 'clash' && classes.selected)}
           />
         </div>
 
