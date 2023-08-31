@@ -34,8 +34,7 @@ export async function getServerSideProps() {
       leaderboards: {
         stake: await getLeaderboard('stake'),
         gamdom: await getLeaderboard('gamdom'),
-        csgoroll: await getLeaderboard('csgoroll'),
-        hypedrop: await getLeaderboard('hypedrop')
+        clash: await getLeaderboard('clash')
       }
     }
   };
@@ -107,8 +106,7 @@ function LeaderboardPage({
         data={[
           { label: 'Stake', value: 'stake' },
           { label: 'Gamdom', value: 'gamdom' },
-          { label: 'CSGORoll', value: 'csgoroll' },
-          { label: 'HypeDrop', value: 'hypedrop' }
+          { label: 'Clash', value: 'clash' }
         ]}
         mb='sm'
       />
