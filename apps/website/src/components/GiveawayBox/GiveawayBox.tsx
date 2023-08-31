@@ -72,8 +72,8 @@ function GiveawayBox({ giveaway }: { giveaway: IGiveaway }) {
               ? Math.abs(Math.floor((giveaway.timestampEnd - Date.now()) / 1000 / 60 / 60 / 24))
               : Math.floor((giveaway.timestampEnd - Date.now()) / 1000 / 60 / 60 / 24)}{' '}
             day
-            {Math.abs(Math.floor((giveaway.timestampEnd - Date.now()) / 1000 / 60 / 60 / 24)) > 1 &&
-              's'}
+            {Math.abs(Math.floor((giveaway.timestampEnd - Date.now()) / 1000 / 60 / 60 / 24)) !==
+              1 && 's'}
             {giveaway.winnerId && ' ago'}
           </p>
         </div>
