@@ -113,7 +113,7 @@ export async function getLeaderboard(type: LeaderboardType) {
       .map((spot) => {
         return {
           username: spot.name,
-          amount: spot.wagered,
+          amount: Math.round(spot.wagered / 100),
           avatar: spot.avatar
         };
       });
