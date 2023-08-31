@@ -103,6 +103,7 @@ function Leaderboards({
               >
                 <LeaderboardPodiumBox
                   leaderboardSpot={leaderboards[selectedLeaderboard].spots[1]}
+                  position={2}
                 />
               </Tilt>
               <Tilt
@@ -118,6 +119,7 @@ function Leaderboards({
               >
                 <LeaderboardPodiumBox
                   leaderboardSpot={leaderboards[selectedLeaderboard].spots[0]}
+                  position={1}
                 />
               </Tilt>
               <Tilt
@@ -133,6 +135,7 @@ function Leaderboards({
               >
                 <LeaderboardPodiumBox
                   leaderboardSpot={leaderboards[selectedLeaderboard].spots[2]}
+                  position={3}
                 />
               </Tilt>
             </div>

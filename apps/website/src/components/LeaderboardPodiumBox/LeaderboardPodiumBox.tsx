@@ -6,23 +6,28 @@ import Jagged from '../svg/Jagged';
 import classes from './LeaderboardPodiumBox.module.scss';
 
 function LeaderboardPodiumBox({
-  leaderboardSpot
+  leaderboardSpot,
+  position
 }: {
   leaderboardSpot: Prisma.LeaderboardSpotCreateInput;
+  position: 1 | 2 | 3;
 }) {
   return (
     <div className={classes.root}>
       <div className={classes.top}>
-        <Avatar
-          style={{
-            border: '4px solid #131320',
-            backgroundColor: 'rgba(38, 38, 58, 0.75)',
-            borderRadius: '50%'
-          }}
-          h={100}
-          w={100}
-          src={leaderboardSpot?.avatar}
-        />
+        <div className={classes.avatarGroup}>
+          <Avatar
+            style={{
+              border: '4px solid #131320',
+              backgroundColor: 'rgba(38, 38, 58, 0.75)',
+              borderRadius: '50%'
+            }}
+            h={100}
+            w={100}
+            src={leaderboardSpot?.avatar}
+          />
+          <p>#{position}</p>
+        </div>
         <p className={classes.name}>{leaderboardSpot.username}</p>
       </div>
       <div className={classes.bottom}>
