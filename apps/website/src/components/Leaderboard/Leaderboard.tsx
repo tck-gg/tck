@@ -1,8 +1,11 @@
 import clsx from 'clsx';
 import { Prisma } from 'database';
 import { Avatar } from '@mantine/core';
+import Image from 'next/image';
 
 import classes from './Leaderboard.module.scss';
+
+import clashGemImage from '@/images/clash-gem.png';
 
 export type ILeaderboard = Prisma.LeaderboardGetPayload<{
   include: { spots: true };
@@ -16,6 +19,7 @@ function Leaderboard({ leaderboard }: { leaderboard: ILeaderboard }) {
           <tr>
             <th>User</th>
             <th>Wagered</th>
+            {leaderboard.type === 'clash' && <th>Prize</th>}
           </tr>
         </thead>
         <tbody>
@@ -37,9 +41,29 @@ function Leaderboard({ leaderboard }: { leaderboard: ILeaderboard }) {
                   </Avatar>
                   <span className={classes.name}>{spot.username}</span>
                 </td>
-                <td className={clsx(classes.shrink, classes.amount)}>
+                <td
+                  className={clsx(
+                    classes.shrink,
+                    classes.amount,
+                    leaderboard.type === 'clash' && classes.rightCol
+                  )}
+                >
                   ${spot.amount.toLocaleString('en-US')}
                 </td>
+                {leaderboard.type === 'clash' && (
+                  <td className={clsx(classes.shrink, classes.amount)}>
+                    <div className={classes.gemsAmount}>
+                      <Image
+                        width={12}
+                        height={12}
+                        src={clashGemImage}
+                        alt='Clash Gem'
+                        className={classes.clashGem}
+                      />
+                      <span>{index > 4 ? 5 : index === 3 ? 40 : index === 4 ? 10 : 0}</span>
+                    </div>
+                  </td>
+                )}
               </tr>
             );
           })}

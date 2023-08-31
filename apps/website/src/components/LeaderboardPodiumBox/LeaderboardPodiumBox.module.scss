@@ -1,5 +1,7 @@
 .root {
-  background: radial-gradient(94.58% 94.58% at 50% 5.42%, rgba(29, 29, 47, 0.2) 0%, rgba(0, 0, 0, 0) 100%, rgba(22, 22, 37, 0) 100%), rgba(22, 22, 37, 0.8);
+  background: radial-gradient(96.74% 96.74% at 50% 3.26%, rgba(52, 52, 84, 0.30) 0%, rgba(0, 0, 0, 0.00) 100%, rgba(22, 22, 37, 0.00) 100%), rgba(22, 22, 37, 0.90);
+  filter: drop-shadow(0px 3px 0px rgba(0, 0, 0, 0.25));
+  backdrop-filter: blur(45px);
 
   min-width: 250px;
   min-height: 250px;
@@ -27,18 +29,37 @@
 
 .bottom {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 10px;
 
   position: relative;
   margin: 1em;
-  padding: 1em;
+}
+
+.infoText {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.reward {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.rewardText {
+  @extend .infoText;
+
+  color: #ffffff;
 }
 
 .wagered {
+  @extend .infoText;
+
   color: #9391C9;
-  font-size: 16px;
-  font-weight: 700;
 }
 
 .background {

@@ -1,16 +1,22 @@
 import { Prisma } from 'database';
 import { Avatar } from '@mantine/core';
+import { LeaderboardRewardType } from 'types';
 
-import Jagged from '../svg/Jagged';
+import JaggedBackgroundItem from '../JaggedBackgroundItem/JaggedBackgroundItem';
 
 import classes from './LeaderboardPodiumBox.module.scss';
 
+import clashGemImage from '@/images/clash-gem.png';
+import Image from 'next/image';
+
 function LeaderboardPodiumBox({
   leaderboardSpot,
-  position
+  position,
+  rewardType
 }: {
   leaderboardSpot: Prisma.LeaderboardSpotCreateInput;
   position: 1 | 2 | 3;
+  rewardType: LeaderboardRewardType;
 }) {
   return (
     <div className={classes.root}>
@@ -31,8 +37,24 @@ function LeaderboardPodiumBox({
         <p className={classes.name}>{leaderboardSpot.username}</p>
       </div>
       <div className={classes.bottom}>
-        <p className={classes.wagered}>${leaderboardSpot.amount.toLocaleString('en-US')} wagered</p>
-        <Jagged className={classes.background} />
+        {rewardType !== 'none' && (
+          <JaggedBackgroundItem fill='#0b0c17' fullWidth>
+            <div className={classes.reward}>
+              {rewardType === 'clash' && (
+                <Image width={16} height={16} src={clashGemImage} alt='Clash Gem' />
+              )}
+              <p className={classes.rewardText}>
+                {rewardType === 'cash' && '$'}
+                {rewardType === 'clash' && [200, 150, 100][position - 1]}
+              </p>
+            </div>
+          </JaggedBackgroundItem>
+        )}
+        <JaggedBackgroundItem fill='#242438' fullWidth>
+          <p className={classes.wagered}>
+            ${leaderboardSpot.amount.toLocaleString('en-US')} wagered
+          </p>
+        </JaggedBackgroundItem>
       </div>
     </div>
   );

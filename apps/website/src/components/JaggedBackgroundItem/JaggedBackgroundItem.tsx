@@ -7,14 +7,16 @@ import classes from './JaggedBackgroundItem.module.scss';
 function JaggedBackgroundItem({
   children,
   fill,
-  withShadow
+  withShadow,
+  fullWidth
 }: {
   children: string | JSX.Element;
   fill: string;
   withShadow?: boolean;
+  fullWidth?: boolean;
 }) {
   return (
-    <div className={classes.root}>
+    <div className={clsx(classes.root, fullWidth && classes.fullWidth)}>
       <div className={classes.content}>{children}</div>
       <Jagged
         className={clsx(classes.background, withShadow && classes.shadow)}
