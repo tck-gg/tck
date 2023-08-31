@@ -103,6 +103,9 @@ export async function getLeaderboard(type: LeaderboardType) {
     const data: ClashLeaderboardEntry[] = response.data;
 
     spots = data
+      .filter((spot) => {
+        return spot.name !== 'TCK';
+      })
       .sort((a, b) => {
         return b.wagered - a.wagered;
       })
