@@ -1,5 +1,10 @@
 import axios, { AxiosHeaders } from 'axios';
-import { LeaderboardApiResponse, LeaderboardSpot, LeaderboardType } from 'types';
+import {
+  ClashLeaderboardEntry,
+  LeaderboardApiResponse,
+  LeaderboardSpot,
+  LeaderboardType
+} from 'types';
 
 import { prisma } from '../client';
 
@@ -81,18 +86,33 @@ export async function getLeaderboard(type: LeaderboardType) {
     }
   }
 
-  // if (type === 'clash') {
-  //   const response = await axios.get(
-  //     'https://api.clash.gg/affiliates/detailed-summary/v2/2023-01-01',
-  //     {
-  //       headers: {
-  //         Authorization: `Bearer ${process.env.CLASH_API_KEY}`,
-  //         'Content-Type': 'application/json'
-  //       }
-  //     }
-  //   );
-  //   console.log(response.data);
-  // }
+  if (type === 'clash') {
+    const response = await axios.get(
+      'https://api.clash.gg/affiliates/detailed-summary/v2/2023-01-01',
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.CLASH_API_KEY}`,
+          'Content-Type': 'application/json'
+        },
+        validateStatus: () => {
+          return true;
+        }
+      }
+    );
+    const data: ClashLeaderboardEntry[] = response.data;
+
+    spots = data
+      .sort((a, b) => {
+        return b.wagered - a.wagered;
+      })
+      .splice(0, 10)
+      .map((spot) => {
+        return {
+          username: spot.name,
+          amount: spot.wagered
+        };
+      });
+  }
 
   if (type !== 'stake' && spots.length > 0) {
     await updateLeaderboard(type, spots);
