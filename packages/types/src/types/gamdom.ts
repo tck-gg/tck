@@ -1,15 +1,15 @@
-interface LeaderboardApiWagerData {
+interface GamdomLeaderboardApiWagerData {
   month: string;
   total_wager_usd: number;
 }
 
-interface LeaderboardApiData {
+interface GamdomLeaderboardApiData {
   user_id: number;
   username: string;
-  wager_data: LeaderboardApiWagerData[];
+  wager_data: GamdomLeaderboardApiWagerData[];
 }
 
-export interface LeaderboardApiResponse {
+export interface GamdomLeaderboardApiResponse {
   success: boolean;
-  data: LeaderboardApiData[];
+  data: GamdomLeaderboardApiData[];
 }

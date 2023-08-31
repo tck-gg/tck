@@ -71,7 +71,8 @@ function LeaderboardPage({
         .map((line) => {
           return {
             username: line[0],
-            amount: parseInt(line[1])
+            amount: parseInt(line[1]),
+            avatar: ''
           };
         })
         .splice(0, 10);

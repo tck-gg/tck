@@ -1,7 +1,7 @@
 import axios, { AxiosHeaders } from 'axios';
 import {
   ClashLeaderboardEntry,
-  LeaderboardApiResponse,
+  GamdomLeaderboardApiResponse,
   LeaderboardSpot,
   LeaderboardType
 } from 'types';
@@ -71,7 +71,7 @@ export async function getLeaderboard(type: LeaderboardType) {
     );
 
     if (response.status === 200) {
-      const data: LeaderboardApiResponse = response.data;
+      const data: GamdomLeaderboardApiResponse = response.data;
       spots = data.data
         .sort((a, b) => {
           return b.wager_data[0].total_wager_usd - a.wager_data[0].total_wager_usd;
@@ -80,7 +80,8 @@ export async function getLeaderboard(type: LeaderboardType) {
         .map((spot) => {
           return {
             username: spot.username,
-            amount: Math.round(spot.wager_data[0].total_wager_usd)
+            amount: Math.round(spot.wager_data[0].total_wager_usd),
+            avatar: ''
           };
         });
     }
@@ -109,7 +110,8 @@ export async function getLeaderboard(type: LeaderboardType) {
       .map((spot) => {
         return {
           username: spot.name,
-          amount: spot.wagered
+          amount: spot.wagered,
+          avatar: spot.avatar
         };
       });
   }

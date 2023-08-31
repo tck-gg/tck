@@ -78,6 +78,7 @@ model LeaderboardSpot {
   id            String       @id @default(auto()) @map("_id") @db.ObjectId
   username      String
   amount        Int
+  avatar        String
   leaderboard   Leaderboard? @relation(fields: [leaderboardId], references: [id])
   leaderboardId String?      @db.ObjectId
 }

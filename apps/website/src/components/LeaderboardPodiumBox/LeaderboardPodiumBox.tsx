@@ -21,6 +21,7 @@ function LeaderboardPodiumBox({
           }}
           h={100}
           w={100}
+          src={leaderboardSpot?.avatar}
         />
         <p className={classes.name}>{leaderboardSpot.username}</p>
       </div>
