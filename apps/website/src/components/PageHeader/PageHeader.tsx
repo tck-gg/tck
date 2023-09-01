@@ -13,6 +13,12 @@ const UNDERLINES: {
       <stop offset='1' stopColor='#9229FF' />
     </>
   ),
+  stake: (
+    <>
+      <stop stopColor='#18A9FF' />
+      <stop offset='1' stopColor='#9229FF' />
+    </>
+  ),
   gamdom: (
     <>
       <stop stop-color='#00FF86' />
