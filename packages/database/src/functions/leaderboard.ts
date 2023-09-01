@@ -1,10 +1,11 @@
-import axios, { AxiosHeaders } from 'axios';
+import axios from 'axios';
 import {
   ClashLeaderboardEntry,
   GamdomLeaderboardApiResponse,
   LeaderboardSpot,
   LeaderboardType
 } from 'types';
+import { format, previousSunday } from 'date-fns';
 
 import { prisma } from '../client';
 
@@ -89,7 +90,10 @@ export async function getLeaderboard(type: LeaderboardType) {
 
   if (type === 'clash') {
     const response = await axios.get(
-      'https://api.clash.gg/affiliates/detailed-summary/v2/2023-01-01',
+      `https://api.clash.gg/affiliates/detailed-summary/v2/${format(
+        previousSunday(new Date()),
+        'yyyy-MM-dd'
+      )}`,
       {
         headers: {
           Authorization: `Bearer ${process.env.CLASH_API_KEY}`,

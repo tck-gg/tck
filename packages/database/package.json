@@ -27,6 +27,7 @@
     "backblaze-b2": "^1.7.0",
     "bcrypt": "^5.1.0",
     "crypto": "^1.0.1",
+    "date-fns": "^2.30.0",
     "discord-bot": "*",
     "types": "*",
     "uuid": "^9.0.0"
