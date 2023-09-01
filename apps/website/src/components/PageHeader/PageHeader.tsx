@@ -24,6 +24,12 @@ const UNDERLINES: {
       <stop stop-color='#FFC701' />
       <stop offset='1' stop-color='#E78A00' />
     </>
+  ),
+  csgobig: (
+    <>
+      <stop stop-color='#E1B56F' />
+      <stop offset='1' stop-color='#94713B' />
+    </>
   )
 };
 

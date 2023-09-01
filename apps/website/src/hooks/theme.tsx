@@ -1,5 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-
 import { useRouter } from 'next/router';
 import { useState, useContext, createContext, useEffect } from 'react';
 import { Theme } from 'types';
@@ -29,10 +27,6 @@ function useProvideTheme() {
 export function ProvidePageHeaderGlow({ children }: { children: any }) {
   const theme = useProvideTheme();
   const router = useRouter();
-
-  useEffect(() => {
-    theme.setTheme('default');
-  }, [router.pathname]);
 
   return <ThemeContext.Provider value={theme}>{children}</ThemeContext.Provider>;
 }

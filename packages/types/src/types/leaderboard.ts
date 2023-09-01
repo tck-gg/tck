@@ -1,4 +1,4 @@
-export type LeaderboardType = 'stake' | 'gamdom' | 'clash';
+export type LeaderboardType = 'stake' | 'gamdom' | 'clash' | 'csgobig';
 
 export type LeaderboardRewardType = 'cash' | 'none' | LeaderboardType;
 export interface LeaderboardSpot {

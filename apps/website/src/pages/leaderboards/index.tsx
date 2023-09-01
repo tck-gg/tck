@@ -44,6 +44,9 @@ function Leaderboards({
   const [selectedLeaderboard, setSelectedLeaderboard] = useState<LeaderboardType>('clash');
 
   useEffect(() => {
+    theme.setTheme('clash');
+  }, []);
+  useEffect(() => {
     if (selectedLeaderboard === 'stake') {
       theme.setTheme('default');
       return;

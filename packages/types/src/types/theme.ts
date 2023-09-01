@@ -1,1 +1,3 @@
-export type Theme = 'default' | 'clash' | 'gamdom';
+import { LeaderboardType } from './leaderboard';
+
+export type Theme = 'default' | LeaderboardType;
