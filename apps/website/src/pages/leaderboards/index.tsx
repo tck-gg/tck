@@ -1,4 +1,6 @@
-import { useState } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+
+import { useEffect, useState } from 'react';
 import { Prisma, getAllLeaderboards } from 'database';
 import { LeaderboardType } from 'types';
 import Tilt from 'react-parallax-tilt';
@@ -10,6 +12,8 @@ import Layout from '@/components/Layout/Layout';
 import PageHeader from '@/components/PageHeader/PageHeader';
 import Leaderboard from '@/components/Leaderboard/Leaderboard';
 import LeaderboardPodiumBox from '@/components/LeaderboardPodiumBox/LeaderboardPodiumBox';
+
+import { useTheme } from '@/hooks/theme';
 
 import classes from './leaderboards.module.scss';
 
@@ -35,7 +39,17 @@ function Leaderboards({
 }: {
   leaderboards: { [key in LeaderboardType]: ILeaderboard };
 }) {
+  const theme = useTheme();
+
   const [selectedLeaderboard, setSelectedLeaderboard] = useState<LeaderboardType>('clash');
+
+  useEffect(() => {
+    if (selectedLeaderboard === 'stake') {
+      theme.setTheme('default');
+      return;
+    }
+    theme.setTheme(selectedLeaderboard);
+  }, [selectedLeaderboard]);
 
   return (
     <Layout title='Leaderboards'>

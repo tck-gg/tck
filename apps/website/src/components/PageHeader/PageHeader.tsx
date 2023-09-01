@@ -1,6 +1,35 @@
+import { Theme } from 'types';
+
+import { useTheme } from '@/hooks/theme';
+
 import classes from './PageHeader.module.scss';
 
+const UNDERLINES: {
+  [key in Theme]: React.ReactNode;
+} = {
+  default: (
+    <>
+      <stop stopColor='#18A9FF' />
+      <stop offset='1' stopColor='#9229FF' />
+    </>
+  ),
+  gamdom: (
+    <>
+      <stop stop-color='#00FF86' />
+      <stop offset='1' stop-color='#009E53' />
+    </>
+  ),
+  clash: (
+    <>
+      <stop stop-color='#FFC701' />
+      <stop offset='1' stop-color='#E78A00' />
+    </>
+  )
+};
+
 function PageHeader({ title }: { title: string }) {
+  const theme = useTheme();
+
   return (
     <div className={classes.root}>
       <div className={classes.wrapper}>
@@ -25,8 +54,7 @@ function PageHeader({ title }: { title: string }) {
               y2='6.05529'
               gradientUnits='userSpaceOnUse'
             >
-              <stop stopColor='#18A9FF' />
-              <stop offset='1' stopColor='#9229FF' />
+              {UNDERLINES[theme.theme]}
             </linearGradient>
           </defs>
         </svg>

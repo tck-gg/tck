@@ -14,6 +14,7 @@ import { ProvideRewardsContextMenu } from '@/hooks/rewards-context-menu';
 import { ProvideAgeVerification } from '@/hooks/age-verification';
 import AgeVerification from '@/components/AgeVerification/AgeVerification';
 import { ProvideAgeVerificationCallback } from '@/hooks/age-verification-callback';
+import { ProvidePageHeaderGlow } from '@/hooks/theme';
 
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import '../styles/globals.scss';
@@ -40,19 +41,21 @@ function App({ Component, pageProps }: AppProps) {
           <ProvideRewardsContextMenu>
             <ProvideAgeVerificationCallback>
               <ProvideAgeVerification>
-                <ReAuth>
-                  <MantineProvider
-                    theme={{
-                      colorScheme: 'dark',
-                      fontFamily: 'Archivo, sans-serif'
-                    }}
-                  >
-                    <Notifications />
-                    <AgeVerification />
-                    <BanBanner />
-                    <Component {...pageProps} />
-                  </MantineProvider>
-                </ReAuth>
+                <ProvidePageHeaderGlow>
+                  <ReAuth>
+                    <MantineProvider
+                      theme={{
+                        colorScheme: 'dark',
+                        fontFamily: 'Archivo, sans-serif'
+                      }}
+                    >
+                      <Notifications />
+                      <AgeVerification />
+                      <BanBanner />
+                      <Component {...pageProps} />
+                    </MantineProvider>
+                  </ReAuth>
+                </ProvidePageHeaderGlow>
               </ProvideAgeVerification>
             </ProvideAgeVerificationCallback>
           </ProvideRewardsContextMenu>
