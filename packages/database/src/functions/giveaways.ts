@@ -93,7 +93,11 @@ export async function getGiveaway(id: string) {
       id
     },
     include: {
-      entries: true
+      entries: {
+        include: {
+          user: true
+        }
+      }
     }
   });
 }

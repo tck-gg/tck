@@ -1,6 +1,6 @@
 .root {
-  width: 50px;
-  height: 50px;
+  width: 48px;
+  height: 48px;
 
   display: flex;
   align-items: center;
@@ -16,13 +16,24 @@
   border-image: linear-gradient(315deg, rgba(152, 158, 174, 0.25) 0%, rgba(25, 25, 39, 0.25) 100%);
   border-image-slice: 1;
   border-collapse: separate;
-  -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
   mask-composite: exclude;
 }
 
+
+.entryDisplay {
+  font-weight: 700;
+}
+
+.display {
+  @extend .entryDisplay;
+  
+  color: #ffffff;
+  font-size: 16px;
+}
+
 .position {
+  @extend .entryDisplay;
+  
   color: #989EAE;
   font-size: 12px;
-  font-weight: 700;
 }

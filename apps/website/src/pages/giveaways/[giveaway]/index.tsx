@@ -2,17 +2,17 @@
 
 import { useEffect, useState } from 'react';
 import { getGiveaway } from 'database';
-import { IGiveaway } from 'types';
+import { IGiveaway, IGiveawayEntry } from 'types';
+import { faTicket } from '@fortawesome/free-solid-svg-icons';
 
 import Layout from '@/components/Layout/Layout';
 import GiveawayInfobox from '@/components/GiveawayInfobox/GiveawayInfobox';
 import GiveawayEntry from '@/components/GiveawayEntry/GiveawayEntry';
+import IconBubble from '@/components/IconBubble/IconBubble';
 
 import { useAuth } from '@/hooks/auth';
 
 import classes from './giveaway.module.scss';
-import IconBubble from '@/components/IconBubble/IconBubble';
-import { faTicket } from '@fortawesome/free-solid-svg-icons';
 
 export async function getServerSideProps(ctx: any) {
   const { giveaway } = ctx.params;
@@ -30,7 +30,7 @@ function GiveawayPage({ giveaway }: { giveaway: IGiveaway }) {
 
   useEffect(() => {
     setMyEntry(
-      giveaway.entries.filter((entry) => {
+      giveaway.entries.filter((entry: IGiveawayEntry) => {
         return entry.userId === auth.user?.id;
       })[0]?.slot + 1 || -1
     );
@@ -53,18 +53,23 @@ function GiveawayPage({ giveaway }: { giveaway: IGiveaway }) {
         )}
       </div>
       <div className={classes.right}>
-        {JSON.stringify(giveaway.entries)}
-        <GiveawayEntry position={1} />
-        <GiveawayEntry position={2} />
-        <GiveawayEntry position={1} />
-        <GiveawayEntry position={2} />
-        <GiveawayEntry position={1} />
-        <GiveawayEntry position={2} />
-        <GiveawayEntry position={1} />
-        <GiveawayEntry position={2} />
-        <GiveawayEntry position={1} />
-        <GiveawayEntry position={2} />
-        <GiveawayEntry position={3} />
+        {Array(giveaway.maxEntries)
+          .fill(0)
+          .map((entry, index) => {
+            return (
+              <GiveawayEntry
+                position={index + 1}
+                display={giveaway.entries
+                  .filter((giveawayEntry: IGiveawayEntry) => {
+                    return giveawayEntry.slot === index;
+                  })[0]
+                  ?.user.username.toUpperCase()
+                  .split('')
+                  .splice(0, 1)}
+                key={index}
+              />
+            );
+          })}
       </div>
     </Layout>
   );

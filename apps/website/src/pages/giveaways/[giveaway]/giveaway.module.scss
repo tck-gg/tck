@@ -25,7 +25,11 @@
   gap: 10px;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
+
+  overflow-y: scroll;
+
+  max-height: 900px;
 }
 
 .mySlot {
