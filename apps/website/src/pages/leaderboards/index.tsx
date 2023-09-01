@@ -121,63 +121,75 @@ function Leaderboards({
           />
         </div>
 
+        {leaderboards[selectedLeaderboard].spots.length === 0 && (
+          <p>There are no published leaderboards for this site.</p>
+        )}
+
         {leaderboards[selectedLeaderboard].spots.length > 0 && (
           <>
             <div className={classes.tiltGroup}>
-              <Tilt
-                tiltAngleXInitial={5}
-                tiltAngleYInitial={-7}
-                glareEnable
-                glareMaxOpacity={0.08}
-                glarePosition='bottom'
-                className={classes.tiltItem}
-                style={{
-                  top: 50
-                }}
-              >
-                <LeaderboardPodiumBox
-                  leaderboardSpot={leaderboards[selectedLeaderboard].spots[1]}
-                  position={2}
-                  rewardType={selectedLeaderboard === 'clash' ? 'clash' : 'none'}
-                />
-              </Tilt>
-              <Tilt
-                tiltAngleXInitial={5}
-                tiltAngleYInitial={9}
-                glareEnable
-                glareMaxOpacity={0.08}
-                glarePosition='bottom'
-                className={classes.tiltItem}
-                style={{
-                  top: 0
-                }}
-              >
-                <LeaderboardPodiumBox
-                  leaderboardSpot={leaderboards[selectedLeaderboard].spots[0]}
-                  position={1}
-                  rewardType={selectedLeaderboard === 'clash' ? 'clash' : 'none'}
-                />
-              </Tilt>
-              <Tilt
-                tiltAngleXInitial={9}
-                tiltAngleYInitial={9}
-                glareEnable
-                glareMaxOpacity={0.08}
-                glarePosition='bottom'
-                className={classes.tiltItem}
-                style={{
-                  top: 75
-                }}
-              >
-                <LeaderboardPodiumBox
-                  leaderboardSpot={leaderboards[selectedLeaderboard].spots[2]}
-                  position={3}
-                  rewardType={selectedLeaderboard === 'clash' ? 'clash' : 'none'}
-                />
-              </Tilt>
+              {leaderboards[selectedLeaderboard].spots[1] && (
+                <Tilt
+                  tiltAngleXInitial={5}
+                  tiltAngleYInitial={-7}
+                  glareEnable
+                  glareMaxOpacity={0.08}
+                  glarePosition='bottom'
+                  className={classes.tiltItem}
+                  style={{
+                    top: 50
+                  }}
+                >
+                  <LeaderboardPodiumBox
+                    leaderboardSpot={leaderboards[selectedLeaderboard].spots[1]}
+                    position={2}
+                    rewardType={selectedLeaderboard === 'clash' ? 'clash' : 'none'}
+                  />
+                </Tilt>
+              )}
+              {leaderboards[selectedLeaderboard].spots[0] && (
+                <Tilt
+                  tiltAngleXInitial={5}
+                  tiltAngleYInitial={9}
+                  glareEnable
+                  glareMaxOpacity={0.08}
+                  glarePosition='bottom'
+                  className={classes.tiltItem}
+                  style={{
+                    top: 0
+                  }}
+                >
+                  <LeaderboardPodiumBox
+                    leaderboardSpot={leaderboards[selectedLeaderboard].spots[0]}
+                    position={1}
+                    rewardType={selectedLeaderboard === 'clash' ? 'clash' : 'none'}
+                  />
+                </Tilt>
+              )}
+              {leaderboards[selectedLeaderboard].spots[2] && (
+                <Tilt
+                  tiltAngleXInitial={9}
+                  tiltAngleYInitial={9}
+                  glareEnable
+                  glareMaxOpacity={0.08}
+                  glarePosition='bottom'
+                  className={classes.tiltItem}
+                  style={{
+                    top: 75
+                  }}
+                >
+                  <LeaderboardPodiumBox
+                    leaderboardSpot={leaderboards[selectedLeaderboard].spots[2]}
+                    position={3}
+                    rewardType={selectedLeaderboard === 'clash' ? 'clash' : 'none'}
+                  />
+                </Tilt>
+              )}
             </div>
 
-            <Leaderboard leaderboard={leaderboards[selectedLeaderboard]} />
+            {leaderboards[selectedLeaderboard].spots.length > 3 && (
+              <Leaderboard leaderboard={leaderboards[selectedLeaderboard]} />
+            )}
           </>
         )}
       </div>
