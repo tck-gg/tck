@@ -1,4 +1,5 @@
 import { prisma, User } from '../client';
+import { socket } from '../socket';
 import { deleteImage } from './backblaze';
 
 export async function getAllGiveaways() {
@@ -73,6 +74,9 @@ export async function deleteGiveaway(id: string): Promise<boolean> {
     return false;
   }
 
+  // Send Discord notification.
+  socket.emit('deleteGiveaway', giveaway);
+
   // Delete the database entry.
   await prisma.giveaway.delete({
     where: {
@@ -96,7 +100,6 @@ export async function getGiveaway(id: string) {
 
 export async function endGiveaway(id: string) {
   const giveaway = await getGiveaway(id);
-
   if (!giveaway) {
     return;
   }
@@ -104,6 +107,7 @@ export async function endGiveaway(id: string) {
   // TODO: Use a real random lol.
   const winner = giveaway.entries[Math.floor(Math.random() * giveaway.entries.length)].userId;
 
+  // Update database.
   await prisma.giveaway.update({
     where: {
       id
@@ -133,6 +137,9 @@ export async function createGiveaway(
       image
     }
   });
+
+  // Send Discord notification.
+  socket.emit('newGiveaway', giveaway);
 
   const timeout = timestampEnd - Date.now();
   setTimeout(async () => {
