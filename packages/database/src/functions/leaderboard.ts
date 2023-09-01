@@ -141,6 +141,7 @@ export async function getAllLeaderboards() {
   return {
     stake: await getLeaderboard('stake'),
     gamdom: await getLeaderboard('gamdom'),
-    clash: await getLeaderboard('clash')
+    clash: await getLeaderboard('clash'),
+    csgobig: await getLeaderboard('csgobig')
   };
 }

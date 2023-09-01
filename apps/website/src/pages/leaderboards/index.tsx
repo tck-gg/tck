@@ -20,6 +20,7 @@ import classes from './leaderboards.module.scss';
 import gamdomLogo from '../../images/affiliate/gamdom.png';
 import stakeLogo from '../../images/affiliate/stake.png';
 import clashLogo from '../../images/affiliate/clash.png';
+import csgobigLogo from '../../images/affiliate/csgobig.png';
 
 export type ILeaderboard = Prisma.LeaderboardGetPayload<{
   include: { spots: true };
@@ -72,6 +73,22 @@ function Leaderboards({
               setSelectedLeaderboard('clash');
             }}
             className={clsx(classes.affiliate, selectedLeaderboard === 'clash' && classes.selected)}
+          />
+          <Image
+            src={csgobigLogo}
+            alt='CSGOBIG'
+            width={100}
+            height={60}
+            style={{
+              objectFit: 'contain'
+            }}
+            onClick={() => {
+              setSelectedLeaderboard('csgobig');
+            }}
+            className={clsx(
+              classes.affiliate,
+              selectedLeaderboard === 'csgobig' && classes.selected
+            )}
           />
           <Image
             src={stakeLogo}
