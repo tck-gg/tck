@@ -60,7 +60,7 @@ function Leaderboard({ leaderboard }: { leaderboard: ILeaderboard }) {
                         alt='Clash Gem'
                         className={classes.clashGem}
                       />
-                      <span>{index > 4 ? 5 : index === 3 ? 40 : index === 4 ? 10 : 0}</span>
+                      <span>{[200, 150, 100, 40, 10, 5, 5, 5, 5, 5][index]}</span>
                     </div>
                   </td>
                 )}
