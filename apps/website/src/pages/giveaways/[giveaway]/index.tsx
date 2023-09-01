@@ -59,13 +59,15 @@ function GiveawayPage({ giveaway }: { giveaway: IGiveaway }) {
             return (
               <GiveawayEntry
                 position={index + 1}
-                display={giveaway.entries
-                  .filter((giveawayEntry: IGiveawayEntry) => {
-                    return giveawayEntry.slot === index;
-                  })[0]
-                  ?.user.username.toUpperCase()
-                  .split('')
-                  .splice(0, 1)}
+                display={
+                  giveaway.entries
+                    .filter((giveawayEntry: IGiveawayEntry) => {
+                      return giveawayEntry.slot === index;
+                    })[0]
+                    ?.user.username.toUpperCase()
+                    .split('')
+                    .splice(0, 1)[0]
+                }
                 key={index}
               />
             );

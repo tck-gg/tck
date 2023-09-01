@@ -10,7 +10,11 @@ export async function getAllGiveaways() {
       }
     },
     include: {
-      entries: true
+      entries: {
+        include: {
+          user: true
+        }
+      }
     },
     orderBy: {
       timestampEnd: 'asc'
@@ -105,6 +109,27 @@ export async function getGiveaway(id: string) {
 export async function endGiveaway(id: string) {
   const giveaway = await getGiveaway(id);
   if (!giveaway) {
+    return;
+  }
+
+  // Didn't have enough entries. Extend by one day.
+  // TODO: Test this.
+  if (giveaway.entries.length === 0) {
+    const newTimestampEnd = giveaway.timestampEnd + 86400000;
+
+    await prisma.giveaway.update({
+      where: {
+        id: giveaway.id
+      },
+      data: {
+        timestampEnd: newTimestampEnd
+      }
+    });
+
+    setTimeout(async () => {
+      await endGiveaway(giveaway.id);
+    }, newTimestampEnd);
+
     return;
   }
 
