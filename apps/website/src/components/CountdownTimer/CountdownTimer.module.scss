@@ -1,0 +1,29 @@
+.root {
+  div {
+    padding: 0 !important;
+  }
+  span {
+    color: #9391C9;
+    font-size: 22px;
+    font-weight: 700;
+  }
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.displayGroup {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+
+  p {
+    color: #9391C9;
+    font-size: 12px;
+    font-weight: 700;
+  }
+}

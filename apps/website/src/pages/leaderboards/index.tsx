@@ -6,6 +6,7 @@ import { LeaderboardType } from 'types';
 import Tilt from 'react-parallax-tilt';
 import Image from 'next/image';
 import clsx from 'clsx';
+import { nextSunday } from 'date-fns';
 
 import Layout from '@/components/Layout/Layout';
 
@@ -14,6 +15,7 @@ import Leaderboard from '@/components/Leaderboard/Leaderboard';
 import LeaderboardPodiumBox from '@/components/LeaderboardPodiumBox/LeaderboardPodiumBox';
 
 import { useTheme } from '@/hooks/theme';
+import { useCountdown } from '@/hooks/countdown';
 
 import classes from './leaderboards.module.scss';
 
@@ -21,6 +23,7 @@ import gamdomLogo from '../../images/affiliate/gamdom.png';
 import stakeLogo from '../../images/affiliate/stake.png';
 import clashLogo from '../../images/affiliate/clash.png';
 import csgobigLogo from '../../images/affiliate/csgobig.png';
+import CountdownTimer from '@/components/CountdownTimer/CountdownTimer';
 
 export type ILeaderboard = Prisma.LeaderboardGetPayload<{
   include: { spots: true };
@@ -40,8 +43,17 @@ function Leaderboards({
 }: {
   leaderboards: { [key in LeaderboardType]: ILeaderboard };
 }) {
+  const now = new Date();
+  const sunday = nextSunday(now);
+
   const theme = useTheme();
 
+  const [weeklyDays, weeklyHours, weeklyMinutes] = useCountdown(
+    new Date(sunday.getFullYear(), sunday.getMonth(), sunday.getDate())
+  );
+  const [monthlyDays, monthlyHours, monthlyMinutes] = useCountdown(
+    new Date(now.getFullYear(), now.getMonth() + 1, 1)
+  );
   const [selectedLeaderboard, setSelectedLeaderboard] = useState<LeaderboardType>('clash');
 
   useEffect(() => {
@@ -127,7 +139,7 @@ function Leaderboards({
 
         {leaderboards[selectedLeaderboard].spots.length > 0 && (
           <>
-            <div className={classes.tiltGroup}>
+            <div className={clsx(classes.tiltGroup, classes.hideOnMobile)}>
               {leaderboards[selectedLeaderboard].spots[1] && (
                 <Tilt
                   tiltAngleXInitial={5}
@@ -184,6 +196,15 @@ function Leaderboards({
                     rewardType={selectedLeaderboard === 'clash' ? 'clash' : 'none'}
                   />
                 </Tilt>
+              )}
+            </div>
+
+            <div className={clsx(classes.timerWrapper, classes.hideOnMobile)}>
+              {(selectedLeaderboard === 'clash' || selectedLeaderboard === 'csgobig') && (
+                <CountdownTimer days={weeklyDays} hours={weeklyHours} minutes={weeklyMinutes} />
+              )}
+              {(selectedLeaderboard === 'stake' || selectedLeaderboard === 'gamdom') && (
+                <CountdownTimer days={monthlyDays} hours={monthlyHours} minutes={monthlyMinutes} />
               )}
             </div>
 
