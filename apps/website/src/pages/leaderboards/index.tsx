@@ -6,7 +6,7 @@ import { LeaderboardType } from 'types';
 import Tilt from 'react-parallax-tilt';
 import Image from 'next/image';
 import clsx from 'clsx';
-import { nextSunday } from 'date-fns';
+import { nextSaturday, nextSunday } from 'date-fns';
 
 import Layout from '@/components/Layout/Layout';
 
@@ -45,11 +45,15 @@ function Leaderboards({
 }) {
   const now = new Date();
   const sunday = nextSunday(now);
+  const saturday = nextSaturday(now);
 
   const theme = useTheme();
 
   const [weeklyDays, weeklyHours, weeklyMinutes] = useCountdown(
     new Date(sunday.getFullYear(), sunday.getMonth(), sunday.getDate())
+  );
+  const [clashDays, clashHours, clashMinutes] = useCountdown(
+    new Date(saturday.getFullYear(), saturday.getMonth(), saturday.getDate())
   );
   const [monthlyDays, monthlyHours, monthlyMinutes] = useCountdown(
     new Date(now.getFullYear(), now.getMonth() + 1, 1)
@@ -200,7 +204,10 @@ function Leaderboards({
             </div>
 
             <div className={clsx(classes.timerWrapper, classes.hideOnMobile)}>
-              {(selectedLeaderboard === 'clash' || selectedLeaderboard === 'csgobig') && (
+              {selectedLeaderboard === 'clash' && (
+                <CountdownTimer days={clashDays} hours={clashHours} minutes={clashMinutes} />
+              )}
+              {selectedLeaderboard === 'csgobig' && (
                 <CountdownTimer days={weeklyDays} hours={weeklyHours} minutes={weeklyMinutes} />
               )}
               {(selectedLeaderboard === 'stake' || selectedLeaderboard === 'gamdom') && (

@@ -5,7 +5,7 @@ import {
   LeaderboardSpot,
   LeaderboardType
 } from 'types';
-import { format, previousSunday } from 'date-fns';
+import { format, previousSaturday, previousSunday } from 'date-fns';
 
 import { prisma } from '../client';
 
@@ -91,7 +91,7 @@ export async function getLeaderboard(type: LeaderboardType) {
   if (type === 'clash') {
     const response = await axios.get(
       `https://api.clash.gg/affiliates/detailed-summary/v2/${format(
-        previousSunday(new Date()),
+        previousSaturday(new Date(Date.now() + 86400000)),
         'yyyy-MM-dd'
       )}`,
       {
