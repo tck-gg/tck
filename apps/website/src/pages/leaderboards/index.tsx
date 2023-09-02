@@ -34,7 +34,7 @@ export async function getStaticProps() {
     props: {
       leaderboards: await getAllLeaderboards()
     },
-    revalidate: 86400
+    revalidate: 3600
   };
 }
 
