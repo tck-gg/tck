@@ -37,7 +37,9 @@ function Leaderboard({ leaderboard }: { leaderboard: ILeaderboard }) {
                       marginRight: '10px'
                     }}
                   >
-                    {spot.username[0]}
+                    {/[a-zA-Z0-9]/.test(spot.username.split('')[0])
+                      ? spot.username.split('')[0]
+                      : '?'}
                   </Avatar>
                   <span className={classes.name}>{spot.username}</span>
                 </td>
