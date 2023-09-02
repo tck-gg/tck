@@ -73,7 +73,7 @@ function Header() {
           <HeaderProfileGroup />
         ) : (
           <div className={classes.buttonGroup}>
-            <Button
+            {/* <Button
               variant='secondary'
               borderRadius={5}
               onClick={() => {
@@ -90,7 +90,7 @@ function Header() {
               }}
             >
               Log in
-            </Button>
+            </Button> */}
           </div>
         )}
       </div>

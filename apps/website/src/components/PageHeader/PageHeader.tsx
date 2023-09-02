@@ -21,20 +21,20 @@ const UNDERLINES: {
   ),
   gamdom: (
     <>
-      <stop stop-color='#00FF86' />
-      <stop offset='1' stop-color='#009E53' />
+      <stop stopColor='#00FF86' />
+      <stop offset='1' stopColor='#009E53' />
     </>
   ),
   clash: (
     <>
-      <stop stop-color='#FFC701' />
-      <stop offset='1' stop-color='#E78A00' />
+      <stop stopColor='#FFC701' />
+      <stop offset='1' stopColor='#E78A00' />
     </>
   ),
   csgobig: (
     <>
-      <stop stop-color='#E1B56F' />
-      <stop offset='1' stop-color='#94713B' />
+      <stop stopColor='#E1B56F' />
+      <stop offset='1' stopColor='#94713B' />
     </>
   )
 };
