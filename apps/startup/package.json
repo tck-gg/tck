@@ -4,10 +4,12 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-		"start": "node dist/index.js",
-		"startup": "npm run build && npm run start"
+    "start": "node dist/index.js",
+    "startup": "npm run build && npm run start"
   },
   "dependencies": {
+    "@sentry/node": "^7.66.0",
+    "@sentry/profiling-node": "^1.2.0",
     "database": "*",
     "types": "*"
   },

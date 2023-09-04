@@ -1,3 +1,5 @@
+const { withSentryConfig } = require('@sentry/nextjs');
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
@@ -15,4 +17,11 @@ const nextConfig = {
   }
 };
 
-module.exports = nextConfig;
+const sentryWebpackPluginOptions = {
+  org: 'tckgg',
+  project: 'tck-website',
+  authToken: process.env.SENTRY_AUTH_TOKEN,
+  silent: true
+};
+
+module.exports = withSentryConfig(nextConfig, sentryWebpackPluginOptions);

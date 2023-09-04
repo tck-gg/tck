@@ -17,6 +17,7 @@
     "@mantine/hooks": "^6.0.13",
     "@mantine/next": "^6.0.13",
     "@mantine/notifications": "^6.0.13",
+    "@sentry/nextjs": "^7.66.0",
     "@tabler/icons-react": "^2.22.0",
     "axios": "^1.4.0",
     "database": "*",

@@ -25,6 +25,7 @@
     "@mantine/next": "^6.0.13",
     "@mantine/notifications": "^6.0.19",
     "@reverse/array": "^1.7.3",
+    "@sentry/nextjs": "^7.66.0",
     "@tabler/icons-react": "^2.32.0",
     "@uidotdev/usehooks": "^2.0.1",
     "axios": "^1.4.0",
