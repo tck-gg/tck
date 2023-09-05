@@ -4,7 +4,7 @@
   "globalEnv": ["NODE_ENV"],
   "pipeline": {
     "dev": {
-      "dependsOn": ["^db:generate", "startup"],
+      "dependsOn": ["^db:generate", "startup:dev"],
       "cache": false,
       "persistent": true
     },
@@ -31,7 +31,12 @@
     "start": {
       "outputs": []
     },
-    "startup": {
+    "startup:dev": {
+      "outputs": [
+        "dist/**"
+      ]
+    },
+    "startup:prod": {
       "outputs": [
         "dist/**"
       ]

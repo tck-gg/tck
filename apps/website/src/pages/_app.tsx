@@ -21,14 +21,13 @@ import '../styles/globals.scss';
 
 function App({ Component, pageProps }: AppProps) {
   useEffect(() => {
-    // Google Analytics
-    // if (process.env.NODE_ENV === 'production') {
-    //   ReactGA.initialize('G-PPF6YEH1XJ');
-    //   ReactGA.send({
-    //     hitType: 'pageview',
-    //     page: window.location.pathname
-    //   });
-    // }
+    if (process.env.NODE_ENV === 'production') {
+      ReactGA.initialize('G-Q3TE3P2QCN');
+      ReactGA.send({
+        hitType: 'pageview',
+        page: window.location.pathname
+      });
+    }
   }, []);
 
   return (

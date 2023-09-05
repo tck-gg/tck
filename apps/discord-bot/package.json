@@ -8,8 +8,9 @@
   ],
   "scripts": {
     "build": "tsc",
-    "start": "node dist/index.js",
-    "dev": "npm run build && npm run start"
+    "start": "cross-env NODE_ENV=production node dist/index.js",
+    "start:dev": "cross-env NODE_ENV=development node dist/index.js",
+    "dev": "npm run build && npm run start:dev"
   },
   "dependencies": {
     "@sapphire/decorators": "^6.0.2",
@@ -26,6 +27,7 @@
     "@sapphire/cli": "^1.6.1",
     "@sapphire/prettier-config": "^2.0.0",
     "@sapphire/ts-config": "^4.0.1",
+    "cross-env": "^7.0.3",
     "eslint-config-custom": "*",
     "types": "*",
     "typescript": "^5.1.6"

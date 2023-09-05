@@ -16,7 +16,7 @@
     "db:migrate:deploy": "prisma migrate deploy",
     "db:migrate:dev": "prisma migrate dev",
     "db:push": "prisma db push",
-    "dev": "tsup --watch",
+    "dev": "cross-env NODE_ENV=development tsup --watch",
     "lint": "eslint \"src/**/*.ts\"",
     "prebuild": "npm run db:generate",
     "predev": "npm run db:generate",
@@ -37,6 +37,7 @@
   },
   "devDependencies": {
     "@types/backblaze-b2": "^1.5.2",
+    "cross-env": "^7.0.3",
     "eslint-config-custom": "*",
     "prisma": "^4.15.0",
     "rimraf": "^3.0.2",
