@@ -3,7 +3,9 @@
 import { useEffect, useState } from 'react';
 import { getGiveaway } from 'database';
 import { IGiveaway, IGiveawayEntry } from 'types';
-import { faTicket } from '@fortawesome/free-solid-svg-icons';
+import { faChevronLeft, faTicket } from '@fortawesome/free-solid-svg-icons';
+import clsx from 'clsx';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import Layout from '@/components/Layout/Layout';
 import GiveawayInfobox from '@/components/GiveawayInfobox/GiveawayInfobox';
@@ -27,6 +29,7 @@ export async function getServerSideProps(ctx: any) {
 function GiveawayPage({ giveaway }: { giveaway: IGiveaway }) {
   const auth = useAuth();
   const [myEntry, setMyEntry] = useState(-1);
+  const [winnerOverlayOpen, setWinnerOverlayOpen] = useState(!!giveaway.winnerId || false);
 
   useEffect(() => {
     setMyEntry(
@@ -52,7 +55,23 @@ function GiveawayPage({ giveaway }: { giveaway: IGiveaway }) {
           </div>
         )}
       </div>
-      <div className={classes.right}>
+      <div className={clsx(classes.right, winnerOverlayOpen && classes.withOverlay)}>
+        {winnerOverlayOpen && (
+          <div className={classes.winnerOverlay}>
+            <div>
+              <p>Winner</p>
+            </div>
+            <div
+              className={classes.viewAll}
+              onClick={() => {
+                setWinnerOverlayOpen(false);
+              }}
+            >
+              <FontAwesomeIcon icon={faChevronLeft} />
+              <p className={classes.viewAllText}>View All Entries</p>
+            </div>
+          </div>
+        )}
         {Array(giveaway.maxEntries)
           .fill(0)
           .map((entry, index) => {
