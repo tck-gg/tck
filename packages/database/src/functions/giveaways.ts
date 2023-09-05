@@ -128,7 +128,7 @@ export async function endGiveaway(id: string) {
 
     setTimeout(async () => {
       await endGiveaway(giveaway.id);
-    }, newTimestampEnd);
+    }, 86400000);
 
     return;
   }
