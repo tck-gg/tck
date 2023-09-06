@@ -14,7 +14,8 @@ export async function getAllGiveaways() {
         include: {
           user: true
         }
-      }
+      },
+      winner: true
     },
     orderBy: {
       timestampEnd: 'asc'
