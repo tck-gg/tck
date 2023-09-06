@@ -87,10 +87,20 @@
   gap: 16px;
 }
 
+.winnerAvatar > div {
+  font-size: 36px;
+}
+
 .winnerName {
   color: #ffffff;
   font-size: 22px;
   font-weight: 800;
+}
+
+.winnerTicket {
+  color: #9391C9;
+  font-size: 18px;
+  font-weight: 700;
 }
 
 .viewAll {
