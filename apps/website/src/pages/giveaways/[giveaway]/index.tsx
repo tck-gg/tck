@@ -55,11 +55,18 @@ function GiveawayPage({ giveaway }: { giveaway: IGiveaway }) {
           </div>
         )}
       </div>
-      <div className={clsx(classes.right, winnerOverlayOpen && classes.withOverlay)}>
-        {winnerOverlayOpen && (
+      <div
+        className={clsx(classes.right, winnerOverlayOpen && giveaway.winner && classes.withOverlay)}
+      >
+        {winnerOverlayOpen && giveaway.winner && (
           <div className={classes.winnerOverlay}>
-            <div>
-              <p>Winner</p>
+            <div className={classes.giveawayWinner}>
+              <p className={classes.winnerName}>{giveaway.winner.displayName}</p>
+              <p>
+                {giveaway.entries.filter((giveawayEntry) => {
+                  return giveawayEntry.userId === giveaway.winnerId;
+                })[0].slot + 1}
+              </p>
             </div>
             <div
               className={classes.viewAll}

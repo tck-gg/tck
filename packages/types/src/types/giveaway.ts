@@ -7,6 +7,7 @@ export type IGiveaway = Prisma.GiveawayGetPayload<{
         user: true;
       };
     };
+    winner: true;
   };
 }>;
 

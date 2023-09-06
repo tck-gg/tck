@@ -101,7 +101,8 @@ export async function getGiveaway(id: string) {
         include: {
           user: true
         }
-      }
+      },
+      winner: true
     }
   });
 }
