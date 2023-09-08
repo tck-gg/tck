@@ -11,7 +11,7 @@
     "dev": "tsc --watch --preserveWatchOutput"
   },
   "devDependencies": {
-    "eslint-configs-custom": "*",
+    "eslint-config-custom": "*",
     "tsconfig": "*",
     "typescript": "^4.8.4"
   }
