@@ -30,6 +30,7 @@
     "@uidotdev/usehooks": "^2.0.1",
     "axios": "^1.4.0",
     "clsx": "^1.2.1",
+    "custom-util": "*",
     "cypress-real-events": "^1.8.1",
     "database": "*",
     "date-fns": "^2.30.0",

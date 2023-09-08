@@ -28,6 +28,7 @@
     "@sentry/profiling-node": "^1.2.0",
     "backblaze-b2": "^1.7.0",
     "bcrypt": "^5.1.0",
+    "custom-util": "*",
     "crypto": "^1.0.1",
     "date-fns": "^2.30.0",
     "discord-bot": "*",

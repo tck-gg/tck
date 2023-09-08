@@ -24,6 +24,10 @@
 			"path": "apps/startup"
 		},
 		{
+			"name": "custom-util",
+			"path": "packages/custom-util"
+		},
+		{
 			"name": "types",
 			"path": "packages/types"
 		},
