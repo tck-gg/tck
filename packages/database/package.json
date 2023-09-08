@@ -31,7 +31,6 @@
     "custom-util": "*",
     "crypto": "^1.0.1",
     "date-fns": "^2.30.0",
-    "discord-bot": "*",
     "socket.io-client": "^4.7.2",
     "types": "*",
     "uuid": "^9.0.0"
