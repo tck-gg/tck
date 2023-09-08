@@ -20,10 +20,19 @@ import JaggedBackgroundItem from '@/components/JaggedBackgroundItem/JaggedBackgr
 
 export async function getServerSideProps(ctx: any) {
   const { giveaway } = ctx.params;
+  const fetchedGiveaway = await getGiveaway(giveaway);
+
+  if (!fetchedGiveaway) {
+    return {
+      redirect: {
+        destination: `/giveaways`
+      }
+    };
+  }
 
   return {
     props: {
-      giveaway: await getGiveaway(giveaway)
+      giveaway: fetchedGiveaway
     }
   };
 }
