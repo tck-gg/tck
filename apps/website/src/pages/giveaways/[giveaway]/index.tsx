@@ -6,7 +6,6 @@ import { IGiveaway, IGiveawayEntry } from 'types';
 import { faChevronLeft, faTicket } from '@fortawesome/free-solid-svg-icons';
 import clsx from 'clsx';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Avatar } from '@mantine/core';
 
 import Layout from '@/components/Layout/Layout';
 import GiveawayInfobox from '@/components/GiveawayInfobox/GiveawayInfobox';
@@ -16,14 +15,22 @@ import IconBubble from '@/components/IconBubble/IconBubble';
 import { useAuth } from '@/hooks/auth';
 
 import classes from './giveaway.module.scss';
-import JaggedBackgroundItem from '@/components/JaggedBackgroundItem/JaggedBackgroundItem';
 
 export async function getServerSideProps(ctx: any) {
   const { giveaway } = ctx.params;
+  const fetchedGiveaway = await getGiveaway(giveaway);
+
+  if (!fetchedGiveaway) {
+    return {
+      redirect: {
+        destination: `/giveaways`
+      }
+    };
+  }
 
   return {
     props: {
-      giveaway: await getGiveaway(giveaway)
+      giveaway: fetchedGiveaway
     }
   };
 }
@@ -63,29 +70,12 @@ function GiveawayPage({ giveaway }: { giveaway: IGiveaway }) {
         {winnerOverlayOpen && giveaway.winner && (
           <div className={classes.winnerOverlay}>
             <div className={classes.giveawayWinner}>
-              <Avatar
-                style={{
-                  border: '4px solid #131320',
-                  backgroundColor: 'rgba(38, 38, 58, 0.75)',
-                  borderRadius: '50%'
-                }}
-                h={100}
-                w={100}
-                className={classes.winnerAvatar}
-              >
-                {giveaway.winner.displayName.toUpperCase().split('').splice(0, 1)[0]}
-              </Avatar>
               <p className={classes.winnerName}>{giveaway.winner.displayName}</p>
-              <JaggedBackgroundItem fill='#26263A'>
-                <p className={classes.winnerTicket}>
-                  Ticket #
-                  {(
-                    giveaway.entries.filter((giveawayEntry) => {
-                      return giveawayEntry.userId === giveaway.winnerId;
-                    })[0].slot + 1
-                  ).toLocaleString('en-US')}
-                </p>
-              </JaggedBackgroundItem>
+              <p>
+                {giveaway.entries.filter((giveawayEntry) => {
+                  return giveawayEntry.userId === giveaway.winnerId;
+                })[0].slot + 1}
+              </p>
             </div>
             <div
               className={classes.viewAll}

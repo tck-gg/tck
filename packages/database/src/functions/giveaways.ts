@@ -1,4 +1,6 @@
-import { prisma, User } from '../client';
+import { ObjectId } from 'mongodb';
+
+import { User, prisma } from '../client';
 import { socket } from '../socket';
 import { deleteImage } from './backblaze';
 
@@ -93,6 +95,10 @@ export async function deleteGiveaway(id: string): Promise<boolean> {
 }
 
 export async function getGiveaway(id: string) {
+  if (!ObjectId.isValid(id)) {
+    return null;
+  }
+
   return await prisma.giveaway.findUnique({
     where: {
       id
