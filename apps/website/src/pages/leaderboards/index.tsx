@@ -53,7 +53,8 @@ function Leaderboards({
     new Date(sunday.getFullYear(), sunday.getMonth(), sunday.getDate())
   );
   const [clashDays, clashHours, clashMinutes] = useCountdown(
-    new Date(saturday.getFullYear(), saturday.getMonth(), saturday.getDate())
+    // new Date(saturday.getFullYear(), saturday.getMonth(), saturday.getDate())
+    new Date(2023, 8, 16)
   );
   const [monthlyDays, monthlyHours, monthlyMinutes] = useCountdown(
     new Date(now.getFullYear(), now.getMonth() + 1, 1)
