@@ -28,10 +28,11 @@
     "@sentry/profiling-node": "^1.2.0",
     "backblaze-b2": "^1.7.0",
     "bcrypt": "^5.1.0",
-    "custom-util": "*",
     "crypto": "^1.0.1",
+    "custom-util": "*",
     "date-fns": "^2.30.0",
     "mongodb": "^6.0.0",
+    "random-org": "^2.2.0",
     "socket.io-client": "^4.7.2",
     "types": "*",
     "uuid": "^9.0.0"

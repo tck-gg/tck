@@ -1,4 +1,5 @@
 import { ObjectId } from 'mongodb';
+import RandomOrg from 'random-org';
 
 import { User, prisma } from '../client';
 import { socket } from '../socket';
@@ -121,8 +122,7 @@ export async function endGiveaway(id: string) {
   }
 
   // Didn't have enough entries. Extend by one day.
-  // TODO: Test this.
-  if (giveaway.entries.length === 0) {
+  if (giveaway.entries.length === 0 || !process.env.RANDOM_ORG_API_KEY) {
     const newTimestampEnd = giveaway.timestampEnd + 86400000;
 
     await prisma.giveaway.update({
@@ -141,8 +141,13 @@ export async function endGiveaway(id: string) {
     return;
   }
 
-  // TODO: Use a real random lol.
-  const winner = giveaway.entries[Math.floor(Math.random() * giveaway.entries.length)].userId;
+  const randomOrg = new RandomOrg({ apiKey: process.env.RANDOM_ORG_API_KEY });
+  const winnerIndex = await randomOrg.generateSignedIntegers({
+    min: 0,
+    max: giveaway.entries.length - 1,
+    n: 1
+  });
+  const winner = giveaway.entries[winnerIndex.random.data[0]].userId;
 
   // Update database.
   await prisma.giveaway.update({
