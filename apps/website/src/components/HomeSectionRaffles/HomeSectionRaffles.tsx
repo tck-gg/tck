@@ -22,8 +22,10 @@ function HomeSectionRaffles() {
       <div className={classes.rafflesLeft}>
         <p className={classes.raffleTitle}>Join Raffles</p>
         <p className={classes.paragraph}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-          ut labore et dolore magna aliqua.
+          <strong>Unlock Your Luck</strong>: Dive into Raffles for a Chance to Win Big!{' '}
+          <strong>BEING PRESENT IN THE STREAM</strong> makes you eligible for a{' '}
+          <strong>FREE ENTRY</strong> into
+          <strong>WEEKLY & MONTHLY</strong> raffles for huge rewards & prizes!
         </p>
         <Button
           rightIcon={faAngleRight}
