@@ -17,10 +17,9 @@ import {
 } from '@mantine/core';
 import { getHotkeyHandler } from '@mantine/hooks';
 import Link from 'next/link';
+import { isValidEmail } from 'custom-util';
 
 import Page from '@/components/Page';
-
-import { isValidEmail } from '@/util/email';
 
 import { useAuth } from '@/hooks/auth';
 

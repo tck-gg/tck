@@ -18,3 +18,4 @@ https://discord.com/oauth2/authorize?client_id=486314584983207945&scope=bot&perm
 - `GAMDOM_API_KEY`
 - `CLASH_API_KEY`
 - `SENTRY_AUTH_TOKEN`
+- `RANDOM_ORG_API_KEY`

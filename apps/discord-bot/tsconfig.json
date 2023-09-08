@@ -3,7 +3,8 @@
 	"compilerOptions": {
 		"rootDir": "src",
 		"outDir": "dist",
-		"verbatimModuleSyntax": false
+		"verbatimModuleSyntax": false,
+		"moduleResolution": "Node16"
 	},
 	"include": ["src"]
 }

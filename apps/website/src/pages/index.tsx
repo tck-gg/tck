@@ -43,8 +43,8 @@ function Home() {
             <p className={classes.sectionDescription}>Claim Free Rewards</p>
             <p className={classes.big}>The Most Rewarding Website</p>
             <p className={classes.description}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-              incididunt ut labore et dolore magna aliqua.
+              Elevate Your Game: The Ultimate Destination for Rewarding Players and Viewers for
+              being a part of the TCK Community.
             </p>
           </div>
           <div className={classes.buttonGroup}>

@@ -1,9 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-
+import { isValidEmail } from 'custom-util';
 import { prisma, createUser } from 'database';
 
 import { getIp } from '@/util/ip';
-import { isValidEmail } from '@/util/email';
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
   const ip = getIp(req);

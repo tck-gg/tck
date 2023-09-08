@@ -1,10 +1,9 @@
 import bcrypt from 'bcrypt';
 import crypto from 'crypto';
 import { Action } from '@prisma/client';
+import { isValidEmail } from 'custom-util';
 
 import { prisma } from '../client';
-
-// import { isValidEmail } from '../util/email';
 
 /**
  * Gets a user from the database by their UUID.
@@ -69,9 +68,9 @@ export async function createUser(
     return false;
   }
   // Email must be valid.
-  // if (!isValidEmail(email)) {
-  //   return false;
-  // }
+  if (!isValidEmail(email)) {
+    return false;
+  }
   // Password must be at least 8 characters long.
   if (password.length < 8) {
     return false;
