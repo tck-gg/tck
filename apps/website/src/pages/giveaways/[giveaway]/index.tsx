@@ -12,11 +12,11 @@ import Layout from '@/components/Layout/Layout';
 import GiveawayInfobox from '@/components/GiveawayInfobox/GiveawayInfobox';
 import GiveawayEntry from '@/components/GiveawayEntry/GiveawayEntry';
 import IconBubble from '@/components/IconBubble/IconBubble';
+import JaggedBackgroundItem from '@/components/JaggedBackgroundItem/JaggedBackgroundItem';
 
 import { useAuth } from '@/hooks/auth';
 
 import classes from './giveaway.module.scss';
-import JaggedBackgroundItem from '@/components/JaggedBackgroundItem/JaggedBackgroundItem';
 
 export async function getServerSideProps(ctx: any) {
   const { giveaway } = ctx.params;
@@ -107,25 +107,27 @@ function GiveawayPage({ giveaway }: { giveaway: IGiveaway }) {
             </div>
           </div>
         )}
-        {Array(giveaway.maxEntries)
-          .fill(0)
-          .map((entry, index) => {
-            return (
-              <GiveawayEntry
-                position={index + 1}
-                display={
-                  giveaway.entries
-                    .filter((giveawayEntry: IGiveawayEntry) => {
-                      return giveawayEntry.slot === index;
-                    })[0]
-                    ?.user.username.toUpperCase()
-                    .split('')
-                    .splice(0, 1)[0]
-                }
-                key={index}
-              />
-            );
-          })}
+        <div className={classes.entryWrapper}>
+          {Array(giveaway.maxEntries)
+            .fill(0)
+            .map((entry, index) => {
+              return (
+                <GiveawayEntry
+                  position={index + 1}
+                  display={
+                    giveaway.entries
+                      .filter((giveawayEntry: IGiveawayEntry) => {
+                        return giveawayEntry.slot === index;
+                      })[0]
+                      ?.user.username.toUpperCase()
+                      .split('')
+                      .splice(0, 1)[0]
+                  }
+                  key={index}
+                />
+              );
+            })}
+        </div>
       </div>
     </Layout>
   );

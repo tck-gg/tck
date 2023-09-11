@@ -20,17 +20,18 @@
   backdrop-filter: blur(45px);
 
   padding: 22px;
-  
+
+  max-height: 900px;
+
+  overflow-y: scroll;
+}
+
+.entryWrapper {
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
-
-  // overflow-x: hidden;
-  overflow-y: scroll;
-
-  max-height: 900px;
 }
 
 .withOverlay {
