@@ -14,6 +14,7 @@ function Button({
   borderRadius,
   fullWidth,
   disabled,
+  background,
   onClick
 }: {
   children: string | JSX.Element;
@@ -23,6 +24,7 @@ function Button({
   borderRadius?: number;
   fullWidth?: boolean;
   disabled?: boolean;
+  background?: string;
   onClick?: (props: any) => void;
 }) {
   function handleClick() {
@@ -38,7 +40,10 @@ function Button({
         disabled && classes.disabled
       )}
       onClick={handleClick}
-      style={{ borderRadius }}
+      style={{
+        borderRadius,
+        background
+      }}
     >
       {leftIcon && <FontAwesomeIcon icon={leftIcon} />}
       <p className={classes.text}>{children}</p>
