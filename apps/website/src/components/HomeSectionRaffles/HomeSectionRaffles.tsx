@@ -24,8 +24,8 @@ function HomeSectionRaffles() {
         <p className={classes.paragraph}>
           <strong>Unlock Your Luck</strong>: Dive into Raffles for a Chance to Win Big!{' '}
           <strong>BEING PRESENT IN THE STREAM</strong> makes you eligible for a{' '}
-          <strong>FREE ENTRY</strong> into
-          <strong>WEEKLY & MONTHLY</strong> raffles for huge rewards & prizes!
+          <strong>FREE ENTRY</strong> into <strong>WEEKLY & MONTHLY</strong> raffles for huge
+          rewards & prizes!
         </p>
         <Button
           rightIcon={faAngleRight}
