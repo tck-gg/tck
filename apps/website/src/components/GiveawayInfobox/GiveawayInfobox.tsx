@@ -75,16 +75,17 @@ function GiveawayInfobox({ giveaway }: { giveaway: IGiveaway }) {
     );
 
     if (response.status !== 200) {
-      router.reload();
+      notifications.show({
+        title: 'Error entering giveaway',
+        message: 'There was an error entering the giveaway, please try again later.',
+        color: 'red',
+        withBorder: true,
+        icon: <IconX />
+      });
       return;
     }
-    notifications.show({
-      title: 'Error entering giveaway',
-      message: 'There was an error entering the giveaway, please try again later.',
-      color: 'red',
-      withBorder: true,
-      icon: <IconX />
-    });
+
+    router.reload();
   }
 
   return (
