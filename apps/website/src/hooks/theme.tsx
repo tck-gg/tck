@@ -24,7 +24,7 @@ function useProvideTheme() {
   };
 }
 
-export function ProvidePageHeaderGlow({ children }: { children: any }) {
+export function ProvideTheme({ children }: { children: any }) {
   const theme = useProvideTheme();
   const router = useRouter();
 

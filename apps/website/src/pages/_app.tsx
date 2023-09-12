@@ -1,20 +1,14 @@
 import { useEffect } from 'react';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
-import { CookiesProvider } from 'react-cookie';
 import ReactGA from 'react-ga4';
-import { MantineProvider } from '@mantine/core';
 import { Notifications } from '@mantine/notifications';
 
 import ReAuth from '@/components/ReAuth';
 import BanBanner from '@/components/BanBanner/BanBanner';
 
-import { ProvideAuth } from '@/hooks/auth';
-import { ProvideRewardsContextMenu } from '@/hooks/rewards-context-menu';
-import { ProvideAgeVerification } from '@/hooks/age-verification';
 import AgeVerification from '@/components/AgeVerification/AgeVerification';
-import { ProvideAgeVerificationCallback } from '@/hooks/age-verification-callback';
-import { ProvidePageHeaderGlow } from '@/hooks/theme';
+import TheProviderProvider from '@/components/TheProviderProvider';
 
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import '../styles/globals.scss';
@@ -35,31 +29,14 @@ function App({ Component, pageProps }: AppProps) {
       <Head>
         <meta name='viewport' content='width=device-width, initial-scale=1' />
       </Head>
-      <CookiesProvider>
-        <ProvideAuth>
-          <ProvideRewardsContextMenu>
-            <ProvideAgeVerificationCallback>
-              <ProvideAgeVerification>
-                <ProvidePageHeaderGlow>
-                  <ReAuth>
-                    <MantineProvider
-                      theme={{
-                        colorScheme: 'dark',
-                        fontFamily: 'Archivo, sans-serif'
-                      }}
-                    >
-                      <Notifications />
-                      <AgeVerification />
-                      <BanBanner />
-                      <Component {...pageProps} />
-                    </MantineProvider>
-                  </ReAuth>
-                </ProvidePageHeaderGlow>
-              </ProvideAgeVerification>
-            </ProvideAgeVerificationCallback>
-          </ProvideRewardsContextMenu>
-        </ProvideAuth>
-      </CookiesProvider>
+      <TheProviderProvider>
+        <AgeVerification />
+        <BanBanner />
+        <ReAuth>
+          <Component {...pageProps} />
+        </ReAuth>
+      </TheProviderProvider>
+      <Notifications />
     </>
   );
 }
