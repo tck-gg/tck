@@ -85,6 +85,13 @@ export async function deleteGiveaway(id: string): Promise<boolean> {
   // Send Discord notification.
   socket.emit('deleteGiveaway', giveaway);
 
+  // Delete all entries.
+  await prisma.giveawayEntry.deleteMany({
+    where: {
+      giveawayId: id
+    }
+  });
+
   // Delete the database entry.
   await prisma.giveaway.delete({
     where: {
