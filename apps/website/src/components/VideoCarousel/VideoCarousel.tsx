@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import lodash from 'lodash';
 
-import SmallButton from '../SmallButton/SmallButton';
+import SmallButton from '@/components/ui/SmallButton/SmallButton';
 import VideoBox from '../VideoBox/VideoBox';
 
 import { Video } from '@/types/video';

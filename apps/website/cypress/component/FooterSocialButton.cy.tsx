@@ -1,6 +1,6 @@
 import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 
-import FooterSocialButton from '../../src/components/FooterSocialButton/FooterSocialButton';
+import FooterSocialButton from '../../src/components/footer2/FooterSocialButton/FooterSocialButton';
 
 beforeEach(() => {
   cy.mount(<FooterSocialButton icon={faGoogle} href='https://example.com/' />);

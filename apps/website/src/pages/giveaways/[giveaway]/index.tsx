@@ -9,9 +9,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Avatar } from '@mantine/core';
 
 import Layout from '@/components/Layout/Layout';
-import GiveawayInfobox from '@/components/GiveawayInfobox/GiveawayInfobox';
-import GiveawayEntry from '@/components/GiveawayEntry/GiveawayEntry';
-import IconBubble from '@/components/IconBubble/IconBubble';
+import GiveawayInfobox from '@/components/giveaway/GiveawayInfobox/GiveawayInfobox';
+import GiveawayEntry from '@/components/giveaway/GiveawayEntry/GiveawayEntry';
+import IconBubble from '@/components/ui/IconBubble/IconBubble';
 import JaggedBackgroundItem from '@/components/JaggedBackgroundItem/JaggedBackgroundItem';
 
 import { useAuth } from '@/hooks/auth';

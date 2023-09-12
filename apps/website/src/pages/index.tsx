@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 
 import Layout from '@/components/Layout/Layout';
-import Button from '@/components/Button/Button';
+import Button from '@/components/ui/Button/Button';
 import AffiliateBox from '@/components/AffiliateBox/AffiliateBox';
 import SocialBox from '@/components/SocialBox/SocialBox';
 import HomeSectionRaffles from '@/components/HomeSectionRaffles/HomeSectionRaffles';

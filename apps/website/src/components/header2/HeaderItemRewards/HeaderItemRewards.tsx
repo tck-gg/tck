@@ -3,8 +3,8 @@ import { AnimatePresence } from 'framer-motion';
 
 import HeaderItemRewardsContextMenu from '../HeaderItemRewardsContextMenu/HeaderItemRewardsContextMenu';
 
-import Dropdown from '../svg/Dropdown';
-import Gift from '../svg/Gift';
+import Dropdown from '@/components/svg/Dropdown';
+import Gift from '@/components/svg/Gift';
 
 import classes from './HeaderItemRewards.module.scss';
 

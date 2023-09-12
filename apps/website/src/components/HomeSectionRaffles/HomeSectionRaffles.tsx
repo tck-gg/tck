@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useState } from 'react';
 
-import Button from '@/components/Button/Button';
+import Button from '@/components/ui/Button/Button';
 
 import classes from './HomeSectionRaffles.module.scss';
 

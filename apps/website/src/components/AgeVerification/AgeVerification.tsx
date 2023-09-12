@@ -3,10 +3,10 @@ import ClickAwayListener from 'react-click-away-listener';
 
 import { useAgeVerification } from '@/hooks/age-verification';
 
-import IconBubble from '../IconBubble/IconBubble';
+import IconBubble from '../ui/IconBubble/IconBubble';
 
 import classes from './AgeVerification.module.scss';
-import Button from '../Button/Button';
+import Button from '@/components/ui/Button/Button';
 
 function AgeVerification() {
   const ageVerification = useAgeVerification();

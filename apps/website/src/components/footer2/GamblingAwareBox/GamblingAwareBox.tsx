@@ -1,4 +1,4 @@
-import AgeWarning from '../svg/AgeWarning';
+import AgeWarning from '../../svg/AgeWarning';
 
 import classes from './GamblingAwareBox.module.scss';
 

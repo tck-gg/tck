@@ -13,6 +13,7 @@ import Layout from '@/components/Layout/Layout';
 import PageHeader from '@/components/PageHeader/PageHeader';
 import Leaderboard from '@/components/Leaderboard/Leaderboard';
 import LeaderboardPodiumBox from '@/components/LeaderboardPodiumBox/LeaderboardPodiumBox';
+import CountdownTimer from '@/components/ui/CountdownTimer/CountdownTimer';
 
 import { useTheme } from '@/hooks/theme';
 import { useCountdown } from '@/hooks/countdown';
@@ -23,7 +24,6 @@ import gamdomLogo from '../../images/affiliate/gamdom.png';
 import stakeLogo from '../../images/affiliate/stake.png';
 import clashLogo from '../../images/affiliate/clash.png';
 import csgobigLogo from '../../images/affiliate/csgobig.png';
-import CountdownTimer from '@/components/CountdownTimer/CountdownTimer';
 
 export type ILeaderboard = Prisma.LeaderboardGetPayload<{
   include: { spots: true };

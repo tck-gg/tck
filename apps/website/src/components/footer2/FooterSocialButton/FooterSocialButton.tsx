@@ -2,7 +2,7 @@ import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { motion } from 'framer-motion';
 
 import classes from './FooterSocialButton.module.scss';
-import SmallButton from '../SmallButton/SmallButton';
+import SmallButton from '@/components/ui/SmallButton/SmallButton';
 
 function FooterSocialButton({ icon, href }: { icon: IconDefinition; href: string }) {
   return (

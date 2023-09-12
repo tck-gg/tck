@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 
 import BoxBadge from '../BoxBadge/BoxBadge';
 import AffiliateBoxCodeBox from '../AffiliateBoxCodeBox/AffiliateBoxCodeBox';
-import Button from '../Button/Button';
+import Button from '@/components/ui/Button/Button';
 
 import { AffiliateTag, IAffiliateCode } from '@/types/affiliate';
 

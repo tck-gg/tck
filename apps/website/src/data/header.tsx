@@ -1,4 +1,4 @@
-import HeaderItemRewards from '@/components/HeaderItemRewards/HeaderItemRewards';
+import HeaderItemRewards from '@/components/header2/HeaderItemRewards/HeaderItemRewards';
 
 interface HeaderItem {
   href?: string;

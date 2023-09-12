@@ -6,20 +6,19 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import clsx from 'clsx';
 import { IGiveaway } from 'types';
-import dateFormat from 'dateformat';
 
-import Button from '../Button/Button';
-import IconBubble from '../IconBubble/IconBubble';
+import Button from '@/components/ui/Button/Button';
+import IconBubble from '../../ui/IconBubble/IconBubble';
 import EntryCounter from '../EntryCounter/EntryCounter';
 
-import Jagged from '../svg/Jagged';
+import Jagged from '../../svg/Jagged';
 
 import { useAuth } from '@/hooks/auth';
 
 import classes from './GiveawayBox.module.scss';
 
 import giveawayCoinImage from '@/images/giveaway-coin.png';
-import BoxBadge from '../BoxBadge/BoxBadge';
+import BoxBadge from '../../BoxBadge/BoxBadge';
 
 function GiveawayBox({ giveaway }: { giveaway: IGiveaway }) {
   const router = useRouter();

@@ -4,8 +4,8 @@ import { useEffect } from 'react';
 import clsx from 'clsx';
 
 import Page from '../Page';
-import Footer from '../Footer/Footer';
-import Header from '../Header/Header';
+import Footer from '../footer2/Footer/Footer';
+import Header from '../header2/Header/Header';
 import PageHeaderGlow from '../PageHeaderGlow/PageHeaderGlow';
 
 import { useTheme } from '@/hooks/theme';

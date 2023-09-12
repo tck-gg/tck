@@ -1,7 +1,7 @@
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import Image from 'next/image';
 
-import Button from '../Button/Button';
+import Button from '@/components/ui/Button/Button';
 
 import { ISocial, Social } from '@/types/social';
 

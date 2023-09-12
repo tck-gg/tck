@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import clsx from 'clsx';
 
-import Button from '../Button/Button';
+import Button from '@/components/ui/Button/Button';
 import HeaderProfileGroup from '../HeaderProfileGroup/HeaderProfileGroup';
 
 import { HEADER_ITEMS } from '@/data/header';

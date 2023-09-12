@@ -1,4 +1,4 @@
-import Accordion from '@/components/Accordion/Accordion';
+import Accordion from '@/components/ui/Accordion/Accordion';
 import Layout from '@/components/Layout/Layout';
 import PageHeader from '@/components/PageHeader/PageHeader';
 

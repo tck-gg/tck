@@ -4,7 +4,7 @@ import { IconHistoryToggle } from '@tabler/icons-react';
 
 import Layout from '@/components/Layout/Layout';
 import PageHeader from '@/components/PageHeader/PageHeader';
-import GiveawayBox from '@/components/GiveawayBox/GiveawayBox';
+import GiveawayBox from '@/components/giveaway/GiveawayBox/GiveawayBox';
 
 import classes from './giveaways.module.scss';
 

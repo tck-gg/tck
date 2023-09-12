@@ -15,9 +15,9 @@ import axios from 'axios';
 import { notifications } from '@mantine/notifications';
 import { IconX } from '@tabler/icons-react';
 
-import Button from '../Button/Button';
-import JaggedBackgroundItem from '../JaggedBackgroundItem/JaggedBackgroundItem';
-import IconBubble from '../IconBubble/IconBubble';
+import Button from '@/components/ui/Button/Button';
+import JaggedBackgroundItem from '@/components/JaggedBackgroundItem/JaggedBackgroundItem';
+import IconBubble from '@/components/ui/IconBubble/IconBubble';
 import EntryCounter from '../EntryCounter/EntryCounter';
 
 import { useAuth } from '@/hooks/auth';

@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { useHover } from '@uidotdev/usehooks';
 
-import Jagged from '../svg/Jagged';
+import Jagged from '../../svg/Jagged';
 
 import { useAuth } from '@/hooks/auth';
 

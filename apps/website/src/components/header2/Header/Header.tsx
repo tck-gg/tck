@@ -8,7 +8,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 
 import HeaderBoxMobile from '../HeaderBoxMobile/HeaderBoxMobile';
-import Button from '../Button/Button';
 import HeaderProfileGroup from '../HeaderProfileGroup/HeaderProfileGroup';
 
 import { HEADER_ITEMS } from '@/data/header';
