@@ -90,7 +90,10 @@ export async function getLeaderboard(type: LeaderboardType) {
 
   if (type === 'clash') {
     const response = await axios.get(
-      `https://api.clash.gg/affiliates/detailed-summary/v2/2023-09-02`,
+      `https://api.clash.gg/affiliates/detailed-summary/v2/${format(
+        previousSaturday(new Date(Date.now() + 86400000)),
+        'yyyy-MM-dd'
+      )}`,
       {
         headers: {
           Authorization: `Bearer ${process.env.CLASH_API_KEY}`,
