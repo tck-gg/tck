@@ -11,8 +11,8 @@ import { nextSaturday, nextSunday } from 'date-fns';
 import Layout from '@/components/Layout/Layout';
 
 import PageHeader from '@/components/PageHeader/PageHeader';
-import Leaderboard from '@/components/Leaderboard/Leaderboard';
-import LeaderboardPodiumBox from '@/components/LeaderboardPodiumBox/LeaderboardPodiumBox';
+import Leaderboard from '@/components/leaderboard2/Leaderboard/Leaderboard';
+import LeaderboardPodiumBox from '@/components/leaderboard2/LeaderboardPodiumBox/LeaderboardPodiumBox';
 import CountdownTimer from '@/components/ui/CountdownTimer/CountdownTimer';
 
 import { useTheme } from '@/hooks/theme';

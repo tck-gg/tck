@@ -2,7 +2,7 @@ import { Prisma } from 'database';
 import { Avatar } from '@mantine/core';
 import { LeaderboardRewardType } from 'types';
 
-import JaggedBackgroundItem from '../JaggedBackgroundItem/JaggedBackgroundItem';
+import JaggedBackgroundItem from '@/components/JaggedBackgroundItem/JaggedBackgroundItem';
 
 import classes from './LeaderboardPodiumBox.module.scss';
 
