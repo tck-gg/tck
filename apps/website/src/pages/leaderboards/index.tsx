@@ -49,12 +49,6 @@ function Leaderboards({
 
   const theme = useTheme();
 
-  const [weeklyDays, weeklyHours, weeklyMinutes] = useCountdown(
-    new Date(sunday.getFullYear(), sunday.getMonth(), sunday.getDate())
-  );
-  const [clashDays, clashHours, clashMinutes] = useCountdown(
-    new Date(saturday.getFullYear(), saturday.getMonth(), saturday.getDate())
-  );
   const [monthlyDays, monthlyHours, monthlyMinutes] = useCountdown(
     new Date(now.getFullYear(), now.getMonth() + 1, 1)
   );
@@ -205,10 +199,10 @@ function Leaderboards({
 
             <div className={clsx(classes.timerWrapper, classes.hideOnMobile)}>
               {selectedLeaderboard === 'clash' && (
-                <CountdownTimer days={clashDays} hours={clashHours} minutes={clashMinutes} />
+                <CountdownTimer days={monthlyDays} hours={monthlyHours} minutes={monthlyMinutes} />
               )}
               {selectedLeaderboard === 'csgobig' && (
-                <CountdownTimer days={weeklyDays} hours={weeklyHours} minutes={weeklyMinutes} />
+                <CountdownTimer days={monthlyDays} hours={monthlyHours} minutes={monthlyMinutes} />
               )}
               {(selectedLeaderboard === 'stake' || selectedLeaderboard === 'gamdom') && (
                 <CountdownTimer days={monthlyDays} hours={monthlyHours} minutes={monthlyMinutes} />
