@@ -45,7 +45,7 @@ function LeaderboardPodiumBox({
               )}
               <p className={classes.rewardText}>
                 {rewardType === 'cash' && '$'}
-                {rewardType === 'clash' && [200, 150, 100][position - 1]}
+                {rewardType === 'clash' && [500, 250, 100][position - 1]}
               </p>
             </div>
           </JaggedBackgroundItem>
