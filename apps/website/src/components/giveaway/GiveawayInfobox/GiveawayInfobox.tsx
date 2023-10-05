@@ -3,7 +3,6 @@
 import { IGiveaway } from 'types';
 import { useRouter } from 'next/router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Image from 'next/image';
 import {
   faAngleLeft,
   faAngleRight,
@@ -14,6 +13,8 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { notifications } from '@mantine/notifications';
 import { IconX } from '@tabler/icons-react';
+import { default as NextImage } from 'next/image';
+import { Image as MantineImage } from '@mantine/core';
 
 import Button from '@/components/ui/Button/Button';
 import JaggedBackgroundItem from '@/components/JaggedBackgroundItem/JaggedBackgroundItem';
@@ -104,14 +105,12 @@ function GiveawayInfobox({ giveaway }: { giveaway: IGiveaway }) {
         </Button>
       </div>
       <div className={classes.middle}>
-        <Image
+        <MantineImage
           width={268}
           height={136}
           src={`https://cdn.tck.gg/giveaways/${giveaway.image}`}
           alt={giveaway.name}
-          style={{
-            objectFit: 'contain'
-          }}
+          fit='contain'
         />
 
         <div className={classes.info}>
@@ -122,7 +121,7 @@ function GiveawayInfobox({ giveaway }: { giveaway: IGiveaway }) {
         <div className={classes.infoSection}>
           <JaggedBackgroundItem fill='#26263A' withShadow>
             <div className={classes.valueItems}>
-              <Image src={giveawayCoinImage} alt='value' width={18} height={18} />
+              <NextImage src={giveawayCoinImage} alt='value' width={18} height={18} />
               <p>{giveaway.value.toLocaleString('en-US', { minimumFractionDigits: 2 })}</p>
             </div>
           </JaggedBackgroundItem>
