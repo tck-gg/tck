@@ -91,7 +91,7 @@ export async function getLeaderboard(type: LeaderboardType) {
   if (type === 'clash') {
     const response = await axios.get(
       `https://api.clash.gg/affiliates/detailed-summary/v2/${format(
-        new Date(new Date().getFullYear(), new Date().getMonth(), 1),
+        new Date(2023, 8, 30),
         'yyyy-MM-dd'
       )}`,
       {
