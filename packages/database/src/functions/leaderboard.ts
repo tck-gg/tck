@@ -3,7 +3,8 @@ import {
   ClashLeaderboardEntry,
   GamdomLeaderboardApiResponse,
   LeaderboardSpot,
-  LeaderboardType
+  LeaderboardType,
+  PackdrawLeaderboardApiData
 } from 'types';
 import { format, previousSaturday, previousSunday } from 'date-fns';
 
@@ -123,6 +124,30 @@ export async function getLeaderboard(type: LeaderboardType) {
       });
   }
 
+  if (type === 'packdraw') {
+    const prevSunday = previousSunday(new Date());
+    const response = await axios.get(
+      `https://packdraw.com/api/v1/affiliates/leaderboard?after=${format(
+        prevSunday,
+        'MM-dd-yyyy'
+      )}&apiKey=${process.env.PACKDRAW_API_KEY}`,
+      {
+        validateStatus: () => {
+          return true;
+        }
+      }
+    );
+    const data: PackdrawLeaderboardApiData = response.data;
+
+    spots = data.leaderboard.map((spot) => {
+      return {
+        username: spot.username,
+        amount: Math.round(spot.wagerAmount),
+        avatar: spot.image
+      };
+    });
+  }
+
   if (type !== 'stake' && spots.length > 0) {
     await updateLeaderboard(type, spots);
   }
@@ -146,6 +171,7 @@ export async function getAllLeaderboards() {
     stake: await getLeaderboard('stake'),
     gamdom: await getLeaderboard('gamdom'),
     clash: await getLeaderboard('clash'),
-    csgobig: await getLeaderboard('csgobig')
+    csgobig: await getLeaderboard('csgobig'),
+    packdraw: await getLeaderboard('packdraw')
   };
 }
