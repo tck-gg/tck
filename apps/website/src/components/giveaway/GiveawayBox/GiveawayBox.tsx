@@ -2,10 +2,11 @@
 
 import { useEffect, useState } from 'react';
 import { faAngleRight, faUser } from '@fortawesome/free-solid-svg-icons';
-import Image from 'next/image';
 import { useRouter } from 'next/router';
 import clsx from 'clsx';
 import { IGiveaway } from 'types';
+import { Image } from '@mantine/core';
+import { default as NextImage } from 'next/image';
 
 import Button from '@/components/ui/Button/Button';
 import IconBubble from '../../ui/IconBubble/IconBubble';
@@ -44,9 +45,7 @@ function GiveawayBox({ giveaway }: { giveaway: IGiveaway }) {
           height={136}
           src={`https://cdn.tck.gg/giveaways/${giveaway.image}`}
           alt={giveaway.name}
-          style={{
-            objectFit: 'contain'
-          }}
+          fit='contain'
         />
 
         <div className={classes.info}>
@@ -86,7 +85,7 @@ function GiveawayBox({ giveaway }: { giveaway: IGiveaway }) {
       </div>
       <div className={classes.valueWrapper}>
         <div className={classes.valueContent}>
-          <Image src={giveawayCoinImage} alt='value' width={18} height={18} />
+          <NextImage src={giveawayCoinImage} alt='value' width={18} height={18} />
           <p>{giveaway.value.toLocaleString('en-US', { minimumFractionDigits: 2 })}</p>
         </div>
         <Jagged className={classes.valueBackground} />

@@ -11,8 +11,8 @@ import { nextSaturday, nextSunday } from 'date-fns';
 import Layout from '@/components/Layout/Layout';
 
 import PageHeader from '@/components/PageHeader/PageHeader';
-import Leaderboard from '@/components/Leaderboard/Leaderboard';
-import LeaderboardPodiumBox from '@/components/LeaderboardPodiumBox/LeaderboardPodiumBox';
+import Leaderboard from '@/components/leaderboard2/Leaderboard/Leaderboard';
+import LeaderboardPodiumBox from '@/components/leaderboard2/LeaderboardPodiumBox/LeaderboardPodiumBox';
 import CountdownTimer from '@/components/ui/CountdownTimer/CountdownTimer';
 
 import { useTheme } from '@/hooks/theme';
@@ -24,6 +24,7 @@ import gamdomLogo from '../../images/affiliate/gamdom.png';
 import stakeLogo from '../../images/affiliate/stake.png';
 import clashLogo from '../../images/affiliate/clash.png';
 import csgobigLogo from '../../images/affiliate/csgobig.png';
+import packDrawLogo from '../../images/affiliate/packdraw.png';
 
 export type ILeaderboard = Prisma.LeaderboardGetPayload<{
   include: { spots: true };
@@ -49,15 +50,11 @@ function Leaderboards({
 
   const theme = useTheme();
 
-  const [weeklyDays, weeklyHours, weeklyMinutes] = useCountdown(
-    new Date(sunday.getFullYear(), sunday.getMonth(), sunday.getDate())
-  );
-  const [clashDays, clashHours, clashMinutes] = useCountdown(
-    // new Date(saturday.getFullYear(), saturday.getMonth(), saturday.getDate())
-    new Date(2023, 8, 16)
-  );
   const [monthlyDays, monthlyHours, monthlyMinutes] = useCountdown(
     new Date(now.getFullYear(), now.getMonth() + 1, 1)
+  );
+  const [weeklyDays, weeklyHours, weeklyMinutes] = useCountdown(
+    new Date(sunday.getFullYear(), sunday.getMonth(), sunday.getDate())
   );
   const [selectedLeaderboard, setSelectedLeaderboard] = useState<LeaderboardType>('clash');
 
@@ -65,7 +62,7 @@ function Leaderboards({
     theme.setTheme('clash');
   }, []);
   useEffect(() => {
-    if (selectedLeaderboard === 'stake') {
+    if (selectedLeaderboard === 'stake' || selectedLeaderboard === 'packdraw') {
       theme.setTheme('default');
       return;
     }
@@ -107,7 +104,7 @@ function Leaderboards({
               selectedLeaderboard === 'csgobig' && classes.selected
             )}
           />
-          <Image
+          {/* <Image
             src={stakeLogo}
             alt='Stake'
             width={100}
@@ -119,6 +116,22 @@ function Leaderboards({
               setSelectedLeaderboard('stake');
             }}
             className={clsx(classes.affiliate, selectedLeaderboard === 'stake' && classes.selected)}
+          /> */}
+          <Image
+            src={packDrawLogo}
+            alt='PackDraw'
+            width={100}
+            height={60}
+            style={{
+              objectFit: 'contain'
+            }}
+            onClick={() => {
+              setSelectedLeaderboard('packdraw');
+            }}
+            className={clsx(
+              classes.affiliate,
+              selectedLeaderboard === 'packdraw' && classes.selected
+            )}
           />
           <Image
             src={gamdomLogo}
@@ -206,13 +219,16 @@ function Leaderboards({
 
             <div className={clsx(classes.timerWrapper, classes.hideOnMobile)}>
               {selectedLeaderboard === 'clash' && (
-                <CountdownTimer days={clashDays} hours={clashHours} minutes={clashMinutes} />
+                <CountdownTimer days={monthlyDays} hours={monthlyHours} minutes={monthlyMinutes} />
               )}
               {selectedLeaderboard === 'csgobig' && (
-                <CountdownTimer days={weeklyDays} hours={weeklyHours} minutes={weeklyMinutes} />
+                <CountdownTimer days={monthlyDays} hours={monthlyHours} minutes={monthlyMinutes} />
               )}
               {(selectedLeaderboard === 'stake' || selectedLeaderboard === 'gamdom') && (
                 <CountdownTimer days={monthlyDays} hours={monthlyHours} minutes={monthlyMinutes} />
+              )}
+              {selectedLeaderboard === 'packdraw' && (
+                <CountdownTimer days={weeklyDays} hours={weeklyHours} minutes={weeklyMinutes} />
               )}
             </div>
 

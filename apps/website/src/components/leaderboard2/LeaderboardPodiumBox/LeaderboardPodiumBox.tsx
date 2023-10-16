@@ -2,7 +2,7 @@ import { Prisma } from 'database';
 import { Avatar } from '@mantine/core';
 import { LeaderboardRewardType } from 'types';
 
-import JaggedBackgroundItem from '../JaggedBackgroundItem/JaggedBackgroundItem';
+import JaggedBackgroundItem from '@/components/JaggedBackgroundItem/JaggedBackgroundItem';
 
 import classes from './LeaderboardPodiumBox.module.scss';
 
@@ -45,7 +45,7 @@ function LeaderboardPodiumBox({
               )}
               <p className={classes.rewardText}>
                 {rewardType === 'cash' && '$'}
-                {rewardType === 'clash' && [200, 150, 100][position - 1]}
+                {rewardType === 'clash' && [500, 250, 100][position - 1]}
               </p>
             </div>
           </JaggedBackgroundItem>
