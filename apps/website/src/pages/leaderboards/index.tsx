@@ -47,6 +47,7 @@ function Leaderboards({
   const now = new Date();
   const sunday = nextSunday(now);
   const saturday = nextSaturday(now);
+  const sunday2 = nextSunday(sunday);
 
   const theme = useTheme();
 
