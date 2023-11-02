@@ -8,7 +8,7 @@ import Jagged from '../svg/Jagged';
 
 import classes from './AffiliateBoxCodeBox.module.scss';
 
-function AffiliateBoxCodeBox({ children }: { children: string }) {
+function AffiliateBoxCodeBox({ children, fill }: { children: string; fill?: string }) {
   const [hasCopied, setHasCopied] = useState(false);
 
   function handleClick() {
@@ -26,7 +26,12 @@ function AffiliateBoxCodeBox({ children }: { children: string }) {
 
   return (
     <div className={classes.root}>
-      <Jagged className={classes.background} />
+      <Jagged
+        className={classes.background}
+        style={{
+          fill
+        }}
+      />
 
       <span className={classes.code}>{children}</span>
 

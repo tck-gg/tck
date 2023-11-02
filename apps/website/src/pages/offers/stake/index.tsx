@@ -1,0 +1,121 @@
+import Image from 'next/image';
+import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
+import { useRouter } from 'next/router';
+
+import Layout from '@/components/Layout/Layout';
+import JaggedBackgroundItem from '@/components/JaggedBackgroundItem/JaggedBackgroundItem';
+import Button from '@/components/ui/Button/Button';
+import AffiliateBoxCodeBox from '@/components/AffiliateBoxCodeBox/AffiliateBoxCodeBox';
+import StakeFormBox from '@/components/StakeFormBox/StakeFormBox';
+
+import stakeDemo from '@/images/affiliate/stake/demo.png';
+
+import classes from './stake.module.scss';
+
+function OfferStake() {
+  const router = useRouter();
+
+  return (
+    <Layout title='$14 Stake Reload'>
+      <div className={classes.header}>
+        <JaggedBackgroundItem fill='#252567'>
+          <p className={classes.jaggedText}>Stake Exclusive</p>
+        </JaggedBackgroundItem>
+        <div className={classes.heroContent}>
+          <p className={classes.title}>$14 Reload</p>
+          <p className={classes.subtitle}>This reward is available for 7 Days upon redemption.</p>
+        </div>
+      </div>
+
+      <div className={classes.sectionWrapper}>
+        <div className={classes.stakeSection}>
+          <div className={classes.stakeSectionLeft}>
+            <div>
+              <p className={classes.title}>
+                Visit Stake<span className={classes.dotCom}>.com</span>
+              </p>
+              <p className={classes.subtitle15}>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                incididunt ut labore et dolore magna aliqua.
+              </p>
+            </div>
+            <div className={classes.stakeSectionLeftBottom}>
+              <div
+                style={{
+                  width: '163px',
+                  height: '45px'
+                }}
+              >
+                <AffiliateBoxCodeBox fill='#161623'>TCK</AffiliateBoxCodeBox>
+              </div>
+              <Button
+                background='linear-gradient(90deg, #6B6AF2 0%, #3F419B 100%)'
+                rightIcon={faAngleRight}
+                width={265}
+                onClick={() => {
+                  window.open('https://stake.com/?c=TCK', '_blank');
+                }}
+              >
+                Register Instantly
+              </Button>
+            </div>
+          </div>
+          <div className={classes.stakeSectionRight}>
+            <Image
+              src={stakeDemo}
+              alt='Stake Demo'
+              width={650}
+              className={classes.stakeDemoImage}
+            />
+          </div>
+        </div>
+
+        <StakeFormBox />
+
+        <div className={classes.enjoySection}>
+          <svg
+            className={classes.sectionHeaderSvg}
+            width='329'
+            height='127'
+            viewBox='0 0 329 127'
+            fill='none'
+            xmlns='http://www.w3.org/2000/svg'
+          >
+            <path
+              d='M2.74369 9.28527C1.51705 7.34478 2.83558 4.8018 5.12834 4.68611L91.6924 0.318269C94.2175 0.190858 95.7581 3.05253 94.2615 5.09028L46.2553 70.455C45.0042 72.1585 42.4309 72.0687 41.3015 70.2821L2.74369 9.28527Z'
+              fill='#171729'
+              fillOpacity='0.55'
+            />
+            <path
+              d='M326.797 78.4488C327.781 80.0012 326.727 82.0382 324.891 82.1306L253.054 85.7457C251.032 85.8474 249.8 83.5553 251 81.9256L290.84 27.8258C291.841 26.4663 293.895 26.5381 294.799 27.9641L326.797 78.4488Z'
+              fill='#171729'
+              fillOpacity='0.55'
+            />
+            <path
+              d='M60.6622 95.0919C59.1652 94.7593 58.5841 92.9351 59.6128 91.7978L98.2042 49.1342C99.3367 47.8822 101.415 48.5099 101.665 50.1795L109.605 103.181C109.813 104.569 108.564 105.734 107.193 105.43L60.6622 95.0919Z'
+              fill='#171729'
+              fillOpacity='0.55'
+            />
+          </svg>
+          <div className={classes.enjoySectionTop}>
+            <p className={classes.title}>Enjoy your Bonus</p>
+            <p className={classes.subtitle15}>
+              Give stake 24-48 hours (might take longer on weekends) to check your account and if
+              eligible.
+            </p>
+          </div>
+          <Button
+            rightIcon={faAngleRight}
+            onClick={() => {
+              router.push('/');
+            }}
+          >
+            Back to Home
+          </Button>
+        </div>
+      </div>
+    </Layout>
+  );
+}
+
+export default OfferStake;
