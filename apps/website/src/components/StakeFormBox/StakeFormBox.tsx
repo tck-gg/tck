@@ -1,6 +1,7 @@
+import axios from 'axios';
 import clsx from 'clsx';
 import { faAngleRight, faUser } from '@fortawesome/free-solid-svg-icons';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { faDiscord } from '@fortawesome/free-brands-svg-icons';
 
 import Button from '@/components/ui/Button/Button';
@@ -11,6 +12,34 @@ import classes from './StakeFormBox.module.scss';
 function StakeFormBox() {
   const [stakeUsername, setStakeUsername] = useState('');
   const [discordUsername, setDiscordUsername] = useState('');
+  const [disabled, setDisabled] = useState(false);
+  const [status, setStatus] = useState('');
+
+  async function onClick() {
+    if (!stakeUsername.trim() || !discordUsername.trim()) {
+      setStatus('Please fill out all fields.');
+
+      return;
+    }
+
+    setDisabled(true);
+
+    const response = await axios.post('/api/v1/collection/stake', {
+      stakeUsername: stakeUsername.trim(),
+      discordUsername: discordUsername.trim()
+    });
+
+    if (response.status === 201) {
+      setStakeUsername('');
+      setDiscordUsername('');
+
+      setStatus('Submitted!');
+    } else {
+      setStatus('Error! Try again.');
+    }
+
+    setDisabled(false);
+  }
 
   return (
     <div className={classes.root}>
@@ -482,11 +511,15 @@ function StakeFormBox() {
               return setDiscordUsername(event.target.value);
             }}
           />
+
+          {status && <p>{status}</p>}
         </div>
         <Button
           rightIcon={faAngleRight}
           background='linear-gradient(90deg, #6B6AF2 0%, #3F419B 100%)'
           fullWidth
+          onClick={onClick}
+          disabled={disabled}
         >
           Submit Information
         </Button>

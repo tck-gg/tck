@@ -84,7 +84,8 @@ const data = [
   { link: '/users', label: 'Users', icon: IconUsers },
   { link: '/leaderboard', label: 'Leaderboard', icon: IconMedal },
   { link: '/raffles', label: 'Raffles', icon: IconDice5 },
-  { link: '/giveaways', label: 'Giveaways', icon: IconGift }
+  { link: '/giveaways', label: 'Giveaways', icon: IconGift },
+  { link: '/reloads', label: 'Reloads', icon: IconGift }
 ];
 
 function Layout({ title, children }: { title?: string; children: React.ReactNode }) {
