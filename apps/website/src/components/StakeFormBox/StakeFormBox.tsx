@@ -1,5 +1,7 @@
 import clsx from 'clsx';
-import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
+import { faAngleRight, faUser } from '@fortawesome/free-solid-svg-icons';
+import { useState } from 'react';
+import { faDiscord } from '@fortawesome/free-brands-svg-icons';
 
 import Button from '@/components/ui/Button/Button';
 import Input from '@/components/ui/Input/Input';
@@ -7,6 +9,9 @@ import Input from '@/components/ui/Input/Input';
 import classes from './StakeFormBox.module.scss';
 
 function StakeFormBox() {
+  const [stakeUsername, setStakeUsername] = useState('');
+  const [discordUsername, setDiscordUsername] = useState('');
+
   return (
     <div className={classes.root}>
       <div className={clsx(classes.side, classes.left)}>
@@ -459,8 +464,24 @@ function StakeFormBox() {
       </div>
       <div className={clsx(classes.side, classes.right)}>
         <div className={classes.formInputs}>
-          <Input />
-          <Input />
+          <Input
+            label='Stake Username'
+            placeholder='Type your Stake username...'
+            value={stakeUsername}
+            icon={faUser}
+            onChange={(event) => {
+              return setStakeUsername(event.target.value);
+            }}
+          />
+          <Input
+            label='Discord Username'
+            placeholder='Type your Discord username...'
+            value={discordUsername}
+            icon={faDiscord}
+            onChange={(event) => {
+              return setDiscordUsername(event.target.value);
+            }}
+          />
         </div>
         <Button
           rightIcon={faAngleRight}
