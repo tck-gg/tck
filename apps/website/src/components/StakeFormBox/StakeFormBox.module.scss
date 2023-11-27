@@ -12,6 +12,9 @@
 
 .left {
   background: linear-gradient(180deg, rgba(0, 0, 0, 0.33) 0%, rgba(0, 0, 0, 0.00) 100%), rgba(10, 10, 22, 0.44);
+
+  display: flex;
+  flex-direction: column;
 }
 .right {
   padding: 24px;
@@ -31,6 +34,7 @@
   justify-content: center;
   align-items: center;
   gap: 8px;
+  flex-grow: 1;
 }
 
 .title {
@@ -54,4 +58,6 @@
   gap: 28px;
 
   flex-grow: 1;
+
+  width: 100%;
 }

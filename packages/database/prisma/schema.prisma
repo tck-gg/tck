@@ -113,3 +113,11 @@ model Giveaway {
   winner            User?           @relation(fields: [winnerId], references: [id])
   winnerId          String?         @db.ObjectId
 }
+
+model StakeReloadEntry {
+  id        String @id @default(auto()) @map("_id") @db.ObjectId
+  timestamp Int
+
+  stakeUsername   String
+  discordUsername String
+}

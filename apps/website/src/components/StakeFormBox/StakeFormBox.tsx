@@ -1,5 +1,8 @@
+import axios from 'axios';
 import clsx from 'clsx';
-import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
+import { faAngleRight, faUser } from '@fortawesome/free-solid-svg-icons';
+import { useEffect, useState } from 'react';
+import { faDiscord } from '@fortawesome/free-brands-svg-icons';
 
 import Button from '@/components/ui/Button/Button';
 import Input from '@/components/ui/Input/Input';
@@ -7,6 +10,37 @@ import Input from '@/components/ui/Input/Input';
 import classes from './StakeFormBox.module.scss';
 
 function StakeFormBox() {
+  const [stakeUsername, setStakeUsername] = useState('');
+  const [discordUsername, setDiscordUsername] = useState('');
+  const [disabled, setDisabled] = useState(false);
+  const [status, setStatus] = useState('');
+
+  async function onClick() {
+    if (!stakeUsername.trim() || !discordUsername.trim()) {
+      setStatus('Please fill out all fields.');
+
+      return;
+    }
+
+    setDisabled(true);
+
+    const response = await axios.post('/api/v1/collection/stake', {
+      stakeUsername: stakeUsername.trim(),
+      discordUsername: discordUsername.trim()
+    });
+
+    if (response.status === 201) {
+      setStakeUsername('');
+      setDiscordUsername('');
+
+      setStatus('Submitted!');
+    } else {
+      setStatus('Error! Try again.');
+    }
+
+    setDisabled(false);
+  }
+
   return (
     <div className={classes.root}>
       <div className={clsx(classes.side, classes.left)}>
@@ -459,13 +493,33 @@ function StakeFormBox() {
       </div>
       <div className={clsx(classes.side, classes.right)}>
         <div className={classes.formInputs}>
-          <Input />
-          <Input />
+          <Input
+            label='Stake Username'
+            placeholder='Type your Stake username...'
+            value={stakeUsername}
+            icon={faUser}
+            onChange={(event) => {
+              return setStakeUsername(event.target.value);
+            }}
+          />
+          <Input
+            label='Discord Username'
+            placeholder='Type your Discord username...'
+            value={discordUsername}
+            icon={faDiscord}
+            onChange={(event) => {
+              return setDiscordUsername(event.target.value);
+            }}
+          />
+
+          {status && <p>{status}</p>}
         </div>
         <Button
           rightIcon={faAngleRight}
           background='linear-gradient(90deg, #6B6AF2 0%, #3F419B 100%)'
           fullWidth
+          onClick={onClick}
+          disabled={disabled}
         >
           Submit Information
         </Button>
