@@ -17,7 +17,7 @@ function Raffles({ reloads }: { reloads: StakeReloadEntry[] }) {
     ['Stake Username,Discord Username']
       .concat(
         reloads.map((reload) => {
-          return `${reload.stakeUsername},${reload.stakeUsername}`;
+          return `${reload.stakeUsername},${reload.discordUsername}`;
         })
       )
       .join('\n')
