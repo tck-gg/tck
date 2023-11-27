@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import { useRouter } from 'next/router';
+import clsx from 'clsx';
 
 import Layout from '@/components/Layout/Layout';
 import JaggedBackgroundItem from '@/components/JaggedBackgroundItem/JaggedBackgroundItem';
@@ -98,8 +99,8 @@ function OfferStake() {
             />
           </svg>
           <div className={classes.enjoySectionTop}>
-            <p className={classes.title}>Enjoy your Bonus</p>
-            <p className={classes.subtitle15}>
+            <p className={clsx(classes.title, classes.center)}>Enjoy your Bonus</p>
+            <p className={clsx(classes.subtitle15, classes.center)}>
               Give stake 24-48 hours (might take longer on weekends) to check your account and if
               eligible.
             </p>
