@@ -44,7 +44,7 @@ function StakeFormBox() {
   return (
     <div className={classes.root}>
       <div className={clsx(classes.side, classes.left)}>
-        <div className={classes.info}>
+        <div className={classes.leftInfo}>
           <p className={classes.title}>Submit your Info</p>
           <p className={classes.description}>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
@@ -52,8 +52,8 @@ function StakeFormBox() {
           </p>
         </div>
         <svg
-          width='584'
-          height='152'
+          // width='584'
+          // height='152'
           viewBox='0 0 584 152'
           fill='none'
           xmlns='http://www.w3.org/2000/svg'
@@ -446,8 +446,8 @@ function StakeFormBox() {
               y2='172.481'
               gradientUnits='userSpaceOnUse'
             >
-              <stop stop-color='#666DF3' />
-              <stop offset='1' stop-color='#C6CAF7' />
+              <stop stopColor='#666DF3' />
+              <stop offset='1' stopColor='#C6CAF7' />
             </linearGradient>
             <clipPath id='clip0_1535_2705'>
               <rect width='584' height='152' fill='white' />
@@ -492,6 +492,13 @@ function StakeFormBox() {
         </svg>
       </div>
       <div className={clsx(classes.side, classes.right)}>
+        <div className={classes.rightInfo}>
+          <p className={classes.title}>Submit your Info</p>
+          <p className={classes.description}>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+            incididunt ut labore et dolore magna aliqua.
+          </p>
+        </div>
         <div className={classes.formInputs}>
           <Input
             label='Stake Username'
