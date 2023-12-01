@@ -119,10 +119,16 @@ function Register() {
           form.setErrors({ username: 'Account already exists', email: 'Account already exists' });
           return;
         }
-        if (response.status === 403) {
+        if (response.status === 418) {
           // User has been IP banned.
           form.setErrors({
             terms: 'Your IP has been banned and you are no longer able to create new accounts.'
+          });
+        }
+        if (response.status === 403) {
+          form.setErrors({
+            terms:
+              'An error has occurred. Try disabling your VPN? If you think this is an error, email us at contact@tck.gg.'
           });
         }
         // If the account was't created for some other reason, like invalid email or password.

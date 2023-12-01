@@ -1,17 +1,39 @@
+/* eslint-disable no-console */
+
 import { NextApiRequest, NextApiResponse } from 'next';
 import { isValidEmail } from 'custom-util';
 import { prisma, createUser } from 'database';
+// import ProxyCheck from 'proxycheck-ts';
 
 import { getIp } from '@/util/ip';
+
+// let proxyCheck: ProxyCheck;
+// if (process.env.PROXYCHECK_API_KEY) {
+//   proxyCheck = new ProxyCheck({ api_key: process.env.PROXYCHECK_API_KEY });
+// }
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
   const ip = getIp(req);
 
   // Check if IP is banned.
   if (ip !== 'Unknown') {
+    // const proxyCheckResult = await proxyCheck.checkIP(ip, {
+    //   vpn: 3
+    // });
+    // if (proxyCheckResult.status !== 'error') {
+    //   const usingVpn = proxyCheckResult[ip].vpn || proxyCheckResult[ip].proxy;
+    //   if (usingVpn) {
+    //     res.status(403).end();
+    //     return;
+    //   }
+
+    //   console.log(proxyCheckResult);
+    //   console.log(usingVpn);
+    // }
+
     const bannedIP = await prisma.bannedIp.findUnique({ where: { ip } });
     if (bannedIP) {
-      res.status(403).end();
+      res.status(418).end();
       return;
     }
   }
