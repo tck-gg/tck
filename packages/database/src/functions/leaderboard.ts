@@ -1,6 +1,7 @@
 import axios from 'axios';
 import {
   ClashLeaderboardEntry,
+  CsgoBigLeaderboardApiResponse,
   GamdomLeaderboardApiResponse,
   LeaderboardSpot,
   LeaderboardType,
@@ -144,6 +145,24 @@ export async function getLeaderboard(type: LeaderboardType) {
         username: spot.username,
         amount: Math.round(spot.wagerAmount),
         avatar: spot.image
+      };
+    });
+  }
+
+  if (type === 'csgobig') {
+    const start = new Date(new Date().getFullYear(), new Date().getMonth(), 1).getTime();
+
+    const response = await axios.get(
+      `https://csgobig.com/api/partners/wagerStats/tckn3e9HBsu8HjjMAqBv33y?time=${start}`
+    );
+
+    const data: CsgoBigLeaderboardApiResponse = response.data;
+
+    spots = data.results.splice(0, 10).map((spot) => {
+      return {
+        username: spot.name,
+        amount: Math.round(spot.total),
+        avatar: spot.img || ''
       };
     });
   }

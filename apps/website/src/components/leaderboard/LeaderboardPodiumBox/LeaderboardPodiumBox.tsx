@@ -1,13 +1,14 @@
 import { Prisma } from 'database';
 import { Avatar } from '@mantine/core';
 import { LeaderboardRewardType } from 'types';
+import Image from 'next/image';
 
 import JaggedBackgroundItem from '@/components/JaggedBackgroundItem/JaggedBackgroundItem';
 
 import classes from './LeaderboardPodiumBox.module.scss';
 
 import clashGemImage from '@/images/clash-gem.png';
-import Image from 'next/image';
+import coinImage from '@/images/coin.png';
 
 function LeaderboardPodiumBox({
   leaderboardSpot,
@@ -43,9 +44,13 @@ function LeaderboardPodiumBox({
               {rewardType === 'clash' && (
                 <Image width={16} height={16} src={clashGemImage} alt='Clash Gem' />
               )}
+              {rewardType === 'csgobig' && (
+                <Image width={16} height={16} src={coinImage} alt='Clash Gem' />
+              )}
               <p className={classes.rewardText}>
                 {rewardType === 'cash' && '$'}
                 {rewardType === 'clash' && [500, 250, 100][position - 1]}
+                {rewardType === 'csgobig' && [500, 250, 100][position - 1]}
               </p>
             </div>
           </JaggedBackgroundItem>

@@ -6,12 +6,15 @@ import Image from 'next/image';
 import classes from './Leaderboard.module.scss';
 
 import clashGemImage from '@/images/clash-gem.png';
+import coinImage from '@/images/coin.png';
 
 export type ILeaderboard = Prisma.LeaderboardGetPayload<{
   include: { spots: true };
 }>;
 
 function Leaderboard({ leaderboard }: { leaderboard: ILeaderboard }) {
+  const hasPrize = leaderboard.type === 'clash' || leaderboard.type === 'csgobig';
+
   return (
     <div className={classes.root}>
       <table>
@@ -19,7 +22,7 @@ function Leaderboard({ leaderboard }: { leaderboard: ILeaderboard }) {
           <tr>
             <th>User</th>
             <th>Wagered</th>
-            {leaderboard.type === 'clash' && <th>Prize</th>}
+            {hasPrize && <th>Prize</th>}
           </tr>
         </thead>
         <tbody>
@@ -43,25 +46,30 @@ function Leaderboard({ leaderboard }: { leaderboard: ILeaderboard }) {
                   </Avatar>
                   <span className={classes.name}>{spot.username}</span>
                 </td>
-                <td
-                  className={clsx(
-                    classes.shrink,
-                    classes.amount,
-                    leaderboard.type === 'clash' && classes.rightCol
-                  )}
-                >
+                <td className={clsx(classes.shrink, classes.amount, hasPrize && classes.rightCol)}>
                   ${spot.amount.toLocaleString('en-US')}
                 </td>
-                {leaderboard.type === 'clash' && (
+                {hasPrize && (
                   <td className={clsx(classes.shrink, classes.amount)}>
                     <div className={classes.gemsAmount}>
-                      <Image
-                        width={12}
-                        height={12}
-                        src={clashGemImage}
-                        alt='Clash Gem'
-                        className={classes.clashGem}
-                      />
+                      {leaderboard.type === 'clash' && (
+                        <Image
+                          width={12}
+                          height={12}
+                          src={clashGemImage}
+                          alt='Clash Gem'
+                          className={classes.clashGem}
+                        />
+                      )}
+                      {leaderboard.type === 'csgobig' && (
+                        <Image
+                          width={12}
+                          height={12}
+                          src={coinImage}
+                          alt='TCK Coin'
+                          className={classes.clashGem}
+                        />
+                      )}
                       <span>{[500, 250, 100, 50, 25, 10, 10, 10, 10, 10][index]}</span>
                     </div>
                   </td>

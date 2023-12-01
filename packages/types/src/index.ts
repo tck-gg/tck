@@ -1,3 +1,4 @@
+export * from './types/csgobig';
 export * from './types/clash';
 export * from './types/gamdom';
 export * from './types/giveaway';
