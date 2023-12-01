@@ -7,6 +7,7 @@ import { AnimatePresence } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 
+import Button from '@/components/ui/Button/Button';
 import HeaderBoxMobile from '../HeaderBoxMobile/HeaderBoxMobile';
 import HeaderProfileGroup from '../HeaderProfileGroup/HeaderProfileGroup';
 
@@ -72,7 +73,7 @@ function Header() {
           <HeaderProfileGroup />
         ) : (
           <div className={classes.buttonGroup}>
-            {/* <Button
+            <Button
               variant='secondary'
               borderRadius={5}
               onClick={() => {
@@ -89,7 +90,7 @@ function Header() {
               }}
             >
               Log in
-            </Button> */}
+            </Button>
           </div>
         )}
       </div>
