@@ -2,8 +2,10 @@ import bcrypt from 'bcrypt';
 import crypto from 'crypto';
 import { Action } from '@prisma/client';
 import { isValidEmail } from 'custom-util';
+import { v4 as uuidv4 } from 'uuid';
 
 import { prisma } from '../client';
+import { sendEmail } from '../email';
 
 /**
  * Gets a user from the database by their UUID.
@@ -98,6 +100,50 @@ export async function createUser(
         }
       }
     }
+  });
+
+  const verificationUuid = uuidv4();
+
+  // Create the verification.
+  await prisma.accountVerification.create({
+    data: {
+      user: {
+        connect: {
+          username
+        }
+      },
+      uuid: verificationUuid
+    }
+  });
+
+  // Send the verification email.
+  await sendEmail({
+    to: email,
+    subject: 'Verify your TCK.gg account.',
+    html: `<p>Click <a href="https://tck.gg/verify?uuid=${verificationUuid}">here</a> to verify your account.</p>`
+  });
+
+  return true;
+}
+
+export async function verifyAccount(uuid: string) {
+  const verification = await prisma.accountVerification.findFirst({
+    where: { uuid }
+  });
+
+  if (!verification) {
+    return false;
+  }
+
+  await prisma.user.update({
+    where: { id: verification.userId },
+    data: {
+      isVerified: true
+    }
+  });
+
+  await prisma.accountVerification.delete({
+    where: { id: verification.id }
   });
 
   return true;

@@ -28,6 +28,7 @@ function Register() {
   const auth = useAuth();
 
   const [loading, setLoading] = useState(false);
+  const [hasRegistered, setHasRegistered] = useState(false);
 
   const form = useForm({
     initialValues: {
@@ -128,11 +129,11 @@ function Register() {
         form.setErrors({ terms: 'There was an error creating your account. Try again.' });
       }
 
-      // Login if account creation was successful.
-      const user = await auth.login(form.values.email, form.values.password);
-      if (user) {
-        // Redirect to feed.
-        router.push('/');
+      // If account creation succeeded.
+      if (response.status === 201) {
+        setHasRegistered(true);
+
+        form.reset();
         setLoading(false);
         return;
       }
@@ -203,6 +204,10 @@ function Register() {
           >
             Register
           </Button>
+
+          {hasRegistered && (
+            <Text mt='xl'>Registered! Check your email to verify your account.</Text>
+          )}
         </Paper>
 
         <Text mt='sm' size='sm'>

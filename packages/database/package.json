@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "@prisma/client": "^4.15.0",
+    "@sendgrid/mail": "^7.7.0",
     "@sentry/node": "^7.66.0",
     "@sentry/profiling-node": "^1.2.0",
     "backblaze-b2": "^1.7.0",
@@ -35,7 +36,7 @@
     "random-org": "^2.2.0",
     "socket.io-client": "^4.7.2",
     "types": "*",
-    "uuid": "^9.0.0"
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
     "@types/backblaze-b2": "^1.5.2",

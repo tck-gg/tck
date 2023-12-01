@@ -18,7 +18,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     res.status(400).end();
     return;
   }
-  if (!user) {
+  if (!user || !user.isVerified) {
     res.status(401).end();
     return;
   }
