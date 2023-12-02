@@ -124,12 +124,14 @@ function Register() {
           form.setErrors({
             terms: 'Your IP has been banned and you are no longer able to create new accounts.'
           });
+          return;
         }
         if (response.status === 403) {
           form.setErrors({
             terms:
               'An error has occurred. Try disabling your VPN? If you think this is an error, email us at contact@tck.gg.'
           });
+          return;
         }
         // If the account was't created for some other reason, like invalid email or password.
         form.setErrors({ terms: 'There was an error creating your account. Try again.' });
@@ -141,11 +143,7 @@ function Register() {
 
         form.reset();
         setLoading(false);
-        return;
       }
-
-      // Else, refresh. Something stupid happened.
-      router.reload();
     })();
   }
 
