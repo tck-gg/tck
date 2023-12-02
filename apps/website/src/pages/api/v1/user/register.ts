@@ -21,7 +21,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
       vpn: 3
     });
     if (proxyCheckResult.status !== 'error') {
-      const usingVpn = proxyCheckResult[ip].vpn || proxyCheckResult[ip].proxy;
+      const usingVpn = proxyCheckResult[ip].vpn === 'yes' || proxyCheckResult[ip].proxy === 'yes';
       if (usingVpn) {
         res.status(403).end();
         return;
