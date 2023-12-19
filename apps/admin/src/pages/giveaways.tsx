@@ -25,6 +25,8 @@ import { Dropzone, FileWithPath, MIME_TYPES } from '@mantine/dropzone';
 import dateFormat from 'dateformat';
 import { notifications } from '@mantine/notifications';
 
+import { usePermissions } from '@/hooks/permissions';
+
 import Layout from '@/components/Layout';
 
 export async function getServerSideProps() {
@@ -61,6 +63,7 @@ function Giveaways({
   const [opened, { open, close }] = useDisclosure(false);
   const [modalMode, setModalMode] = useState<'create' | 'edit'>('create');
   const router = useRouter();
+  const permissions = usePermissions();
 
   const [disabled, setDisabled] = useState(false);
 
@@ -74,6 +77,14 @@ function Giveaways({
   const [editId, setEditId] = useState('');
 
   const [confirmDelete, setConfirmDelete] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => {
+      if (!permissions.permissions.includes('MANAGE_GIVEAWAYS')) {
+        router.push('/');
+      }
+    }, 3000);
+  });
 
   useEffect(() => {
     setDisabled(
@@ -283,229 +294,240 @@ function Giveaways({
 
   return (
     <Layout>
-      <Title mb='sm'>Giveaways</Title>
-      <Title order={2} mb='sm'>
-        Active Giveaways
-      </Title>
+      {permissions.permissions.includes('MANAGE_GIVEAWAYS') ? (
+        <>
+          <Title mb='sm'>Giveaways</Title>
+          <Title order={2} mb='sm'>
+            Active Giveaways
+          </Title>
 
-      <Button leftIcon={<IconPlus />} onClick={handleCreateClick} mb='sm'>
-        New Giveaway
-      </Button>
-
-      {giveaways.currentGiveaways.length > 0 ? (
-        <Table highlightOnHover withBorder>
-          <thead>
-            <tr>
-              <th>Item</th>
-              <th>Brand</th>
-              <th>Value</th>
-              <th>Entries</th>
-              <th>End Date</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {giveaways.currentGiveaways.map((giveaway: IGiveaway) => {
-              return (
-                <tr key={giveaway.id}>
-                  <td>{giveaway.name}</td>
-                  <td>{giveaway.brand}</td>
-                  <td>${giveaway.value.toLocaleString('en-US')}</td>
-                  <td>
-                    {giveaway.entries.length}/{giveaway.maxEntries}
-                  </td>
-                  <td>
-                    {dateFormat(giveaway.timestampEnd, 'yyyy-mm-dd HH:mm:ss')} (in{' '}
-                    {Math.floor((giveaway.timestampEnd - Date.now()) / 1000 / 60 / 60 / 24)} days)
-                  </td>
-                  <td>
-                    <Anchor
-                      component='button'
-                      onClick={() => {
-                        handleEditClick(giveaway);
-                      }}
-                    >
-                      Edit
-                    </Anchor>
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </Table>
-      ) : (
-        <Text>No active giveaways.</Text>
-      )}
-
-      <Space h='md' />
-
-      <Title order={2} mb='sm'>
-        Previous Giveaways
-      </Title>
-      {giveaways.pastGiveaways.length > 0 ? (
-        <Table highlightOnHover withBorder>
-          <thead>
-            <tr>
-              <th>Item</th>
-              <th>Brand</th>
-              <th>Value</th>
-              <th>Entries</th>
-              <th>End Date</th>
-              <th>Winner</th>
-            </tr>
-          </thead>
-          <tbody>
-            {giveaways.pastGiveaways.map((giveaway: IGiveaway) => {
-              return (
-                <tr key={giveaway.id}>
-                  <td>{giveaway.name}</td>
-                  <td>{giveaway.brand}</td>
-                  <td>${giveaway.value}</td>
-                  <td>
-                    {giveaway.entries.length}/{giveaway.maxEntries}
-                  </td>
-                  <td>{new Date(giveaway.timestampEnd).toLocaleString()}</td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </Table>
-      ) : (
-        <Text>No previous giveaways.</Text>
-      )}
-
-      <Modal
-        opened={opened}
-        onClose={handleClose}
-        centered
-        title={`${modalMode === 'create' ? 'Create' : 'Edit'} Giveaway`}
-      >
-        <TextInput
-          value={name}
-          onChange={(e) => {
-            return setName(e.currentTarget.value);
-          }}
-          label='Item Name'
-          placeholder='PlayStation 5'
-          withAsterisk
-          mb='sm'
-        />
-        <TextInput
-          value={brand}
-          onChange={(e) => {
-            return setBrand(e.currentTarget.value);
-          }}
-          label='Item Brand'
-          placeholder='Sony'
-          withAsterisk
-          mb='sm'
-        />
-        <NumberInput
-          value={value}
-          onChange={setValue}
-          label='Item Value'
-          placeholder='549.00'
-          withAsterisk
-          mb='sm'
-          step={0.01}
-          min={0.01}
-          precision={2}
-        />
-        <NumberInput
-          value={maxEntries}
-          onChange={setMaxEntries}
-          label='Max Entries'
-          placeholder='500'
-          withAsterisk
-          mb='sm'
-        />
-        <DateTimePicker
-          label='End Date'
-          dropdownType='modal'
-          value={endDate || new Date()}
-          onChange={setEndDate}
-          placeholder='Pick date and time'
-          clearable
-          withAsterisk
-          mx='auto'
-          maw={400}
-          mb='sm'
-        />
-
-        {modalMode === 'create' && (
-          <Dropzone
-            onDrop={setImages}
-            maxSize={1024 * 1024 * 8}
-            accept={[MIME_TYPES.png]}
-            maxFiles={1}
-            mb='sm'
-          >
-            <Group position='center' spacing='xl' style={{ minHeight: 120, pointerEvents: 'none' }}>
-              <Dropzone.Accept>
-                <IconUpload
-                  size='3.2rem'
-                  stroke={1.5}
-                  color={theme.colors[theme.primaryColor][theme.colorScheme === 'dark' ? 4 : 6]}
-                />
-              </Dropzone.Accept>
-              <Dropzone.Reject>
-                <IconX
-                  size='3.2rem'
-                  stroke={1.5}
-                  color={theme.colors.red[theme.colorScheme === 'dark' ? 4 : 6]}
-                />
-              </Dropzone.Reject>
-              <Dropzone.Idle>
-                <IconPhoto size='3.2rem' stroke={1.5} />
-              </Dropzone.Idle>
-
-              <div>
-                <Text size='xl' inline>
-                  Drag image here or click to select file.
-                </Text>
-                <Text size='sm' color='dimmed' inline mt={7}>
-                  Upload one image. Max 8 MB.
-                </Text>
-              </div>
-            </Group>
-          </Dropzone>
-        )}
-
-        <Flex justify='center' mb='sm'>
-          {images.map((file) => {
-            const url = URL.createObjectURL(file);
-
-            return (
-              <Image
-                key={file.name}
-                src={url}
-                imageProps={{
-                  onLoad: () => {
-                    URL.revokeObjectURL(url);
-                  }
-                }}
-                alt={file.name}
-                height={200}
-                fit='contain'
-              />
-            );
-          })}
-        </Flex>
-
-        <Button
-          onClick={handleSubmitGiveaway}
-          disabled={disabled}
-          fullWidth
-          mb={modalMode === 'edit' ? 'sm' : 0}
-        >
-          {modalMode === 'create' ? 'Create' : 'Update'} Giveaway
-        </Button>
-        {modalMode === 'edit' && (
-          <Button disabled={disabled} fullWidth color='red' onClick={handleDeleteClick}>
-            {confirmDelete ? 'Confirm?' : 'Delete Giveaway'}
+          <Button leftIcon={<IconPlus />} onClick={handleCreateClick} mb='sm'>
+            New Giveaway
           </Button>
-        )}
-      </Modal>
+
+          {giveaways.currentGiveaways.length > 0 ? (
+            <Table highlightOnHover withBorder>
+              <thead>
+                <tr>
+                  <th>Item</th>
+                  <th>Brand</th>
+                  <th>Value</th>
+                  <th>Entries</th>
+                  <th>End Date</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {giveaways.currentGiveaways.map((giveaway: IGiveaway) => {
+                  return (
+                    <tr key={giveaway.id}>
+                      <td>{giveaway.name}</td>
+                      <td>{giveaway.brand}</td>
+                      <td>${giveaway.value.toLocaleString('en-US')}</td>
+                      <td>
+                        {giveaway.entries.length}/{giveaway.maxEntries}
+                      </td>
+                      <td>
+                        {dateFormat(giveaway.timestampEnd, 'yyyy-mm-dd HH:mm:ss')} (in{' '}
+                        {Math.floor((giveaway.timestampEnd - Date.now()) / 1000 / 60 / 60 / 24)}{' '}
+                        days)
+                      </td>
+                      <td>
+                        <Anchor
+                          component='button'
+                          onClick={() => {
+                            handleEditClick(giveaway);
+                          }}
+                        >
+                          Edit
+                        </Anchor>
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </Table>
+          ) : (
+            <Text>No active giveaways.</Text>
+          )}
+
+          <Space h='md' />
+
+          <Title order={2} mb='sm'>
+            Previous Giveaways
+          </Title>
+          {giveaways.pastGiveaways.length > 0 ? (
+            <Table highlightOnHover withBorder>
+              <thead>
+                <tr>
+                  <th>Item</th>
+                  <th>Brand</th>
+                  <th>Value</th>
+                  <th>Entries</th>
+                  <th>End Date</th>
+                  <th>Winner</th>
+                </tr>
+              </thead>
+              <tbody>
+                {giveaways.pastGiveaways.map((giveaway: IGiveaway) => {
+                  return (
+                    <tr key={giveaway.id}>
+                      <td>{giveaway.name}</td>
+                      <td>{giveaway.brand}</td>
+                      <td>${giveaway.value}</td>
+                      <td>
+                        {giveaway.entries.length}/{giveaway.maxEntries}
+                      </td>
+                      <td>{new Date(giveaway.timestampEnd).toLocaleString()}</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </Table>
+          ) : (
+            <Text>No previous giveaways.</Text>
+          )}
+
+          <Modal
+            opened={opened}
+            onClose={handleClose}
+            centered
+            title={`${modalMode === 'create' ? 'Create' : 'Edit'} Giveaway`}
+          >
+            <TextInput
+              value={name}
+              onChange={(e) => {
+                return setName(e.currentTarget.value);
+              }}
+              label='Item Name'
+              placeholder='PlayStation 5'
+              withAsterisk
+              mb='sm'
+            />
+            <TextInput
+              value={brand}
+              onChange={(e) => {
+                return setBrand(e.currentTarget.value);
+              }}
+              label='Item Brand'
+              placeholder='Sony'
+              withAsterisk
+              mb='sm'
+            />
+            <NumberInput
+              value={value}
+              onChange={setValue}
+              label='Item Value'
+              placeholder='549.00'
+              withAsterisk
+              mb='sm'
+              step={0.01}
+              min={0.01}
+              precision={2}
+            />
+            <NumberInput
+              value={maxEntries}
+              onChange={setMaxEntries}
+              label='Max Entries'
+              placeholder='500'
+              withAsterisk
+              mb='sm'
+            />
+            <DateTimePicker
+              label='End Date'
+              dropdownType='modal'
+              value={endDate || new Date()}
+              onChange={setEndDate}
+              placeholder='Pick date and time'
+              clearable
+              withAsterisk
+              mx='auto'
+              maw={400}
+              mb='sm'
+            />
+
+            {modalMode === 'create' && (
+              <Dropzone
+                onDrop={setImages}
+                maxSize={1024 * 1024 * 8}
+                accept={[MIME_TYPES.png]}
+                maxFiles={1}
+                mb='sm'
+              >
+                <Group
+                  position='center'
+                  spacing='xl'
+                  style={{ minHeight: 120, pointerEvents: 'none' }}
+                >
+                  <Dropzone.Accept>
+                    <IconUpload
+                      size='3.2rem'
+                      stroke={1.5}
+                      color={theme.colors[theme.primaryColor][theme.colorScheme === 'dark' ? 4 : 6]}
+                    />
+                  </Dropzone.Accept>
+                  <Dropzone.Reject>
+                    <IconX
+                      size='3.2rem'
+                      stroke={1.5}
+                      color={theme.colors.red[theme.colorScheme === 'dark' ? 4 : 6]}
+                    />
+                  </Dropzone.Reject>
+                  <Dropzone.Idle>
+                    <IconPhoto size='3.2rem' stroke={1.5} />
+                  </Dropzone.Idle>
+
+                  <div>
+                    <Text size='xl' inline>
+                      Drag image here or click to select file.
+                    </Text>
+                    <Text size='sm' color='dimmed' inline mt={7}>
+                      Upload one image. Max 8 MB.
+                    </Text>
+                  </div>
+                </Group>
+              </Dropzone>
+            )}
+
+            <Flex justify='center' mb='sm'>
+              {images.map((file) => {
+                const url = URL.createObjectURL(file);
+
+                return (
+                  <Image
+                    key={file.name}
+                    src={url}
+                    imageProps={{
+                      onLoad: () => {
+                        URL.revokeObjectURL(url);
+                      }
+                    }}
+                    alt={file.name}
+                    height={200}
+                    fit='contain'
+                  />
+                );
+              })}
+            </Flex>
+
+            <Button
+              onClick={handleSubmitGiveaway}
+              disabled={disabled}
+              fullWidth
+              mb={modalMode === 'edit' ? 'sm' : 0}
+            >
+              {modalMode === 'create' ? 'Create' : 'Update'} Giveaway
+            </Button>
+            {modalMode === 'edit' && (
+              <Button disabled={disabled} fullWidth color='red' onClick={handleDeleteClick}>
+                {confirmDelete ? 'Confirm?' : 'Delete Giveaway'}
+              </Button>
+            )}
+          </Modal>
+        </>
+      ) : (
+        <p>Missing permissions. Redirecting...</p>
+      )}
     </Layout>
   );
 }

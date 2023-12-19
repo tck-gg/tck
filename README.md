@@ -8,6 +8,11 @@ https://discord.com/oauth2/authorize?client_id=486314584983207945&scope=bot&perm
 
 ## User Permissions
 - `ACCESS_ADMIN_PANEL`
+- `MANAGE_USERS`
+- `MANAGE_LEADERBOARDS`
+- `MANAGE_RAFFLES`
+- `MANAGE_GIVEAWAYS`
+- `MANAGE_RELOADS`
 - `VIEW_USER_ACTIVITY`
 
 ## `.env`

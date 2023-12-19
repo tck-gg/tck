@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Title, Group, Text, useMantineTheme, rem, SegmentedControl, Table } from '@mantine/core';
 import { IconUpload, IconX, IconFileSpreadsheet } from '@tabler/icons-react';
 import { Dropzone, FileWithPath, MIME_TYPES } from '@mantine/dropzone';
@@ -8,6 +8,8 @@ import { useCookies } from 'react-cookie';
 import { Prisma, getLeaderboard } from 'database';
 
 import Layout from '@/components/Layout';
+
+import { usePermissions } from '@/hooks/permissions';
 
 import { getContents } from '@/util/reader';
 
@@ -51,6 +53,15 @@ function LeaderboardPage({
   const [selectedLeaderboard, setSelectedLeaderboard] = useState<string>('stake');
   const [cookie, setCookie] = useCookies(['authorization']);
   const router = useRouter();
+  const permissions = usePermissions();
+
+  useEffect(() => {
+    setTimeout(() => {
+      if (!permissions.permissions.includes('MANAGE_LEADERBOARDS')) {
+        router.push('/');
+      }
+    }, 3000);
+  });
 
   async function handleDrop(file: FileWithPath) {
     const contents = await getContents(file);
@@ -100,84 +111,90 @@ function LeaderboardPage({
 
   return (
     <Layout>
-      <Title mb='sm'>Leaderboard</Title>
-      <SegmentedControl
-        value={selectedLeaderboard}
-        onChange={setSelectedLeaderboard}
-        data={[
-          { label: 'Stake', value: 'stake' },
-          { label: 'Gamdom', value: 'gamdom' },
-          { label: 'Clash', value: 'clash' }
-        ]}
-        mb='sm'
-      />
-      {selectedLeaderboard === 'stake' ? (
-        <Dropzone
-          onDrop={(files) => {
-            handleDrop(files[0]);
-          }}
-          maxSize={3 * 1024 ** 2}
-          accept={[MIME_TYPES.csv]}
-          maxFiles={1}
-          mb='md'
-        >
-          <Group
-            position='center'
-            spacing='xl'
-            style={{ minHeight: rem(100), pointerEvents: 'none' }}
-          >
-            <Dropzone.Accept>
-              <IconUpload
-                size='3.2rem'
-                stroke={1.5}
-                color={theme.colors[theme.primaryColor][theme.colorScheme === 'dark' ? 4 : 6]}
-              />
-            </Dropzone.Accept>
-            <Dropzone.Reject>
-              <IconX
-                size='3.2rem'
-                stroke={1.5}
-                color={theme.colors.red[theme.colorScheme === 'dark' ? 4 : 6]}
-              />
-            </Dropzone.Reject>
-            <Dropzone.Idle>
-              <IconFileSpreadsheet size='3.2rem' stroke={1.5} />
-            </Dropzone.Idle>
-
-            <div>
-              <Text size='xl' inline>
-                Drag CSV here or click to select file.
-              </Text>
-              <Text size='sm' color='dimmed' inline mt={7}>
-                Upload leaderboard CSV file. Max 5 MB.
-              </Text>
-            </div>
-          </Group>
-        </Dropzone>
-      ) : null}
-      {leaderboards[selectedLeaderboard].spots.length > 0 ? (
+      {permissions.permissions.includes('MANAGE_LEADERBOARDS') ? (
         <>
-          <Table striped highlightOnHover withBorder>
-            <thead>
-              <tr>
-                <th>Username</th>
-                <th>Amount</th>
-              </tr>
-            </thead>
-            <tbody>
-              {leaderboards[selectedLeaderboard].spots.map((spot) => {
-                return (
-                  <tr key={spot.id}>
-                    <td>{spot.username}</td>
-                    <td>{spot.amount}</td>
+          <Title mb='sm'>Leaderboard</Title>
+          <SegmentedControl
+            value={selectedLeaderboard}
+            onChange={setSelectedLeaderboard}
+            data={[
+              { label: 'Stake', value: 'stake' },
+              { label: 'Gamdom', value: 'gamdom' },
+              { label: 'Clash', value: 'clash' }
+            ]}
+            mb='sm'
+          />
+          {selectedLeaderboard === 'stake' ? (
+            <Dropzone
+              onDrop={(files) => {
+                handleDrop(files[0]);
+              }}
+              maxSize={3 * 1024 ** 2}
+              accept={[MIME_TYPES.csv]}
+              maxFiles={1}
+              mb='md'
+            >
+              <Group
+                position='center'
+                spacing='xl'
+                style={{ minHeight: rem(100), pointerEvents: 'none' }}
+              >
+                <Dropzone.Accept>
+                  <IconUpload
+                    size='3.2rem'
+                    stroke={1.5}
+                    color={theme.colors[theme.primaryColor][theme.colorScheme === 'dark' ? 4 : 6]}
+                  />
+                </Dropzone.Accept>
+                <Dropzone.Reject>
+                  <IconX
+                    size='3.2rem'
+                    stroke={1.5}
+                    color={theme.colors.red[theme.colorScheme === 'dark' ? 4 : 6]}
+                  />
+                </Dropzone.Reject>
+                <Dropzone.Idle>
+                  <IconFileSpreadsheet size='3.2rem' stroke={1.5} />
+                </Dropzone.Idle>
+
+                <div>
+                  <Text size='xl' inline>
+                    Drag CSV here or click to select file.
+                  </Text>
+                  <Text size='sm' color='dimmed' inline mt={7}>
+                    Upload leaderboard CSV file. Max 5 MB.
+                  </Text>
+                </div>
+              </Group>
+            </Dropzone>
+          ) : null}
+          {leaderboards[selectedLeaderboard].spots.length > 0 ? (
+            <>
+              <Table striped highlightOnHover withBorder>
+                <thead>
+                  <tr>
+                    <th>Username</th>
+                    <th>Amount</th>
                   </tr>
-                );
-              })}
-            </tbody>
-          </Table>
+                </thead>
+                <tbody>
+                  {leaderboards[selectedLeaderboard].spots.map((spot) => {
+                    return (
+                      <tr key={spot.id}>
+                        <td>{spot.username}</td>
+                        <td>{spot.amount}</td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </Table>
+            </>
+          ) : (
+            <Text>No leaderboard uploaded.</Text>
+          )}
         </>
       ) : (
-        <Text>No leaderboard uploaded.</Text>
+        <p>Missing permissions. Redirecting...</p>
       )}
     </Layout>
   );

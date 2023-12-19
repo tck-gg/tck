@@ -22,6 +22,8 @@ import {
 import { useState } from 'react';
 import Link from 'next/link';
 
+import { usePermissions } from '@/hooks/permissions';
+
 const useStyles = createStyles((theme) => {
   return {
     header: {
@@ -79,27 +81,37 @@ const useStyles = createStyles((theme) => {
   };
 });
 
-const data = [
+const SIDEBAR_DATA = [
   { link: '/', label: 'Home', icon: IconHome },
-  { link: '/users', label: 'Users', icon: IconUsers },
-  { link: '/leaderboard', label: 'Leaderboard', icon: IconMedal },
-  { link: '/raffles', label: 'Raffles', icon: IconDice5 },
-  { link: '/giveaways', label: 'Giveaways', icon: IconGift },
-  { link: '/reloads', label: 'Reloads', icon: IconGift }
+  { link: '/users', label: 'Users', icon: IconUsers, permission: 'MANAGE_USERS' },
+  {
+    link: '/leaderboard',
+    label: 'Leaderboard',
+    icon: IconMedal,
+    permission: 'MANAGE_LEADERBOARDS'
+  },
+  { link: '/raffles', label: 'Raffles', icon: IconDice5, permission: 'MANAGE_RAFFLES' },
+  { link: '/giveaways', label: 'Giveaways', icon: IconGift, permission: 'MANAGE_GIVEAWAYS' },
+  { link: '/reloads', label: 'Reloads', icon: IconGift, permission: 'MANAGE_RELOADS' }
 ];
 
 function Layout({ title, children }: { title?: string; children: React.ReactNode }) {
+  const permissions = usePermissions();
+
   const theme = useMantineTheme();
 
   const { classes, cx } = useStyles();
   const [active, setActive] = useState(
-    data.find((item) => {
+    SIDEBAR_DATA.find((item) => {
       return item.label.toLowerCase() === window.location.pathname.replace('/', '');
     })?.label || 'Home'
   );
   const [opened, setOpened] = useState(false);
 
-  const links = data.map((item) => {
+  const links = SIDEBAR_DATA.map((item) => {
+    if (item.permission && !permissions.permissions.includes(item.permission)) {
+      return null;
+    }
     return (
       <Link
         href={item.link}

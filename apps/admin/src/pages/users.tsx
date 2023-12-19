@@ -11,6 +11,8 @@ import {
 } from '@mantine/core';
 import { getAllUsers, User, UserAccounts, UserAction } from 'database';
 import dateformat from 'dateformat';
+import { useEffect } from 'react';
+import { useRouter } from 'next/router';
 
 import Layout from '@/components/Layout';
 import {
@@ -40,6 +42,15 @@ type IUser = User & {
 
 function Users({ users }: { users: IUser[] }) {
   const permissions = usePermissions();
+  const router = useRouter();
+
+  useEffect(() => {
+    setTimeout(() => {
+      if (!permissions.permissions.includes('MANAGE_USERS')) {
+        router.push('/');
+      }
+    }, 3000);
+  });
 
   const rows = users.map((user) => {
     return (
@@ -130,23 +141,29 @@ function Users({ users }: { users: IUser[] }) {
 
   return (
     <Layout>
-      <Title mb='lg'>Users</Title>
-      <ScrollArea>
-        <Table highlightOnHover withBorder>
-          <thead>
-            <tr>
-              <th>User</th>
-              <th>Email</th>
-              <th>Points</th>
-              <th>Joined</th>
-              <th>Last Active</th>
-              {permissions.permissions.includes('VIEW_USER_ACTIVITY') && <th>Activity</th>}
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>{rows}</tbody>
-        </Table>
-      </ScrollArea>
+      {permissions.permissions.includes('MANAGE_USERS') ? (
+        <>
+          <Title mb='lg'>Users</Title>
+          <ScrollArea>
+            <Table highlightOnHover withBorder>
+              <thead>
+                <tr>
+                  <th>User</th>
+                  <th>Email</th>
+                  <th>Points</th>
+                  <th>Joined</th>
+                  <th>Last Active</th>
+                  {permissions.permissions.includes('VIEW_USER_ACTIVITY') && <th>Activity</th>}
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>{rows}</tbody>
+            </Table>
+          </ScrollArea>
+        </>
+      ) : (
+        <p>Missing permissions. Redirecting...</p>
+      )}
     </Layout>
   );
 }
