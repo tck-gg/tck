@@ -26,9 +26,6 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
         res.status(403).end();
         return;
       }
-
-      console.log(proxyCheckResult);
-      console.log(usingVpn);
     }
 
     const bannedIP = await prisma.bannedIp.findUnique({ where: { ip } });

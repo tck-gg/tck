@@ -20,6 +20,7 @@ enum Permission {
   MANAGE_USERS
   MANAGE_GIVEAWAYS
   MANAGE_LEADERBOARDS
+  VIEW_USER_ACTIVITY
 }
 
 model UserAction {

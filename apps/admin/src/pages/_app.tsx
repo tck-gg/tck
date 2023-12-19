@@ -6,6 +6,8 @@ import { Notifications } from '@mantine/notifications';
 
 import Auth from '@/components/Auth';
 
+import { ProvidePermissions } from '@/hooks/permissions';
+
 import '../styles/globals.scss';
 
 function App({ Component, pageProps }: AppProps) {
@@ -23,9 +25,11 @@ function App({ Component, pageProps }: AppProps) {
       >
         <Notifications />
         <CookiesProvider>
-          <Auth>
-            <Component {...pageProps} />
-          </Auth>
+          <ProvidePermissions>
+            <Auth>
+              <Component {...pageProps} />
+            </Auth>
+          </ProvidePermissions>
         </CookiesProvider>
       </MantineProvider>
     </>

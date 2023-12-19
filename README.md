@@ -6,6 +6,10 @@
 ## Discord Bot
 https://discord.com/oauth2/authorize?client_id=486314584983207945&scope=bot&permissions=478272
 
+## User Permissions
+- `ACCESS_ADMIN_PANEL`
+- `VIEW_USER_ACTIVITY`
+
 ## `.env`
 - `NEXT_PUBLIC_PRODUCTION_COOKIE_DOMAIN`
 - `YOUTUBE_API_KEY`

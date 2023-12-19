@@ -4,7 +4,11 @@ import { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
 
+import { usePermissions } from '@/hooks/permissions';
+
 function Auth({ children }: { children: React.ReactNode }) {
+  const permissions = usePermissions();
+
   const [cookie, setCookie] = useCookies(['authorization']);
 
   const [isAuth, setIsAuth] = useState(false);
@@ -63,6 +67,9 @@ function Auth({ children }: { children: React.ReactNode }) {
         });
 
         setIsAuth(true);
+
+        permissions.setPermissions(user.permissions);
+
         return;
       }
       window.location.href = `${getUrl()}/login?redirect=${encodeURIComponent(

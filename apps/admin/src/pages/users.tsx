@@ -23,6 +23,8 @@ import {
   IconUser
 } from '@tabler/icons-react';
 
+import { usePermissions } from '@/hooks/permissions';
+
 export async function getServerSideProps() {
   return {
     props: {
@@ -37,6 +39,8 @@ type IUser = User & {
 };
 
 function Users({ users }: { users: IUser[] }) {
+  const permissions = usePermissions();
+
   const rows = users.map((user) => {
     return (
       <tr key={user.id}>
@@ -83,9 +87,11 @@ function Users({ users }: { users: IUser[] }) {
             'mmmm d, yyyy, h:MM:ss TT'
           )}
         </td>
-        <td>
-          <Anchor component='button'>View activity</Anchor>
-        </td>
+        {permissions.permissions.includes('VIEW_USER_ACTIVITY') && (
+          <td>
+            <Anchor component='button'>View activity</Anchor>
+          </td>
+        )}
         <td>
           <Group spacing={0} position='left'>
             <ActionIcon>
@@ -134,7 +140,7 @@ function Users({ users }: { users: IUser[] }) {
               <th>Points</th>
               <th>Joined</th>
               <th>Last Active</th>
-              <th>Activity</th>
+              {permissions.permissions.includes('VIEW_USER_ACTIVITY') && <th>Activity</th>}
               <th>Actions</th>
             </tr>
           </thead>
