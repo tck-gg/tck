@@ -23,6 +23,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 
 import { usePermissions } from '@/hooks/permissions';
+import { Permission } from 'database';
 
 const useStyles = createStyles((theme) => {
   return {
@@ -81,7 +82,12 @@ const useStyles = createStyles((theme) => {
   };
 });
 
-const SIDEBAR_DATA = [
+const SIDEBAR_DATA: {
+  link: string;
+  label: string;
+  icon: React.FC<any>;
+  permission?: Permission;
+}[] = [
   { link: '/', label: 'Home', icon: IconHome },
   { link: '/users', label: 'Users', icon: IconUsers, permission: 'MANAGE_USERS' },
   {
