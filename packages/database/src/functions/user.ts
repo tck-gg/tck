@@ -52,11 +52,14 @@ export async function getUserByAuthorization(authorization: string) {
  * @returns `true` if the user was created, `false` otherwise.
  */
 export async function createUser(
-  username: string,
-  email: string,
+  inputUsername: string,
+  inputEmail: string,
   password: string,
   ip: string
 ): Promise<boolean> {
+  const username = inputUsername.trim();
+  const email = inputEmail.trim().toLowerCase();
+
   const existingUsernameUser = await getUserByUsername(username);
   const existingEmailUser = await getUserByEmail(email);
 

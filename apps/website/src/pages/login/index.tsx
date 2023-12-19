@@ -73,7 +73,7 @@ function Login() {
       if (form.isValid()) {
         setLoading(true);
 
-        const user = await auth.login(form.values.email, form.values.password);
+        const user = await auth.login(form.values.email.trim().toLowerCase(), form.values.password);
         if (user) {
           // If "Remember me" is checked.
           if (form.values.rememberMe) {

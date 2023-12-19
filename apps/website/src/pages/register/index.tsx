@@ -100,8 +100,8 @@ function Register() {
       const response = await axios.post(
         '/api/v1/user/register',
         {
-          username: form.values.username,
-          email: form.values.email,
+          username: form.values.username.trim(),
+          email: form.values.email.trim().toLowerCase(),
           password: form.values.password
         },
         {

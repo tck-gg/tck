@@ -158,7 +158,14 @@ function Users({ users }: { users: IUser[] }) {
     <Layout>
       {permissions.permissions.includes('MANAGE_USERS') ? (
         <>
-          <Title mb='lg'>Users</Title>
+          <Title mb='sm'>Users</Title>
+          <Text mb='lg'>
+            Use{' '}
+            <a href='https://verifymail.io/' target='_blank'>
+              verifymail.io
+            </a>{' '}
+            to check emails.
+          </Text>
           <ScrollArea>
             <Table highlightOnHover withBorder>
               <thead>

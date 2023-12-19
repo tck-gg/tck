@@ -32,8 +32,8 @@ function useProvideAuth() {
     let response: AxiosResponse<{ user: SafeUser }>;
     try {
       response = await axios.post('/api/v1/user/login', {
-        email,
-        password
+        email: email.trim().toLowerCase(),
+        password: password
       });
     } catch (error) {
       return null;
