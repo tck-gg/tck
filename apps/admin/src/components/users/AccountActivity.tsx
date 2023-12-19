@@ -1,10 +1,11 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+
 import { Table } from '@mantine/core';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { UserAction } from 'database';
 import dateformat from 'dateformat';
-
-import { usePermissions } from '@/hooks/permissions';
+import { useCookies } from 'react-cookie';
 
 function getUrl() {
   if (process.env.NODE_ENV === 'production') {
@@ -20,7 +21,8 @@ function getUrl() {
 }
 
 function AccountActivity({ username }: { username: string }) {
-  const permissions = usePermissions();
+  const [cookie, setCookie] = useCookies(['authorization']);
+
   const [rows, setRows] = useState<JSX.Element[]>([]);
 
   useEffect(() => {
@@ -28,6 +30,9 @@ function AccountActivity({ username }: { username: string }) {
       const response = await axios.get(`${getUrl()}/api/v1/user/activity`, {
         params: {
           username
+        },
+        headers: {
+          authorization: cookie.authorization
         }
       });
 

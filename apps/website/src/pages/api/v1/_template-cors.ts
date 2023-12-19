@@ -9,8 +9,8 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     optionsSuccessStatus: 200
   });
 
-  const authorization = req.headers.Authorization as string;
-  if (!validateAuthorization(authorization)) {
+  const authorization = req.headers.authorization;
+  if (!authorization || !validateAuthorization(authorization)) {
     res.status(401).end();
     return;
   }
