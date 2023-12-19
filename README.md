@@ -13,7 +13,7 @@ https://discord.com/oauth2/authorize?client_id=486314584983207945&scope=bot&perm
 - `MANAGE_RAFFLES`
 - `MANAGE_GIVEAWAYS`
 - `MANAGE_RELOADS`
-- `VIEW_USER_ACTIVITY`
+- `USER_VIEW_ACTIVITY`
 
 ## `.env`
 - `NEXT_PUBLIC_PRODUCTION_COOKIE_DOMAIN`

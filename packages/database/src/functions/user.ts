@@ -148,3 +148,17 @@ export async function verifyAccount(uuid: string) {
 
   return true;
 }
+
+export async function getActivity(username: string) {
+  const user = await getUserByUsername(username);
+  if (!user) {
+    return null;
+  }
+
+  const actions = await prisma.userAction.findMany({
+    where: { userId: user.id },
+    orderBy: { timestamp: 'desc' }
+  });
+
+  return actions;
+}

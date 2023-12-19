@@ -1,18 +1,20 @@
 import {
-  Avatar,
-  Table,
-  Group,
-  Text,
-  ScrollArea,
-  Title,
   ActionIcon,
+  Anchor,
+  Avatar,
+  Group,
   Menu,
-  Anchor
+  Modal,
+  ScrollArea,
+  Table,
+  Text,
+  Title
 } from '@mantine/core';
-import { getAllUsers, User, UserAccounts, UserAction } from 'database';
+import { useDisclosure } from '@mantine/hooks';
+import { User, UserAccounts, UserAction, getAllUsers } from 'database';
 import dateformat from 'dateformat';
-import { useEffect } from 'react';
 import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 
 import Layout from '@/components/Layout';
 import {
@@ -26,6 +28,7 @@ import {
 } from '@tabler/icons-react';
 
 import { usePermissions } from '@/hooks/permissions';
+import AccountActivity from '@/components/users/AccountActivity';
 
 export async function getServerSideProps() {
   return {
@@ -43,6 +46,10 @@ type IUser = User & {
 function Users({ users }: { users: IUser[] }) {
   const permissions = usePermissions();
   const router = useRouter();
+
+  const [isActivityModalOpen, { open: openActivityModal, close: closeActivityModal }] =
+    useDisclosure(false);
+  const [selectedUser, setSelectedUser] = useState<IUser | null>(null);
 
   useEffect(() => {
     setTimeout(() => {
@@ -98,9 +105,17 @@ function Users({ users }: { users: IUser[] }) {
             'mmmm d, yyyy, h:MM:ss TT'
           )}
         </td>
-        {permissions.permissions.includes('VIEW_USER_ACTIVITY') && (
+        {permissions.permissions.includes('USER_VIEW_ACTIVITY') && (
           <td>
-            <Anchor component='button'>View activity</Anchor>
+            <Anchor
+              component='button'
+              onClick={() => {
+                setSelectedUser(user);
+                openActivityModal();
+              }}
+            >
+              View activity
+            </Anchor>
           </td>
         )}
         <td>
@@ -153,13 +168,21 @@ function Users({ users }: { users: IUser[] }) {
                   <th>Points</th>
                   <th>Joined</th>
                   <th>Last Active</th>
-                  {permissions.permissions.includes('VIEW_USER_ACTIVITY') && <th>Activity</th>}
+                  {permissions.permissions.includes('USER_VIEW_ACTIVITY') && <th>Activity</th>}
                   <th>Actions</th>
                 </tr>
               </thead>
               <tbody>{rows}</tbody>
             </Table>
           </ScrollArea>
+          <Modal
+            opened={isActivityModalOpen}
+            onClose={closeActivityModal}
+            title={`Account Activity for ${selectedUser?.username || 'Unknown'}`}
+            centered
+          >
+            <AccountActivity username={selectedUser?.username || 'Unknown'} />
+          </Modal>
         </>
       ) : (
         <p>Missing permissions. Redirecting...</p>
