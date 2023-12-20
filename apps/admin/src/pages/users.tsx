@@ -6,6 +6,7 @@ import {
   Menu,
   Modal,
   ScrollArea,
+  SegmentedControl,
   Table,
   Text,
   Title
@@ -46,6 +47,7 @@ type IUser = User & {
 function Users({ users }: { users: IUser[] }) {
   const permissions = usePermissions();
   const router = useRouter();
+  const [tab, setTab] = useState('verified');
 
   const [isActivityModalOpen, { open: openActivityModal, close: closeActivityModal }] =
     useDisclosure(false);
@@ -59,100 +61,113 @@ function Users({ users }: { users: IUser[] }) {
     }, 3000);
   });
 
-  const rows = users.map((user) => {
-    return (
-      <tr key={user.id}>
-        <td>
-          <Group spacing='sm'>
-            <Avatar size={40} radius='xl'>
-              {(user.displayName || user.username)
-                .split(' ')
-                .splice(0, 2)
-                .map((name: string) => {
-                  return name.split('')[0];
-                })
-                .join('')}
-            </Avatar>
-            <div>
-              <Text fz='sm' fw={500}>
-                {user.username}
-              </Text>
-              <Text fz='xs' c='dimmed'>
-                {`"${user.displayName}"`}
-              </Text>
-            </div>
-          </Group>
-        </td>
-        <td>{user.email}</td>
-        <td>{user.points}</td>
-        <td>
-          {dateformat(
-            user.actions.find((action) => {
-              return action.action === 'ACCOUNT_CREATE';
-            })?.timestamp,
-            'mmmm d, yyyy, h:MM:ss TT'
-          )}
-        </td>
-        <td>
-          {dateformat(
-            user.actions
-              .filter((action) => {
-                return action.action === 'ACCOUNT_LOGIN';
-              })
-              .sort((a, b) => {
-                return b.timestamp - a.timestamp;
-              })[0]?.timestamp,
-            'mmmm d, yyyy, h:MM:ss TT'
-          )}
-        </td>
-        {permissions.permissions.includes('USER_VIEW_ACTIVITY') && (
+  const rows = users
+    .filter((user) => {
+      if (tab === 'verified') {
+        return user.isVerified;
+      }
+      if (tab === 'unverified') {
+        return !user.isVerified;
+      }
+      if (tab === 'mod') {
+        return user.permissions.includes('ACCESS_ADMIN_PANEL');
+      }
+      return false;
+    })
+    .map((user) => {
+      return (
+        <tr key={user.id}>
           <td>
-            <Anchor
-              component='button'
-              onClick={() => {
-                setSelectedUser(user);
-                openActivityModal();
-              }}
-            >
-              View activity
-            </Anchor>
+            <Group spacing='sm'>
+              <Avatar size={40} radius='xl'>
+                {(user.displayName || user.username)
+                  .split(' ')
+                  .splice(0, 2)
+                  .map((name: string) => {
+                    return name.split('')[0];
+                  })
+                  .join('')}
+              </Avatar>
+              <div>
+                <Text fz='sm' fw={500}>
+                  {user.username}
+                </Text>
+                <Text fz='xs' c='dimmed'>
+                  {`"${user.displayName}"`}
+                </Text>
+              </div>
+            </Group>
           </td>
-        )}
-        <td>
-          <Group spacing={0} position='left'>
-            <ActionIcon>
-              <IconPencil size='1rem' stroke={1.5} />
-            </ActionIcon>
-            <Menu
-              transitionProps={{ transition: 'pop' }}
-              withArrow
-              position='bottom-end'
-              withinPortal
-            >
-              <Menu.Target>
-                <ActionIcon>
-                  <IconDots size='1rem' stroke={1.5} />
-                </ActionIcon>
-              </Menu.Target>
-              <Menu.Dropdown>
-                {user.permissions.includes('ACCESS_ADMIN_PANEL') ? (
-                  <Menu.Item icon={<IconUser size='1rem' stroke={1.5} />}>Remove Admin</Menu.Item>
-                ) : (
-                  <Menu.Item icon={<IconGavel size='1rem' stroke={1.5} />}>Make Admin</Menu.Item>
-                )}
-                {user.isBanned ? (
-                  <Menu.Item icon={<IconLockOpen size='1rem' stroke={1.5} />}>Unban</Menu.Item>
-                ) : (
-                  <Menu.Item icon={<IconLock size='1rem' stroke={1.5} />}>Ban</Menu.Item>
-                )}
-                <Menu.Item icon={<IconTrash size='1rem' stroke={1.5} />}>Delete</Menu.Item>
-              </Menu.Dropdown>
-            </Menu>
-          </Group>
-        </td>
-      </tr>
-    );
-  });
+          <td>{user.email}</td>
+          <td>{user.points}</td>
+          <td>
+            {dateformat(
+              user.actions.find((action) => {
+                return action.action === 'ACCOUNT_CREATE';
+              })?.timestamp,
+              'mmmm d, yyyy, h:MM:ss TT'
+            )}
+          </td>
+          <td>
+            {dateformat(
+              user.actions
+                .filter((action) => {
+                  return action.action === 'ACCOUNT_LOGIN';
+                })
+                .sort((a, b) => {
+                  return b.timestamp - a.timestamp;
+                })[0]?.timestamp,
+              'mmmm d, yyyy, h:MM:ss TT'
+            )}
+          </td>
+          {permissions.permissions.includes('USER_VIEW_ACTIVITY') && (
+            <td>
+              <Anchor
+                component='button'
+                onClick={() => {
+                  setSelectedUser(user);
+                  openActivityModal();
+                }}
+              >
+                View activity
+              </Anchor>
+            </td>
+          )}
+          <td>
+            <Group spacing={0} position='left'>
+              <ActionIcon>
+                <IconPencil size='1rem' stroke={1.5} />
+              </ActionIcon>
+              <Menu
+                transitionProps={{ transition: 'pop' }}
+                withArrow
+                position='bottom-end'
+                withinPortal
+              >
+                <Menu.Target>
+                  <ActionIcon>
+                    <IconDots size='1rem' stroke={1.5} />
+                  </ActionIcon>
+                </Menu.Target>
+                <Menu.Dropdown>
+                  {user.permissions.includes('ACCESS_ADMIN_PANEL') ? (
+                    <Menu.Item icon={<IconUser size='1rem' stroke={1.5} />}>Remove Admin</Menu.Item>
+                  ) : (
+                    <Menu.Item icon={<IconGavel size='1rem' stroke={1.5} />}>Make Admin</Menu.Item>
+                  )}
+                  {user.isBanned ? (
+                    <Menu.Item icon={<IconLockOpen size='1rem' stroke={1.5} />}>Unban</Menu.Item>
+                  ) : (
+                    <Menu.Item icon={<IconLock size='1rem' stroke={1.5} />}>Ban</Menu.Item>
+                  )}
+                  <Menu.Item icon={<IconTrash size='1rem' stroke={1.5} />}>Delete</Menu.Item>
+                </Menu.Dropdown>
+              </Menu>
+            </Group>
+          </td>
+        </tr>
+      );
+    });
 
   return (
     <Layout>
@@ -166,6 +181,18 @@ function Users({ users }: { users: IUser[] }) {
             </a>{' '}
             to check emails.
           </Text>
+
+          <SegmentedControl
+            value={tab}
+            onChange={setTab}
+            data={[
+              { label: 'Verified Users', value: 'verified' },
+              { label: 'Unverified Users', value: 'unverified' },
+              { label: 'Moderator', value: 'mod' }
+            ]}
+            mb='sm'
+          />
+
           <ScrollArea>
             <Table highlightOnHover withBorder>
               <thead>
@@ -187,6 +214,7 @@ function Users({ users }: { users: IUser[] }) {
             onClose={closeActivityModal}
             title={`Account Activity for ${selectedUser?.username || 'Unknown'}`}
             centered
+            size='auto'
           >
             <AccountActivity username={selectedUser?.username || 'Unknown'} />
           </Modal>
