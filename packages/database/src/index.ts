@@ -9,6 +9,7 @@ export * from './functions/backblaze';
 export * from './functions/collection';
 export * from './functions/giveaways';
 export * from './functions/leaderboard';
+export * from './functions/permissions';
 export * from './functions/user';
 
 Sentry.init({

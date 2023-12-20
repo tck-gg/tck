@@ -4,6 +4,7 @@ import {
   ActionIcon,
   Anchor,
   Avatar,
+  Button,
   Group,
   Input,
   Menu,
@@ -14,29 +15,48 @@ import {
   SegmentedControl,
   Table,
   Text,
-  Title
+  Title,
+  TransferList,
+  TransferListData
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import { User, UserAccounts, UserAction, getAllUsers } from 'database';
+import { Permission, User, UserAccounts, UserAction, getAllUsers } from 'database';
 import dateformat from 'dateformat';
 import { useRouter } from 'next/router';
 import { useEffect, useRef, useState } from 'react';
-
-import Layout from '@/components/Layout';
 import {
   IconDots,
-  IconGavel,
+  IconLicense,
   IconLock,
   IconLockOpen,
   IconPencil,
   IconSearch,
   IconSend,
   IconTrash,
-  IconUser
+  IconX,
+  IconCheck
 } from '@tabler/icons-react';
+import axios from 'axios';
+import { useCookies } from 'react-cookie';
+import { notifications } from '@mantine/notifications';
 
 import { usePermissions } from '@/hooks/permissions';
+
+import Layout from '@/components/Layout';
 import AccountActivity from '@/components/users/AccountActivity';
+
+function getUrl() {
+  if (process.env.NODE_ENV === 'production') {
+    if (!window.location.hostname.includes('localhost')) {
+      return 'https://tck.gg';
+    }
+    return 'http://localhost:8007';
+  }
+  if (process.env.NODE_ENV === 'development') {
+    return 'http://localhost:8000';
+  }
+  return '';
+}
 
 export async function getServerSideProps() {
   return {
@@ -54,6 +74,7 @@ type IUser = User & {
 function Users({ users }: { users: IUser[] }) {
   const permissions = usePermissions();
   const router = useRouter();
+  const [cookie, setCookie] = useCookies(['authorization']);
 
   const top = useRef<HTMLDivElement>(null);
 
@@ -63,9 +84,13 @@ function Users({ users }: { users: IUser[] }) {
   const [pages, setPages] = useState<number>(1);
   const [page, setPage] = useState<number>(1);
 
+  const [selectedUser, setSelectedUser] = useState<IUser | null>(null);
   const [isActivityModalOpen, { open: openActivityModal, close: closeActivityModal }] =
     useDisclosure(false);
-  const [selectedUser, setSelectedUser] = useState<IUser | null>(null);
+
+  const [permissionsListData, setPermissionsListData] = useState<TransferListData>([[], []]);
+  const [isPermissionsModalOpen, { open: openPermissionsModal, close: closePermissionsModal }] =
+    useDisclosure(false);
 
   useEffect(() => {
     setTimeout(() => {
@@ -114,6 +139,116 @@ function Users({ users }: { users: IUser[] }) {
   useEffect(() => {
     setPage(1);
   }, [tab, search]);
+
+  useEffect(() => {
+    (async () => {
+      const fetchedPermissions = await axios.get(`${getUrl()}/api/v1/permissions`);
+      const allPermissions: Permission[] = fetchedPermissions.data;
+
+      if (selectedUser) {
+        setPermissionsListData([
+          allPermissions
+            .filter((permission) => {
+              return !selectedUser.permissions.includes(permission);
+            })
+            .map((permission) => {
+              return {
+                value: permission,
+                label: permission
+              };
+            }),
+          selectedUser.permissions.map((permission) => {
+            return {
+              value: permission,
+              label: permission
+            };
+          })
+        ]);
+      }
+    })();
+  }, [selectedUser, isPermissionsModalOpen]);
+
+  async function updatePermissions() {
+    const newPermissions = permissionsListData[1].map((permission) => {
+      return permission.value;
+    });
+
+    const response = await axios.post(
+      `${getUrl()}/api/v1/user/update-permissions`,
+      {
+        permissions: newPermissions,
+        userId: selectedUser?.id
+      },
+      {
+        headers: {
+          authorization: cookie.authorization
+        },
+        validateStatus: () => {
+          return true;
+        }
+      }
+    );
+
+    if (response.status === 200) {
+      closePermissionsModal();
+
+      notifications.show({
+        title: 'Permissions Updated',
+        message: `Permissions for ${selectedUser?.username} have been updated.`,
+        color: 'teal',
+        icon: <IconCheck />,
+        withBorder: true,
+        autoClose: 10000
+      });
+
+      router.replace(router.asPath);
+
+      return;
+    }
+    if (response.status === 401) {
+      notifications.show({
+        title: 'Unauthorized',
+        message: 'You are not authorized to perform this action.',
+        color: 'red',
+        icon: <IconX />,
+        withBorder: true,
+        autoClose: 10000
+      });
+      return;
+    }
+    if (response.status === 403) {
+      notifications.show({
+        title: 'Forbidden',
+        message: 'You are not allowed to perform this action.',
+        color: 'red',
+        icon: <IconX />,
+        withBorder: true,
+        autoClose: 10000
+      });
+      return;
+    }
+    if (response.status === 418) {
+      notifications.show({
+        title: 'Forbidden',
+        message: 'You are not allowed to change your own permissions..',
+        color: 'red',
+        icon: <IconX />,
+        withBorder: true,
+        autoClose: 10000
+      });
+      return;
+    }
+    if (response.status === 500) {
+      notifications.show({
+        title: 'Internal Server Error',
+        message: 'An internal server error occurred.',
+        color: 'red',
+        icon: <IconX />,
+        withBorder: true,
+        autoClose: 10000
+      });
+    }
+  }
 
   return (
     <Layout>
@@ -300,13 +435,15 @@ function Users({ users }: { users: IUser[] }) {
                                   </ActionIcon>
                                 </Menu.Target>
                                 <Menu.Dropdown>
-                                  {user.permissions.includes('ACCESS_ADMIN_PANEL') ? (
-                                    <Menu.Item icon={<IconUser size='1rem' stroke={1.5} />}>
-                                      Remove Admin
-                                    </Menu.Item>
-                                  ) : (
-                                    <Menu.Item icon={<IconGavel size='1rem' stroke={1.5} />}>
-                                      Make Admin
+                                  {user.permissions.includes('USER_MODIFY_PERMISSIONS') && (
+                                    <Menu.Item
+                                      icon={<IconLicense size='1rem' stroke={1.5} />}
+                                      onClick={() => {
+                                        openPermissionsModal();
+                                        setSelectedUser(user);
+                                      }}
+                                    >
+                                      Change Permissions
                                     </Menu.Item>
                                   )}
                                   {user.isBanned ? (
@@ -357,6 +494,34 @@ function Users({ users }: { users: IUser[] }) {
             size='auto'
           >
             <AccountActivity username={selectedUser?.username || 'Unknown'} />
+          </Modal>
+          <Modal
+            opened={isPermissionsModalOpen}
+            onClose={closePermissionsModal}
+            title={`Permissions for ${selectedUser?.username || 'Unknown'}`}
+            centered
+            size='auto'
+          >
+            <TransferList
+              value={permissionsListData}
+              onChange={setPermissionsListData}
+              searchPlaceholder='Search...'
+              nothingFound='No results...'
+              titles={['Available Permissions', 'Granted Permissions']}
+              breakpoint='sm'
+              listHeight={500}
+            />
+            <Group position='right' mt='sm' grow>
+              <Button
+                onClick={() => {
+                  closePermissionsModal();
+                }}
+                variant='outline'
+              >
+                Discard
+              </Button>
+              <Button onClick={updatePermissions}>Save</Button>
+            </Group>
           </Modal>
         </>
       ) : (
