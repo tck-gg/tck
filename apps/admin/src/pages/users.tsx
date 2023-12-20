@@ -3,8 +3,10 @@ import {
   Anchor,
   Avatar,
   Group,
+  Input,
   Menu,
   Modal,
+  Paper,
   ScrollArea,
   SegmentedControl,
   Table,
@@ -24,6 +26,7 @@ import {
   IconLock,
   IconLockOpen,
   IconPencil,
+  IconSearch,
   IconTrash,
   IconUser
 } from '@tabler/icons-react';
@@ -47,7 +50,9 @@ type IUser = User & {
 function Users({ users }: { users: IUser[] }) {
   const permissions = usePermissions();
   const router = useRouter();
+
   const [tab, setTab] = useState('verified');
+  const [search, setSearch] = useState('');
 
   const [isActivityModalOpen, { open: openActivityModal, close: closeActivityModal }] =
     useDisclosure(false);
@@ -73,6 +78,20 @@ function Users({ users }: { users: IUser[] }) {
         return user.permissions.includes('ACCESS_ADMIN_PANEL');
       }
       return false;
+    })
+    .filter((user) => {
+      if (search.length > 0) {
+        return (
+          user.username.toLowerCase().includes(search.toLowerCase()) ||
+          user.email.includes(search) ||
+          user.displayName.toLowerCase().includes(search.toLowerCase()) ||
+          user.id.includes(search) ||
+          user.accounts?.discord?.includes(search) ||
+          user.accounts?.kick?.includes(search) ||
+          user.accounts?.twitch?.includes(search)
+        );
+      }
+      return true;
     })
     .map((user) => {
       return (
@@ -193,22 +212,38 @@ function Users({ users }: { users: IUser[] }) {
             mb='sm'
           />
 
-          <ScrollArea>
-            <Table highlightOnHover withBorder>
-              <thead>
-                <tr>
-                  <th>User</th>
-                  <th>Email</th>
-                  <th>Points</th>
-                  <th>Joined</th>
-                  <th>Last Active</th>
-                  {permissions.permissions.includes('USER_VIEW_ACTIVITY') && <th>Activity</th>}
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>{rows}</tbody>
-            </Table>
-          </ScrollArea>
+          <Paper shadow='xs' p='md' mb='sm'>
+            <Input
+              placeholder='Search...'
+              icon={<IconSearch size='1rem' stroke={1.5} />}
+              size='sm'
+              value={search}
+              onChange={(e) => {
+                setSearch(e.currentTarget.value);
+              }}
+            />
+          </Paper>
+
+          {rows.length > 0 ? (
+            <ScrollArea>
+              <Table highlightOnHover withBorder>
+                <thead>
+                  <tr>
+                    <th>User</th>
+                    <th>Email</th>
+                    <th>Points</th>
+                    <th>Joined</th>
+                    <th>Last Active</th>
+                    {permissions.permissions.includes('USER_VIEW_ACTIVITY') && <th>Activity</th>}
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>{rows}</tbody>
+              </Table>
+            </ScrollArea>
+          ) : (
+            <Text>No results.</Text>
+          )}
           <Modal
             opened={isActivityModalOpen}
             onClose={closeActivityModal}
