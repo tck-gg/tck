@@ -36,7 +36,7 @@ export async function tryLoginWithUsername(username: string, password: string) {
  */
 export async function tryLoginWithEmail(email: string, password: string) {
   // Check if the user exists.
-  const user = await getUserByEmail(email);
+  const user = await getUserByEmail(email.trim().toLowerCase());
   if (!user) {
     return null;
   }

@@ -31,7 +31,17 @@ export async function getUserByUsername(username: string) {
  * @returns The user, `null` if the user doesn't exist.
  */
 export async function getUserByEmail(email: string) {
-  return await prisma.user.findUnique({ where: { email } });
+  return (
+    await prisma.user.findMany({
+      where: {
+        email: {
+          equals: email,
+          // Backwards compatibility.
+          mode: 'insensitive'
+        }
+      }
+    })
+  )[0];
 }
 
 /**

@@ -13,7 +13,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
   } = req.body;
   let user;
   if (isValidEmail(data.email)) {
-    user = await tryLoginWithEmail(data.email, data.password);
+    user = await tryLoginWithEmail(data.email.trim().toLowerCase(), data.password);
   } else {
     res.status(400).end();
     return;
