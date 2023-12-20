@@ -30,6 +30,7 @@ import {
   IconLockOpen,
   IconPencil,
   IconSearch,
+  IconSend,
   IconTrash,
   IconUser
 } from '@tabler/icons-react';
@@ -209,13 +210,44 @@ function Users({ users }: { users: IUser[] }) {
                             </Group>
                           </td>
                           <td>
-                            {user.email}{' '}
-                            <Anchor
-                              href={`https://verifymail.io/email/${user.email}`}
-                              target='_blank'
+                            <div
+                              style={{
+                                display: 'flex',
+                                alignItems: 'center'
+                              }}
                             >
-                              (Lookup)
-                            </Anchor>
+                              {user.email}
+                              <Menu
+                                transitionProps={{ transition: 'pop' }}
+                                withArrow
+                                position='bottom-end'
+                                withinPortal
+                              >
+                                <Menu.Target>
+                                  <ActionIcon>
+                                    <IconDots size='1rem' stroke={1.5} />
+                                  </ActionIcon>
+                                </Menu.Target>
+                                <Menu.Dropdown>
+                                  <Menu.Item
+                                    icon={<IconSend size='1rem' stroke={1.5} />}
+                                    onClick={() => {
+                                      window.open(`mailto:${user.email}`);
+                                    }}
+                                  >
+                                    Send Email
+                                  </Menu.Item>
+                                  <Menu.Item
+                                    icon={<IconSearch size='1rem' stroke={1.5} />}
+                                    onClick={() => {
+                                      window.open(`https://verifymail.io/email/${user.email}`);
+                                    }}
+                                  >
+                                    Lookup
+                                  </Menu.Item>
+                                </Menu.Dropdown>
+                              </Menu>
+                            </div>
                           </td>
                           <td>{user.points}</td>
                           <td>
