@@ -114,7 +114,7 @@ function showErrorNotification(status: number) {
   if (status === 418) {
     notifications.show({
       title: 'Forbidden',
-      message: 'You are not allowed to change your own permissions..',
+      message: 'You are not allowed to change your own permissions.',
       color: 'red',
       icon: <IconX />,
       withBorder: true,
@@ -230,6 +230,9 @@ function Users({ users }: { users: IUser[] }) {
           if (tab === 'unverified') {
             return !user.isVerified;
           }
+          if (tab === 'mod') {
+            return user.permissions.includes('ACCESS_ADMIN_PANEL');
+          }
           return false;
         })
         .filter((user) => {
@@ -242,6 +245,9 @@ function Users({ users }: { users: IUser[] }) {
           }
           if (tab === 'unverified') {
             return !user.isVerified;
+          }
+          if (tab === 'mod') {
+            return user.permissions.includes('ACCESS_ADMIN_PANEL');
           }
           return false;
         })
