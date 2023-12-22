@@ -11,12 +11,17 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
 
   const authorization = req.headers.authorization as string;
   if (!validateAuthorization(authorization)) {
-    res.status(403).end();
+    res.status(401).end();
     return;
   }
 
   const user = await getUserByAuthorization(authorization);
   if (!user) {
+    res.status(401).end();
+    return;
+  }
+
+  if (user.isBanned) {
     res.status(403).end();
     return;
   }

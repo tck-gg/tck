@@ -75,6 +75,18 @@ function GiveawayInfobox({ giveaway }: { giveaway: IGiveaway }) {
       }
     );
 
+    if (response.status === 403) {
+      notifications.show({
+        title: 'Banned',
+        message: 'You have been banned and cannot participate in giveaways.',
+        color: 'red',
+        withBorder: true,
+        icon: <IconX />
+      });
+
+      return;
+    }
+
     if (response.status !== 200) {
       notifications.show({
         title: 'Error entering giveaway',
