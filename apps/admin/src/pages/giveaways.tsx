@@ -379,7 +379,7 @@ function Giveaways({
                         {giveaway.entries.length}/{giveaway.maxEntries}
                       </td>
                       <td>{new Date(giveaway.timestampEnd).toLocaleString()}</td>
-                      <td>{giveaway.winner?.username || 'Unknown'}</td>
+                      <td>{giveaway.winnerId || 'Unknown'}</td>
                     </tr>
                   );
                 })}

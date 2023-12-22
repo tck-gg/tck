@@ -149,12 +149,17 @@ export async function endGiveaway(id: string) {
   }
 
   const randomOrg = new RandomOrg({ apiKey: process.env.RANDOM_ORG_API_KEY });
-  const winnerIndex = await randomOrg.generateSignedIntegers({
-    min: 0,
-    max: giveaway.entries.length - 1,
-    n: 1
-  });
-  const winner = giveaway.entries[winnerIndex.random.data[0]].userId;
+
+  let winnerIndex = 0;
+  if (giveaway.entries.length !== 1) {
+    const response = await randomOrg.generateSignedIntegers({
+      min: 0,
+      max: giveaway.entries.length - 1,
+      n: 1
+    });
+    winnerIndex = response.random.data[0];
+  }
+  const winner = giveaway.entries[winnerIndex].userId;
 
   // Update database.
   await prisma.giveaway.update({
