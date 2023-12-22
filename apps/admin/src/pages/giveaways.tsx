@@ -328,7 +328,7 @@ function Giveaways({
                         {giveaway.entries.length}/{giveaway.maxEntries}
                       </td>
                       <td>
-                        {dateFormat(giveaway.timestampEnd, 'yyyy-mm-dd HH:mm:ss')} (in{' '}
+                        {dateFormat(giveaway.timestampEnd, 'yyyy-mm-dd HH:MM:ss')} (in{' '}
                         {Math.floor((giveaway.timestampEnd - Date.now()) / 1000 / 60 / 60 / 24)}{' '}
                         days)
                       </td>
@@ -379,6 +379,7 @@ function Giveaways({
                         {giveaway.entries.length}/{giveaway.maxEntries}
                       </td>
                       <td>{new Date(giveaway.timestampEnd).toLocaleString()}</td>
+                      <td>{giveaway.winner?.username || 'Unknown'}</td>
                     </tr>
                   );
                 })}
