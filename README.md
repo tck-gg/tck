@@ -13,6 +13,8 @@ https://discord.com/oauth2/authorize?client_id=486314584983207945&scope=bot&perm
 - `MANAGE_RAFFLES`
 - `MANAGE_GIVEAWAYS`
 - `MANAGE_RELOADS`
+- `USER_BAN`
+- `USER_UNBAN`
 - `USER_MODIFY_PERMISSIONS`
 - `USER_VIEW_ACTIVITY`
 

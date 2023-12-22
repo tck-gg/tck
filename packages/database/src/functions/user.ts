@@ -175,3 +175,21 @@ export async function getActivity(username: string) {
 
   return actions;
 }
+
+export async function banUser(userId: string) {
+  await prisma.user.update({
+    where: { id: userId },
+    data: {
+      isBanned: true
+    }
+  });
+}
+
+export async function unbanUser(userId: string) {
+  await prisma.user.update({
+    where: { id: userId },
+    data: {
+      isBanned: false
+    }
+  });
+}

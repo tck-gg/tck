@@ -5,6 +5,7 @@ import {
   Anchor,
   Avatar,
   Button,
+  Code,
   Group,
   Input,
   Menu,
@@ -13,6 +14,7 @@ import {
   Paper,
   ScrollArea,
   SegmentedControl,
+  Space,
   Table,
   Text,
   Title,
@@ -86,6 +88,52 @@ function filterBySearch(users: IUser[], search: string) {
   });
 }
 
+function showErrorNotification(status: number) {
+  if (status === 401) {
+    notifications.show({
+      title: 'Unauthorized',
+      message: 'You are not authorized to perform this action.',
+      color: 'red',
+      icon: <IconX />,
+      withBorder: true,
+      autoClose: 10000
+    });
+    return;
+  }
+  if (status === 403) {
+    notifications.show({
+      title: 'Forbidden',
+      message: 'You are not allowed to perform this action.',
+      color: 'red',
+      icon: <IconX />,
+      withBorder: true,
+      autoClose: 10000
+    });
+    return;
+  }
+  if (status === 418) {
+    notifications.show({
+      title: 'Forbidden',
+      message: 'You are not allowed to change your own permissions..',
+      color: 'red',
+      icon: <IconX />,
+      withBorder: true,
+      autoClose: 10000
+    });
+    return;
+  }
+  if (status === 500) {
+    notifications.show({
+      title: 'Internal Server Error',
+      message: 'An internal server error occurred.',
+      color: 'red',
+      icon: <IconX />,
+      withBorder: true,
+      autoClose: 10000
+    });
+  }
+}
+
 function Users({ users }: { users: IUser[] }) {
   const permissions = usePermissions();
   const router = useRouter();
@@ -119,6 +167,10 @@ function Users({ users }: { users: IUser[] }) {
 
   const [permissionsListData, setPermissionsListData] = useState<TransferListData>([[], []]);
   const [isPermissionsModalOpen, { open: openPermissionsModal, close: closePermissionsModal }] =
+    useDisclosure(false);
+
+  const [banUnbanMode, setBanUnbanMode] = useState<'ban' | 'unban'>('ban');
+  const [isBanUnbanModalOpen, { open: openBanUnbanModal, close: closeBanUnbanModal }] =
     useDisclosure(false);
 
   useEffect(() => {
@@ -272,49 +324,52 @@ function Users({ users }: { users: IUser[] }) {
 
       return;
     }
-    if (response.status === 401) {
+
+    showErrorNotification(response.status);
+  }
+
+  async function promptBanUnban(action: 'ban' | 'unban', user: IUser) {
+    setSelectedUser(user);
+    setBanUnbanMode(action);
+    openBanUnbanModal();
+  }
+
+  async function banUnban() {
+    const response = await axios.post(
+      `${getUrl()}/api/v1/user/${banUnbanMode}`,
+      {
+        userId: selectedUser?.id
+      },
+      {
+        headers: {
+          authorization: cookie.authorization
+        },
+        validateStatus: () => {
+          return true;
+        }
+      }
+    );
+
+    if (response.status === 200) {
+      closeBanUnbanModal();
+
       notifications.show({
-        title: 'Unauthorized',
-        message: 'You are not authorized to perform this action.',
-        color: 'red',
-        icon: <IconX />,
+        title: 'Success',
+        message: `${selectedUser?.username || 'Unknown'} has been ${
+          banUnbanMode === 'unban' ? 'un' : ''
+        }banned.`,
+        color: 'teal',
+        icon: <IconCheck />,
         withBorder: true,
         autoClose: 10000
       });
+
+      router.replace(router.asPath);
+
       return;
     }
-    if (response.status === 403) {
-      notifications.show({
-        title: 'Forbidden',
-        message: 'You are not allowed to perform this action.',
-        color: 'red',
-        icon: <IconX />,
-        withBorder: true,
-        autoClose: 10000
-      });
-      return;
-    }
-    if (response.status === 418) {
-      notifications.show({
-        title: 'Forbidden',
-        message: 'You are not allowed to change your own permissions..',
-        color: 'red',
-        icon: <IconX />,
-        withBorder: true,
-        autoClose: 10000
-      });
-      return;
-    }
-    if (response.status === 500) {
-      notifications.show({
-        title: 'Internal Server Error',
-        message: 'An internal server error occurred.',
-        color: 'red',
-        icon: <IconX />,
-        withBorder: true,
-        autoClose: 10000
-      });
-    }
+
+    showErrorNotification(response.status);
   }
 
   return (
@@ -519,15 +574,27 @@ function Users({ users }: { users: IUser[] }) {
                                         Change Permissions
                                       </Menu.Item>
                                     )}
-                                    {user.isBanned ? (
-                                      <Menu.Item icon={<IconLockOpen size='1rem' stroke={1.5} />}>
-                                        Unban
-                                      </Menu.Item>
-                                    ) : (
-                                      <Menu.Item icon={<IconLock size='1rem' stroke={1.5} />}>
-                                        Ban
-                                      </Menu.Item>
-                                    )}
+                                    {user.isBanned
+                                      ? permissions.permissions.includes('USER_UNBAN') && (
+                                          <Menu.Item
+                                            icon={<IconLockOpen size='1rem' stroke={1.5} />}
+                                            onClick={() => {
+                                              promptBanUnban('unban', user);
+                                            }}
+                                          >
+                                            Unban
+                                          </Menu.Item>
+                                        )
+                                      : permissions.permissions.includes('USER_BAN') && (
+                                          <Menu.Item
+                                            icon={<IconLock size='1rem' stroke={1.5} />}
+                                            onClick={() => {
+                                              promptBanUnban('ban', user);
+                                            }}
+                                          >
+                                            Ban
+                                          </Menu.Item>
+                                        )}
                                     <Menu.Item icon={<IconTrash size='1rem' stroke={1.5} />}>
                                       Delete
                                     </Menu.Item>
@@ -560,6 +627,7 @@ function Users({ users }: { users: IUser[] }) {
               <Text>No users found.</Text>
             )}
           </Paper>
+
           <Modal
             opened={isActivityModalOpen}
             onClose={closeActivityModal}
@@ -569,6 +637,7 @@ function Users({ users }: { users: IUser[] }) {
           >
             <AccountActivity username={selectedUser?.username || 'Unknown'} />
           </Modal>
+
           <Modal
             opened={isPermissionsModalOpen}
             onClose={closePermissionsModal}
@@ -586,15 +655,37 @@ function Users({ users }: { users: IUser[] }) {
               listHeight={500}
             />
             <Group position='right' mt='sm' grow>
-              <Button
-                onClick={() => {
-                  closePermissionsModal();
-                }}
-                variant='outline'
-              >
+              <Button onClick={closePermissionsModal} variant='outline'>
                 Discard
               </Button>
               <Button onClick={updatePermissions}>Save</Button>
+            </Group>
+          </Modal>
+
+          <Modal
+            opened={isBanUnbanModalOpen}
+            onClose={closeBanUnbanModal}
+            title={`${banUnbanMode === 'ban' ? 'B' : 'Unb'}an ${
+              selectedUser?.username || 'Unknown'
+            }`}
+            centered
+          >
+            <Text>
+              Are you sure you want to {banUnbanMode === 'ban' ? 'b' : 'unb'}an{' '}
+              <strong>{selectedUser?.username || 'Unknown'}</strong>?
+            </Text>
+            <Space h='sm' />
+            <Text color='dimmed' size='xs'>
+              You can undo this action as long as you have the{' '}
+              <Code>USER_{banUnbanMode === 'ban' && 'UN'}BAN</Code> permission.
+            </Text>
+            <Group position='right' mt='md' grow>
+              <Button onClick={closeBanUnbanModal} variant='outline'>
+                Cancel
+              </Button>
+              <Button onClick={banUnban} color='red'>
+                {banUnbanMode === 'ban' ? 'B' : 'Unb'}an
+              </Button>
             </Group>
           </Modal>
         </>
