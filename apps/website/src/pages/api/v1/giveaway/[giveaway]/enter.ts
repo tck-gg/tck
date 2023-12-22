@@ -2,7 +2,11 @@ import { enterGiveaway, getUserByAuthorization, validateAuthorization } from 'da
 import { NextApiRequest, NextApiResponse } from 'next';
 import NextCors from 'nextjs-cors';
 
+import { getIp } from '@/util/ip';
+
 async function handler(req: NextApiRequest, res: NextApiResponse) {
+  const ip = getIp(req);
+
   await NextCors(req, res, {
     methods: ['POST'],
     origin: '*',
@@ -27,7 +31,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
   }
 
   const { giveaway } = req.query;
-  const result = await enterGiveaway(user, giveaway as string);
+  const result = await enterGiveaway(user, giveaway as string, ip);
 
   res.status(result ? 200 : 500).end();
 }

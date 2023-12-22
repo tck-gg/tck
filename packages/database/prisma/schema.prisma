@@ -13,6 +13,7 @@ enum Action {
   ACCOUNT_DELETE
   ACCOUNT_UNBAN
   ACCOUNT_LOGIN
+  GIVEAWAY_JOIN
 }
 
 enum Permission {
@@ -34,9 +35,10 @@ model UserAction {
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId String @unique @db.ObjectId
 
-  action    Action
-  ip        String
-  timestamp Int
+  action      Action
+  ip          String
+  timestamp   Int
+  description String?
 }
 
 model UserAccounts {

@@ -1,7 +1,7 @@
 import { ObjectId } from 'mongodb';
 import RandomOrg from 'random-org';
 
-import { User, prisma } from '../client';
+import { Action, User, prisma } from '../client';
 import { socket } from '../socket';
 import { deleteImage } from './backblaze';
 
@@ -206,7 +206,7 @@ export async function createGiveaway(
   }, timeout);
 }
 
-export async function enterGiveaway(user: User, giveawayId: string): Promise<boolean> {
+export async function enterGiveaway(user: User, giveawayId: string, ip: string): Promise<boolean> {
   const giveaway = await getGiveaway(giveawayId);
 
   if (!giveaway) {
@@ -247,6 +247,20 @@ export async function enterGiveaway(user: User, giveawayId: string): Promise<boo
           userId: user.id
         }
       }
+    }
+  });
+
+  await prisma.userAction.create({
+    data: {
+      user: {
+        connect: {
+          id: user.id
+        }
+      },
+      action: Action.GIVEAWAY_JOIN,
+      ip,
+      timestamp: Date.now(),
+      description: `Giveaway ${giveawayId}`
     }
   });
 

@@ -45,6 +45,7 @@ function AccountActivity({ username }: { username: string }) {
                 <td>{dateformat(action.timestamp, 'yyyy-mm-dd, HH:MM:ss')}</td>
                 <td>{action.action}</td>
                 <td>{action.ip}</td>
+                <td>{action.description}</td>
               </tr>
             );
           })
@@ -60,6 +61,7 @@ function AccountActivity({ username }: { username: string }) {
           <th>Timestamp</th>
           <th>Activity</th>
           <th>IP</th>
+          <th>Description</th>
         </tr>
       </thead>
       <tbody>{rows}</tbody>
