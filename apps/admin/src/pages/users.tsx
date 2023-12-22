@@ -569,7 +569,9 @@ function Users({ users }: { users: IUser[] }) {
                                     </ActionIcon>
                                   </Menu.Target>
                                   <Menu.Dropdown>
-                                    {user.permissions.includes('USER_MODIFY_PERMISSIONS') && (
+                                    {permissions.permissions.includes(
+                                      'USER_MODIFY_PERMISSIONS'
+                                    ) && (
                                       <Menu.Item
                                         icon={<IconLicense size='1rem' stroke={1.5} />}
                                         onClick={() => {
