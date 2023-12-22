@@ -193,3 +193,23 @@ export async function unbanUser(userId: string) {
     }
   });
 }
+
+export async function deleteUser(userId: string) {
+  const user = await getUserById(userId);
+
+  if (!user) {
+    return false;
+  }
+
+  if (user.isVerified) {
+    // Delete more stuff.
+  }
+
+  // await prisma.user.delete({
+  //   where: { id: userId }
+  // });
+
+  console.log('"""""Deleted"""""');
+
+  return true;
+}

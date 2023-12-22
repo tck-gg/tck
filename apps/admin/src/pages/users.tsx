@@ -128,7 +128,7 @@ function showErrorNotification(status: number) {
   if (status === 418) {
     notifications.show({
       title: 'Forbidden',
-      message: 'You are not allowed to change your own permissions.',
+      message: 'You are not allowed to modify yourself.',
       color: 'red',
       icon: <IconX />,
       withBorder: true,
@@ -188,6 +188,9 @@ function Users({ users }: { users: IUser[] }) {
 
   const [banUnbanMode, setBanUnbanMode] = useState<'ban' | 'unban'>('ban');
   const [isBanUnbanModalOpen, { open: openBanUnbanModal, close: closeBanUnbanModal }] =
+    useDisclosure(false);
+
+  const [isDeleteModalOpen, { open: openDeleteModal, close: closeDeleteModal }] =
     useDisclosure(false);
 
   useEffect(() => {
@@ -399,6 +402,34 @@ function Users({ users }: { users: IUser[] }) {
       return;
     }
 
+    showErrorNotification(response.status);
+    setDisabled(false);
+  }
+
+  async function deleteUser() {
+    setDisabled(true);
+
+    const response = await axios.post(
+      `${getUrl()}/api/v1/user/delete`,
+      {
+        userId: selectedUser?.id
+      },
+      {
+        headers: {
+          authorization: cookie.authorization
+        },
+        validateStatus: () => {
+          return true;
+        }
+      }
+    );
+
+    if (response.status === 200) {
+      closeDeleteModal();
+      setDisabled(false);
+
+      return;
+    }
     showErrorNotification(response.status);
     setDisabled(false);
   }
@@ -628,7 +659,13 @@ function Users({ users }: { users: IUser[] }) {
                                             Ban
                                           </Menu.Item>
                                         )}
-                                    <Menu.Item icon={<IconTrash size='1rem' stroke={1.5} />}>
+                                    <Menu.Item
+                                      icon={<IconTrash size='1rem' stroke={1.5} />}
+                                      onClick={() => {
+                                        setSelectedUser(user);
+                                        openDeleteModal();
+                                      }}
+                                    >
                                       Delete
                                     </Menu.Item>
                                   </Menu.Dropdown>
@@ -700,7 +737,7 @@ function Users({ users }: { users: IUser[] }) {
           <Modal
             opened={isBanUnbanModalOpen}
             onClose={closeBanUnbanModal}
-            title={`${banUnbanMode === 'ban' ? 'B' : 'Unb'}an ${
+            title={`${banUnbanMode === 'ban' ? 'B' : 'Unb'}an User: ${
               selectedUser?.username || 'Unknown'
             }`}
             centered
@@ -720,6 +757,30 @@ function Users({ users }: { users: IUser[] }) {
               </Button>
               <Button onClick={banUnban} color='red' disabled={disabled}>
                 {banUnbanMode === 'ban' ? 'B' : 'Unb'}an
+              </Button>
+            </Group>
+          </Modal>
+
+          <Modal
+            opened={isDeleteModalOpen}
+            onClose={closeDeleteModal}
+            title={`Delete User: ${selectedUser?.username || 'Unknown'}`}
+            centered
+          >
+            <Text>
+              Are you sure you want to delete the user{' '}
+              <strong>{selectedUser?.username || 'Unknown'}</strong>?
+            </Text>
+            <Space h='sm' />
+            <Text color='dimmed' size='xs'>
+              This action is <strong>irreversible</strong>.
+            </Text>
+            <Group position='right' mt='md' grow>
+              <Button onClick={closeBanUnbanModal} variant='outline'>
+                Cancel
+              </Button>
+              <Button onClick={deleteUser} color='red' disabled={disabled}>
+                Delete
               </Button>
             </Group>
           </Modal>
