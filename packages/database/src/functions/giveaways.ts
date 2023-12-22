@@ -31,7 +31,12 @@ export async function getAllGiveaways() {
       }
     },
     include: {
-      entries: true
+      entries: {
+        include: {
+          user: true
+        }
+      },
+      winner: true
     },
     orderBy: {
       timestampEnd: 'desc'
