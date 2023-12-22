@@ -17,7 +17,8 @@ import {
   Text,
   Title,
   TransferList,
-  TransferListData
+  TransferListData,
+  filterProps
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { Permission, User, UserAccounts, UserAction, getAllUsers } from 'database';
@@ -71,6 +72,20 @@ type IUser = User & {
   actions: UserAction[];
 };
 
+function filterBySearch(users: IUser[], search: string) {
+  return users.filter((user) => {
+    return (
+      user.username.toLowerCase().includes(search.toLowerCase()) ||
+      user.email.includes(search) ||
+      user.displayName.toLowerCase().includes(search.toLowerCase()) ||
+      user.id.includes(search) ||
+      user.accounts?.discord?.includes(search) ||
+      user.accounts?.kick?.includes(search) ||
+      user.accounts?.twitch?.includes(search)
+    );
+  });
+}
+
 function Users({ users }: { users: IUser[] }) {
   const permissions = usePermissions();
   const router = useRouter();
@@ -82,6 +97,19 @@ function Users({ users }: { users: IUser[] }) {
   const [banTab, setBanTab] = useState('unbanned');
   const [search, setSearch] = useState('');
   const [filteredUsers, setFilteredUsers] = useState<IUser[]>([]);
+  const [counts, setCounts] = useState<{
+    verified: number;
+    unverified: number;
+    mod: number;
+    banned: number;
+    unbanned: number;
+  }>({
+    verified: 0,
+    unverified: 0,
+    mod: 0,
+    banned: 0,
+    unbanned: 0
+  });
   const [pages, setPages] = useState<number>(1);
   const [page, setPage] = useState<number>(1);
 
@@ -102,8 +130,47 @@ function Users({ users }: { users: IUser[] }) {
   }, []);
 
   useEffect(() => {
+    // Update display table.
     setFilteredUsers(
-      users
+      filterBySearch(
+        users
+          .filter((user) => {
+            if (tab === 'verified') {
+              return user.isVerified;
+            }
+            if (tab === 'unverified') {
+              return !user.isVerified;
+            }
+            if (tab === 'mod') {
+              return user.permissions.includes('ACCESS_ADMIN_PANEL');
+            }
+            return false;
+          })
+          .filter((user) => {
+            if (banTab === 'unbanned') {
+              return !user.isBanned;
+            }
+            if (banTab === 'banned') {
+              return user.isBanned;
+            }
+            return false;
+          }),
+        search
+      )
+    );
+
+    // Update counts.
+    setCounts({
+      verified: filterBySearch(users, search).filter((user) => {
+        return user.isVerified;
+      }).length,
+      unverified: filterBySearch(users, search).filter((user) => {
+        return !user.isVerified;
+      }).length,
+      mod: filterBySearch(users, search).filter((user) => {
+        return user.permissions.includes('ACCESS_ADMIN_PANEL');
+      }).length,
+      banned: filterBySearch(users, search)
         .filter((user) => {
           if (tab === 'verified') {
             return user.isVerified;
@@ -111,35 +178,25 @@ function Users({ users }: { users: IUser[] }) {
           if (tab === 'unverified') {
             return !user.isVerified;
           }
-          if (tab === 'mod') {
-            return user.permissions.includes('ACCESS_ADMIN_PANEL');
+          return false;
+        })
+        .filter((user) => {
+          return user.isBanned;
+        }).length,
+      unbanned: filterBySearch(users, search)
+        .filter((user) => {
+          if (tab === 'verified') {
+            return user.isVerified;
+          }
+          if (tab === 'unverified') {
+            return !user.isVerified;
           }
           return false;
         })
         .filter((user) => {
-          if (search.length > 0) {
-            return (
-              user.username.toLowerCase().includes(search.toLowerCase()) ||
-              user.email.includes(search) ||
-              user.displayName.toLowerCase().includes(search.toLowerCase()) ||
-              user.id.includes(search) ||
-              user.accounts?.discord?.includes(search) ||
-              user.accounts?.kick?.includes(search) ||
-              user.accounts?.twitch?.includes(search)
-            );
-          }
-          return true;
-        })
-        .filter((user) => {
-          if (banTab === 'unbanned') {
-            return !user.isBanned;
-          }
-          if (banTab === 'banned') {
-            return user.isBanned;
-          }
-          return false;
-        })
-    );
+          return !user.isBanned;
+        }).length
+    });
   }, [users, tab, search, banTab]);
 
   useEffect(() => {
@@ -273,28 +330,16 @@ function Users({ users }: { users: IUser[] }) {
             onChange={setTab}
             data={[
               {
-                label: `Verified Users (${
-                  users.filter((user) => {
-                    return user.isVerified;
-                  }).length
-                })`,
+                label: `Verified Users (${counts.verified})`,
                 value: 'verified'
               },
               {
-                label: `Unverified Users (${
-                  users.filter((user) => {
-                    return !user.isVerified;
-                  }).length
-                })
+                label: `Unverified Users (${counts.unverified})
               `,
                 value: 'unverified'
               },
               {
-                label: `Moderator (${
-                  users.filter((user) => {
-                    return user.permissions.includes('ACCESS_ADMIN_PANEL');
-                  }).length
-                })
+                label: `Moderator (${counts.mod})
               `,
                 value: 'mod'
               }
@@ -320,45 +365,11 @@ function Users({ users }: { users: IUser[] }) {
               onChange={setBanTab}
               data={[
                 {
-                  label: `Unbanned Users (${
-                    users
-                      .filter((user) => {
-                        if (tab === 'verified') {
-                          return user.isVerified;
-                        }
-                        if (tab === 'unverified') {
-                          return !user.isVerified;
-                        }
-                        if (tab === 'mod') {
-                          return user.permissions.includes('ACCESS_ADMIN_PANEL');
-                        }
-                        return false;
-                      })
-                      .filter((user) => {
-                        return !user.isBanned;
-                      }).length
-                  })`,
+                  label: `Unbanned Users (${counts.unbanned})`,
                   value: 'unbanned'
                 },
                 {
-                  label: `Banned Users (${
-                    users
-                      .filter((user) => {
-                        if (tab === 'verified') {
-                          return user.isVerified;
-                        }
-                        if (tab === 'unverified') {
-                          return !user.isVerified;
-                        }
-                        if (tab === 'mod') {
-                          return user.permissions.includes('ACCESS_ADMIN_PANEL');
-                        }
-                        return false;
-                      })
-                      .filter((user) => {
-                        return user.isBanned;
-                      }).length
-                  })`,
+                  label: `Banned Users (${counts.banned})`,
                   value: 'banned'
                 }
               ]}
