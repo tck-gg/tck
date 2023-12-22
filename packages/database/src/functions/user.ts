@@ -201,15 +201,50 @@ export async function deleteUser(userId: string) {
     return false;
   }
 
-  if (user.isVerified) {
-    // Delete more stuff.
-  }
+  await prisma.userAction.deleteMany({
+    where: { userId }
+  });
 
-  // await prisma.user.delete({
-  //   where: { id: userId }
-  // });
+  await prisma.accountVerification.deleteMany({
+    where: { userId }
+  });
 
-  console.log('"""""Deleted"""""');
+  await prisma.user.update({
+    where: { id: userId },
+    data: {
+      username: `Deleted User ${user.id.substring(user.id.length - 8, user.id.length)}`,
+      email: '',
+      password: '',
+      apiKey: '',
+      accounts: {
+        delete: true
+      },
+      displayName: `Deleted User ${user.id.substring(user.id.length - 8, user.id.length)}`,
+      isAnonymous: false,
+      actions: {
+        create: {
+          action: Action.ACCOUNT_DELETE,
+          ip: '',
+          timestamp: Date.now()
+        }
+      },
+      points: 0,
+      permissions: [],
+      isDeleted: true
+    }
+  });
+
+  // Delete giveaway entries for unfinished giveaways.
+  await prisma.giveawayEntry.deleteMany({
+    where: {
+      giveaway: {
+        timestampEnd: {
+          gt: Date.now()
+        }
+      },
+      userId
+    }
+  });
 
   return true;
 }

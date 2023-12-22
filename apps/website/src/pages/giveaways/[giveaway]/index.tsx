@@ -91,7 +91,7 @@ function GiveawayPage({ giveaway }: { giveaway: IGiveaway }) {
                   {(
                     giveaway.entries.filter((giveawayEntry) => {
                       return giveawayEntry.userId === giveaway.winnerId;
-                    })[0].slot + 1
+                    })[0]?.slot + 1
                   ).toLocaleString('en-US')}
                 </p>
               </JaggedBackgroundItem>

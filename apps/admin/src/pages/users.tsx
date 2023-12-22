@@ -207,6 +207,9 @@ function Users({ users }: { users: IUser[] }) {
       filterBySearch(
         users
           .filter((user) => {
+            return !user.isDeleted;
+          })
+          .filter((user) => {
             if (tab === 'verified') {
               return user.isVerified;
             }
@@ -233,16 +236,34 @@ function Users({ users }: { users: IUser[] }) {
 
     // Update counts.
     setCounts({
-      verified: filterBySearch(users, search).filter((user) => {
-        return user.isVerified;
-      }).length,
-      unverified: filterBySearch(users, search).filter((user) => {
-        return !user.isVerified;
-      }).length,
-      mod: filterBySearch(users, search).filter((user) => {
-        return user.permissions.includes('ACCESS_ADMIN_PANEL');
-      }).length,
+      verified: filterBySearch(users, search)
+        .filter((user) => {
+          return !user.isDeleted;
+        })
+        .filter((user) => {
+          return user.isVerified;
+        }).length,
+      unverified: filterBySearch(users, search)
+        .filter((user) => {
+          return !user.isDeleted;
+        })
+        .filter((user) => {
+          return !user.isVerified;
+        }).length,
+      mod: filterBySearch(users, search)
+        .filter((user) => {
+          return !user.isDeleted;
+        })
+        .filter((user) => {
+          return user.permissions.includes('ACCESS_ADMIN_PANEL');
+        }).length,
       banned: filterBySearch(users, search)
+        .filter((user) => {
+          return !user.isDeleted;
+        })
+        .filter((user) => {
+          return !user.isDeleted;
+        })
         .filter((user) => {
           if (tab === 'verified') {
             return user.isVerified;
@@ -259,6 +280,9 @@ function Users({ users }: { users: IUser[] }) {
           return user.isBanned;
         }).length,
       unbanned: filterBySearch(users, search)
+        .filter((user) => {
+          return !user.isDeleted;
+        })
         .filter((user) => {
           if (tab === 'verified') {
             return user.isVerified;
@@ -427,9 +451,20 @@ function Users({ users }: { users: IUser[] }) {
     if (response.status === 200) {
       closeDeleteModal();
       setDisabled(false);
+      router.replace(router.asPath);
+
+      notifications.show({
+        title: 'Success',
+        message: `${selectedUser?.username || 'Unknown'} has been deleted.`,
+        color: 'teal',
+        icon: <IconCheck />,
+        withBorder: true,
+        autoClose: 10000
+      });
 
       return;
     }
+
     showErrorNotification(response.status);
     setDisabled(false);
   }

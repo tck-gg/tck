@@ -98,7 +98,7 @@ function GiveawayInfobox({ giveaway }: { giveaway: IGiveaway }) {
       return;
     }
 
-    router.reload();
+    router.replace(router.asPath);
   }
 
   return (
