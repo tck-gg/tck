@@ -20,7 +20,7 @@ import { useDisclosure } from '@mantine/hooks';
 import { DateTimePicker } from '@mantine/dates';
 import { getAllGiveaways } from 'database';
 import axios from 'axios';
-import { IGiveaway } from 'types';
+import { IGiveaway, ISafeGiveaway } from 'types';
 import { Dropzone, FileWithPath, MIME_TYPES } from '@mantine/dropzone';
 import dateFormat from 'dateformat';
 import { notifications } from '@mantine/notifications';
@@ -30,9 +30,26 @@ import { usePermissions } from '@/hooks/permissions';
 import Layout from '@/components/Layout';
 
 export async function getServerSideProps() {
+  const giveaways = await getAllGiveaways();
+
   return {
     props: {
-      giveaways: await getAllGiveaways()
+      giveaways: {
+        currentGiveaways: giveaways.currentGiveaways.map((giveaway) => {
+          return {
+            ...giveaway,
+            entries: giveaway.entries.length,
+            winner: null
+          };
+        }),
+        pastGiveaways: giveaways.pastGiveaways.map((giveaway) => {
+          return {
+            ...giveaway,
+            entries: giveaway.entries.length,
+            winner: giveaway.winner?.username || 'Unknown'
+          };
+        })
+      }
     }
   };
 }
@@ -54,8 +71,8 @@ function Giveaways({
   giveaways
 }: {
   giveaways: {
-    currentGiveaways: IGiveaway[];
-    pastGiveaways: IGiveaway[];
+    currentGiveaways: ISafeGiveaway[];
+    pastGiveaways: ISafeGiveaway[];
   };
 }) {
   const theme = useMantineTheme();
@@ -209,7 +226,7 @@ function Giveaways({
     open();
   }
 
-  function handleEditClick(giveaway: IGiveaway) {
+  function handleEditClick(giveaway: ISafeGiveaway) {
     setName(giveaway.name);
     setBrand(giveaway.brand);
     setValue(giveaway.value);
@@ -318,14 +335,14 @@ function Giveaways({
                 </tr>
               </thead>
               <tbody>
-                {giveaways.currentGiveaways.map((giveaway: IGiveaway) => {
+                {giveaways.currentGiveaways.map((giveaway: ISafeGiveaway) => {
                   return (
                     <tr key={giveaway.id}>
                       <td>{giveaway.name}</td>
                       <td>{giveaway.brand}</td>
                       <td>${giveaway.value.toLocaleString('en-US')}</td>
                       <td>
-                        {giveaway.entries.length}/{giveaway.maxEntries}
+                        {giveaway.entries}/{giveaway.maxEntries}
                       </td>
                       <td>
                         {dateFormat(giveaway.timestampEnd, 'yyyy-mm-dd HH:MM:ss')} (in{' '}
@@ -369,17 +386,17 @@ function Giveaways({
                 </tr>
               </thead>
               <tbody>
-                {giveaways.pastGiveaways.map((giveaway: IGiveaway) => {
+                {giveaways.pastGiveaways.map((giveaway: ISafeGiveaway) => {
                   return (
                     <tr key={giveaway.id}>
                       <td>{giveaway.name}</td>
                       <td>{giveaway.brand}</td>
                       <td>${giveaway.value}</td>
                       <td>
-                        {giveaway.entries.length}/{giveaway.maxEntries}
+                        {giveaway.entries}/{giveaway.maxEntries}
                       </td>
                       <td>{new Date(giveaway.timestampEnd).toLocaleString()}</td>
-                      <td>{giveaway.winner?.username || 'Unknown'}</td>
+                      <td>{giveaway.winner}</td>
                     </tr>
                   );
                 })}
