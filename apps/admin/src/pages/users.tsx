@@ -137,6 +137,7 @@ function showErrorNotification(status: number) {
 function Users({ users }: { users: IUser[] }) {
   const permissions = usePermissions();
   const router = useRouter();
+
   const [cookie, setCookie] = useCookies(['authorization']);
 
   const top = useRef<HTMLDivElement>(null);
@@ -160,6 +161,8 @@ function Users({ users }: { users: IUser[] }) {
   });
   const [pages, setPages] = useState<number>(1);
   const [page, setPage] = useState<number>(1);
+
+  const [disabled, setDisabled] = useState<boolean>(false);
 
   const [selectedUser, setSelectedUser] = useState<IUser | null>(null);
   const [isActivityModalOpen, { open: openActivityModal, close: closeActivityModal }] =
@@ -294,6 +297,8 @@ function Users({ users }: { users: IUser[] }) {
   }, [selectedUser, isPermissionsModalOpen]);
 
   async function updatePermissions() {
+    setDisabled(true);
+
     const newPermissions = permissionsListData[1].map((permission) => {
       return permission.value;
     });
@@ -326,12 +331,14 @@ function Users({ users }: { users: IUser[] }) {
         autoClose: 10000
       });
 
+      setDisabled(false);
       router.replace(router.asPath);
 
       return;
     }
 
     showErrorNotification(response.status);
+    setDisabled(false);
   }
 
   async function promptBanUnban(action: 'ban' | 'unban', user: IUser) {
@@ -341,6 +348,8 @@ function Users({ users }: { users: IUser[] }) {
   }
 
   async function banUnban() {
+    setDisabled(true);
+
     const response = await axios.post(
       `${getUrl()}/api/v1/user/${banUnbanMode}`,
       {
@@ -370,12 +379,14 @@ function Users({ users }: { users: IUser[] }) {
         autoClose: 10000
       });
 
+      setDisabled(false);
       router.replace(router.asPath);
 
       return;
     }
 
     showErrorNotification(response.status);
+    setDisabled(false);
   }
 
   return (
@@ -666,7 +677,9 @@ function Users({ users }: { users: IUser[] }) {
               <Button onClick={closePermissionsModal} variant='outline'>
                 Discard
               </Button>
-              <Button onClick={updatePermissions}>Save</Button>
+              <Button onClick={updatePermissions} disabled={disabled}>
+                Save
+              </Button>
             </Group>
           </Modal>
 
@@ -691,7 +704,7 @@ function Users({ users }: { users: IUser[] }) {
               <Button onClick={closeBanUnbanModal} variant='outline'>
                 Cancel
               </Button>
-              <Button onClick={banUnban} color='red'>
+              <Button onClick={banUnban} color='red' disabled={disabled}>
                 {banUnbanMode === 'ban' ? 'B' : 'Unb'}an
               </Button>
             </Group>
