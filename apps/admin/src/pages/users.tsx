@@ -19,8 +19,7 @@ import {
   Text,
   Title,
   TransferList,
-  TransferListData,
-  filterProps
+  TransferListData
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { Permission, User, UserAccounts, UserAction, getAllUsers } from 'database';
