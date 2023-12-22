@@ -62,14 +62,28 @@ function getUrl() {
 }
 
 export async function getServerSideProps() {
+  const users = await getAllUsers();
+
   return {
     props: {
-      users: await getAllUsers()
+      users: users.map((user) => {
+        return {
+          ...user,
+          apiKey: null,
+          password: null
+        };
+      })
     }
   };
 }
 
-type IUser = User & {
+type IUser = Omit<
+  User,
+  keyof {
+    apiKey: string;
+    password: string;
+  }
+> & {
   accounts: UserAccounts | null;
   actions: UserAction[];
 };
