@@ -47,8 +47,7 @@ function StakeFormBox() {
         <div className={classes.leftInfo}>
           <p className={classes.title}>Submit your Info</p>
           <p className={classes.description}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-            incididunt ut labore et dolore magna aliqua.
+            Submit your info here for Stake to give you your Reload exclusively with TCK.gg
           </p>
         </div>
         <svg
