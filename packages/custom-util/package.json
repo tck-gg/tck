@@ -8,10 +8,15 @@
   ],
   "scripts": {
     "build": "tsc --build",
-    "dev": "tsc --watch --preserveWatchOutput"
+    "dev": "tsc --watch --preserveWatchOutput",
+    "jest": "jest --maxWorkers=50% --coverage",
+    "test": "npm run jest"
   },
   "devDependencies": {
+    "@types/jest": "^29.5.11",
     "eslint-config-custom": "*",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.1.1",
     "tsconfig": "*",
     "typescript": "^4.8.4"
   }
