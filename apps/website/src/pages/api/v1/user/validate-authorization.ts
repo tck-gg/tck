@@ -29,20 +29,6 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
   // Don't send the password hash to the client.
   user.password = undefined as any;
 
-  // Add user action.
-  await prisma.user.update({
-    where: { id: user.id },
-    data: {
-      actions: {
-        create: {
-          action: Action.ACCOUNT_LOGIN,
-          ip,
-          timestamp: Date.now()
-        }
-      }
-    }
-  });
-
   // If the user exists in the end.
   res.send({ user });
 }

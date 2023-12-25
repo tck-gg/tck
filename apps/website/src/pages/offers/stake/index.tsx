@@ -65,7 +65,7 @@ function OfferStake() {
             <Image
               src={stakeDemo}
               alt='Stake Demo'
-              width={650}
+              width={640}
               className={classes.stakeDemoImage}
             />
           </div>
