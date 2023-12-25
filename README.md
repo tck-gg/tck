@@ -4,7 +4,7 @@
 ![](https://wakatime.com/badge/user/6b7d9181-edde-4a25-857c-e7101bfee7ea/project/37e24fb3-b1db-4114-a105-eb5412ae4287.svg?style=for-the-badge)
 
 ## Discord Bot
-https://discord.com/oauth2/authorize?client_id=486314584983207945&scope=bot&permissions=478272
+https://discord.com/oauth2/authorize?client_id=1188676912525090837&scope=bot&permissions=2148265024
 
 ## User Permissions
 - `ACCESS_ADMIN_PANEL`

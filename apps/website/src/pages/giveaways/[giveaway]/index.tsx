@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { getGiveaway } from 'database';
-import { IGiveaway, IGiveawayEntry } from 'types';
+import { IGiveaway, IGiveawayEntry, ISafeGiveaway } from 'types';
 import { faChevronLeft, faTicket } from '@fortawesome/free-solid-svg-icons';
 import clsx from 'clsx';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -37,15 +37,15 @@ export async function getServerSideProps(ctx: any) {
   };
 }
 
-function GiveawayPage({ giveaway }: { giveaway: IGiveaway }) {
+function GiveawayPage({ giveaway }: { giveaway: ISafeGiveaway }) {
   const auth = useAuth();
   const [myEntry, setMyEntry] = useState(-1);
-  const [winnerOverlayOpen, setWinnerOverlayOpen] = useState(!!giveaway.winnerId || false);
+  const [winnerOverlayOpen, setWinnerOverlayOpen] = useState(!!giveaway.winner || false);
 
   useEffect(() => {
     setMyEntry(
-      giveaway.entries.filter((entry: IGiveawayEntry) => {
-        return entry.userId === auth.user?.id;
+      giveaway.entries.filter((entry) => {
+        return entry.username === auth.user?.username;
       })[0]?.slot + 1 || -1
     );
   }, [auth]);
@@ -82,15 +82,15 @@ function GiveawayPage({ giveaway }: { giveaway: IGiveaway }) {
                 w={100}
                 className={classes.winnerAvatar}
               >
-                {giveaway.winner.displayName.toUpperCase().split('').splice(0, 1)[0]}
+                {giveaway.winner.toUpperCase().split('').splice(0, 1)[0]}
               </Avatar>
-              <p className={classes.winnerName}>{giveaway.winner.displayName}</p>
+              <p className={classes.winnerName}>{giveaway.winner}</p>
               <JaggedBackgroundItem fill='#26263A'>
                 <p className={classes.winnerTicket}>
                   Ticket #
                   {(
                     giveaway.entries.filter((giveawayEntry) => {
-                      return giveawayEntry.userId === giveaway.winnerId;
+                      return giveawayEntry.username === giveaway.winner;
                     })[0]?.slot + 1
                   ).toLocaleString('en-US')}
                 </p>
@@ -111,17 +111,16 @@ function GiveawayPage({ giveaway }: { giveaway: IGiveaway }) {
           {Array(giveaway.maxEntries)
             .fill(0)
             .map((entry, index) => {
+              const theEntry = giveaway.entries.filter((giveawayEntry) => {
+                return giveawayEntry.slot === index;
+              })[0];
+
               return (
                 <GiveawayEntry
                   position={index + 1}
                   display={
-                    giveaway.entries
-                      .filter((giveawayEntry: IGiveawayEntry) => {
-                        return giveawayEntry.slot === index;
-                      })[0]
-                      ?.user.username.toUpperCase()
-                      .split('')
-                      .splice(0, 1)[0]
+                    // wtf???
+                    theEntry ? theEntry.username?.toUpperCase().split('').splice(0, 1)[0] : ''
                   }
                   key={index}
                 />

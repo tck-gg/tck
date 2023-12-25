@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { faAngleRight, faUser } from '@fortawesome/free-solid-svg-icons';
 import { useRouter } from 'next/router';
 import clsx from 'clsx';
-import { IGiveaway } from 'types';
+import { ISafeGiveaway } from 'types';
 import { Image } from '@mantine/core';
 import { default as NextImage } from 'next/image';
 
@@ -21,24 +21,18 @@ import classes from './GiveawayBox.module.scss';
 import giveawayCoinImage from '@/images/giveaway-coin.png';
 import BoxBadge from '../../BoxBadge/BoxBadge';
 
-function GiveawayBox({ giveaway }: { giveaway: IGiveaway }) {
+function GiveawayBox({ giveaway }: { giveaway: ISafeGiveaway }) {
   const router = useRouter();
   const auth = useAuth();
   const [isEntered, setIsEntered] = useState(false);
 
   useEffect(() => {
-    setIsEntered(
-      giveaway.entries
-        .map((entry) => {
-          return entry.userId;
-        })
-        .includes(auth.user?.id || '')
-    );
+    setIsEntered(giveaway.entries.includes(auth.user?.id || ''));
   }, [auth]);
 
   return (
     <div className={classes.root}>
-      {isEntered && !giveaway.winnerId && <BoxBadge>ENTERED</BoxBadge>}
+      {isEntered && !giveaway.winner && <BoxBadge>ENTERED</BoxBadge>}
       <div className={classes.top}>
         <Image
           width={268}
@@ -56,7 +50,7 @@ function GiveawayBox({ giveaway }: { giveaway: IGiveaway }) {
         <div className={classes.buttonGroup}>
           <Button
             rightIcon={faAngleRight}
-            variant={giveaway.winnerId ? 'secondary' : 'gradient'}
+            variant={giveaway.winner ? 'secondary' : 'gradient'}
             fullWidth
             onClick={() => {
               return router.push(`/giveaways/${giveaway.id}`);
@@ -65,14 +59,14 @@ function GiveawayBox({ giveaway }: { giveaway: IGiveaway }) {
             View Giveaway
           </Button>
           <p className={classes.end}>
-            end{giveaway.winnerId ? 'ed' : 's'} {!giveaway.winnerId && 'in'}{' '}
-            {giveaway.winnerId
+            end{giveaway.winner ? 'ed' : 's'} {!giveaway.winner && 'in'}{' '}
+            {giveaway.winner
               ? Math.abs(Math.floor((giveaway.timestampEnd - Date.now()) / 1000 / 60 / 60 / 24))
               : Math.floor((giveaway.timestampEnd - Date.now()) / 1000 / 60 / 60 / 24)}{' '}
             day
             {Math.abs(Math.floor((giveaway.timestampEnd - Date.now()) / 1000 / 60 / 60 / 24)) !==
               1 && 's'}
-            {giveaway.winnerId && ' ago'}
+            {giveaway.winner && ' ago'}
           </p>
         </div>
       </div>

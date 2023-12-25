@@ -1,5 +1,11 @@
 import { Prisma } from 'database';
 
+export interface ISafeGiveawayEntry {
+  id: string;
+  username: string;
+  slot: number;
+}
+
 export interface ISafeGiveaway {
   id: string;
   name: string;
@@ -7,7 +13,7 @@ export interface ISafeGiveaway {
   value: number;
   maxEntries: number;
   image: string;
-  entries: number;
+  entries: ISafeGiveawayEntry[];
   timestampCreation: number;
   timestampEnd: number;
   winner: string | null;

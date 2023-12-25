@@ -20,7 +20,7 @@ import { useDisclosure } from '@mantine/hooks';
 import { DateTimePicker } from '@mantine/dates';
 import { getAllGiveaways } from 'database';
 import axios from 'axios';
-import { IGiveaway, ISafeGiveaway } from 'types';
+import { ISafeGiveaway } from 'types';
 import { Dropzone, FileWithPath, MIME_TYPES } from '@mantine/dropzone';
 import dateFormat from 'dateformat';
 import { notifications } from '@mantine/notifications';
@@ -34,22 +34,7 @@ export async function getServerSideProps() {
 
   return {
     props: {
-      giveaways: {
-        currentGiveaways: giveaways.currentGiveaways.map((giveaway) => {
-          return {
-            ...giveaway,
-            entries: giveaway.entries.length,
-            winner: null
-          };
-        }),
-        pastGiveaways: giveaways.pastGiveaways.map((giveaway) => {
-          return {
-            ...giveaway,
-            entries: giveaway.entries.length,
-            winner: giveaway.winner?.username || 'Unknown'
-          };
-        })
-      }
+      giveaways
     }
   };
 }
@@ -342,7 +327,7 @@ function Giveaways({
                       <td>{giveaway.brand}</td>
                       <td>${giveaway.value.toLocaleString('en-US')}</td>
                       <td>
-                        {giveaway.entries}/{giveaway.maxEntries}
+                        {giveaway.entries.length}/{giveaway.maxEntries}
                       </td>
                       <td>
                         {dateFormat(giveaway.timestampEnd, 'yyyy-mm-dd HH:MM:ss')} (in{' '}
@@ -393,7 +378,7 @@ function Giveaways({
                       <td>{giveaway.brand}</td>
                       <td>${giveaway.value}</td>
                       <td>
-                        {giveaway.entries}/{giveaway.maxEntries}
+                        {giveaway.entries.length}/{giveaway.maxEntries}
                       </td>
                       <td>{new Date(giveaway.timestampEnd).toLocaleString()}</td>
                       <td>{giveaway.winner}</td>

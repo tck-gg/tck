@@ -4,8 +4,12 @@ import RandomOrg from 'random-org';
 import { Action, User, prisma } from '../client';
 import { socket } from '../socket';
 import { deleteImage } from './backblaze';
+import { ISafeGiveaway } from 'types';
 
-export async function getAllGiveaways() {
+export async function getAllGiveaways(): Promise<{
+  currentGiveaways: ISafeGiveaway[];
+  pastGiveaways: ISafeGiveaway[];
+}> {
   const currentGiveaways = await prisma.giveaway.findMany({
     where: {
       timestampEnd: {
@@ -44,8 +48,32 @@ export async function getAllGiveaways() {
   });
 
   return {
-    currentGiveaways,
-    pastGiveaways
+    currentGiveaways: currentGiveaways.map((currentGiveaway) => {
+      return {
+        ...currentGiveaway,
+        entries: currentGiveaway.entries.map((entry) => {
+          return {
+            id: entry.id,
+            username: entry.user.username,
+            slot: entry.slot
+          };
+        }),
+        winner: currentGiveaway.winner?.username || null
+      };
+    }),
+    pastGiveaways: pastGiveaways.map((pastGiveaway) => {
+      return {
+        ...pastGiveaway,
+        entries: pastGiveaway.entries.map((entry) => {
+          return {
+            id: entry.id,
+            username: entry.user.username,
+            slot: entry.slot
+          };
+        }),
+        winner: pastGiveaway.winner?.username || null
+      };
+    })
   };
 }
 
@@ -107,12 +135,12 @@ export async function deleteGiveaway(id: string): Promise<boolean> {
   return true;
 }
 
-export async function getGiveaway(id: string) {
+export async function getGiveaway(id: string): Promise<ISafeGiveaway | null> {
   if (!ObjectId.isValid(id)) {
     return null;
   }
 
-  return await prisma.giveaway.findUnique({
+  const giveaway = await prisma.giveaway.findUnique({
     where: {
       id
     },
@@ -125,6 +153,24 @@ export async function getGiveaway(id: string) {
       winner: true
     }
   });
+
+  if (!giveaway) {
+    return null;
+  }
+
+  const safeGiveaway = {
+    ...giveaway,
+    entries: giveaway.entries.map((entry) => {
+      return {
+        id: entry.id,
+        username: entry.user.username,
+        slot: entry.slot
+      };
+    }),
+    winner: giveaway.winner?.username || null
+  };
+
+  return safeGiveaway;
 }
 
 export async function endGiveaway(id: string) {
@@ -164,7 +210,7 @@ export async function endGiveaway(id: string) {
     });
     winnerIndex = response.random.data[0];
   }
-  const winner = giveaway.entries[winnerIndex].userId;
+  const winner = giveaway.entries[winnerIndex];
 
   // Update database.
   await prisma.giveaway.update({
@@ -172,7 +218,11 @@ export async function endGiveaway(id: string) {
       id
     },
     data: {
-      winnerId: winner
+      winner: {
+        connect: {
+          username: winner.username
+        }
+      }
     }
   });
 }
@@ -214,17 +264,17 @@ export async function enterGiveaway(user: User, giveawayId: string, ip: string):
     return false;
   }
 
-  if (giveaway.winnerId || Date.now() > giveaway.timestampEnd) {
+  if (giveaway.winner || Date.now() > giveaway.timestampEnd) {
     // If the giveaway has already ended.
     return false;
   }
 
   if (
     giveaway.entries
-      .map((entry) => {
-        return entry.userId;
+      .map((user) => {
+        return user.username;
       })
-      .includes(user.id)
+      .includes(user.username)
   ) {
     // The user was already entered.
     return false;

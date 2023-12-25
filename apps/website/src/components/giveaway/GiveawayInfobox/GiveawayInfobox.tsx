@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
-import { IGiveaway } from 'types';
+import { ISafeGiveaway } from 'types';
 import { useRouter } from 'next/router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -40,7 +40,7 @@ function getUrl() {
   return '';
 }
 
-function GiveawayInfobox({ giveaway }: { giveaway: IGiveaway }) {
+function GiveawayInfobox({ giveaway }: { giveaway: ISafeGiveaway }) {
   const router = useRouter();
   const auth = useAuth();
   const [isEntered, setIsEntered] = useState(false);
@@ -52,9 +52,9 @@ function GiveawayInfobox({ giveaway }: { giveaway: IGiveaway }) {
     setIsEntered(
       giveaway.entries
         .map((entry) => {
-          return entry.userId;
+          return entry.username;
         })
-        .includes(auth.user?.id || '')
+        .includes(auth.user?.username || '')
     );
   }, [auth]);
 
@@ -154,7 +154,7 @@ function GiveawayInfobox({ giveaway }: { giveaway: IGiveaway }) {
           fullWidth
           disabled={isEntered || !auth.user || auth.user.isBanned || hasMaxEntries}
         >
-          {giveaway.winnerId
+          {giveaway.winner
             ? 'Giveaway Ended'
             : auth.user
             ? isEntered
@@ -165,7 +165,7 @@ function GiveawayInfobox({ giveaway }: { giveaway: IGiveaway }) {
             : 'Login to Enter'}
         </Button>
         <p className={classes.end}>
-          End{giveaway.winnerId ? 'ed' : 's'} {new Date(giveaway.timestampEnd).toLocaleString()}
+          End{giveaway.winner ? 'ed' : 's'} {new Date(giveaway.timestampEnd).toLocaleString()}
         </p>
       </div>
     </div>

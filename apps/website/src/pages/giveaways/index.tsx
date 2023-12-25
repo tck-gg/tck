@@ -1,5 +1,5 @@
 import { getAllGiveaways } from 'database';
-import { IGiveaway } from 'types';
+import { ISafeGiveaway } from 'types';
 import { IconHistoryToggle } from '@tabler/icons-react';
 
 import Layout from '@/components/Layout/Layout';
@@ -9,9 +9,11 @@ import GiveawayBox from '@/components/giveaway/GiveawayBox/GiveawayBox';
 import classes from './giveaways.module.scss';
 
 export async function getServerSideProps() {
+  const giveaways = await getAllGiveaways();
+
   return {
     props: {
-      giveaways: await getAllGiveaways()
+      giveaways
     }
   };
 }
@@ -20,8 +22,8 @@ function Giveaways({
   giveaways
 }: {
   giveaways: {
-    currentGiveaways: IGiveaway[];
-    pastGiveaways: IGiveaway[];
+    currentGiveaways: ISafeGiveaway[];
+    pastGiveaways: ISafeGiveaway[];
   };
 }) {
   return (
