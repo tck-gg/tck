@@ -1,5 +1,5 @@
 import { endGiveaway, getAllGiveaways } from 'database';
-import { IGiveaway } from 'types';
+import { IGiveaway, ISafeGiveaway } from 'types';
 import * as Sentry from '@sentry/node';
 import { ProfilingIntegration } from '@sentry/profiling-node';
 
@@ -14,7 +14,7 @@ Sentry.init({
 (async () => {
   const giveaways = await getAllGiveaways();
 
-  giveaways.currentGiveaways.forEach((giveaway: IGiveaway) => {
+  giveaways.currentGiveaways.forEach((giveaway: ISafeGiveaway) => {
     const timeout = giveaway.timestampEnd - Date.now();
     setTimeout(async () => {
       await endGiveaway(giveaway.id);

@@ -27,7 +27,13 @@ function GiveawayBox({ giveaway }: { giveaway: ISafeGiveaway }) {
   const [isEntered, setIsEntered] = useState(false);
 
   useEffect(() => {
-    setIsEntered(giveaway.entries.includes(auth.user?.id || ''));
+    setIsEntered(
+      giveaway.entries
+        .map((entry) => {
+          return entry.username;
+        })
+        .includes(auth.user?.username || '')
+    );
   }, [auth]);
 
   return (
