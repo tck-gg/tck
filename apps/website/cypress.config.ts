@@ -11,7 +11,6 @@ export default defineConfig({
   defaultCommandTimeout: 100000,
   responseTimeout: 100000,
   taskTimeout: 100000,
-
   component: {
     devServer: {
       framework: 'next',
