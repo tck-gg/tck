@@ -35,10 +35,6 @@ function OfferStake() {
               <p className={classes.title}>
                 Visit Stake<span className={classes.dotCom}>.com</span>
               </p>
-              <p className={classes.subtitle15}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                incididunt ut labore et dolore magna aliqua.
-              </p>
             </div>
             <div className={classes.stakeSectionLeftBottom}>
               <div
