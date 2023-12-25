@@ -51,7 +51,7 @@ function Giveaways({
         {giveaways.pastGiveaways.length > 0 && (
           <div>
             <div className={classes.iconHeader}>
-              <IconHistoryToggle color='#989EAE' />
+              <IconHistoryToggle color='#989eae' />
               <p className={classes.header}>Finished Giveaways</p>
             </div>
             <div className={classes.giveawayBoxWrapper}>

@@ -8,9 +8,10 @@
     "start": "cross-env NODE_ENV=production next start -p 8007",
     "lint": "next lint",
     "cypress": "cross-env NODE_ENV=development cypress open",
-    "cypress:headless": "cross-env NODE_ENV=development cypress run",
+    "cypress:headless:e2e": "cross-env NODE_ENV=development cypress run --e2e",
+    "cypress:headless:component": "cross-env NODE_ENV=development cypress run --component",
     "jest": "jest --maxWorkers=50% --coverage",
-    "test": "npm run jest && npm run cypress:headless"
+    "test": "npm run jest && npm run cypress:headless:e2e && npm run cypress:headless:component"
   },
   "dependencies": {
     "@emotion/react": "^11.11.0",

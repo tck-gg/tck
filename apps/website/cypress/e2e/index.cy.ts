@@ -4,6 +4,6 @@ beforeEach(() => {
 
 describe('Smoke', () => {
   it('exists', () => {
-    cy.contains('Test').should('exist');
+    cy.contains('The Most Rewarding Website').should('exist');
   });
 });
