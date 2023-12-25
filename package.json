@@ -11,7 +11,8 @@
     "build": "dotenv -- turbo run build",
     "lint": "turbo run lint",
     "test": "turbo run test --concurrency=1",
-    "start": "dotenv -- turbo run start"
+    "start": "dotenv -- turbo run start",
+    "gource": "gource --user-image-dir ./avatar -1280x720 --seconds-per-day 0.25"
   },
   "devDependencies": {
     "dotenv-cli": "^7.2.1",
