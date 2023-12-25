@@ -8,6 +8,7 @@ describe('Utility - Log', () => {
 
     expect(logSpy).toHaveBeenCalled();
     expect(logSpy).toBeCalledTimes(1);
+
     // TODO: Test output.
   });
 });

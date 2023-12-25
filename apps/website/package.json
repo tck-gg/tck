@@ -10,7 +10,7 @@
     "cypress": "cross-env NODE_ENV=development cypress open",
     "cypress:headless": "cross-env NODE_ENV=development cypress run",
     "jest": "jest --maxWorkers=50% --coverage",
-    "test": "npm run jest"
+    "test": "npm run jest && npm run cypress:headless"
   },
   "dependencies": {
     "@emotion/react": "^11.11.0",
