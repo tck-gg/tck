@@ -32,9 +32,7 @@ function OfferStake() {
         <div className={classes.stakeSection}>
           <div className={classes.stakeSectionLeft}>
             <div>
-              <p className={classes.title}>
-                Visit Stake<span className={classes.dotCom}>.com</span>
-              </p>
+              <p className={classes.title}>Visit Stake.com</p>
             </div>
             <div className={classes.stakeSectionLeftBottom}>
               <div
