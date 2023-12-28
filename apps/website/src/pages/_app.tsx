@@ -9,6 +9,7 @@ import BanBanner from '@/components/BanBanner/BanBanner';
 
 import AgeVerification from '@/components/AgeVerification/AgeVerification';
 import TheProviderProvider from '@/components/TheProviderProvider';
+import ModalProfile from '@/components/ModalProfile/ModalProfile';
 
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import '../styles/globals.scss';
@@ -32,6 +33,7 @@ function App({ Component, pageProps }: AppProps) {
       <TheProviderProvider>
         <AgeVerification />
         <BanBanner />
+        <ModalProfile />
         <ReAuth>
           <Component {...pageProps} />
         </ReAuth>

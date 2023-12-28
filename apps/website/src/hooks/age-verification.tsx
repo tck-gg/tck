@@ -16,7 +16,7 @@ export function useAgeVerification(): {
 function useProvideAgeVerification() {
   const ageVerificationCallback = useAgeVerificationCallback();
   const [cookie, setCookie] = useCookies(['hasVerifiedAge']);
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
 
   function open() {
     if (!cookie.hasVerifiedAge) {

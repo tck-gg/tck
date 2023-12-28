@@ -19,10 +19,6 @@
   border-radius: 8px;
   background: #161625;
   backdrop-filter: blur(45px);
-  
-  max-width: 512px;
-  width: 100%;
-  height: 342px;
 
   padding: 20px;
 }
@@ -52,6 +48,10 @@
 
 .modalWrapper {
   position: relative;
+
+  max-width: 512px;
+  width: 100%;
+  height: 342px;
 }
 
 .close {

@@ -6,6 +6,7 @@ import { ProvideAgeVerificationCallback } from '@/hooks/age-verification-callbac
 import { ProvideAuth } from '@/hooks/auth';
 import { ProvideRewardsContextMenu } from '@/hooks/rewards-context-menu';
 import { ProvideTheme } from '@/hooks/theme';
+import { ProvideProfile } from '@/hooks/profile';
 
 function TheProviderProvider({ children }: { children: React.ReactNode }) {
   return (
@@ -14,16 +15,18 @@ function TheProviderProvider({ children }: { children: React.ReactNode }) {
         <ProvideRewardsContextMenu>
           <ProvideAgeVerificationCallback>
             <ProvideAgeVerification>
-              <ProvideTheme>
-                <MantineProvider
-                  theme={{
-                    colorScheme: 'dark',
-                    fontFamily: 'Archivo, sans-serif'
-                  }}
-                >
-                  {children}
-                </MantineProvider>
-              </ProvideTheme>
+              <ProvideProfile>
+                <ProvideTheme>
+                  <MantineProvider
+                    theme={{
+                      colorScheme: 'dark',
+                      fontFamily: 'Archivo, sans-serif'
+                    }}
+                  >
+                    {children}
+                  </MantineProvider>
+                </ProvideTheme>
+              </ProvideProfile>
             </ProvideAgeVerification>
           </ProvideAgeVerificationCallback>
         </ProvideRewardsContextMenu>
