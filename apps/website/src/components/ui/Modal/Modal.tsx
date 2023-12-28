@@ -17,24 +17,22 @@ function Modal({
   open: () => void;
   close: () => void;
   children: React.ReactNode;
-  title: string;
-  titleIcon: IconDefinition;
+  title?: string;
+  titleIcon?: IconDefinition;
 }) {
-  return (
+  return isOpen ? (
     <div className={classes.root}>
       <ClickAwayListener onClickAway={close}>
         <div className={classes.box}>
-          {(title || titleIcon) && (
-            <div className={classes.top}>
-              {titleIcon && <IconBubble icon={titleIcon} size={16} />}
-              {title && <p className={classes.title}>{title}</p>}
-            </div>
-          )}
+          <div className={classes.top}>
+            {titleIcon && <IconBubble icon={titleIcon} size={16} />}
+            {title && <p className={classes.title}>{title}</p>}
+          </div>
           <div className={classes.bottom}>{children}</div>
         </div>
       </ClickAwayListener>
     </div>
-  );
+  ) : null;
 }
 
 export default Modal;
