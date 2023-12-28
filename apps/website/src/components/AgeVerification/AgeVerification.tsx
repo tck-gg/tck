@@ -1,12 +1,13 @@
 import { faBan, faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import ClickAwayListener from 'react-click-away-listener';
 
+import Button from '@/components/ui/Button/Button';
+
 import { useAgeVerification } from '@/hooks/age-verification';
 
 import IconBubble from '../ui/IconBubble/IconBubble';
 
 import classes from './AgeVerification.module.scss';
-import Button from '@/components/ui/Button/Button';
 
 function AgeVerification() {
   const ageVerification = useAgeVerification();

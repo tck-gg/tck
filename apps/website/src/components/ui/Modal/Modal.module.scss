@@ -1,0 +1,50 @@
+.root {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  z-index: 3;
+  padding: 1em;
+
+  background: rgba(0, 0, 0, 0.5);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.box {
+  border-radius: 8px;
+  background: #161625;
+  backdrop-filter: blur(45px);
+  
+  width: 512px;
+  height: 342px;
+
+  padding: 20px;
+}
+
+.top {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.title {
+  color: #989eae;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.bottom {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 32px;
+
+  height: 100%;
+}
