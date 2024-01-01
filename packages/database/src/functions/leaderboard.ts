@@ -7,7 +7,7 @@ import {
   LeaderboardType,
   PackdrawLeaderboardApiData
 } from 'types';
-import { format, previousSaturday, previousSunday } from 'date-fns';
+import { format, previousSunday } from 'date-fns';
 
 import { prisma } from '../client';
 
@@ -167,6 +167,15 @@ export async function getLeaderboard(type: LeaderboardType) {
     });
   }
 
+  if (type === 'roobet') {
+    // const response = await axios.get(`https://api.roobet.com/affiliate/stats`, {
+    //   headers: {
+    //     authorization: `Bearer ${process.env.ROOBET_API_KEY}`
+    //   }
+    // });
+    // console.log(response.data);
+  }
+
   if (type !== 'stake' && spots.length > 0) {
     await updateLeaderboard(type, spots);
   }
@@ -191,6 +200,7 @@ export async function getAllLeaderboards() {
     gamdom: await getLeaderboard('gamdom'),
     clash: await getLeaderboard('clash'),
     csgobig: await getLeaderboard('csgobig'),
-    packdraw: await getLeaderboard('packdraw')
+    packdraw: await getLeaderboard('packdraw'),
+    roobet: await getLeaderboard('roobet')
   };
 }

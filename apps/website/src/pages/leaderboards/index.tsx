@@ -25,6 +25,7 @@ import stakeLogo from '../../images/affiliate/stake.png';
 import clashLogo from '../../images/affiliate/clash.png';
 import csgobigLogo from '../../images/affiliate/csgobig.png';
 import packDrawLogo from '../../images/affiliate/packdraw.png';
+import roobetLogo from '../../images/affiliate/roobet.png';
 
 export type ILeaderboard = Prisma.LeaderboardGetPayload<{
   include: { spots: true };
@@ -148,6 +149,22 @@ function Leaderboards({
             className={clsx(
               classes.affiliate,
               selectedLeaderboard === 'gamdom' && classes.selected
+            )}
+          />
+          <Image
+            src={roobetLogo}
+            alt='Roobet'
+            width={100}
+            height={60}
+            style={{
+              objectFit: 'contain'
+            }}
+            onClick={() => {
+              setSelectedLeaderboard('roobet');
+            }}
+            className={clsx(
+              classes.affiliate,
+              selectedLeaderboard === 'roobet' && classes.selected
             )}
           />
         </div>
