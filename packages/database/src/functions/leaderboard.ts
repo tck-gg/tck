@@ -5,7 +5,8 @@ import {
   GamdomLeaderboardApiResponse,
   LeaderboardSpot,
   LeaderboardType,
-  PackdrawLeaderboardApiData
+  PackdrawLeaderboardApiData,
+  RoobetLeaderboardSpot
 } from 'types';
 import { format, previousSunday } from 'date-fns';
 
@@ -59,13 +60,15 @@ export async function updateLeaderboard(type: LeaderboardType, data: Leaderboard
 export async function getLeaderboard(type: LeaderboardType) {
   await ensureLeaderboard(type);
 
+  const monthStart = new Date(new Date().getFullYear(), new Date().getMonth(), 1)
+    .toISOString()
+    .split('T')[0];
+
   let spots: LeaderboardSpot[] = [];
 
   if (type === 'gamdom') {
     const response = await axios.get(
-      `https://gamdom.com/api/affiliates/leaderboard?apikey=${process.env.GAMDOM_API_KEY}&after=${
-        new Date(new Date().getFullYear(), new Date().getMonth(), 1).toISOString().split('T')[0]
-      }`,
+      `https://gamdom.com/api/affiliates/leaderboard?apikey=${process.env.GAMDOM_API_KEY}&after=${monthStart}`,
       {
         validateStatus: () => {
           return true;
@@ -168,12 +171,30 @@ export async function getLeaderboard(type: LeaderboardType) {
   }
 
   if (type === 'roobet') {
-    // const response = await axios.get(`https://api.roobet.com/affiliate/stats`, {
-    //   headers: {
-    //     authorization: `Bearer ${process.env.ROOBET_API_KEY}`
-    //   }
-    // });
-    // console.log(response.data);
+    const response = await axios.get(
+      `https://api.roobet.com/affiliate/stats?userId=0401366b-7c9a-4edf-99e5-90db191b54ed&startDate=${new Date(
+        monthStart
+      ).toISOString()}`,
+      {
+        headers: {
+          authorization: `Bearer ${process.env.ROOBET_API_KEY}`
+        }
+      }
+    );
+    const data: RoobetLeaderboardSpot[] = response.data;
+
+    spots = data
+      .sort((a, b) => {
+        return b.wagered - a.wagered;
+      })
+      .splice(0, 10)
+      .map((spot) => {
+        return {
+          username: spot.username,
+          amount: Math.round(spot.wagered),
+          avatar: ''
+        };
+      });
   }
 
   if (type !== 'stake' && spots.length > 0) {
