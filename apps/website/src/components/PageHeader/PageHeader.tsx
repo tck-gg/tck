@@ -42,6 +42,12 @@ const UNDERLINES: {
       <stop stopColor='#E1B56F' />
       <stop offset='1' stopColor='#94713B' />
     </>
+  ),
+  roobet: (
+    <>
+      <stop stopColor='#18A9FF' />
+      <stop offset='1' stopColor='#9229FF' />
+    </>
   )
 };
 
