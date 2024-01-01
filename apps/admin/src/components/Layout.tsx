@@ -17,7 +17,8 @@ import {
   IconGift,
   IconHome,
   IconMedal,
-  IconUsers
+  IconUsers,
+  IconDevicesPc
 } from '@tabler/icons-react';
 import { useState } from 'react';
 import Link from 'next/link';
@@ -98,7 +99,8 @@ const SIDEBAR_DATA: {
   },
   { link: '/raffles', label: 'Raffles', icon: IconDice5, permission: 'MANAGE_RAFFLES' },
   { link: '/giveaways', label: 'Giveaways', icon: IconGift, permission: 'MANAGE_GIVEAWAYS' },
-  { link: '/reloads', label: 'Reloads', icon: IconGift, permission: 'MANAGE_RELOADS' }
+  { link: '/reloads', label: 'Reloads', icon: IconGift, permission: 'MANAGE_RELOADS' },
+  { link: '/ips', label: 'IPs', icon: IconDevicesPc, permission: 'MANAGE_IPS' }
 ];
 
 function Layout({ title, children }: { title?: string; children: React.ReactNode }) {

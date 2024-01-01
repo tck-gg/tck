@@ -8,6 +8,7 @@ export * from './functions/auth';
 export * from './functions/backblaze';
 export * from './functions/collection';
 export * from './functions/giveaways';
+export * from './functions/ip';
 export * from './functions/leaderboard';
 export * from './functions/permissions';
 export * from './functions/user';

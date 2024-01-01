@@ -12,6 +12,7 @@ https://discord.com/oauth2/authorize?client_id=1188676912525090837&scope=bot&per
 - `MANAGE_LEADERBOARDS`
 - `MANAGE_RAFFLES`
 - `MANAGE_GIVEAWAYS`
+- `MANAGE_IPS`
 - `MANAGE_RELOADS`
 - `USER_BAN`
 - `USER_DELETE`
