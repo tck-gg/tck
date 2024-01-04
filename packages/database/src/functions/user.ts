@@ -249,7 +249,7 @@ export async function deleteUser(userId: string) {
   return true;
 }
 
-export async function setPoints(userId: string, points: number, ip: string) {
+export async function setPoints(userId: string, points: number, ip: string, moderator: string) {
   if (points < 0) {
     points = 0;
   }
@@ -268,11 +268,27 @@ export async function setPoints(userId: string, points: number, ip: string) {
     }
   });
 
+  // Add user action for target.
   await prisma.userAction.create({
     data: {
       user: {
         connect: {
           id: userId
+        }
+      },
+      action: Action.USER_POINTS_SET,
+      ip,
+      timestamp: Date.now(),
+      description: `Had points set from ${oldPoints} to ${points} by ${moderator}.`
+    }
+  });
+
+  // Add user action for moderator.
+  await prisma.userAction.create({
+    data: {
+      user: {
+        connect: {
+          username: moderator
         }
       },
       action: Action.USER_POINTS_SET,
@@ -285,7 +301,7 @@ export async function setPoints(userId: string, points: number, ip: string) {
   return true;
 }
 
-export async function addPoints(userId: string, points: number, ip: string) {
+export async function addPoints(userId: string, points: number, ip: string, moderator: string) {
   if (points < 0) {
     points = 0;
   }
@@ -306,6 +322,7 @@ export async function addPoints(userId: string, points: number, ip: string) {
     }
   });
 
+  // Add user action for target.
   await prisma.userAction.create({
     data: {
       user: {
@@ -316,14 +333,29 @@ export async function addPoints(userId: string, points: number, ip: string) {
       action: Action.USER_POINTS_ADD,
       ip,
       timestamp: Date.now(),
-      description: `Added ${points} to ${user.username}. Has ${oldPoints + points}.`
+      description: `Had ${points} added by ${moderator}. ${oldPoints} → ${oldPoints + points}.`
+    }
+  });
+
+  // Add user action for moderator.
+  await prisma.userAction.create({
+    data: {
+      user: {
+        connect: {
+          username: moderator
+        }
+      },
+      action: Action.USER_POINTS_ADD,
+      ip,
+      timestamp: Date.now(),
+      description: `Added ${points} to ${user.username}. ${oldPoints} → ${oldPoints + points}.`
     }
   });
 
   return true;
 }
 
-export async function removePoints(userId: string, points: number, ip: string) {
+export async function removePoints(userId: string, points: number, ip: string, moderator: string) {
   if (points < 0) {
     points = 0;
   }
@@ -344,6 +376,7 @@ export async function removePoints(userId: string, points: number, ip: string) {
     }
   });
 
+  // Add user action for target.
   await prisma.userAction.create({
     data: {
       user: {
@@ -354,7 +387,24 @@ export async function removePoints(userId: string, points: number, ip: string) {
       action: Action.USER_POINTS_REMOVE,
       ip,
       timestamp: Date.now(),
-      description: `Removed ${points} to ${user.username}. Has ${oldPoints - points}.`
+      description: `Had ${points} removed by ${user.username}. ${oldPoints} → ${
+        oldPoints - points
+      }.`
+    }
+  });
+
+  // Add user action for moderator.
+  await prisma.userAction.create({
+    data: {
+      user: {
+        connect: {
+          username: moderator
+        }
+      },
+      action: Action.USER_POINTS_REMOVE,
+      ip,
+      timestamp: Date.now(),
+      description: `Removed ${points} from ${user.username}. ${oldPoints} → ${oldPoints - points}.`
     }
   });
 

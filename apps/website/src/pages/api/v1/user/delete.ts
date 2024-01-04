@@ -2,12 +2,16 @@ import { deleteUser, getUserByAuthorization, validateAuthorization } from 'datab
 import { NextApiRequest, NextApiResponse } from 'next';
 import NextCors from 'nextjs-cors';
 
+import { getIp } from '@/util/ip';
+
 async function handler(req: NextApiRequest, res: NextApiResponse) {
   await NextCors(req, res, {
     methods: ['POST'],
     origin: '*',
     optionsSuccessStatus: 200
   });
+
+  const ip = getIp(req);
 
   const authorization = req.headers.authorization;
   if (!authorization || !validateAuthorization(authorization)) {
@@ -39,7 +43,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     return;
   }
 
-  const success = await deleteUser(userId);
+  const success = await deleteUser(userId, ip);
 
   if (!success) {
     res.status(500).end();

@@ -42,7 +42,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     return;
   }
 
-  await removePoints(userId, points, ip);
+  await removePoints(userId, points, ip, user.username);
 
   res.status(200).end();
 }

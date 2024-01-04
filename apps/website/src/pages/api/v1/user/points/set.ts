@@ -42,7 +42,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     return;
   }
 
-  await setPoints(userId, points, ip);
+  await setPoints(userId, points, ip, user.username);
 
   res.status(200).end();
 }
