@@ -10,6 +10,7 @@ import {
   Input,
   Menu,
   Modal,
+  NumberInput,
   Pagination,
   Paper,
   ScrollArea,
@@ -190,6 +191,10 @@ function Users({ users }: { users: IUser[] }) {
     useDisclosure(false);
 
   const [isDeleteModalOpen, { open: openDeleteModal, close: closeDeleteModal }] =
+    useDisclosure(false);
+
+  const [points, setPoints] = useState<number>(0);
+  const [isPointsModalOpen, { open: openPointsModal, close: closePointsModal }] =
     useDisclosure(false);
 
   useEffect(() => {
@@ -468,6 +473,44 @@ function Users({ users }: { users: IUser[] }) {
     setDisabled(false);
   }
 
+  async function updatePoints() {
+    setDisabled(true);
+
+    const response = await axios.post(
+      `${getUrl()}/api/v1/user/points/set`,
+      {
+        userId: selectedUser?.id,
+        points
+      },
+      {
+        headers: {
+          authorization: cookie.authorization
+        },
+        validateStatus: () => {
+          return true;
+        }
+      }
+    );
+
+    if (response.status === 200) {
+      closePointsModal();
+      setDisabled(false);
+      router.replace(router.asPath);
+
+      notifications.show({
+        title: 'Success',
+        message: `Points for ${selectedUser?.username || 'Unknown'} have been updated.`,
+        color: 'teal',
+        icon: <IconCheck />,
+        withBorder: true,
+        autoClose: 10000
+      });
+    }
+
+    showErrorNotification(response.status);
+    setDisabled(false);
+  }
+
   return (
     <Layout>
       {permissions.permissions.includes('MANAGE_USERS') ? (
@@ -608,7 +651,36 @@ function Users({ users }: { users: IUser[] }) {
                                 </Menu>
                               </div>
                             </td>
-                            <td>{user.points}</td>
+                            <td>
+                              <div
+                                style={{
+                                  display: 'flex',
+                                  alignItems: 'center'
+                                }}
+                              >
+                                {user.points}
+                                {permissions.permissions.includes('USER_POINTS_SET') && (
+                                  <Menu
+                                    transitionProps={{ transition: 'pop' }}
+                                    withArrow
+                                    position='bottom-end'
+                                    withinPortal
+                                  >
+                                    <Menu.Target>
+                                      <ActionIcon
+                                        onClick={() => {
+                                          setSelectedUser(user);
+                                          setPoints(user.points);
+                                          openPointsModal();
+                                        }}
+                                      >
+                                        <IconPencil size='1rem' stroke={1.5} />
+                                      </ActionIcon>
+                                    </Menu.Target>
+                                  </Menu>
+                                )}
+                              </div>
+                            </td>
                             <td>
                               {dateformat(
                                 user.actions.find((action) => {
@@ -815,6 +887,31 @@ function Users({ users }: { users: IUser[] }) {
               </Button>
               <Button onClick={deleteUser} color='red' disabled={disabled}>
                 Delete
+              </Button>
+            </Group>
+          </Modal>
+
+          <Modal
+            opened={isPointsModalOpen}
+            onClose={closePointsModal}
+            title={`Edit Points for ${selectedUser?.username || 'Unknown'}`}
+            centered
+          >
+            <NumberInput
+              label='Points'
+              placeholder='Points'
+              value={points}
+              type='number'
+              onChange={(value) => {
+                setPoints(value || 0);
+              }}
+            />
+            <Group position='right' mt='md' grow>
+              <Button onClick={closePointsModal} variant='outline'>
+                Cancel
+              </Button>
+              <Button onClick={updatePoints} disabled={disabled}>
+                Update
               </Button>
             </Group>
           </Modal>

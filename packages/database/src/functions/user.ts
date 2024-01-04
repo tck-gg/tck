@@ -249,10 +249,17 @@ export async function deleteUser(userId: string) {
   return true;
 }
 
-export async function setPoints(userId: string, points: number) {
+export async function setPoints(userId: string, points: number, ip: string) {
   if (points < 0) {
     points = 0;
   }
+
+  const user = await getUserById(userId);
+  if (!user) {
+    return false;
+  }
+
+  const oldPoints = user.points;
 
   await prisma.user.update({
     where: { id: userId },
@@ -260,12 +267,35 @@ export async function setPoints(userId: string, points: number) {
       points
     }
   });
+
+  await prisma.userAction.create({
+    data: {
+      user: {
+        connect: {
+          id: userId
+        }
+      },
+      action: Action.USER_POINTS_SET,
+      ip,
+      timestamp: Date.now(),
+      description: `Set points from ${oldPoints} to ${points} for ${user.username}.`
+    }
+  });
+
+  return true;
 }
 
-export async function addPoints(userId: string, points: number) {
+export async function addPoints(userId: string, points: number, ip: string) {
   if (points < 0) {
     points = 0;
   }
+
+  const user = await getUserById(userId);
+  if (!user) {
+    return false;
+  }
+
+  const oldPoints = user.points;
 
   await prisma.user.update({
     where: { id: userId },
@@ -275,12 +305,35 @@ export async function addPoints(userId: string, points: number) {
       }
     }
   });
+
+  await prisma.userAction.create({
+    data: {
+      user: {
+        connect: {
+          id: userId
+        }
+      },
+      action: Action.USER_POINTS_ADD,
+      ip,
+      timestamp: Date.now(),
+      description: `Added ${points} to ${user.username}. Has ${oldPoints + points}.`
+    }
+  });
+
+  return true;
 }
 
-export async function removePoints(userId: string, points: number) {
+export async function removePoints(userId: string, points: number, ip: string) {
   if (points < 0) {
     points = 0;
   }
+
+  const user = await getUserById(userId);
+  if (!user) {
+    return false;
+  }
+
+  const oldPoints = user.points;
 
   await prisma.user.update({
     where: { id: userId },
@@ -290,4 +343,20 @@ export async function removePoints(userId: string, points: number) {
       }
     }
   });
+
+  await prisma.userAction.create({
+    data: {
+      user: {
+        connect: {
+          id: userId
+        }
+      },
+      action: Action.USER_POINTS_REMOVE,
+      ip,
+      timestamp: Date.now(),
+      description: `Removed ${points} to ${user.username}. Has ${oldPoints - points}.`
+    }
+  });
+
+  return true;
 }
