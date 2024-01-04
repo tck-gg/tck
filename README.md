@@ -18,6 +18,9 @@ https://discord.com/oauth2/authorize?client_id=1188676912525090837&scope=bot&per
 - `USER_DELETE`
 - `USER_UNBAN`
 - `USER_MODIFY_PERMISSIONS`
+- `USER_POINTS_ADD`
+- `USER_POINTS_REMOVE`
+- `USER_POINTS_SET`
 - `USER_VIEW_ACTIVITY`
 
 ## `.env`

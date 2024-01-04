@@ -248,3 +248,46 @@ export async function deleteUser(userId: string) {
 
   return true;
 }
+
+export async function setPoints(userId: string, points: number) {
+  if (points < 0) {
+    points = 0;
+  }
+
+  await prisma.user.update({
+    where: { id: userId },
+    data: {
+      points
+    }
+  });
+}
+
+export async function addPoints(userId: string, points: number) {
+  if (points < 0) {
+    points = 0;
+  }
+
+  await prisma.user.update({
+    where: { id: userId },
+    data: {
+      points: {
+        increment: points
+      }
+    }
+  });
+}
+
+export async function removePoints(userId: string, points: number) {
+  if (points < 0) {
+    points = 0;
+  }
+
+  await prisma.user.update({
+    where: { id: userId },
+    data: {
+      points: {
+        decrement: points
+      }
+    }
+  });
+}
