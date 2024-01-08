@@ -91,12 +91,6 @@ const SIDEBAR_DATA: {
 }[] = [
   { link: '/', label: 'Home', icon: IconHome },
   { link: '/users', label: 'Users', icon: IconUsers, permission: 'MANAGE_USERS' },
-  {
-    link: '/leaderboard',
-    label: 'Leaderboard',
-    icon: IconMedal,
-    permission: 'MANAGE_LEADERBOARDS'
-  },
   { link: '/raffles', label: 'Raffles', icon: IconDice5, permission: 'MANAGE_RAFFLES' },
   { link: '/giveaways', label: 'Giveaways', icon: IconGift, permission: 'MANAGE_GIVEAWAYS' },
   { link: '/reloads', label: 'Reloads', icon: IconGift, permission: 'MANAGE_RELOADS' },
