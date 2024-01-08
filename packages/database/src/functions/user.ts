@@ -194,7 +194,7 @@ export async function unbanUser(userId: string) {
   });
 }
 
-export async function deleteUser(userId: string) {
+export async function deleteUser(userId: string, ip: string) {
   const user = await getUserById(userId);
 
   if (!user) {
@@ -225,7 +225,8 @@ export async function deleteUser(userId: string) {
         create: {
           action: Action.ACCOUNT_DELETE,
           ip: '',
-          timestamp: Date.now()
+          timestamp: Date.now(),
+          description: 'Account has been deleted by user.'
         }
       },
       points: 0,
