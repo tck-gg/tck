@@ -1,6 +1,5 @@
 import axios from 'axios';
 import {
-  ClashLeaderboardEntry,
   CsgoBigLeaderboardApiResponse,
   GamdomLeaderboardApiResponse,
   LeaderboardSpot,
@@ -91,41 +90,6 @@ export async function getLeaderboard(type: LeaderboardType) {
           };
         });
     }
-  }
-
-  if (type === 'clash') {
-    const response = await axios.get(
-      `https://api.clash.gg/affiliates/detailed-summary/v2/${format(
-        new Date(new Date().getFullYear(), new Date().getMonth(), 1),
-        'yyyy-MM-dd'
-      )}`,
-      {
-        headers: {
-          Authorization: `Bearer ${process.env.CLASH_API_KEY}`,
-          'Content-Type': 'application/json'
-        },
-        validateStatus: () => {
-          return true;
-        }
-      }
-    );
-    const data: ClashLeaderboardEntry[] = response.data;
-
-    spots = data
-      .filter((spot) => {
-        return spot.name !== 'TCK';
-      })
-      .sort((a, b) => {
-        return b.wagered - a.wagered;
-      })
-      .splice(0, 10)
-      .map((spot) => {
-        return {
-          username: spot.name,
-          amount: Math.round(spot.wagered / 100),
-          avatar: spot.avatar
-        };
-      });
   }
 
   if (type === 'packdraw') {
@@ -219,7 +183,6 @@ export async function getAllLeaderboards() {
   return {
     stake: await getLeaderboard('stake'),
     gamdom: await getLeaderboard('gamdom'),
-    clash: await getLeaderboard('clash'),
     csgobig: await getLeaderboard('csgobig'),
     packdraw: await getLeaderboard('packdraw'),
     roobet: await getLeaderboard('roobet')

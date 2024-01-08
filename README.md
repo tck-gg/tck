@@ -33,7 +33,9 @@ https://discord.com/oauth2/authorize?client_id=1188676912525090837&scope=bot&per
 - `DISCORD_TOKEN`
 - `DISCORD_ANNOUNCEMENT_CHANNEL_ID`
 - `GAMDOM_API_KEY`
-- `CLASH_API_KEY`
 - `SENTRY_AUTH_TOKEN`
 - `RANDOM_ORG_API_KEY` (signed)
 - `PACKDRAW_API_KEY`
+
+### Unused
+- `CLASH_API_KEY`

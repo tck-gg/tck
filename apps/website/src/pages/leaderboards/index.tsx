@@ -22,7 +22,6 @@ import classes from './leaderboards.module.scss';
 
 import gamdomLogo from '../../images/affiliate/gamdom.png';
 import stakeLogo from '../../images/affiliate/stake.png';
-import clashLogo from '../../images/affiliate/clash.png';
 import csgobigLogo from '../../images/affiliate/csgobig.png';
 import packDrawLogo from '../../images/affiliate/packdraw.png';
 import roobetLogo from '../../images/affiliate/roobet.png';
@@ -58,10 +57,10 @@ function Leaderboards({
   const [weeklyDays, weeklyHours, weeklyMinutes] = useCountdown(
     new Date(sunday.getFullYear(), sunday.getMonth(), sunday.getDate())
   );
-  const [selectedLeaderboard, setSelectedLeaderboard] = useState<LeaderboardType>('clash');
+  const [selectedLeaderboard, setSelectedLeaderboard] = useState<LeaderboardType>('csgobig');
 
   useEffect(() => {
-    theme.setTheme('clash');
+    theme.setTheme('csgobig');
   }, []);
   useEffect(() => {
     if (selectedLeaderboard === 'stake' || selectedLeaderboard === 'packdraw') {
@@ -77,19 +76,6 @@ function Leaderboards({
         <PageHeader title='Leaderboards' />
 
         <div className={classes.affiliates}>
-          <Image
-            src={clashLogo}
-            alt='Clash'
-            width={100}
-            height={60}
-            style={{
-              objectFit: 'contain'
-            }}
-            onClick={() => {
-              setSelectedLeaderboard('clash');
-            }}
-            className={clsx(classes.affiliate, selectedLeaderboard === 'clash' && classes.selected)}
-          />
           <Image
             src={csgobigLogo}
             alt='CSGOBIG'
@@ -254,9 +240,6 @@ function Leaderboards({
             </div>
 
             <div className={clsx(classes.timerWrapper, classes.hideOnMobile)}>
-              {selectedLeaderboard === 'clash' && (
-                <CountdownTimer days={monthlyDays} hours={monthlyHours} minutes={monthlyMinutes} />
-              )}
               {selectedLeaderboard === 'csgobig' && (
                 <CountdownTimer days={monthlyDays} hours={monthlyHours} minutes={monthlyMinutes} />
               )}
