@@ -23,7 +23,6 @@ import classes from './leaderboards.module.scss';
 import gamdomLogo from '../../images/affiliate/gamdom.png';
 import stakeLogo from '../../images/affiliate/stake.png';
 import csgobigLogo from '../../images/affiliate/csgobig.png';
-import packDrawLogo from '../../images/affiliate/packdraw.png';
 import roobetLogo from '../../images/affiliate/roobet.png';
 
 export type ILeaderboard = Prisma.LeaderboardGetPayload<{
@@ -105,22 +104,6 @@ function Leaderboards({
             }}
             className={clsx(classes.affiliate, selectedLeaderboard === 'stake' && classes.selected)}
           /> */}
-          <Image
-            src={packDrawLogo}
-            alt='PackDraw'
-            width={100}
-            height={60}
-            style={{
-              objectFit: 'contain'
-            }}
-            onClick={() => {
-              setSelectedLeaderboard('packdraw');
-            }}
-            className={clsx(
-              classes.affiliate,
-              selectedLeaderboard === 'packdraw' && classes.selected
-            )}
-          />
           <Image
             src={gamdomLogo}
             alt='Gamdom'

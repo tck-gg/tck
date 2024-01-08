@@ -92,30 +92,6 @@ export async function getLeaderboard(type: LeaderboardType) {
     }
   }
 
-  if (type === 'packdraw') {
-    const prevSunday = previousSunday(new Date());
-    const response = await axios.get(
-      `https://packdraw.com/api/v1/affiliates/leaderboard?after=${format(
-        prevSunday,
-        'MM-dd-yyyy'
-      )}&apiKey=${process.env.PACKDRAW_API_KEY}`,
-      {
-        validateStatus: () => {
-          return true;
-        }
-      }
-    );
-    const data: PackdrawLeaderboardApiData = response.data;
-
-    spots = data.leaderboard.map((spot) => {
-      return {
-        username: spot.username,
-        amount: Math.round(spot.wagerAmount),
-        avatar: spot.image
-      };
-    });
-  }
-
   if (type === 'csgobig') {
     const start = new Date(new Date().getFullYear(), new Date().getMonth(), 1).getTime();
 
@@ -184,7 +160,6 @@ export async function getAllLeaderboards() {
     stake: await getLeaderboard('stake'),
     gamdom: await getLeaderboard('gamdom'),
     csgobig: await getLeaderboard('csgobig'),
-    packdraw: await getLeaderboard('packdraw'),
     roobet: await getLeaderboard('roobet')
   };
 }
