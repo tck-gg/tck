@@ -157,7 +157,6 @@ export async function getLeaderboard(type: LeaderboardType) {
 
 export async function getAllLeaderboards() {
   return {
-    stake: await getLeaderboard('stake'),
     gamdom: await getLeaderboard('gamdom'),
     csgobig: await getLeaderboard('csgobig'),
     roobet: await getLeaderboard('roobet')
