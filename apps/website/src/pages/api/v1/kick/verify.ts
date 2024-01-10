@@ -1,5 +1,4 @@
-import { validateAuthorization } from 'database';
-import { validateKickVerification } from 'database/src/functions/kick';
+import { validateAuthorization, validateKickVerification } from 'database';
 import { NextApiRequest, NextApiResponse } from 'next';
 import NextCors from 'nextjs-cors';
 
