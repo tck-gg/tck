@@ -33,3 +33,48 @@ export async function requestKickVerification(
 
   return verificationCode;
 }
+
+export async function validateKickVerification(
+  kickUsername: string,
+  verificationCode: string
+): Promise<boolean> {
+  const kickVerification = await prisma.kickVerification.findFirst({
+    where: {
+      verificationCode
+    }
+  });
+
+  if (!kickVerification) {
+    return false;
+  }
+
+  const { kickUsername: verificationKickUsername } = kickVerification;
+
+  // If the user doesn't match the verification code's user.
+  if (verificationKickUsername !== kickUsername) {
+    return false;
+  }
+
+  // Delete the verification code.
+  await prisma.kickVerification.delete({
+    where: {
+      userId: kickVerification.userId
+    }
+  });
+
+  // Add Kick username to profile.
+  await prisma.user.update({
+    where: {
+      id: kickVerification.userId
+    },
+    data: {
+      accounts: {
+        update: {
+          kick: kickUsername
+        }
+      }
+    }
+  });
+
+  return true;
+}

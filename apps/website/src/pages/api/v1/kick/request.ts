@@ -27,12 +27,18 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
   }
 
   const { kickUsername } = req.body;
+  const cleanKickUsername = kickUsername.trim();
 
-  if (await hasKickVerification(kickUsername)) {
+  if (!cleanKickUsername) {
+    res.status(400).end();
+    return;
+  }
+
+  if (await hasKickVerification(cleanKickUsername)) {
     res.status(418).end();
   }
 
-  const verificationCode = await requestKickVerification(user.id, kickUsername);
+  const verificationCode = await requestKickVerification(user.id, cleanKickUsername);
 
   res.send({ verificationCode });
 }

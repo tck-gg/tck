@@ -1,4 +1,5 @@
 import { validateAuthorization } from 'database';
+import { validateKickVerification } from 'database/src/functions/kick';
 import { NextApiRequest, NextApiResponse } from 'next';
 import NextCors from 'nextjs-cors';
 
@@ -15,7 +16,21 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     return;
   }
 
-  const { verificationCode } = req.body;
+  const { kickUsername, verificationCode } = req.body;
+  const cleanKickUsername = kickUsername.trim();
+  const cleanVerificationCode = verificationCode.trim();
+
+  if (!cleanKickUsername || !cleanVerificationCode) {
+    res.status(400).end();
+    return;
+  }
+
+  const result = await validateKickVerification(cleanKickUsername, cleanVerificationCode);
+
+  if (!result) {
+    res.status(400).end();
+    return;
+  }
 
   res.status(200).end();
 }
