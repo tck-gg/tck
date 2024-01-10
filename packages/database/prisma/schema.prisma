@@ -83,6 +83,8 @@ model User {
   accountVerification AccountVerification?
 
   isDeleted Boolean @default(false)
+  
+  kickVerification KickVerification?
 }
 
 model BannedIp {
@@ -149,4 +151,16 @@ model AccountVerification {
   userId String @unique @db.ObjectId
 
   uuid String
+}
+
+model KickVerification {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String @unique @db.ObjectId
+
+  kickUsername String
+  verificationCode String
+
+  timestamp Int
 }
