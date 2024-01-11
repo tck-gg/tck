@@ -12,11 +12,24 @@ export async function hasKickVerification(kickUsername: string) {
   return kickVerification !== null;
 }
 
+export async function kickVerificationCodeExists(verificationCode: string) {
+  const kickVerification = await prisma.kickVerification.findFirst({
+    where: {
+      verificationCode
+    }
+  });
+
+  return kickVerification !== null;
+}
+
 export async function requestKickVerification(
   userId: string,
   kickUsername: string
 ): Promise<string> {
-  const verificationCode = v4().substring(0, 8);
+  let verificationCode;
+  do {
+    verificationCode = v4().substring(0, 8);
+  } while (await kickVerificationCodeExists(verificationCode));
 
   await prisma.kickVerification.create({
     data: {
