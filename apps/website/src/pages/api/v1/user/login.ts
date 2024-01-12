@@ -11,6 +11,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     email: string;
     password: string;
   } = req.body;
+
   let user;
   if (isValidEmail(data.email)) {
     user = await tryLoginWithEmail(data.email.trim().toLowerCase(), data.password);

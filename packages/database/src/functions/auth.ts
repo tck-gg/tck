@@ -59,7 +59,9 @@ export async function tryLoginWithEmail(email: string, password: string) {
  * @returns True if the authorization is valid, false otherwise.
  */
 export async function validateAuthorization(authorization: string): Promise<boolean> {
-  const user = prisma.user.findUnique({ where: { apiKey: authorization } });
+  const user = await prisma.user.findUnique({
+    where: { apiKey: authorization }
+  });
 
   return user !== null;
 }

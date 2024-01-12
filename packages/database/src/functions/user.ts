@@ -39,6 +39,9 @@ export async function getUserByEmail(email: string) {
           // Backwards compatibility.
           mode: 'insensitive'
         }
+      },
+      include: {
+        accounts: true
       }
     })
   )[0];
@@ -50,7 +53,12 @@ export async function getUserByEmail(email: string) {
  * @returns The user, `null` if the user doesn't exist.
  */
 export async function getUserByAuthorization(authorization: string) {
-  return await prisma.user.findUnique({ where: { apiKey: authorization } });
+  return await prisma.user.findUnique({
+    where: { apiKey: authorization },
+    include: {
+      accounts: true
+    }
+  });
 }
 
 /**

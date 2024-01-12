@@ -1,9 +1,12 @@
 import { useState, useContext, createContext } from 'react';
 import axios, { AxiosResponse } from 'axios';
 import { useCookies } from 'react-cookie';
-import { User } from 'database';
+import { Prisma, User } from 'database';
 
-type SafeUser = Omit<User, 'password'>;
+export type IUser = Prisma.UserGetPayload<{
+  include: { accounts: true };
+}>;
+type SafeUser = Omit<IUser, 'password'>;
 
 // Context
 const AuthContext = createContext(null as any);
@@ -41,6 +44,7 @@ function useProvideAuth() {
 
     const fetchedUser = response.data.user;
     setUser(fetchedUser);
+
     return fetchedUser;
   }
 
