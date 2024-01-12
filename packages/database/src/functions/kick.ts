@@ -2,10 +2,10 @@ import { v4 } from 'uuid';
 
 import { prisma } from '../client';
 
-export async function hasKickVerification(kickUsername: string) {
+export async function hasKickVerification(userId: string) {
   const kickVerification = await prisma.kickVerification.findFirst({
     where: {
-      kickUsername
+      userId
     }
   });
 
@@ -38,7 +38,6 @@ export async function requestKickVerification(
           id: userId
         }
       },
-      kickUsername,
       verificationCode,
       timestamp: Date.now()
     }
@@ -57,16 +56,14 @@ export async function validateKickVerification(
     }
   });
 
+  if (!kickUsername) {
+    return false;
+  }
   if (!kickVerification) {
     return false;
   }
 
-  const { kickUsername: verificationKickUsername } = kickVerification;
-
-  // If the user doesn't match the verification code's user.
-  if (verificationKickUsername !== kickUsername) {
-    return false;
-  }
+  const cleanKickUsername = kickUsername.trim();
 
   // Delete the verification code.
   await prisma.kickVerification.delete({
@@ -83,7 +80,7 @@ export async function validateKickVerification(
     data: {
       accounts: {
         update: {
-          kick: kickUsername
+          kick: cleanKickUsername
         }
       }
     }

@@ -34,7 +34,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     return;
   }
 
-  if (await hasKickVerification(cleanKickUsername)) {
+  if (await hasKickVerification(user.id)) {
     res.status(418).end();
   }
 

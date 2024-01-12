@@ -159,7 +159,6 @@ model KickVerification {
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId String @unique @db.ObjectId
 
-  kickUsername String
   verificationCode String
 
   timestamp Int
