@@ -1,6 +1,7 @@
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 
 import Button from '@/components/ui/Button/Button';
+import ProfileBoxBase from '@/components/profile/ProfileBoxBase/ProfileBoxBase';
 
 import classes from './ProfileConnection.module.scss';
 
@@ -18,7 +19,7 @@ function ProfileConnection({
   onClick: () => void;
 }) {
   return (
-    <div className={classes.root}>
+    <ProfileBoxBase>
       <div className={classes.left}>
         <div className={classes.name}>
           {icon && <div className={classes.icon}>{icon}</div>}
@@ -36,7 +37,7 @@ function ProfileConnection({
       >
         {`Connect${username ? 'ed' : ''}`}
       </Button>
-    </div>
+    </ProfileBoxBase>
   );
 }
 
