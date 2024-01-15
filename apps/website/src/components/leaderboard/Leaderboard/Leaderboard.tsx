@@ -5,15 +5,15 @@ import Image from 'next/image';
 
 import classes from './Leaderboard.module.scss';
 
-import clashGemImage from '@/images/clash-gem.png';
 import coinImage from '@/images/coin.png';
+import roobetIcon from '@/images/affiliate/roobet-icon.png';
 
 export type ILeaderboard = Prisma.LeaderboardGetPayload<{
   include: { spots: true };
 }>;
 
 function Leaderboard({ leaderboard }: { leaderboard: ILeaderboard }) {
-  const hasPrize = leaderboard.type === 'clash' || leaderboard.type === 'csgobig';
+  const hasPrize = leaderboard.type === 'roobet' || leaderboard.type === 'csgobig';
 
   return (
     <div className={classes.root}>
@@ -52,25 +52,30 @@ function Leaderboard({ leaderboard }: { leaderboard: ILeaderboard }) {
                 {hasPrize && (
                   <td className={clsx(classes.shrink, classes.amount)}>
                     <div className={classes.gemsAmount}>
-                      {leaderboard.type === 'clash' && (
-                        <Image
-                          width={12}
-                          height={12}
-                          src={clashGemImage}
-                          alt='Clash Gem'
-                          className={classes.clashGem}
-                        />
-                      )}
                       {leaderboard.type === 'csgobig' && (
-                        <Image
-                          width={12}
-                          height={12}
-                          src={coinImage}
-                          alt='TCK Coin'
-                          className={classes.clashGem}
-                        />
+                        <>
+                          <Image
+                            width={12}
+                            height={12}
+                            src={coinImage}
+                            alt='TCK Coin'
+                            className={classes.clashGem}
+                          />
+                          <span>{[500, 250, 100, 50, 25, 10, 10, 10, 10, 10][index]}</span>
+                        </>
                       )}
-                      <span>{[500, 250, 100, 50, 25, 10, 10, 10, 10, 10][index]}</span>
+                      {leaderboard.type === 'roobet' && (
+                        <>
+                          <Image
+                            width={12}
+                            height={12}
+                            src={roobetIcon}
+                            alt='Roobet Icon'
+                            className={classes.clashGem}
+                          />
+                          <span>{[1000, 500, 250, 100, 50, 20, 20, 20, 20, 20][index]}</span>
+                        </>
+                      )}
                     </div>
                   </td>
                 )}

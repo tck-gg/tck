@@ -1,18 +1,17 @@
 import { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
+import axios from 'axios';
 
 import Modal from '@/components/ui/Modal/Modal';
 import ProfileConnection from '@/components/profile/ProfileConnection/ProfileConnection';
 
 import { useProfile } from '@/hooks/profile';
 import { useAuth } from '@/hooks/auth';
-import Button from '@/components/ui/Button/Button';
 
 import KickColored from '../svg/KickColored';
 import ProfileBoxBase from '../profile/ProfileBoxBase/ProfileBoxBase';
 
 import classes from './ModalProfile.module.scss';
-import axios from 'axios';
 
 function ModalProfile() {
   const profile = useProfile();
@@ -25,6 +24,7 @@ function ModalProfile() {
 
   async function handleKickClick() {
     setDisabled(true);
+
     const response = await axios.post(
       '/api/v1/kick/request',
       {

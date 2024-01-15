@@ -147,8 +147,8 @@ function Leaderboards({
                     leaderboardSpot={leaderboards[selectedLeaderboard].spots[1]}
                     position={2}
                     rewardType={
-                      selectedLeaderboard === 'clash'
-                        ? 'clash'
+                      selectedLeaderboard === 'roobet'
+                        ? 'roobet'
                         : selectedLeaderboard === 'csgobig'
                         ? 'csgobig'
                         : 'none'
@@ -172,8 +172,8 @@ function Leaderboards({
                     leaderboardSpot={leaderboards[selectedLeaderboard].spots[0]}
                     position={1}
                     rewardType={
-                      selectedLeaderboard === 'clash'
-                        ? 'clash'
+                      selectedLeaderboard === 'roobet'
+                        ? 'roobet'
                         : selectedLeaderboard === 'csgobig'
                         ? 'csgobig'
                         : 'none'
@@ -197,8 +197,8 @@ function Leaderboards({
                     leaderboardSpot={leaderboards[selectedLeaderboard].spots[2]}
                     position={3}
                     rewardType={
-                      selectedLeaderboard === 'clash'
-                        ? 'clash'
+                      selectedLeaderboard === 'roobet'
+                        ? 'roobet'
                         : selectedLeaderboard === 'csgobig'
                         ? 'csgobig'
                         : 'none'

@@ -7,8 +7,8 @@ import JaggedBackgroundItem from '@/components/JaggedBackgroundItem/JaggedBackgr
 
 import classes from './LeaderboardPodiumBox.module.scss';
 
-import clashGemImage from '@/images/clash-gem.png';
 import coinImage from '@/images/coin.png';
+import roobetIcon from '@/images/affiliate/roobet-icon.png';
 
 function LeaderboardPodiumBox({
   leaderboardSpot,
@@ -41,15 +41,15 @@ function LeaderboardPodiumBox({
         {rewardType !== 'none' && (
           <JaggedBackgroundItem fill='#0b0c17' fullWidth>
             <div className={classes.reward}>
-              {rewardType === 'clash' && (
-                <Image width={16} height={16} src={clashGemImage} alt='Clash Gem' />
-              )}
               {rewardType === 'csgobig' && (
-                <Image width={16} height={16} src={coinImage} alt='Clash Gem' />
+                <Image width={16} height={16} src={coinImage} alt='TCK Coin' />
+              )}
+              {rewardType === 'roobet' && (
+                <Image width={16} height={16} src={roobetIcon} alt='Roobet Icon' />
               )}
               <p className={classes.rewardText}>
                 {rewardType === 'cash' && '$'}
-                {rewardType === 'clash' && [500, 250, 100][position - 1]}
+                {rewardType === 'roobet' && [1000, 500, 250][position - 1]}
                 {rewardType === 'csgobig' && [500, 250, 100][position - 1]}
               </p>
             </div>
