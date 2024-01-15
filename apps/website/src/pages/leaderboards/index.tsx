@@ -212,8 +212,11 @@ function Leaderboards({
               {selectedLeaderboard === 'csgobig' && (
                 <CountdownTimer days={monthlyDays} hours={monthlyHours} minutes={monthlyMinutes} />
               )}
-              {selectedLeaderboard === 'packdraw' && (
-                <CountdownTimer days={weeklyDays} hours={weeklyHours} minutes={weeklyMinutes} />
+              {selectedLeaderboard === 'gamdom' && (
+                <CountdownTimer days={monthlyDays} hours={monthlyHours} minutes={monthlyMinutes} />
+              )}
+              {selectedLeaderboard === 'roobet' && (
+                <CountdownTimer days={monthlyDays} hours={monthlyHours} minutes={monthlyMinutes} />
               )}
             </div>
 
