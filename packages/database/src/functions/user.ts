@@ -56,7 +56,8 @@ export async function getUserByAuthorization(authorization: string) {
   return await prisma.user.findUnique({
     where: { apiKey: authorization },
     include: {
-      accounts: true
+      accounts: true,
+      kickVerification: true
     }
   });
 }

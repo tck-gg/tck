@@ -10,12 +10,14 @@ function ProfileConnection({
   color,
   username,
   icon,
+  disabled,
   onClick
 }: {
   name: string;
   color: string;
   username: string | null | undefined;
   icon?: React.ReactNode;
+  disabled?: boolean;
   onClick: () => void;
 }) {
   return (
@@ -31,8 +33,9 @@ function ProfileConnection({
       </div>
       <Button
         background={color}
-        disabled={!!username}
+        disabled={!!username || disabled}
         rightIcon={username ? faAngleRight : (null as any)}
+        color='#000000'
         onClick={onClick}
       >
         {`Connect${username ? 'ed' : ''}`}

@@ -22,10 +22,7 @@ export async function kickVerificationCodeExists(verificationCode: string) {
   return kickVerification !== null;
 }
 
-export async function requestKickVerification(
-  userId: string,
-  kickUsername: string
-): Promise<string> {
+export async function requestKickVerification(userId: string): Promise<string> {
   let verificationCode;
   do {
     verificationCode = v4().substring(0, 8);

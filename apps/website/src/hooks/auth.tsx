@@ -4,7 +4,7 @@ import { useCookies } from 'react-cookie';
 import { Prisma, User } from 'database';
 
 export type IUser = Prisma.UserGetPayload<{
-  include: { accounts: true };
+  include: { accounts: true; kickVerification: true };
 }>;
 type SafeUser = Omit<IUser, 'password'>;
 

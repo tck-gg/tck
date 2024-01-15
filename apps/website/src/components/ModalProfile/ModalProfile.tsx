@@ -1,28 +1,88 @@
-import Modal from '../ui/Modal/Modal';
-import ProfileConnection from '../profile/ProfileConnection/ProfileConnection';
+import { useEffect, useState } from 'react';
+import { useCookies } from 'react-cookie';
+
+import Modal from '@/components/ui/Modal/Modal';
+import ProfileConnection from '@/components/profile/ProfileConnection/ProfileConnection';
 
 import { useProfile } from '@/hooks/profile';
 import { useAuth } from '@/hooks/auth';
+import Button from '@/components/ui/Button/Button';
 
 import KickColored from '../svg/KickColored';
+import ProfileBoxBase from '../profile/ProfileBoxBase/ProfileBoxBase';
+
+import classes from './ModalProfile.module.scss';
+import axios from 'axios';
 
 function ModalProfile() {
   const profile = useProfile();
   const auth = useAuth();
 
-  function handleKickClick() {
-    // Do nothing.
+  const [cookie, setCookie] = useCookies(['authorization']);
+
+  const [disabled, setDisabled] = useState<boolean>(false);
+  const [kickVerification, setKickVerification] = useState<string>(null as any);
+
+  async function handleKickClick() {
+    setDisabled(true);
+    const response = await axios.post(
+      '/api/v1/kick/request',
+      {
+        userId: auth.user?.id
+      },
+      {
+        headers: {
+          authorization: cookie.authorization
+        },
+        validateStatus: () => {
+          return true;
+        }
+      }
+    );
+
+    const code = response.data.verificationCode;
+    setKickVerification(code);
+
+    setDisabled(false);
   }
+
+  useEffect(() => {
+    setKickVerification(auth.user?.kickVerification?.verificationCode || (null as any));
+  }, [auth.user]);
 
   return (
     <Modal isOpen={profile.isOpen} open={profile.open} close={profile.close}>
-      <ProfileConnection
-        name='Kick'
-        color='#53fc18'
-        icon={<KickColored />}
-        username={auth.user?.accounts?.kick}
-        onClick={handleKickClick}
-      />
+      {kickVerification ? (
+        <ProfileBoxBase>
+          <div className={classes.kickVerification}>
+            <p>
+              Visit{' '}
+              <a href='https://kick.com/tck' target='_blank'>
+                kick.com/tck
+              </a>{' '}
+              and send{' '}
+              <code
+                className={classes.code}
+                onClick={() => {
+                  navigator.clipboard.writeText(`!verify ${kickVerification}`);
+                }}
+              >
+                !verify {kickVerification}
+              </code>{' '}
+              in the chat to link your <strong>Kick</strong> account. Then refresh this page.
+            </p>
+          </div>
+        </ProfileBoxBase>
+      ) : (
+        <ProfileConnection
+          name='Kick'
+          color='#53fc18'
+          icon={<KickColored />}
+          username={auth.user?.accounts?.kick}
+          onClick={handleKickClick}
+          disabled={disabled}
+        />
+      )}
     </Modal>
   );
 }

@@ -16,6 +16,7 @@ function Button({
   disabled,
   background,
   width,
+  color,
   onClick
 }: {
   children: string | JSX.Element;
@@ -27,6 +28,7 @@ function Button({
   disabled?: boolean;
   background?: string;
   width?: number;
+  color?: string;
   onClick?: (props: any) => void;
 }) {
   function handleClick() {
@@ -45,7 +47,8 @@ function Button({
       style={{
         borderRadius,
         background,
-        width
+        width,
+        color
       }}
     >
       {leftIcon && <FontAwesomeIcon icon={leftIcon} />}
