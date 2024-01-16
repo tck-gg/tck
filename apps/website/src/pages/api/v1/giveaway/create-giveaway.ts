@@ -1,4 +1,4 @@
-import { createGiveaway, uploadImage, validateAuthorization } from 'database';
+import { createGiveaway, getUserByAuthorization, uploadImage } from 'database';
 import { NextApiRequest, NextApiResponse } from 'next';
 import NextCors from 'nextjs-cors';
 
@@ -17,8 +17,13 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     optionsSuccessStatus: 200
   });
 
-  const authorization = req.headers.Authorization as string;
-  if (!validateAuthorization(authorization)) {
+  const authorization = req.headers.authorization as string;
+  const user = await getUserByAuthorization(authorization);
+  if (!user) {
+    res.status(401).end();
+    return;
+  }
+  if (!user.permissions.includes('MANAGE_GIVEAWAYS')) {
     res.status(403).end();
     return;
   }

@@ -24,6 +24,7 @@ import { ISafeGiveaway } from 'types';
 import { Dropzone, FileWithPath, MIME_TYPES } from '@mantine/dropzone';
 import dateFormat from 'dateformat';
 import { notifications } from '@mantine/notifications';
+import { useCookies } from 'react-cookie';
 
 import { usePermissions } from '@/hooks/permissions';
 
@@ -66,6 +67,7 @@ function Giveaways({
   const [modalMode, setModalMode] = useState<'create' | 'edit'>('create');
   const router = useRouter();
   const permissions = usePermissions();
+  const [cookie, setCookie] = useCookies(['authorization']);
 
   const [disabled, setDisabled] = useState(false);
 
@@ -140,6 +142,9 @@ function Giveaways({
           image: Buffer.from(await images[0].arrayBuffer()).toString('base64')
         },
         {
+          headers: {
+            authorization: cookie.authorization
+          },
           validateStatus: () => {
             return true;
           }
@@ -157,6 +162,9 @@ function Giveaways({
           timestampEnd: endDate.getTime()
         },
         {
+          headers: {
+            authorization: cookie.authorization
+          },
           validateStatus: () => {
             return true;
           }
