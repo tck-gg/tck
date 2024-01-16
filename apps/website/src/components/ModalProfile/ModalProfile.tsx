@@ -32,7 +32,7 @@ function ModalProfile() {
       },
       {
         headers: {
-          authorization: cookie.authorization
+          authorization: auth.user?.apiKey
         },
         validateStatus: () => {
           return true;
