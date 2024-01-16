@@ -1,3 +1,2 @@
-import { LeaderboardType } from './leaderboard';
-
-export type Theme = 'default' | LeaderboardType;
+export type ThemedLeaderboard = 'gamdom' | 'csgobig' | 'roobet';
+export type Theme = 'default' | ThemedLeaderboard;

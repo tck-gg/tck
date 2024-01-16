@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { Prisma, getAllLeaderboards } from 'database';
-import { LeaderboardType } from 'types';
+import { LeaderboardType, ThemedLeaderboard } from 'types';
 import Tilt from 'react-parallax-tilt';
 import Image from 'next/image';
 import clsx from 'clsx';
@@ -55,16 +55,12 @@ function Leaderboards({
   const [weeklyDays, weeklyHours, weeklyMinutes] = useCountdown(
     new Date(sunday.getFullYear(), sunday.getMonth(), sunday.getDate())
   );
-  const [selectedLeaderboard, setSelectedLeaderboard] = useState<LeaderboardType>('csgobig');
+  const [selectedLeaderboard, setSelectedLeaderboard] = useState<ThemedLeaderboard>('csgobig');
 
   useEffect(() => {
     theme.setTheme('csgobig');
   }, []);
   useEffect(() => {
-    if (selectedLeaderboard === 'stake' || selectedLeaderboard === 'packdraw') {
-      theme.setTheme('default');
-      return;
-    }
     theme.setTheme(selectedLeaderboard);
   }, [selectedLeaderboard]);
 

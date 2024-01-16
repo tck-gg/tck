@@ -13,28 +13,10 @@ const UNDERLINES: {
       <stop offset='1' stopColor='#9229FF' />
     </>
   ),
-  stake: (
-    <>
-      <stop stopColor='#18A9FF' />
-      <stop offset='1' stopColor='#9229FF' />
-    </>
-  ),
-  packdraw: (
-    <>
-      <stop stopColor='#18A9FF' />
-      <stop offset='1' stopColor='#9229FF' />
-    </>
-  ),
   gamdom: (
     <>
       <stop stopColor='#00FF86' />
       <stop offset='1' stopColor='#009E53' />
-    </>
-  ),
-  clash: (
-    <>
-      <stop stopColor='#FFC701' />
-      <stop offset='1' stopColor='#E78A00' />
     </>
   ),
   csgobig: (
@@ -45,8 +27,8 @@ const UNDERLINES: {
   ),
   roobet: (
     <>
-      <stop stopColor='#18A9FF' />
-      <stop offset='1' stopColor='#9229FF' />
+      <stop stopColor='#DDB43F' />
+      <stop offset='1' stopColor='#9B7C25' />
     </>
   )
 };

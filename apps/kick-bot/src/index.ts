@@ -37,7 +37,6 @@ Sentry.init({
   });
 
   console.log('Listening to Kick chatroom...');
-
   await client.ws.chatroom.listen(channel.data.chatroom.id);
   client.on(Events.Chatroom.Message, async (message) => {
     const username = message.data.sender.username;
