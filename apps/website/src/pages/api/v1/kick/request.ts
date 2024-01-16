@@ -28,6 +28,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
 
   if (await hasKickVerification(user.id)) {
     res.status(418).end();
+    return;
   }
 
   const verificationCode = await requestKickVerification(user.id);
