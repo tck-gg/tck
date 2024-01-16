@@ -57,8 +57,8 @@ function ModalProfile() {
           <div className={classes.kickVerification}>
             <p>
               Visit{' '}
-              <a href='https://kick.com/tck' target='_blank'>
-                kick.com/tck
+              <a href='https://kick.com/tckgg' target='_blank'>
+                kick.com/tckgg
               </a>{' '}
               and send{' '}
               <code

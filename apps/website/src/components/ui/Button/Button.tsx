@@ -32,6 +32,9 @@ function Button({
   onClick?: (props: any) => void;
 }) {
   function handleClick() {
+    if (disabled) {
+      return;
+    }
     onClick && onClick({});
   }
 

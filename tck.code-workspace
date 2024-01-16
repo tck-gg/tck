@@ -20,6 +20,10 @@
 			"path": "packages/database"
 		},
 		{
+			"name": "kick-bot",
+			"path": "apps/kick-bot"
+		},
+		{
 			"name": "startup",
 			"path": "apps/startup"
 		},

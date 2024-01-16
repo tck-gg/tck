@@ -1,0 +1,25 @@
+{
+  "name": "kick-bot",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "start": "cross-env NODE_ENV=production node dist",
+    "dev": "cross-env NODE_ENV=development concurrently \"tsc -w --preserveWatchOutput\" \"nodemon dist\""
+  },
+  "dependencies": {
+    "@sentry/node": "^7.66.0",
+    "@sentry/profiling-node": "^1.2.0",
+    "database": "*",
+    "kient": "^1.0.1-8",
+    "nodemon": "^3.0.2",
+    "otp": "^1.1.2",
+    "types": "*"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "cross-env": "^7.0.3",
+    "eslint-config-custom": "*",
+    "tsconfig": "*"
+  }
+}

@@ -26,7 +26,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     return;
   }
 
-  if (await hasKickVerification(user.id)) {
+  if ((await hasKickVerification(user.id)) || user.accounts?.kick) {
     res.status(418).end();
     return;
   }
