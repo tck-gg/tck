@@ -41,7 +41,8 @@ export async function getUserByEmail(email: string) {
         }
       },
       include: {
-        accounts: true
+        accounts: true,
+        kickVerification: true
       }
     })
   )[0];
