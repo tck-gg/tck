@@ -22,7 +22,7 @@ export const client = new SapphireClient({
 (async () => {
   try {
     client.logger.info('Logging in...');
-    await client.login();
+    await client.login(process.env.DISCORD_TOKEN);
     client.logger.info('Logged in.');
 
     client.user?.setActivity('tck.gg', {

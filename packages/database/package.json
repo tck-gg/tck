@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "license": "MIT",
   "main": "dist/index.js",
-  "source": "src/index.ts",
   "types": "dist/index.d.ts",
   "files": [
     "dist/**"
@@ -18,8 +17,6 @@
     "db:push": "prisma db push",
     "dev": "cross-env NODE_ENV=development tsup --watch",
     "lint": "eslint \"src/**/*.ts\"",
-    "prebuild": "npm run db:generate",
-    "predev": "npm run db:generate",
     "studio": "prisma studio"
   },
   "dependencies": {

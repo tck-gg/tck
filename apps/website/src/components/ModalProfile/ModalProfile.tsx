@@ -52,6 +52,7 @@ function ModalProfile() {
 
   return (
     <Modal isOpen={profile.isOpen} open={profile.open} close={profile.close}>
+      {JSON.stringify(auth.user)}
       {kickVerification ? (
         <ProfileBoxBase>
           <div className={classes.kickVerification}>
