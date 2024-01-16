@@ -52,15 +52,24 @@ export async function validateKickVerification(
       verificationCode
     }
   });
-
-  if (!kickUsername) {
-    return false;
-  }
   if (!kickVerification) {
     return false;
   }
 
   const cleanKickUsername = kickUsername.trim();
+  if (!cleanKickUsername) {
+    return false;
+  }
+
+  const existingUser = await prisma.userAccounts.findFirst({
+    where: {
+      kick: cleanKickUsername
+    }
+  });
+
+  if (existingUser) {
+    return false;
+  }
 
   // Delete the verification code.
   await prisma.kickVerification.delete({
