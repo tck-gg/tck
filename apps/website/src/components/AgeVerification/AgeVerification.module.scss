@@ -4,6 +4,12 @@
   font-weight: 800;
 }
 
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+}
 .description {
   color: #989eae;
   text-align: center;

@@ -4,6 +4,7 @@ import axios from 'axios';
 
 import Modal from '@/components/ui/Modal/Modal';
 import ProfileConnection from '@/components/profile/ProfileConnection/ProfileConnection';
+import LogoutButton from '@/components/LogoutButton/LogoutButton';
 
 import { useProfile } from '@/hooks/profile';
 import { useAuth } from '@/hooks/auth';
@@ -52,37 +53,40 @@ function ModalProfile() {
 
   return (
     <Modal isOpen={profile.isOpen} open={profile.open} close={profile.close}>
-      {kickVerification ? (
-        <ProfileBoxBase>
-          <div className={classes.kickVerification}>
-            <p>
-              Visit{' '}
-              <a href='https://kick.com/tckgg' target='_blank'>
-                kick.com/tckgg
-              </a>{' '}
-              and send{' '}
-              <code
-                className={classes.code}
-                onClick={() => {
-                  navigator.clipboard.writeText(`!verify ${kickVerification}`);
-                }}
-              >
-                !verify {kickVerification}
-              </code>{' '}
-              in the chat to link your <strong>Kick</strong> account. Then refresh this page.
-            </p>
-          </div>
-        </ProfileBoxBase>
-      ) : (
-        <ProfileConnection
-          name='Kick'
-          color='#53fc18'
-          icon={<KickColored />}
-          username={auth.user?.accounts?.kick}
-          onClick={handleKickClick}
-          disabled={disabled}
-        />
-      )}
+      <div className={classes.wrapper}>
+        {kickVerification ? (
+          <ProfileBoxBase>
+            <div className={classes.kickVerification}>
+              <p>
+                Visit{' '}
+                <a href='https://kick.com/tckgg' target='_blank'>
+                  kick.com/tckgg
+                </a>{' '}
+                and send{' '}
+                <code
+                  className={classes.code}
+                  onClick={() => {
+                    navigator.clipboard.writeText(`!verify ${kickVerification}`);
+                  }}
+                >
+                  !verify {kickVerification}
+                </code>{' '}
+                in the chat to link your <strong>Kick</strong> account. Then refresh this page.
+              </p>
+            </div>
+          </ProfileBoxBase>
+        ) : (
+          <ProfileConnection
+            name='Kick'
+            color='#53fc18'
+            icon={<KickColored />}
+            username={auth.user?.accounts?.kick}
+            onClick={handleKickClick}
+            disabled={disabled}
+          />
+        )}
+        <LogoutButton />
+      </div>
     </Modal>
   );
 }
