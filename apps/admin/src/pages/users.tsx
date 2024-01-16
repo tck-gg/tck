@@ -311,7 +311,7 @@ function Users({ users }: { users: IUser[] }) {
 
   useEffect(() => {
     setPage(1);
-  }, [tab, search]);
+  }, [tab, banTab, search]);
 
   useEffect(() => {
     (async () => {
