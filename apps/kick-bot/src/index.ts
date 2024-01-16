@@ -16,13 +16,17 @@ Sentry.init({
 
 (async () => {
   const client = await Kient.create();
-  const channel = await client.api.channel.getChannel('mythichunter758');
 
-  await client.ws.chatroom.listen(channel.data.chatroom.id);
-
-  if (!process.env.KICK_EMAIL || !process.env.KICK_PASSWORD || !process.env.KICK_2FA) {
+  if (
+    !process.env.KICK_CHANNEL ||
+    !process.env.KICK_EMAIL ||
+    !process.env.KICK_PASSWORD ||
+    !process.env.KICK_2FA
+  ) {
     return;
   }
+
+  const channel = await client.api.channel.getChannel(process.env.KICK_CHANNEL);
 
   await client.api.authentication.login({
     email: process.env.KICK_EMAIL,
@@ -33,6 +37,7 @@ Sentry.init({
   });
 
   console.log('Listening to Kick chatroom...');
+  await client.ws.chatroom.listen(channel.data.chatroom.id);
   client.on(Events.Chatroom.Message, async (message) => {
     const username = message.data.sender.username;
     const content = message.data.content.trim();
