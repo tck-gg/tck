@@ -119,3 +119,58 @@ export async function validateKickVerification(
 
   return true;
 }
+
+export async function updateKickUsername(newKickUsername: string, kickId: number, ip: string) {
+  const userAccountsEntry = await prisma.userAccounts.findFirst({
+    where: {
+      kick: {
+        kickId
+      }
+    },
+    include: {
+      kick: true
+    }
+  });
+  if (!userAccountsEntry || !userAccountsEntry.kick) {
+    return false;
+  }
+
+  const oldKickUsername = userAccountsEntry.kick?.kickUsername;
+  const cleanOldKickUsername = oldKickUsername.trim();
+  const cleanNewKickUsername = newKickUsername.trim();
+
+  if (cleanOldKickUsername === cleanNewKickUsername) {
+    return false;
+  }
+
+  // Update.
+  await prisma.userAccounts.update({
+    where: {
+      id: userAccountsEntry.id
+    },
+    data: {
+      kick: {
+        update: {
+          kickUsername: cleanNewKickUsername
+        }
+      }
+    }
+  });
+
+  // Add user action.
+  await prisma.userAction.create({
+    data: {
+      user: {
+        connect: {
+          id: userAccountsEntry.userId
+        }
+      },
+      action: Action.UPDATE_KICK,
+      ip,
+      timestamp: Date.now(),
+      description: `Updated Kick username from "${cleanOldKickUsername}" to "${cleanNewKickUsername}".`
+    }
+  });
+
+  return true;
+}

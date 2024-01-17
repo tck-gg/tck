@@ -3,7 +3,7 @@
 import * as Sentry from '@sentry/node';
 import { ProfilingIntegration } from '@sentry/profiling-node';
 import { Events, Kient } from 'kient';
-import { validateKickVerification } from 'database';
+import { updateKickUsername, validateKickVerification } from 'database';
 import OTP from 'otp';
 
 Sentry.init({
@@ -43,6 +43,7 @@ Sentry.init({
     const kickId = message.data.sender.id;
 
     const content = message.data.content.trim();
+
     if (content.startsWith('!verify')) {
       const code = /!verify ([a-z0-9]{8})$/gm.exec(content)?.[1];
       if (!code) {
@@ -57,6 +58,19 @@ Sentry.init({
       );
       if (response) {
         await client.api.chat.sendMessage(channel.data.chatroom.id, `Verified ${kickUsername}!`);
+      }
+
+      return;
+    }
+
+    if(content.startsWith('!update')) {
+      const response = await updateKickUsername(
+        kickUsername,
+        kickId,
+        "kick.com"
+      );
+      if (response) {
+        await client.api.chat.sendMessage(channel.data.chatroom.id, `Updated ${kickUsername}!`);
       }
 
       return;
