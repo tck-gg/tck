@@ -1,4 +1,5 @@
 import { v4 } from 'uuid';
+import { Action } from '@prisma/client';
 
 import { prisma } from '../client';
 
@@ -45,7 +46,8 @@ export async function requestKickVerification(userId: string): Promise<string> {
 
 export async function validateKickVerification(
   kickUsername: string,
-  verificationCode: string
+  verificationCode: string,
+  ip: string
 ): Promise<boolean> {
   const kickVerification = await prisma.kickVerification.findFirst({
     where: {
@@ -89,6 +91,21 @@ export async function validateKickVerification(
           kick: cleanKickUsername
         }
       }
+    }
+  });
+
+  // Create log.
+  await prisma.userAction.create({
+    data: {
+      user: {
+        connect: {
+          id: kickVerification.userId
+        }
+      },
+      action: Action.LINK_KICK,
+      ip,
+      timestamp: Date.now(),
+      description: `Linked Kick account "${cleanKickUsername}".`
     }
   });
 
