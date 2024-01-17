@@ -23,7 +23,7 @@ import {
   TransferListData
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import { Permission, User, UserAccounts, UserAction, getAllUsers } from 'database';
+import { Permission, Prisma, User, UserAccounts, UserAction, getAllUsers } from 'database';
 import dateformat from 'dateformat';
 import { useRouter } from 'next/router';
 import { useEffect, useRef, useState } from 'react';
@@ -77,6 +77,12 @@ export async function getServerSideProps() {
   };
 }
 
+type IUserAccounts = Prisma.UserAccountsGetPayload<{
+  include: {
+    kick: true;
+  };
+}>;
+
 type IUser = Omit<
   User,
   keyof {
@@ -84,7 +90,7 @@ type IUser = Omit<
     password: string;
   }
 > & {
-  accounts: UserAccounts | null;
+  accounts: IUserAccounts | null;
   actions: UserAction[];
 };
 
@@ -96,7 +102,7 @@ function filterBySearch(users: IUser[], search: string) {
       user.displayName.toLowerCase().includes(search.toLowerCase()) ||
       user.id.includes(search) ||
       user.accounts?.discord?.includes(search) ||
-      user.accounts?.kick?.includes(search) ||
+      user.accounts?.kick?.kickUsername.includes(search) ||
       user.accounts?.twitch?.includes(search)
     );
   });

@@ -1,10 +1,15 @@
 import { useState, useContext, createContext } from 'react';
 import axios, { AxiosResponse } from 'axios';
 import { useCookies } from 'react-cookie';
-import { Prisma, User } from 'database';
+import { Prisma } from 'database';
 
 export type IUser = Prisma.UserGetPayload<{
-  include: { accounts: true; kickVerification: true };
+  include: {
+    accounts: {
+      include: { kick: true };
+    };
+    kickVerification: true;
+  };
 }>;
 type SafeUser = Omit<IUser, 'password'>;
 

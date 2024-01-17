@@ -46,6 +46,7 @@ export async function requestKickVerification(userId: string): Promise<string> {
 
 export async function validateKickVerification(
   kickUsername: string,
+  kickId: number,
   verificationCode: string,
   ip: string
 ): Promise<boolean> {
@@ -54,7 +55,7 @@ export async function validateKickVerification(
       verificationCode
     }
   });
-  if (!kickVerification) {
+  if (!kickVerification || !kickId) {
     return false;
   }
 
@@ -65,7 +66,9 @@ export async function validateKickVerification(
 
   const existingUser = await prisma.userAccounts.findFirst({
     where: {
-      kick: cleanKickUsername
+      kick: {
+        kickUsername: cleanKickUsername
+      }
     }
   });
 
@@ -88,7 +91,12 @@ export async function validateKickVerification(
     data: {
       accounts: {
         update: {
-          kick: cleanKickUsername
+          kick: {
+            update: {
+              kickUsername: cleanKickUsername,
+              kickId
+            }
+          }
         }
       }
     }

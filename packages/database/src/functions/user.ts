@@ -41,7 +41,11 @@ export async function getUserByEmail(email: string) {
         }
       },
       include: {
-        accounts: true,
+        accounts: {
+          include: {
+            kick: true
+          }
+        },
         kickVerification: true
       }
     })
@@ -57,7 +61,11 @@ export async function getUserByAuthorization(authorization: string) {
   return await prisma.user.findUnique({
     where: { apiKey: authorization },
     include: {
-      accounts: true,
+      accounts: {
+        include: {
+          kick: true
+        }
+      },
       kickVerification: true
     }
   });
@@ -119,7 +127,10 @@ export async function createUser(
       accounts: {
         create: {
           twitch: null,
-          discord: null
+          discord: null,
+          kick: {
+            create: undefined
+          }
         }
       }
     }

@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt';
 
 import { prisma } from '../client';
-import { getUserByEmail, getUserByUsername } from './user';
+import { getUserByEmail } from './user';
 
 /**
  * Tries to login a user with their email.

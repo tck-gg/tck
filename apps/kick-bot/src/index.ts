@@ -39,22 +39,27 @@ Sentry.init({
   console.log('Listening to Kick chatroom...');
   await client.ws.chatroom.listen(channel.data.chatroom.id);
   client.on(Events.Chatroom.Message, async (message) => {
-    const username = message.data.sender.username;
+    const kickUsername = message.data.sender.username;
+    const kickId = message.data.sender.id;
+
     const content = message.data.content.trim();
-
-    if (!content.startsWith('!verify')) {
-      return;
-    }
-
-    const code = /!verify ([a-z0-9]{8})$/gm.exec(content)?.[1];
-    if (!code) {
-      return;
-    }
+    if (content.startsWith('!verify')) {
+      const code = /!verify ([a-z0-9]{8})$/gm.exec(content)?.[1];
+      if (!code) {
+        return;
+      }
     
-    const response = await validateKickVerification(username, code);
+      const response = await validateKickVerification(
+        kickUsername,
+        kickId,
+        code,
+        "kick.com"
+      );
+      if (response) {
+        await client.api.chat.sendMessage(channel.data.chatroom.id, `Verified ${kickUsername}!`);
+      }
 
-    if (response) {
-      await client.api.chat.sendMessage(channel.data.chatroom.id, `Verified ${username}!`);
+      return;
     }
   });
 })();

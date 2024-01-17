@@ -18,8 +18,6 @@ function ModalProfile() {
   const profile = useProfile();
   const auth = useAuth();
 
-  const [cookie, setCookie] = useCookies(['authorization']);
-
   const [disabled, setDisabled] = useState<boolean>(false);
   const [kickVerification, setKickVerification] = useState<string>(null as any);
 
@@ -80,7 +78,7 @@ function ModalProfile() {
             name='Kick'
             color='#53fc18'
             icon={<KickColored />}
-            username={auth.user?.accounts?.kick}
+            username={auth.user?.accounts?.kick?.kickUsername}
             onClick={handleKickClick}
             disabled={disabled}
           />
