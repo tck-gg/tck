@@ -45,7 +45,7 @@ model UserAction {
   userId String @unique @db.ObjectId
 
   action      Action
-  ip          String
+  ip          String?
   timestamp   Int
   description String?
 }

@@ -197,20 +197,78 @@ export async function getActivity(username: string) {
   return actions;
 }
 
-export async function banUser(userId: string) {
+export async function banUser(targetId: string, moderator: string, ip: string) {
   await prisma.user.update({
-    where: { id: userId },
+    where: { id: targetId },
     data: {
       isBanned: true
     }
   });
+
+  // Add user action for target.
+  await prisma.userAction.create({
+    data: {
+      user: {
+        connect: {
+          id: targetId
+        }
+      },
+      action: Action.ACCOUNT_BAN,
+      timestamp: Date.now(),
+      description: `Account banned by ${moderator}.`
+    }
+  });
+
+  // Add user action for moderator.
+  await prisma.userAction.create({
+    data: {
+      user: {
+        connect: {
+          username: moderator
+        }
+      },
+      action: Action.ACCOUNT_BAN,
+      ip,
+      timestamp: Date.now(),
+      description: `Banned ${targetId}.`
+    }
+  });
 }
 
-export async function unbanUser(userId: string) {
+export async function unbanUser(targetId: string, moderator: string, ip: string) {
   await prisma.user.update({
-    where: { id: userId },
+    where: { id: targetId },
     data: {
       isBanned: false
+    }
+  });
+
+  // Add user action for target.
+  await prisma.userAction.create({
+    data: {
+      user: {
+        connect: {
+          id: targetId
+        }
+      },
+      action: Action.ACCOUNT_BAN,
+      timestamp: Date.now(),
+      description: `Account unbanned by ${moderator}.`
+    }
+  });
+
+  // Add user action for moderator.
+  await prisma.userAction.create({
+    data: {
+      user: {
+        connect: {
+          username: moderator
+        }
+      },
+      action: Action.ACCOUNT_BAN,
+      ip,
+      timestamp: Date.now(),
+      description: `Unbanned ${targetId}.`
     }
   });
 }
@@ -353,7 +411,6 @@ export async function addPoints(userId: string, points: number, ip: string, mode
         }
       },
       action: Action.USER_POINTS_ADD,
-      ip,
       timestamp: Date.now(),
       description: `Had ${points} added by ${moderator}. ${oldPoints} → ${oldPoints + points}.`
     }

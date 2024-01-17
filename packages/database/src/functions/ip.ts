@@ -24,7 +24,11 @@ export async function getAssociatedIps(userId: string): Promise<string[]> {
     return ip.ip;
   });
 
-  return unique(ips);
+  const uniqueIps = unique(ips);
+
+  return uniqueIps.filter((ip) => {
+    return ip !== null;
+  }) as string[];
 }
 
 export async function getAssociatedUsers(ip: string): Promise<SimpleUser[]> {
@@ -68,8 +72,11 @@ export async function getAllIps(): Promise<string[]> {
   const ips = actions.map((action) => {
     return action.ip;
   });
+  const uniqueIps = unique(ips);
 
-  return unique(ips);
+  return uniqueIps.filter((ip) => {
+    return ip !== null;
+  }) as string[];
 }
 
 export async function getIpData(ip: string): Promise<IpData> {

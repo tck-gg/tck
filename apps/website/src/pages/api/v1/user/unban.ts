@@ -2,12 +2,16 @@ import { getUserByAuthorization, unbanUser, validateAuthorization } from 'databa
 import { NextApiRequest, NextApiResponse } from 'next';
 import NextCors from 'nextjs-cors';
 
+import { getIp } from '@/util/ip';
+
 async function handler(req: NextApiRequest, res: NextApiResponse) {
   await NextCors(req, res, {
     methods: ['POST'],
     origin: '*',
     optionsSuccessStatus: 200
   });
+
+  const ip = getIp(req);
 
   const authorization = req.headers.authorization;
   if (!authorization || !validateAuthorization(authorization)) {
@@ -33,7 +37,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     return;
   }
 
-  await unbanUser(userId);
+  await unbanUser(userId, user.username, ip);
 
   res.status(200).end();
 }
