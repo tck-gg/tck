@@ -92,7 +92,7 @@ export async function validateKickVerification(
       accounts: {
         update: {
           kick: {
-            update: {
+            create: {
               kickUsername: cleanKickUsername,
               kickId
             }
