@@ -219,6 +219,11 @@ export async function banUser(targetId: string, moderator: string, ip: string) {
     }
   });
 
+  const target = await getUserById(targetId);
+  if (!target) {
+    return;
+  }
+
   // Add user action for moderator.
   await prisma.userAction.create({
     data: {
@@ -230,7 +235,7 @@ export async function banUser(targetId: string, moderator: string, ip: string) {
       action: Action.ACCOUNT_BAN,
       ip,
       timestamp: Date.now(),
-      description: `Banned ${targetId}.`
+      description: `Banned ${target.username}.`
     }
   });
 }
@@ -257,6 +262,11 @@ export async function unbanUser(targetId: string, moderator: string, ip: string)
     }
   });
 
+  const target = await getUserById(targetId);
+  if (!target) {
+    return;
+  }
+
   // Add user action for moderator.
   await prisma.userAction.create({
     data: {
@@ -268,7 +278,7 @@ export async function unbanUser(targetId: string, moderator: string, ip: string)
       action: Action.ACCOUNT_BAN,
       ip,
       timestamp: Date.now(),
-      description: `Unbanned ${targetId}.`
+      description: `Unbanned ${target.username}.`
     }
   });
 }
