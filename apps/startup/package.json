@@ -17,6 +17,7 @@
   "devDependencies": {
     "cross-env": "^7.0.3",
     "eslint-config-custom": "*",
-    "tsconfig": "*"
+    "tsconfig": "*",
+    "typescript": "^5.2.2"
   }
 }
