@@ -61,14 +61,30 @@ model KickAccount {
 }
 
 model UserAccounts {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String @unique @db.ObjectId
+
+  kick   KickAccount?
+  kickId String?      @db.ObjectId
+
+  csgobig String?
+  discord String?
+  gamdom  String?
+  roobet  String?
+  twitch  String?
+}
+
+model UserWallets {
   id     String @id @default(auto()) @map("_id") @db.ObjectId
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId String @unique @db.ObjectId
 
-  kick    KickAccount?
-  kickId  String?       @db.ObjectId
-  twitch  String?
-  discord String?
+  bitcoin       String?
+  ethereum      String?
+  litecoin      String?
+  steamTradeUrl String?
 }
 
 model User {
@@ -79,6 +95,7 @@ model User {
   apiKey   String @unique
 
   accounts    UserAccounts?
+  wallets     UserWallets?
   displayName String
   isAnonymous Boolean       @default(false)
 
