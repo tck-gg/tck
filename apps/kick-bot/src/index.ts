@@ -13,13 +13,15 @@ import {
 } from 'database';
 import OTP from 'otp';
 
-Sentry.init({
-  dsn: 'https://199400c6557fe69cd7e442efda7419df@o4505824725172224.ingest.sentry.io/4506578396119040',
-  integrations: [new ProfilingIntegration()],
-  tracesSampleRate: process.env.NODE_ENV === 'production' ? 0.1 : 1.0,
-  profilesSampleRate: process.env.NODE_ENV === 'production' ? 0.1 : 1.0,
-  environment: process.env.NODE_ENV
-});
+if(process.env.NODE_ENV === 'production') {
+  Sentry.init({
+    dsn: 'https://199400c6557fe69cd7e442efda7419df@o4505824725172224.ingest.sentry.io/4506578396119040',
+    integrations: [new ProfilingIntegration()],
+    tracesSampleRate: process.env.NODE_ENV === 'production' ? 0.1 : 1.0,
+    profilesSampleRate: process.env.NODE_ENV === 'production' ? 0.1 : 1.0,
+    environment: process.env.NODE_ENV
+  });
+}
 
 (async () => {
   const client = await Kient.create();
