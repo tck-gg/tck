@@ -103,6 +103,21 @@ export async function enterKickRaffle(
     }
   });
 
+  // Add action.
+  await prisma.userAction.create({
+    data: {
+      user: {
+        connect: {
+          id: user.id
+        }
+      },
+      action: 'JOIN_KICK_RAFFLE',
+      ip: 'kick.com',
+      timestamp: Date.now(),
+      description: `Entered Kick Raffle ${raffle.id}.`
+    }
+  });
+
   return 'entered';
 }
 
