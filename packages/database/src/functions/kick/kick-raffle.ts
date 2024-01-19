@@ -53,6 +53,63 @@ export async function createKickRaffle(
   return created.id;
 }
 
+export async function enterKickRaffle(
+  raffleId: string,
+  kickUsername: string
+): Promise<'error' | 'unlinked' | 'exists' | 'entered'> {
+  const user = await prisma.user.findFirst({
+    where: {
+      accounts: {
+        kick: {
+          kickUsername
+        }
+      }
+    },
+    include: {
+      accounts: {
+        include: {
+          kick: true
+        }
+      }
+    }
+  });
+  if (!user) {
+    return 'error';
+  }
+
+  if (!user.accounts?.kick?.kickUsername) {
+    return 'unlinked';
+  }
+
+  const raffle = await prisma.kickRaffle.findFirst({
+    where: {
+      id: raffleId
+    }
+  });
+  if (!raffle) {
+    return 'error';
+  }
+
+  // Check if we entered already.
+  if (raffle.entries.includes(kickUsername)) {
+    return 'exists';
+  }
+
+  // Add entry.
+  await prisma.kickRaffle.update({
+    where: {
+      id: raffleId
+    },
+    data: {
+      entries: {
+        push: kickUsername
+      }
+    }
+  });
+
+  return 'entered';
+}
+
 export async function endKickRaffle(id: string): Promise<{
   entries: number;
   points: number;

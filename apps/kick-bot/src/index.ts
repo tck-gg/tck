@@ -3,8 +3,9 @@
 import * as Sentry from '@sentry/node';
 import { ProfilingIntegration } from '@sentry/profiling-node';
 import { Events, Kient } from 'kient';
-import { createKickRaffle, endKickRaffle, updateKickUsername, validateKickVerification } from 'database';
+import { createKickRaffle, endKickRaffle, enterKickRaffle, updateKickUsername, validateKickVerification } from 'database';
 import OTP from 'otp';
+import { getUserByKickId } from 'database';
 
 Sentry.init({
   dsn: 'https://199400c6557fe69cd7e442efda7419df@o4505824725172224.ingest.sentry.io/4506578396119040',
@@ -64,6 +65,11 @@ Sentry.init({
         return;
       }
 
+      const user = await getUserByKickId(kickId);
+      if(!user || !user.permissions.includes("CREATE_KICK_RAFFLE")) {
+        return;
+      }
+      
       if(raffleTimeout) {
         client.api.chat.sendMessage(channel.data.chatroom.id, `There's already a raffle in progress!`);
         return;
@@ -106,13 +112,32 @@ Sentry.init({
           return;
         }
         
-        // "X viewer(s) wins X point(s)"
+        // Send results.
         client.api.chat.sendMessage(
           channel.data.chatroom.id,
           `${response.entries} viewer${response.entries !== 1 ? 's' : ''} win${response.entries === 1 ? 's' : ''} ${response.points} point${response.points !== 1 ? 's' : ''}!`
         );
+        
+        // Reset.
         raffleTimeout = null;
+        currentRaffle = null;
       }, duration * 1000);
+    }
+
+    if(content === 'tckTCKPoints') {
+      if(!currentRaffle) {
+        return;
+      }
+
+      const response = await enterKickRaffle(currentRaffle, kickUsername)
+      if(response === 'error') {
+        return;
+      }
+      if(response === 'unlinked') {
+        await client.api.chat.sendMessage(channel.data.chatroom.id, `You must link your Kick account at tck.gg to enter raffles!`);
+      }
+
+      return;
     }
   });
 
