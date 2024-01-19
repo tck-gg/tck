@@ -35,5 +35,20 @@ export async function createKickRaffle(
     }
   });
 
+  // Create action.
+  await prisma.userAction.create({
+    data: {
+      user: {
+        connect: {
+          id: authorizedUser.id
+        }
+      },
+      action: 'CREATE_KICK_RAFFLE',
+      ip: 'kick.com',
+      timestamp: Date.now(),
+      description: `Started a ${duration} second ${reward} point raffle on Kick.`
+    }
+  });
+
   return true;
 }
