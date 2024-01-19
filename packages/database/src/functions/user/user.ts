@@ -4,8 +4,8 @@ import { Action, Permission } from '@prisma/client';
 import { isValidEmail } from 'custom-util';
 import { v4 as uuidv4 } from 'uuid';
 
-import { prisma } from '../client';
-import { sendEmail } from '../email';
+import { prisma } from '../../client';
+import { sendEmail } from '../../email';
 
 const includes = {
   accounts: {
