@@ -55,13 +55,13 @@ export async function createKickRaffle(
 
 export async function enterKickRaffle(
   raffleId: string,
-  kickUsername: string
+  kickId: number
 ): Promise<'error' | 'unlinked' | 'exists' | 'entered'> {
   const user = await prisma.user.findFirst({
     where: {
       accounts: {
         kick: {
-          kickUsername
+          kickId: kickId
         }
       }
     },
@@ -74,10 +74,6 @@ export async function enterKickRaffle(
     }
   });
   if (!user) {
-    return 'error';
-  }
-
-  if (!user.accounts?.kick?.kickUsername) {
     return 'unlinked';
   }
 
@@ -91,7 +87,7 @@ export async function enterKickRaffle(
   }
 
   // Check if we entered already.
-  if (raffle.entries.includes(kickUsername)) {
+  if (raffle.entries.includes(kickId)) {
     return 'exists';
   }
 
@@ -102,7 +98,7 @@ export async function enterKickRaffle(
     },
     data: {
       entries: {
-        push: kickUsername
+        push: kickId
       }
     }
   });
@@ -138,7 +134,7 @@ export async function endKickRaffle(id: string): Promise<{
     where: {
       accounts: {
         kick: {
-          kickUsername: {
+          kickId: {
             in: raffle.entries
           }
         }

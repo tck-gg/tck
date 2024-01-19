@@ -71,7 +71,7 @@ Sentry.init({
       }
       
       if(raffleTimeout) {
-        client.api.chat.sendMessage(channel.data.chatroom.id, `There's already a raffle in progress!`);
+        client.api.chat.sendMessage(channel.data.chatroom.id, `@${kickUsername} There's already a raffle in progress!`);
         return;
       }
       
@@ -79,11 +79,11 @@ Sentry.init({
       const duration = parseInt(regexResponse[2]);
 
       if(reward < 1) {
-        client.api.chat.sendMessage(channel.data.chatroom.id, `You can only give a positive number of points.`);
+        client.api.chat.sendMessage(channel.data.chatroom.id, `@${kickUsername} You can only give a positive number of points.`);
         return;
       }
       if(reward > 10000) {
-        client.api.chat.sendMessage(channel.data.chatroom.id, `You can only give a maximum of 10k points.`);
+        client.api.chat.sendMessage(channel.data.chatroom.id, `@${kickUsername} You can only give a maximum of 10k points.`);
         return;
       }
 
@@ -129,12 +129,12 @@ Sentry.init({
         return;
       }
 
-      const response = await enterKickRaffle(currentRaffle, kickUsername)
+      const response = await enterKickRaffle(currentRaffle, kickId)
       if(response === 'error') {
         return;
       }
       if(response === 'unlinked') {
-        await client.api.chat.sendMessage(channel.data.chatroom.id, `You must link your Kick account at tck.gg to enter raffles!`);
+        await client.api.chat.sendMessage(channel.data.chatroom.id, `@${kickUsername} You must link your Kick account to enter raffles!`);
       }
 
       return;

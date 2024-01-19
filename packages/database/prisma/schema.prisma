@@ -184,7 +184,7 @@ model KickRaffle {
 
   duration Int
   reward   Int
-  entries  String[]
+  entries  Int[]
 
   timestamp Int
 }
