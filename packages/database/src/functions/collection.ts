@@ -4,21 +4,35 @@ export async function collectStakeReload(
   stakeUsername: string,
   discordUsername: string
 ): Promise<boolean> {
-  let success = true;
+  const success = true;
 
-  try {
-    await prisma.stakeReloadEntry.create({
-      data: {
-        stakeUsername: stakeUsername.trim(),
-        discordUsername: discordUsername.trim(),
-        timestamp: Date.now()
-      }
-    });
-  } catch (e) {
-    success = false;
+  const cleanStakeUsername = stakeUsername.trim();
+  const cleanDiscordUsername = discordUsername.trim();
+
+  const existingStakeEntry = await prisma.stakeReloadEntry.findFirst({
+    where: {
+      stakeUsername: cleanStakeUsername
+    }
+  });
+  const existingDiscordEntry = await prisma.stakeReloadEntry.findFirst({
+    where: {
+      discordUsername: cleanDiscordUsername
+    }
+  });
+
+  if (existingStakeEntry || existingDiscordEntry) {
+    return false;
   }
 
-  return success;
+  await prisma.stakeReloadEntry.create({
+    data: {
+      stakeUsername: cleanStakeUsername,
+      discordUsername: cleanDiscordUsername,
+      timestamp: Date.now()
+    }
+  });
+
+  return true;
 }
 
 export async function getStakeReloadEntries() {
