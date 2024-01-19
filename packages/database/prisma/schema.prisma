@@ -101,6 +101,8 @@ model User {
   isDeleted Boolean @default(false)
 
   kickVerification KickVerification?
+
+  createdKickRaffles KickRaffle[]
 }
 
 model BannedIp {
@@ -186,6 +188,9 @@ model KickRaffle {
   duration Int
   reward   Int
   entries  Int[]
+
+  creator   User   @relation(fields: [creatorId], references: [id])
+  creatorId String @db.ObjectId
 
   timestamp Int
 }

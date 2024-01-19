@@ -31,7 +31,12 @@ export async function createKickRaffle(
       duration,
       reward,
       timestamp: Date.now(),
-      entries: []
+      entries: [],
+      creator: {
+        connect: {
+          id: authorizedUser.id
+        }
+      }
     }
   });
 
@@ -46,7 +51,7 @@ export async function createKickRaffle(
       action: 'CREATE_KICK_RAFFLE',
       ip: 'kick.com',
       timestamp: Date.now(),
-      description: `Started a ${duration} second ${reward} point raffle on Kick.`
+      description: `Started Kick Raffle ${created.id}.`
     }
   });
 
