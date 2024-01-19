@@ -36,6 +36,7 @@ https://discord.com/oauth2/authorize?client_id=1188676912525090837&scope=bot&per
 - `SENTRY_AUTH_TOKEN`
 - `RANDOM_ORG_API_KEY` (signed)
 - `KICK_CHANNEL`
+- `KICK_VERIFY_CHANNEL`
 - `KICK_EMAIL`
 - `KICK_PASSWORD`
 - `KICK_2FA`

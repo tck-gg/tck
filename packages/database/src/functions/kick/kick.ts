@@ -1,7 +1,7 @@
 import { v4 } from 'uuid';
 import { Action } from '@prisma/client';
 
-import { prisma } from '../client';
+import { prisma } from '../../client';
 
 export async function hasKickVerification(userId: string) {
   const kickVerification = await prisma.kickVerification.findFirst({

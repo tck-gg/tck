@@ -13,6 +13,7 @@ enum Action {
   ACCOUNT_DELETE
   ACCOUNT_UNBAN
   ACCOUNT_LOGIN
+  CREATE_KICK_RAFFLE
   GIVEAWAY_JOIN
   LINK_KICK
   UPDATE_KICK
@@ -23,6 +24,7 @@ enum Action {
 
 enum Permission {
   ACCESS_ADMIN_PANEL
+  CREATE_KICK_RAFFLE
   MANAGE_USERS
   MANAGE_LEADERBOARDS
   MANAGE_RAFFLES
@@ -190,6 +192,16 @@ model KickVerification {
   userId String @unique @db.ObjectId
 
   verificationCode String
+
+  timestamp Int
+}
+
+model KickRaffle {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  duration Int
+  reward   Int
+  entries  Int[]
 
   timestamp Int
 }

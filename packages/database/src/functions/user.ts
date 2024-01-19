@@ -1,11 +1,20 @@
 import bcrypt from 'bcrypt';
 import crypto from 'crypto';
-import { Action } from '@prisma/client';
+import { Action, Permission } from '@prisma/client';
 import { isValidEmail } from 'custom-util';
 import { v4 as uuidv4 } from 'uuid';
 
 import { prisma } from '../client';
 import { sendEmail } from '../email';
+
+const includes = {
+  accounts: {
+    include: {
+      kick: true
+    }
+  },
+  kickVerification: true
+};
 
 /**
  * Gets a user from the database by their UUID.
@@ -13,7 +22,12 @@ import { sendEmail } from '../email';
  * @returns The user, `null` if the user doesn't exist.
  */
 export async function getUserById(id: string) {
-  return await prisma.user.findUnique({ where: { id } });
+  return await prisma.user.findUnique({
+    where: {
+      id
+    },
+    include: includes
+  });
 }
 
 /**
@@ -22,7 +36,12 @@ export async function getUserById(id: string) {
  * @returns The user, `null` if the user doesn't exist.
  */
 export async function getUserByUsername(username: string) {
-  return await prisma.user.findUnique({ where: { username } });
+  return await prisma.user.findUnique({
+    where: {
+      username
+    },
+    include: includes
+  });
 }
 
 /**
@@ -40,14 +59,7 @@ export async function getUserByEmail(email: string) {
           mode: 'insensitive'
         }
       },
-      include: {
-        accounts: {
-          include: {
-            kick: true
-          }
-        },
-        kickVerification: true
-      }
+      include: includes
     })
   )[0];
 }
@@ -498,4 +510,17 @@ export async function removePoints(userId: string, points: number, ip: string, m
   });
 
   return true;
+}
+
+export async function getUserByKickId(kickId: number) {
+  return await prisma.user.findFirst({
+    where: {
+      accounts: {
+        kick: {
+          kickId
+        }
+      }
+    },
+    include: includes
+  });
 }

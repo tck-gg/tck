@@ -3,7 +3,14 @@
 import * as Sentry from '@sentry/node';
 import { ProfilingIntegration } from '@sentry/profiling-node';
 import { Events, Kient } from 'kient';
-import { updateKickUsername, validateKickVerification } from 'database';
+import {
+  createKickRaffle,
+  endKickRaffle,
+  enterKickRaffle,
+  getUserByKickId,
+  updateKickUsername,
+  validateKickVerification
+} from 'database';
 import OTP from 'otp';
 
 if(process.env.NODE_ENV === 'production') {
@@ -18,17 +25,20 @@ if(process.env.NODE_ENV === 'production') {
 
 (async () => {
   const client = await Kient.create();
+  const verifyClient = await Kient.create();
+  
+  let raffleTimeout: NodeJS.Timeout | null = null;
+  let currentRaffle: string | null = null;
 
   if (
     !process.env.KICK_CHANNEL ||
+    !process.env.KICK_VERIFY_CHANNEL ||
     !process.env.KICK_EMAIL ||
     !process.env.KICK_PASSWORD ||
     !process.env.KICK_2FA
   ) {
     return;
   }
-
-  const channel = await client.api.channel.getChannel(process.env.KICK_CHANNEL);
 
   await client.api.authentication.login({
     email: process.env.KICK_EMAIL,
@@ -37,13 +47,111 @@ if(process.env.NODE_ENV === 'production') {
       secret: process.env.KICK_2FA
     }).totp(Date.now())
   });
-
-  console.log('Listening to Kick chatroom...');
+  const channel = await client.api.channel.getChannel(process.env.KICK_CHANNEL);
   await client.ws.chatroom.listen(channel.data.chatroom.id);
+  console.log(`Listening to ${process.env.KICK_CHANNEL}`);
+
+  await verifyClient.api.authentication.login({
+    email: process.env.KICK_EMAIL,
+    password: process.env.KICK_PASSWORD,
+    otc: new OTP({
+      secret: process.env.KICK_2FA
+    }).totp(Date.now())
+  });
+  const verifyChannel = await verifyClient.api.channel.getChannel(process.env.KICK_VERIFY_CHANNEL);
+  await verifyClient.ws.chatroom.listen(verifyChannel.data.chatroom.id);
+  console.log(`Listening to ${process.env.KICK_VERIFY_CHANNEL}`);
+ 
   client.on(Events.Chatroom.Message, async (message) => {
     const kickUsername = message.data.sender.username;
     const kickId = message.data.sender.id;
+    const content = message.data.content.trim();
 
+    if(content.startsWith("!raffle")) {
+      const regexResponse = /!raffle\s(\d+)\s(\d+)$/gm.exec(content);
+      if(!regexResponse) {
+        return;
+      }
+
+      const user = await getUserByKickId(kickId);
+      if(!user || !user.permissions.includes("CREATE_KICK_RAFFLE")) {
+        return;
+      }
+      
+      if(raffleTimeout) {
+        client.api.chat.sendMessage(channel.data.chatroom.id, `@${kickUsername} There's already a raffle in progress!`);
+        return;
+      }
+      
+      const reward = parseInt(regexResponse[1]);
+      const duration = parseInt(regexResponse[2]);
+
+      if(reward < 1) {
+        client.api.chat.sendMessage(channel.data.chatroom.id, `@${kickUsername} You can only give a positive number of points.`);
+        return;
+      }
+      if(reward > 10000) {
+        client.api.chat.sendMessage(channel.data.chatroom.id, `@${kickUsername} You can only give a maximum of 10k points.`);
+        return;
+      }
+
+      const createdRaffleId = await createKickRaffle(duration, reward, kickUsername);
+      if(!createdRaffleId) {
+        return;
+      }
+      currentRaffle = createdRaffleId;
+
+      await client.api.chat.sendMessage(
+        channel.data.chatroom.id,
+        `Raffle started for ${reward} points; type tckTCKPoints to join within the next ${duration} seconds!`
+      );
+      
+      raffleTimeout = setTimeout(async () => {
+        if(!currentRaffle) {
+          return;
+        }
+
+        const response = await endKickRaffle(currentRaffle);
+        if(response.entries < 0) {
+          return;
+        }
+        if(response.entries === 0) {
+          client.api.chat.sendMessage(channel.data.chatroom.id, `Nobody joined the raffle :(`);
+          return;
+        }
+        
+        // Send results.
+        client.api.chat.sendMessage(
+          channel.data.chatroom.id,
+          `${response.entries} viewer${response.entries !== 1 ? 's' : ''} win${response.entries === 1 ? 's' : ''} ${response.points} point${response.points !== 1 ? 's' : ''}!`
+        );
+        
+        // Reset.
+        raffleTimeout = null;
+        currentRaffle = null;
+      }, duration * 1000);
+    }
+
+    if(content === 'tckTCKPoints') {
+      if(!currentRaffle) {
+        return;
+      }
+
+      const response = await enterKickRaffle(currentRaffle, kickId)
+      if(response === 'error') {
+        return;
+      }
+      if(response === 'unlinked') {
+        await client.api.chat.sendMessage(channel.data.chatroom.id, `@${kickUsername} You must link your Kick account to enter raffles!`);
+      }
+
+      return;
+    }
+  });
+
+  verifyClient.on(Events.Chatroom.Message, async (message) => {
+    const kickUsername = message.data.sender.username;
+    const kickId = message.data.sender.id;
     const content = message.data.content.trim();
 
     if (content.startsWith('!verify')) {
@@ -59,7 +167,7 @@ if(process.env.NODE_ENV === 'production') {
         "kick.com"
       );
       if (response) {
-        await client.api.chat.sendMessage(channel.data.chatroom.id, `Verified ${kickUsername}!`);
+        await verifyClient.api.chat.sendMessage(verifyChannel.data.chatroom.id, `Verified @${kickUsername}!`);
       }
 
       return;
@@ -72,7 +180,7 @@ if(process.env.NODE_ENV === 'production') {
         "kick.com"
       );
       if (response) {
-        await client.api.chat.sendMessage(channel.data.chatroom.id, `Updated ${kickUsername}!`);
+        await verifyClient.api.chat.sendMessage(verifyChannel.data.chatroom.id, `Updated @${kickUsername}!`);
       }
 
       return;
