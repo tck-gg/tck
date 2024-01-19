@@ -3,7 +3,7 @@
 import * as Sentry from '@sentry/node';
 import { ProfilingIntegration } from '@sentry/profiling-node';
 import { Events, Kient } from 'kient';
-import { updateKickUsername, validateKickVerification } from 'database';
+import { createKickRaffle, updateKickUsername, validateKickVerification } from 'database';
 import OTP from 'otp';
 
 Sentry.init({
@@ -16,17 +16,19 @@ Sentry.init({
 
 (async () => {
   const client = await Kient.create();
+  const verifyClient = await Kient.create();
+  
+  let raffleTimeout: NodeJS.Timeout | null = null;
 
   if (
     !process.env.KICK_CHANNEL ||
+    !process.env.KICK_VERIFY_CHANNEL ||
     !process.env.KICK_EMAIL ||
     !process.env.KICK_PASSWORD ||
     !process.env.KICK_2FA
   ) {
     return;
   }
-
-  const channel = await client.api.channel.getChannel(process.env.KICK_CHANNEL);
 
   await client.api.authentication.login({
     email: process.env.KICK_EMAIL,
@@ -35,13 +37,70 @@ Sentry.init({
       secret: process.env.KICK_2FA
     }).totp(Date.now())
   });
-
-  console.log('Listening to Kick chatroom...');
+  const channel = await client.api.channel.getChannel(process.env.KICK_CHANNEL);
   await client.ws.chatroom.listen(channel.data.chatroom.id);
+  console.log(`Listening to ${process.env.KICK_CHANNEL}`);
+
+  await verifyClient.api.authentication.login({
+    email: process.env.KICK_EMAIL,
+    password: process.env.KICK_PASSWORD,
+    otc: new OTP({
+      secret: process.env.KICK_2FA
+    }).totp(Date.now())
+  });
+  const verifyChannel = await verifyClient.api.channel.getChannel(process.env.KICK_VERIFY_CHANNEL);
+  await verifyClient.ws.chatroom.listen(verifyChannel.data.chatroom.id);
+  console.log(`Listening to ${process.env.KICK_VERIFY_CHANNEL}`);
+ 
   client.on(Events.Chatroom.Message, async (message) => {
     const kickUsername = message.data.sender.username;
     const kickId = message.data.sender.id;
+    const content = message.data.content.trim();
 
+    if(content.startsWith("!raffle")) {
+      const regexResponse = /!raffle\s(\d+)\s(\d+)$/gm.exec(content);
+      if(!regexResponse) {
+        return;
+      }
+
+      if(raffleTimeout) {
+        client.api.chat.sendMessage(channel.data.chatroom.id, `There's already a raffle in progress!`);
+        return;
+      }
+      
+      const reward = parseInt(regexResponse[1]);
+      const duration = parseInt(regexResponse[2]);
+
+      if(reward < 1) {
+        client.api.chat.sendMessage(channel.data.chatroom.id, `You can only give a positive number of points.`);
+        return;
+      }
+      if(reward > 10000) {
+        client.api.chat.sendMessage(channel.data.chatroom.id, `You can only give a maximum of 10k points.`);
+        return;
+      }
+
+      const response = await createKickRaffle(duration, reward);
+      if(!response) {
+        return;
+      }
+
+      await client.api.chat.sendMessage(
+        channel.data.chatroom.id,
+        `Raffle started for ${reward} points; type livetc1Coinstatic or livetc1Points to join within the next ${duration} seconds!`
+      );
+      
+      raffleTimeout = setTimeout(() => {
+        // TODO: Rename this.
+        client.api.chat.sendMessage(channel.data.chatroom.id, `Raffle has ended!`);
+        raffleTimeout = null;
+      }, duration * 1000);
+    }
+  });
+  
+  verifyClient.on(Events.Chatroom.Message, async (message) => {
+    const kickUsername = message.data.sender.username;
+    const kickId = message.data.sender.id;
     const content = message.data.content.trim();
 
     if (content.startsWith('!verify')) {
@@ -57,7 +116,7 @@ Sentry.init({
         "kick.com"
       );
       if (response) {
-        await client.api.chat.sendMessage(channel.data.chatroom.id, `Verified ${kickUsername}!`);
+        await client.api.chat.sendMessage(verifyChannel.data.chatroom.id, `Verified ${kickUsername}!`);
       }
 
       return;
@@ -70,7 +129,7 @@ Sentry.init({
         "kick.com"
       );
       if (response) {
-        await client.api.chat.sendMessage(channel.data.chatroom.id, `Updated ${kickUsername}!`);
+        await client.api.chat.sendMessage(verifyChannel.data.chatroom.id, `Updated ${kickUsername}!`);
       }
 
       return;
