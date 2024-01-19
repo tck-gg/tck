@@ -2,6 +2,8 @@ import { createGiveaway, getUserByAuthorization, uploadImage } from 'database';
 import { NextApiRequest, NextApiResponse } from 'next';
 import NextCors from 'nextjs-cors';
 
+import { getIp } from '@/util/ip';
+
 export const config = {
   api: {
     bodyParser: {
@@ -16,6 +18,8 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     origin: '*',
     optionsSuccessStatus: 200
   });
+
+  const ip = getIp(req);
 
   const authorization = req.headers.authorization as string;
   const user = await getUserByAuthorization(authorization);
@@ -36,7 +40,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     return;
   }
 
-  await createGiveaway(name, brand, value, maxEntries, timestampEnd, fileName);
+  await createGiveaway(name, brand, value, maxEntries, timestampEnd, fileName, user.id, ip);
 
   res.status(200).end();
 }
