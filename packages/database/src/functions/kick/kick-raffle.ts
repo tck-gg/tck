@@ -4,9 +4,9 @@ export async function createKickRaffle(
   duration: number,
   reward: number,
   creator: string
-): Promise<boolean> {
+): Promise<string | null> {
   if (duration < 1 || reward < 1) {
-    return false;
+    return null;
   }
 
   const authorizedUser = await prisma.user.findFirst({
@@ -19,14 +19,14 @@ export async function createKickRaffle(
     }
   });
   if (!authorizedUser) {
-    return false;
+    return null;
   }
   if (!authorizedUser.permissions.includes('CREATE_KICK_RAFFLE')) {
-    return false;
+    return null;
   }
 
   // Create raffle.
-  await prisma.kickRaffle.create({
+  const created = await prisma.kickRaffle.create({
     data: {
       duration,
       reward,
@@ -50,5 +50,52 @@ export async function createKickRaffle(
     }
   });
 
-  return true;
+  return created.id;
+}
+
+export async function endKickRaffle(id: string): Promise<{
+  entries: number;
+  points: number;
+}> {
+  const raffle = await prisma.kickRaffle.findFirst({
+    where: {
+      id
+    }
+  });
+  if (!raffle) {
+    return {
+      entries: -1,
+      points: 0
+    };
+  }
+
+  if (raffle.entries.length === 0) {
+    return {
+      entries: 0,
+      points: raffle.reward
+    };
+  }
+
+  // Give points.
+  await prisma.user.updateMany({
+    where: {
+      accounts: {
+        kick: {
+          kickUsername: {
+            in: raffle.entries
+          }
+        }
+      }
+    },
+    data: {
+      points: {
+        increment: raffle.reward
+      }
+    }
+  });
+
+  return {
+    entries: raffle.entries.length,
+    points: raffle.reward
+  };
 }

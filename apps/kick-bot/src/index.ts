@@ -3,7 +3,7 @@
 import * as Sentry from '@sentry/node';
 import { ProfilingIntegration } from '@sentry/profiling-node';
 import { Events, Kient } from 'kient';
-import { createKickRaffle, updateKickUsername, validateKickVerification } from 'database';
+import { createKickRaffle, endKickRaffle, updateKickUsername, validateKickVerification } from 'database';
 import OTP from 'otp';
 
 Sentry.init({
@@ -19,6 +19,7 @@ Sentry.init({
   const verifyClient = await Kient.create();
   
   let raffleTimeout: NodeJS.Timeout | null = null;
+  let currentRaffle: string | null = null;
 
   if (
     !process.env.KICK_CHANNEL ||
@@ -80,19 +81,36 @@ Sentry.init({
         return;
       }
 
-      const response = await createKickRaffle(duration, reward, kickUsername);
-      if(!response) {
+      const createdRaffleId = await createKickRaffle(duration, reward, kickUsername);
+      if(!createdRaffleId) {
         return;
       }
+      currentRaffle = createdRaffleId;
 
       await client.api.chat.sendMessage(
         channel.data.chatroom.id,
-        `Raffle started for ${reward} points; type livetc1Coinstatic or livetc1Points to join within the next ${duration} seconds!`
+        `Raffle started for ${reward} points; type tckTCKPoints to join within the next ${duration} seconds!`
       );
       
-      raffleTimeout = setTimeout(() => {
-        // TODO: Rename this.
-        client.api.chat.sendMessage(channel.data.chatroom.id, `Raffle has ended!`);
+      raffleTimeout = setTimeout(async () => {
+        if(!currentRaffle) {
+          return;
+        }
+
+        const response = await endKickRaffle(currentRaffle);
+        if(response.entries < 0) {
+          return;
+        }
+        if(response.entries === 0) {
+          client.api.chat.sendMessage(channel.data.chatroom.id, `Nobody joined the raffle :(`);
+          return;
+        }
+        
+        // "X viewer(s) wins X point(s)"
+        client.api.chat.sendMessage(
+          channel.data.chatroom.id,
+          `${response.entries} viewer${response.entries !== 1 ? 's' : ''} win${response.entries === 1 ? 's' : ''} ${response.points} point${response.points !== 1 ? 's' : ''}!`
+        );
         raffleTimeout = null;
       }, duration * 1000);
     }
