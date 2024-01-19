@@ -80,7 +80,7 @@ Sentry.init({
         return;
       }
 
-      const response = await createKickRaffle(duration, reward);
+      const response = await createKickRaffle(duration, reward, kickUsername);
       if(!response) {
         return;
       }
@@ -97,7 +97,7 @@ Sentry.init({
       }, duration * 1000);
     }
   });
-  
+
   verifyClient.on(Events.Chatroom.Message, async (message) => {
     const kickUsername = message.data.sender.username;
     const kickId = message.data.sender.id;
