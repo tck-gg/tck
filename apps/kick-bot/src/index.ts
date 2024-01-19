@@ -57,7 +57,7 @@ Sentry.init({
         "kick.com"
       );
       if (response) {
-        await client.api.chat.sendMessage(channel.data.chatroom.id, `Verified ${kickUsername}!`);
+        await client.api.chat.sendMessage(channel.data.chatroom.id, `Verified @${kickUsername}!`);
       }
 
       return;
@@ -70,7 +70,7 @@ Sentry.init({
         "kick.com"
       );
       if (response) {
-        await client.api.chat.sendMessage(channel.data.chatroom.id, `Updated ${kickUsername}!`);
+        await client.api.chat.sendMessage(channel.data.chatroom.id, `Updated @${kickUsername}!`);
       }
 
       return;
