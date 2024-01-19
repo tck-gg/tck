@@ -4,7 +4,6 @@ import { ProfilingIntegration } from '@sentry/profiling-node';
 export * from './client';
 
 export * from './functions/admin';
-export * from './functions/auth';
 export * from './functions/backblaze';
 export * from './functions/collection';
 export * from './functions/giveaways';
@@ -14,6 +13,9 @@ export * from './functions/kick/kick';
 export * from './functions/leaderboard';
 export * from './functions/permissions';
 export * from './functions/user/accounts';
+export * from './functions/user/auth';
+export * from './functions/user/fetch';
+export * from './functions/user/points';
 export * from './functions/user/user';
 export * from './functions/user/wallets';
 
