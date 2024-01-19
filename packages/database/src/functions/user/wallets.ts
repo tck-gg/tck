@@ -32,3 +32,14 @@ export async function updateLitecoinWallet(wallet: string, userId: string) {
     }
   });
 }
+
+export async function updateSteamTradeUrl(steamTradeUrl: string, userId: string) {
+  await prisma.userWallets.update({
+    where: {
+      userId
+    },
+    data: {
+      steamTradeUrl
+    }
+  });
+}
