@@ -22,8 +22,11 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     return;
   }
 
-  await updateLitecoinWallet(cleanWallet, user.id);
-
+  const result = await updateLitecoinWallet(cleanWallet, user.id);
+  if (!result) {
+    res.status(403).end();
+    return;
+  }
   res.status(200).end();
 }
 
