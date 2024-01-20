@@ -113,10 +113,14 @@ if(process.env.NODE_ENV === 'production') {
 
         const response = await endKickRaffle(currentRaffle);
         if(response.entries < 0) {
+          raffleTimeout = null;
+          currentRaffle = null;
           return;
         }
         if(response.entries === 0) {
           client.api.chat.sendMessage(channel.data.chatroom.id, `Nobody joined the raffle :(`);
+          raffleTimeout = null;
+          currentRaffle = null;
           return;
         }
         
