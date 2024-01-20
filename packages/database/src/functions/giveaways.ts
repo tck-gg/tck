@@ -109,6 +109,16 @@ export async function updateGiveaway(
     }
   });
 
+  if (
+    name === giveaway.name &&
+    brand === giveaway.brand &&
+    value === giveaway.value &&
+    maxEntries === giveaway.maxEntries &&
+    timestampEnd === giveaway.timestampEnd
+  ) {
+    return true;
+  }
+
   // Get updates.
   const updates = [];
   if (giveaway.name !== name) {
