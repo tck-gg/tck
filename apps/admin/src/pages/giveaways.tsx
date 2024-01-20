@@ -281,6 +281,9 @@ function Giveaways({
         id: editId
       },
       {
+        headers: {
+          authorization: cookie.authorization
+        },
         validateStatus: () => {
           return true;
         }

@@ -12,7 +12,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
   });
 
   const ip = getIp(req);
-  const authorization = req.headers.Authorization as string;
+  const authorization = req.headers.authorization as string;
   if (!validateAuthorization(authorization)) {
     res.status(401).end();
     return;
