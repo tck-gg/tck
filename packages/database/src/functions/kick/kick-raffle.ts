@@ -61,7 +61,7 @@ export async function createKickRaffle(
 export async function enterKickRaffle(
   raffleId: string,
   kickId: number
-): Promise<'error' | 'unlinked' | 'exists' | 'entered'> {
+): Promise<'error' | 'unlinked' | 'banned' | 'exists' | 'entered'> {
   const user = await prisma.user.findFirst({
     where: {
       accounts: {
@@ -80,6 +80,9 @@ export async function enterKickRaffle(
   });
   if (!user) {
     return 'unlinked';
+  }
+  if (user.isBanned) {
+    return 'banned';
   }
 
   const raffle = await prisma.kickRaffle.findFirst({
