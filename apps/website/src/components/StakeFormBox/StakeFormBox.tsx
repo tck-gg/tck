@@ -24,10 +24,18 @@ function StakeFormBox() {
 
     setDisabled(true);
 
-    const response = await axios.post('/api/v1/collection/stake', {
-      stakeUsername: stakeUsername.trim(),
-      discordUsername: discordUsername.trim()
-    });
+    const response = await axios.post(
+      '/api/v1/collection/stake',
+      {
+        stakeUsername: stakeUsername.trim(),
+        discordUsername: discordUsername.trim()
+      },
+      {
+        validateStatus: () => {
+          return true;
+        }
+      }
+    );
 
     if (response.status === 201) {
       setStakeUsername('');
