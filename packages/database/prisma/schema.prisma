@@ -14,7 +14,11 @@ enum Action {
   ACCOUNT_UNBAN
   ACCOUNT_LOGIN
   CREATE_KICK_RAFFLE
+  GIVEAWAY_CREATE
+  GIVEAWAY_DELETE
+  GIVEAWAY_UPDATE
   GIVEAWAY_JOIN
+  JOIN_KICK_RAFFLE
   LINK_KICK
   UPDATE_KICK
   USER_POINTS_ADD
@@ -117,6 +121,8 @@ model User {
   isDeleted Boolean @default(false)
 
   kickVerification KickVerification?
+
+  createdKickRaffles KickRaffle[]
 }
 
 model BannedIp {
@@ -202,6 +208,9 @@ model KickRaffle {
   duration Int
   reward   Int
   entries  Int[]
+
+  creator   User   @relation(fields: [creatorId], references: [id])
+  creatorId String @db.ObjectId
 
   timestamp Int
 }

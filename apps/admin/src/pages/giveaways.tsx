@@ -53,6 +53,51 @@ function getUrl() {
   return '';
 }
 
+function showErrorNotification(status: number) {
+  if (status === 400) {
+    notifications.show({
+      title: 'Bad Request',
+      message: 'Try again.',
+      color: 'red',
+      icon: <IconX />,
+      withBorder: true,
+      autoClose: 10000
+    });
+  }
+  if (status === 401 || status === 403) {
+    notifications.show({
+      title: 'Error',
+      message: 'You are not authorized to do this. Ask the developer for permission.',
+      color: 'red',
+      icon: <IconX />,
+      withBorder: true,
+      autoClose: 10000
+    });
+    return;
+  }
+  if (status === 404) {
+    notifications.show({
+      title: 'Error',
+      message: 'Giveaway not found. Notify the developer.',
+      color: 'red',
+      icon: <IconX />,
+      withBorder: true,
+      autoClose: 10000
+    });
+    return;
+  }
+  if (status === 500) {
+    notifications.show({
+      title: 'Internal Server Error',
+      message: 'An internal server error occurred.',
+      color: 'red',
+      icon: <IconX />,
+      withBorder: true,
+      autoClose: 10000
+    });
+  }
+}
+
 function Giveaways({
   giveaways
 }: {
@@ -172,17 +217,7 @@ function Giveaways({
       );
     }
 
-    if (response.status === 403) {
-      notifications.show({
-        title: 'Error',
-        message: 'You are not authorized to do this. Ask the developer for permission.',
-        color: 'red',
-        icon: <IconX />,
-        withBorder: true,
-        autoClose: 10000
-      });
-      return;
-    }
+    showErrorNotification(response.status);
 
     if (response.status === 200) {
       router.replace(router.asPath);
@@ -246,34 +281,16 @@ function Giveaways({
         id: editId
       },
       {
+        headers: {
+          authorization: cookie.authorization
+        },
         validateStatus: () => {
           return true;
         }
       }
     );
 
-    if (response.status === 403) {
-      notifications.show({
-        title: 'Error',
-        message: 'You are not authorized to do this. Ask the developer for permission.',
-        color: 'red',
-        icon: <IconX />,
-        withBorder: true,
-        autoClose: 10000
-      });
-      return;
-    }
-    if (response.status === 404) {
-      notifications.show({
-        title: 'Error',
-        message: 'Giveaway not found. Notify the developer.',
-        color: 'red',
-        icon: <IconX />,
-        withBorder: true,
-        autoClose: 10000
-      });
-      return;
-    }
+    showErrorNotification(response.status);
 
     if (response.status === 200) {
       router.replace(router.asPath);

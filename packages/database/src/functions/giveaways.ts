@@ -83,8 +83,19 @@ export async function updateGiveaway(
   brand: string,
   value: number,
   maxEntries: number,
-  timestampEnd: number
-) {
+  timestampEnd: number,
+  userId: string,
+  ip: string
+): Promise<boolean> {
+  const giveaway = await prisma.giveaway.findUnique({
+    where: {
+      id
+    }
+  });
+  if (!giveaway) {
+    return false;
+  }
+
   await prisma.giveaway.update({
     where: {
       id
@@ -97,9 +108,54 @@ export async function updateGiveaway(
       timestampEnd
     }
   });
+
+  if (
+    name === giveaway.name &&
+    brand === giveaway.brand &&
+    value === giveaway.value &&
+    maxEntries === giveaway.maxEntries &&
+    timestampEnd === giveaway.timestampEnd
+  ) {
+    return true;
+  }
+
+  // Get updates.
+  const updates = [];
+  if (giveaway.name !== name) {
+    updates.push(`Name updated from ${giveaway.name} to ${name}.`);
+  }
+  if (giveaway.brand !== brand) {
+    updates.push(`Brand updated from ${giveaway.brand} to ${brand}.`);
+  }
+  if (giveaway.value !== value) {
+    updates.push(`Value updated from ${giveaway.value} to ${value}.`);
+  }
+  if (giveaway.maxEntries !== maxEntries) {
+    updates.push(`Max entries updated from ${giveaway.maxEntries} to ${maxEntries}.`);
+  }
+  if (giveaway.timestampEnd !== timestampEnd) {
+    updates.push(`End date updated from ${giveaway.timestampEnd} to ${timestampEnd}.`);
+  }
+
+  // Create action.
+  await prisma.userAction.create({
+    data: {
+      user: {
+        connect: {
+          id: userId
+        }
+      },
+      action: Action.GIVEAWAY_UPDATE,
+      ip,
+      timestamp: Date.now(),
+      description: `Giveaway ${id} updated. ${updates.join(' ')}`
+    }
+  });
+
+  return true;
 }
 
-export async function deleteGiveaway(id: string): Promise<boolean> {
+export async function deleteGiveaway(id: string, userId: string, ip: string): Promise<boolean> {
   const giveaway = await prisma.giveaway.findUnique({
     where: {
       id
@@ -129,6 +185,21 @@ export async function deleteGiveaway(id: string): Promise<boolean> {
   await prisma.giveaway.delete({
     where: {
       id
+    }
+  });
+
+  // Create action.
+  await prisma.userAction.create({
+    data: {
+      user: {
+        connect: {
+          id: userId
+        }
+      },
+      action: Action.GIVEAWAY_DELETE,
+      ip,
+      timestamp: Date.now(),
+      description: `Giveaway ${id}`
     }
   });
 
@@ -233,7 +304,9 @@ export async function createGiveaway(
   value: number,
   maxEntries: number,
   timestampEnd: number,
-  image: string
+  image: string,
+  userId: string,
+  ip: string
 ) {
   const giveaway = await prisma.giveaway.create({
     data: {
@@ -244,6 +317,21 @@ export async function createGiveaway(
       timestampCreation: Date.now(),
       timestampEnd,
       image
+    }
+  });
+
+  // Create action.
+  await prisma.userAction.create({
+    data: {
+      user: {
+        connect: {
+          id: userId
+        }
+      },
+      action: Action.GIVEAWAY_CREATE,
+      ip,
+      timestamp: Date.now(),
+      description: `Giveaway ${giveaway.id}`
     }
   });
 

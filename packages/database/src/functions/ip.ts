@@ -2,7 +2,7 @@ import { unique } from '@reverse/array';
 import { IpData, SimpleUser } from 'types';
 
 import { prisma } from '../client';
-import { getUserById } from './user';
+import { getUserById } from './user/fetch';
 
 export async function getAssociatedIps(userId: string): Promise<string[]> {
   const user = await prisma.user.findUnique({

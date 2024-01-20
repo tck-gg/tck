@@ -24,10 +24,18 @@ function StakeFormBox() {
 
     setDisabled(true);
 
-    const response = await axios.post('/api/v1/collection/stake', {
-      stakeUsername: stakeUsername.trim(),
-      discordUsername: discordUsername.trim()
-    });
+    const response = await axios.post(
+      '/api/v1/collection/stake',
+      {
+        stakeUsername: stakeUsername.trim(),
+        discordUsername: discordUsername.trim()
+      },
+      {
+        validateStatus: () => {
+          return true;
+        }
+      }
+    );
 
     if (response.status === 201) {
       setStakeUsername('');
@@ -51,8 +59,6 @@ function StakeFormBox() {
           </p>
         </div>
         <svg
-          // width='584'
-          // height='152'
           viewBox='0 0 584 152'
           fill='none'
           xmlns='http://www.w3.org/2000/svg'
