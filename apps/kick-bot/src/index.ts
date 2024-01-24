@@ -103,7 +103,7 @@ if(process.env.NODE_ENV === 'production') {
 
       await client.api.chat.sendMessage(
         channel.data.chatroom.id,
-        `Raffle started for ${reward} points; type tckTCKPoints to join within the next ${duration} seconds!`
+        `Raffle started for ${reward} points; type tckFREE to join within the next ${duration} seconds!`
       );
       
       raffleTimeout = setTimeout(async () => {
@@ -136,7 +136,7 @@ if(process.env.NODE_ENV === 'production') {
       }, duration * 1000);
     }
 
-    if(content === 'tckTCKPoints') {
+    if(content === 'tckFREE') {
       if(!currentRaffle) {
         return;
       }
