@@ -40,6 +40,7 @@ https://discord.com/oauth2/authorize?client_id=1188676912525090837&scope=bot&per
 - `KICK_EMAIL`
 - `KICK_PASSWORD`
 - `KICK_2FA`
+- `KICK_AUTH`
 
 ### Unused
 - `CLASH_API_KEY`

@@ -46,7 +46,7 @@ if(process.env.NODE_ENV === 'production') {
     otc: new OTP({
       secret: process.env.KICK_2FA
     }).totp(Date.now())
-  });
+  }, process.env.KICK_AUTH);
   const channel = await client.api.channel.getChannel(process.env.KICK_CHANNEL);
   await client.ws.chatroom.listen(channel.data.chatroom.id);
   console.log(`Listening to ${process.env.KICK_CHANNEL}`);
@@ -57,7 +57,7 @@ if(process.env.NODE_ENV === 'production') {
     otc: new OTP({
       secret: process.env.KICK_2FA
     }).totp(Date.now())
-  });
+  }, process.env.KICK_AUTH);
   const verifyChannel = await verifyClient.api.channel.getChannel(process.env.KICK_VERIFY_CHANNEL);
   await verifyClient.ws.chatroom.listen(verifyChannel.data.chatroom.id);
   console.log(`Listening to ${process.env.KICK_VERIFY_CHANNEL}`);
