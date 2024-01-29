@@ -136,7 +136,7 @@ if(process.env.NODE_ENV === 'production') {
       }, duration * 1000);
     }
 
-    if(content === 'tckFREE') {
+    if(content === '[emote:2191419:tckFREE]') {
       if(!currentRaffle) {
         return;
       }
