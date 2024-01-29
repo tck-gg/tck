@@ -101,10 +101,17 @@ if(process.env.NODE_ENV === 'production') {
       }
       currentRaffle = createdRaffleId;
 
-      await client.api.chat.sendMessage(
-        channel.data.chatroom.id,
-        `Raffle started for ${reward} points; type [emote:2191419:tckFREE] to join within the next ${duration} seconds!`
-      );
+      if(process.env.NODE_ENV === 'production') {
+        await client.api.chat.sendMessage(
+          channel.data.chatroom.id,
+          `Raffle started for ${reward} points; type [emote:2191419:tckFREE] to join within the next ${duration} seconds!`
+        );
+      }else {
+        await client.api.chat.sendMessage(
+          channel.data.chatroom.id,
+          `Raffle started for ${reward} points; type tckFREE to join within the next ${duration} seconds!`
+        );
+      }
       
       raffleTimeout = setTimeout(async () => {
         if(!currentRaffle) {
@@ -136,7 +143,9 @@ if(process.env.NODE_ENV === 'production') {
       }, duration * 1000);
     }
 
-    if(content === '[emote:2191419:tckFREE]') {
+    console.log(content);
+    
+    if(content === '[emote:2191419:tckFREE]' || content === '[emote:2191426:tckPoints]') {
       if(!currentRaffle) {
         return;
       }
