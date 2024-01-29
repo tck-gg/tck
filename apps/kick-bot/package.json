@@ -11,7 +11,7 @@
     "@sentry/node": "^7.66.0",
     "@sentry/profiling-node": "^1.2.0",
     "database": "*",
-    "kient": "^1.0.1-8",
+    "kient": "^1.0.1-12",
     "otp": "^1.1.2",
     "types": "*"
   },
