@@ -8,6 +8,7 @@ import {
   endKickRaffle,
   enterKickRaffle,
   getUserByKickId,
+  getUserPointsByKickId,
   updateKickUsername,
   validateKickVerification
 } from 'database';
@@ -157,6 +158,12 @@ if(process.env.NODE_ENV === 'production') {
       }
 
       return;
+    }
+
+    if(content === '!points') {
+      const points = await getUserPointsByKickId(kickId);
+
+      await client.api.chat.sendMessage(channel.data.chatroom.id, `@${kickUsername} You have ${points} point${points !== 1 ? 's' : ''}!`);
     }
   });
 

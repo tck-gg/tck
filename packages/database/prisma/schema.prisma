@@ -73,7 +73,6 @@ model UserAccounts {
   userId String @unique @db.ObjectId
 
   kick   KickAccount?
-  kickId String?      @db.ObjectId
 
   csgobig String?
   discord String?
