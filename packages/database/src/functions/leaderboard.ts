@@ -77,7 +77,23 @@ export async function getLeaderboard(type: LeaderboardType) {
 
     if (response.status === 200) {
       const data: GamdomLeaderboardApiResponse = response.data;
-      spots = data.data
+      const yearAndMonth = monthStart.split('-').slice(0, 2).join('-');
+
+      let dataSpots = data.data;
+      dataSpots = dataSpots
+        .map((spot) => {
+          return {
+            ...spot,
+            wager_data: spot.wager_data.filter((wager) => {
+              return wager.month === yearAndMonth;
+            })
+          };
+        })
+        .filter((spot) => {
+          return spot.wager_data.length > 0;
+        });
+
+      spots = dataSpots
         .sort((a, b) => {
           return b.wager_data[0].total_wager_usd - a.wager_data[0].total_wager_usd;
         })
