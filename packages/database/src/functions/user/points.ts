@@ -3,6 +3,20 @@ import { Action } from '@prisma/client';
 import { prisma } from '../../client';
 import { getUserById } from './fetch';
 
+export async function getUserPointsByKickId(kickId: number) {
+  const user = await prisma.user.findFirst({
+    where: {
+      accounts: {
+        kick: {
+          kickId
+        }
+      }
+    }
+  });
+
+  return user?.points || 0;
+}
+
 export async function setPoints(userId: string, points: number, ip: string, moderator: string) {
   if (points < 0) {
     points = 0;

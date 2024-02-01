@@ -8,6 +8,7 @@ import {
   endKickRaffle,
   enterKickRaffle,
   getUserByKickId,
+  getUserPointsByKickId,
   updateKickUsername,
   validateKickVerification
 } from 'database';
@@ -104,7 +105,7 @@ if(process.env.NODE_ENV === 'production') {
       if(process.env.NODE_ENV === 'production') {
         await client.api.chat.sendMessage(
           channel.data.chatroom.id,
-          `Raffle started for ${reward} points; type [emote:2191419:tckFREE] to join within the next ${duration} seconds!`
+          `Raffle started for ${reward} points; type [emote:2191419:tckFREE] or [emote:2191426:tckPoints] to join within the next ${duration} seconds!`
         );
       }else {
         await client.api.chat.sendMessage(
@@ -157,6 +158,12 @@ if(process.env.NODE_ENV === 'production') {
       }
 
       return;
+    }
+
+    if(content === '!points') {
+      const points = await getUserPointsByKickId(kickId);
+
+      await client.api.chat.sendMessage(channel.data.chatroom.id, `@${kickUsername} You have ${points} point${points !== 1 ? 's' : ''}!`);
     }
   });
 
