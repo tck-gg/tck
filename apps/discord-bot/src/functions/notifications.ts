@@ -4,7 +4,7 @@ import { Giveaway } from 'database';
 import { client } from '../index';
 
 export async function sendNewGiveawayNotification(giveaway: Giveaway) {
-  if (!process.env.DISCORD_ANNOUNCEMENT_CHANNEL_ID) {
+  if (!process.env.DISCORD_TOKEN || !process.env.DISCORD_ANNOUNCEMENT_CHANNEL_ID) {
     return;
   }
 

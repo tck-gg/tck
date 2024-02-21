@@ -5,6 +5,11 @@ import { ProfilingIntegration } from '@sentry/profiling-node';
 
 import { initSocket } from './socket';
 
+if (!process.env.DISCORD_TOKEN || !process.env.DISCORD_ANNOUNCEMENT_CHANNEL_ID) {
+  console.log('Missing environment variables. Not starting Discord bot...');
+  process.exit(1);
+}
+
 if (process.env.NODE_ENV === 'production') {
   Sentry.init({
     dsn: 'https://92455f7c5f4cdd0035a65e24b168fa6d@o4505824725172224.ingest.sentry.io/4505824785989632',
