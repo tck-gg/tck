@@ -251,7 +251,7 @@ export async function endGiveaway(id: string) {
   }
 
   // Didn't have enough entries. Extend by one day.
-  if (giveaway.entries.length === 0 || !process.env.RANDOM_ORG_API_KEY) {
+  if (giveaway.entries.length === 0) {
     const newTimestampEnd = giveaway.timestampEnd + 86400000;
 
     await prisma.giveaway.update({
@@ -270,16 +270,21 @@ export async function endGiveaway(id: string) {
     return;
   }
 
-  const randomOrg = new RandomOrg({ apiKey: process.env.RANDOM_ORG_API_KEY });
-
   let winnerIndex = 0;
-  if (giveaway.entries.length !== 1) {
-    const response = await randomOrg.generateSignedIntegers({
-      min: 0,
-      max: giveaway.entries.length - 1,
-      n: 1
-    });
-    winnerIndex = response.random.data[0];
+  const entries = giveaway.entries.length;
+  if (process.env.RANDOM_ORG_API_KEY) {
+    const randomOrg = new RandomOrg({ apiKey: process.env.RANDOM_ORG_API_KEY });
+
+    if (entries !== 1) {
+      const response = await randomOrg.generateSignedIntegers({
+        min: 0,
+        max: entries - 1,
+        n: 1
+      });
+      winnerIndex = response.random.data[0];
+    }
+  } else {
+    winnerIndex = Math.floor(Math.random() * entries);
   }
   const winner = giveaway.entries[winnerIndex];
 
