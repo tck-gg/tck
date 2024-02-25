@@ -26,7 +26,10 @@ https://discord.com/oauth2/authorize?client_id=1188676912525090837&scope=bot&per
 ## `.env`
 ### Required
 - `NEXT_PUBLIC_PRODUCTION_COOKIE_DOMAIN`
+  - You may set this to any domain for development.
 - `DATABASE_URL`
+  - This must be a valid connection URL for a MongoDB instance.
+  - Example: `mongodb+srv://username:password@xxx.xxxxxxx.mongodb.net/xxx"`
 
 ### Optional for Development
 - `B2_BUCKET_NAME`
@@ -41,6 +44,7 @@ https://discord.com/oauth2/authorize?client_id=1188676912525090837&scope=bot&per
 - `KICK_PASSWORD`
 - `KICK_2FA`
 - `RANDOM_ORG_API_KEY` (signed)
+- `ROOBET_API_KEY`
 - `SENTRY_AUTH_TOKEN`
 - `YOUTUBE_API_KEY`
 
