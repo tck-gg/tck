@@ -2,11 +2,18 @@ import Backblaze from 'backblaze-b2';
 import { v4 as uuidv4 } from 'uuid';
 
 let b2: Backblaze = null as any;
-if (process.env.B2_APPLICATION_KEY_ID && process.env.B2_APPLICATION_KEY) {
+if (
+  process.env.B2_BUCKET_NAME &&
+  process.env.B2_APPLICATION_KEY_ID &&
+  process.env.B2_APPLICATION_KEY
+) {
   b2 = new Backblaze({
     applicationKeyId: process.env.B2_APPLICATION_KEY_ID,
     applicationKey: process.env.B2_APPLICATION_KEY
   });
+} else {
+  // eslint-disable-next-line no-console
+  console.log('Missing environment variables. Not using Backblaze...');
 }
 
 export async function uploadImage(data: Buffer, path: string): Promise<string> {

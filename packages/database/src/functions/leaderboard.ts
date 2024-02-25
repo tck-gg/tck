@@ -66,6 +66,14 @@ export async function getLeaderboard(type: LeaderboardType) {
   let spots: LeaderboardSpot[] = [];
 
   if (type === 'gamdom') {
+    if (!process.env.GAMDOM_API_KEY) {
+      return {
+        id: '0',
+        type,
+        spots: []
+      };
+    }
+
     const response = await axios.get(
       `https://gamdom.com/api/affiliates/leaderboard?apikey=${process.env.GAMDOM_API_KEY}&after=${monthStart}`,
       {
@@ -127,6 +135,14 @@ export async function getLeaderboard(type: LeaderboardType) {
   }
 
   if (type === 'roobet') {
+    if (!process.env.ROOBET_API_KEY) {
+      return {
+        id: '0',
+        type,
+        spots: []
+      };
+    }
+
     const response = await axios.get(
       `https://api.roobet.com/affiliate/stats?userId=0401366b-7c9a-4edf-99e5-90db191b54ed&startDate=${new Date(
         monthStart

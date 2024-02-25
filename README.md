@@ -24,23 +24,30 @@ https://discord.com/oauth2/authorize?client_id=1188676912525090837&scope=bot&per
 - `USER_VIEW_ACTIVITY`
 
 ## `.env`
+### Required
 - `NEXT_PUBLIC_PRODUCTION_COOKIE_DOMAIN`
-- `YOUTUBE_API_KEY`
+  - You may set this to any domain for development.
 - `DATABASE_URL`
+  - This must be a valid connection URL for a MongoDB instance.
+  - Example: `mongodb+srv://username:password@xxx.xxxxxxx.mongodb.net/xxx"`
+
+### Optional for Development
 - `B2_BUCKET_NAME`
 - `B2_APPLICATION_KEY_ID`
 - `B2_APPLICATION_KEY`
 - `DISCORD_TOKEN`
 - `DISCORD_ANNOUNCEMENT_CHANNEL_ID`
 - `GAMDOM_API_KEY`
-- `SENTRY_AUTH_TOKEN`
-- `RANDOM_ORG_API_KEY` (signed)
 - `KICK_CHANNEL`
 - `KICK_VERIFY_CHANNEL`
 - `KICK_EMAIL`
 - `KICK_PASSWORD`
 - `KICK_2FA`
 - `KICK_AUTH`
+- `RANDOM_ORG_API_KEY` (signed)
+- `ROOBET_API_KEY`
+- `SENTRY_AUTH_TOKEN`
+- `YOUTUBE_API_KEY`
 
 ### Unused
 - `CLASH_API_KEY`

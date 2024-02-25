@@ -14,6 +14,11 @@ import {
 } from 'database';
 import OTP from 'otp';
 
+if(!process.env.KICK_CHANNEL || !process.env.KICK_VERIFY_CHANNEL || !process.env.KICK_EMAIL || !process.env.KICK_PASSWORD || !process.env.KICK_2FA || !process.env.KICK_AUTH) {
+  console.log('Missing environment variables. Not starting Kick bot...');
+  process.exit(1);
+}
+
 if(process.env.NODE_ENV === 'production') {
   Sentry.init({
     dsn: 'https://199400c6557fe69cd7e442efda7419df@o4505824725172224.ingest.sentry.io/4506578396119040',
