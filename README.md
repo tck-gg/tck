@@ -43,6 +43,7 @@ https://discord.com/oauth2/authorize?client_id=1188676912525090837&scope=bot&per
 - `KICK_EMAIL`
 - `KICK_PASSWORD`
 - `KICK_2FA`
+- `KICK_AUTH`
 - `RANDOM_ORG_API_KEY` (signed)
 - `ROOBET_API_KEY`
 - `SENTRY_AUTH_TOKEN`
