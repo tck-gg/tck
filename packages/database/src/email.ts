@@ -18,6 +18,12 @@ export async function sendEmail({
   subject: string;
   html: string;
 }) {
+  if (!process.env.SENDGRID_API_KEY) {
+    // eslint-disable-next-line no-console
+    console.log('Missing environment variables. Not sending email...');
+    return;
+  }
+
   initEmail();
 
   await sendGrid.send({
