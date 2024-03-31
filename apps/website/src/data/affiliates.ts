@@ -40,32 +40,32 @@ export const AFFILIATES: IAffiliate[] = [
     tags: ['Slots', 'Live Games', 'Originals', 'Crypto'],
     featured: true
   },
-  {
-    image: hypeDropLogo,
-    reward: '3 Free Boxes',
-    name: 'Hypedrop',
-    codes: [
-      {
-        code: 'TCK',
-        link: 'https://www.hypedrop.com/'
-      }
-    ],
-    tags: ['Slots', 'Live Games', 'Originals', 'Crypto'],
-    featured: true
-  },
-  {
-    image: csgorollLogo,
-    reward: '3 Free Cases and 5% Deposit Bonus',
-    name: 'CSGORoll',
-    codes: [
-      {
-        code: 'TCK',
-        link: 'https://csgoroll.com/r/TCK'
-      }
-    ],
-    tags: ['CS:GO', 'Crypto', 'Battles', 'Originals'],
-    featured: true
-  },
+  // {
+  //   image: hypeDropLogo,
+  //   reward: '3 Free Boxes',
+  //   name: 'Hypedrop',
+  //   codes: [
+  //     {
+  //       code: 'TCK',
+  //       link: 'https://www.hypedrop.com/'
+  //     }
+  //   ],
+  //   tags: ['Slots', 'Live Games', 'Originals', 'Crypto'],
+  //   featured: true
+  // },
+  // {
+  //   image: csgorollLogo,
+  //   reward: '3 Free Cases and 5% Deposit Bonus',
+  //   name: 'CSGORoll',
+  //   codes: [
+  //     {
+  //       code: 'TCK',
+  //       link: 'https://csgoroll.com/r/TCK'
+  //     }
+  //   ],
+  //   tags: ['CS:GO', 'Crypto', 'Battles', 'Originals'],
+  //   featured: true
+  // },
   {
     image: datDropLogo,
     reward: '5% Deposit Bonus',
