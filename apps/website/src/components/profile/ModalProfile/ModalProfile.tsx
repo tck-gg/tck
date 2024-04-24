@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import Modal from '@/components/ui/Modal/Modal';
 
@@ -13,6 +13,10 @@ function ModalProfile() {
   const profile = useProfile();
 
   const [tab, setTab] = useState<'profile' | 'wallet'>('profile');
+
+  useEffect(() => {
+    setTab('profile');
+  }, [profile.isOpen]);
 
   return (
     <Modal isOpen={profile.isOpen} open={profile.open} close={profile.close}>
