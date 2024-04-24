@@ -8,6 +8,7 @@ export type IUser = Prisma.UserGetPayload<{
     accounts: {
       include: { kick: true };
     };
+    wallets: true;
     kickVerification: true;
   };
 }>;

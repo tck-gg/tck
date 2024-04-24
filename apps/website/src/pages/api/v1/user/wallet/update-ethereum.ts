@@ -14,15 +14,11 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     return;
   }
 
-  const { wallet } = req.body;
+  const { address } = req.body;
 
-  const cleanWallet = wallet.trim();
-  if (!cleanWallet) {
-    res.status(400).end();
-    return;
-  }
+  const cleanAddress = address.trim();
 
-  const result = await updateEthereumWallet(cleanWallet, user.id);
+  const result = await updateEthereumWallet(cleanAddress, user.id);
   if (!result) {
     res.status(403).end();
     return;

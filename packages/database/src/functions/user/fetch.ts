@@ -6,6 +6,7 @@ const includes = {
       kick: true
     }
   },
+  wallets: true,
   kickVerification: true
 };
 
