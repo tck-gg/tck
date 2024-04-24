@@ -9,7 +9,7 @@ import BanBanner from '@/components/BanBanner/BanBanner';
 
 import AgeVerification from '@/components/AgeVerification/AgeVerification';
 import TheProviderProvider from '@/components/TheProviderProvider';
-import ModalProfile from '@/components/ModalProfile/ModalProfile';
+import ModalProfile from '@/components/profile/ModalProfile/ModalProfile';
 
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import '../styles/globals.scss';
