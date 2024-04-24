@@ -1,19 +1,44 @@
+import { useState } from 'react';
+
 import Modal from '@/components/ui/Modal/Modal';
-import LogoutButton from '@/components/LogoutButton/LogoutButton';
-import VerificationKick from '@/components/profile/verification/VerificationKick/VerificationKick';
 
 import { useProfile } from '@/hooks/profile';
+
+import ProfileTabProfile from '../tab/ProfileTabProfile';
+import ProfileTabWallet from '../tab/ProfileTabWallet';
 
 import classes from './ModalProfile.module.scss';
 
 function ModalProfile() {
   const profile = useProfile();
 
+  const [tab, setTab] = useState<'profile' | 'wallet'>('profile');
+
   return (
     <Modal isOpen={profile.isOpen} open={profile.open} close={profile.close}>
       <div className={classes.wrapper}>
-        <VerificationKick />
-        <LogoutButton />
+        <span>
+          <button
+            onClick={() => {
+              setTab('profile');
+            }}
+          >
+            Profile
+          </button>
+          <button
+            onClick={() => {
+              setTab('wallet');
+            }}
+          >
+            Wallet
+          </button>
+        </span>
+        {
+          {
+            profile: <ProfileTabProfile />,
+            wallet: <ProfileTabWallet />
+          }[tab]
+        }
       </div>
     </Modal>
   );
