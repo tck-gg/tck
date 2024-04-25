@@ -2,10 +2,19 @@ import { faBitcoin, faEthereum, faSteam } from '@fortawesome/free-brands-svg-ico
 import { faChevronRight, faLitecoinSign } from '@fortawesome/free-solid-svg-icons';
 
 import ProfileWallet from '@/components/profile/ProfileWallet/ProfileWallet';
+import Button from '@/components/ui/Button/Button';
+
+import { useProfile } from '@/hooks/profile';
 
 import classes from './ProfileTabWallet.module.scss';
 
 function ProfileTabWallet() {
+  const profile = useProfile();
+
+  function close() {
+    profile.close();
+  }
+
   return (
     <>
       <div className={classes.group}>
@@ -30,6 +39,9 @@ function ProfileTabWallet() {
           httpAddress='/api/v1/user/wallet/update-steam-trade'
         />
       </div>
+      <Button rightIcon={faChevronRight} onClick={close} variant='gradient'>
+        Save Changes
+      </Button>
     </>
   );
 }
