@@ -7,11 +7,11 @@ import Layout from '@/components/Layout/Layout';
 import JaggedBackgroundItem from '@/components/JaggedBackgroundItem/JaggedBackgroundItem';
 import Button from '@/components/ui/Button/Button';
 import AffiliateBoxCodeBox from '@/components/AffiliateBoxCodeBox/AffiliateBoxCodeBox';
-import StakeFormBox from '@/components/StakeFormBox/StakeFormBox';
 
 import stakeDemo from '@/images/affiliate/stake/demo.png';
 
 import classes from './stake.module.scss';
+import RoobetFormBox from '@/components/RoobetFormBox/RoobetFormBox';
 
 function OfferStake() {
   const router = useRouter();
@@ -20,11 +20,13 @@ function OfferStake() {
     <Layout title='$14 Stake Reload'>
       <div className={classes.header}>
         <JaggedBackgroundItem fill='#252567'>
-          <p className={classes.jaggedText}>Stake Exclusive</p>
+          <p className={classes.jaggedText}>Roobet Exclusive</p>
         </JaggedBackgroundItem>
         <div className={classes.heroContent}>
-          <p className={classes.title}>$14 Reload</p>
-          <p className={classes.subtitle}>This reward is available for 7 Days upon redemption.</p>
+          <p className={classes.title}>$15 Reload</p>
+          <p className={classes.subtitle}>
+            This reward is available for seven days upon redemption.
+          </p>
         </div>
       </div>
 
@@ -32,7 +34,7 @@ function OfferStake() {
         <div className={classes.stakeSection}>
           <div className={classes.stakeSectionLeft}>
             <div>
-              <p className={classes.title}>Visit Stake.com</p>
+              <p className={classes.title}>Visit Roobet.com</p>
             </div>
             <div className={classes.stakeSectionLeftBottom}>
               <div
@@ -48,7 +50,7 @@ function OfferStake() {
                 rightIcon={faAngleRight}
                 width={265}
                 onClick={() => {
-                  window.open('https://stake.com/?c=TCK', '_blank');
+                  window.open('https://roobet.com/?ref=TCK', '_blank');
                 }}
               >
                 Register Instantly
@@ -65,7 +67,7 @@ function OfferStake() {
           </div>
         </div>
 
-        <StakeFormBox />
+        <RoobetFormBox />
 
         <div className={classes.enjoySection}>
           <svg
@@ -95,7 +97,7 @@ function OfferStake() {
           <div className={classes.enjoySectionTop}>
             <p className={clsx(classes.title, classes.center)}>Enjoy your Bonus</p>
             <p className={clsx(classes.subtitle15, classes.center)}>
-              Give stake 24-48 hours (might take longer on weekends) to check your account and if
+              Give Roobet 24-48 hours (might take longer on weekends) to check your account and if
               eligible.
             </p>
           </div>

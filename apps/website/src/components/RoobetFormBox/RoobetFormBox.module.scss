@@ -1,0 +1,86 @@
+$breakpoint: 635px;
+
+.root {
+  border-radius: 8px;
+  background: radial-gradient(100% 100% at 50% 0%, rgba(47, 47, 77, 0.20) 0%, rgba(22, 22, 37, 0.00) 100%), rgba(22, 22, 37, 0.80);
+  backdrop-filter: blur(45px);
+
+  display: flex;
+}
+
+.side {
+  width: 50%;
+}
+
+.left {
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.33) 0%, rgba(0, 0, 0, 0.00) 100%), rgba(10, 10, 22, 0.44);
+
+  display: flex;
+  flex-direction: column;
+}
+.right {
+  padding: 24px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 35px;
+  flex-grow: 1;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.leftInfo {
+  @extend .info;
+  
+  padding: 58px 54px 54px 36px;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.rightInfo {
+  @extend .info;
+}
+
+.title {
+  text-align: center;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
+  font-size: 30px;
+  font-weight: 800;
+}
+
+.description {
+  color: #989eae;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.formInputs {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 28px;
+
+  flex-grow: 1;
+
+  width: 100%;
+}
+
+@media screen and (max-width: $breakpoint) {
+  .left {
+    display: none;
+  }
+}
+
+@media screen and (min-width: $breakpoint) {
+  .rightInfo {
+    display: none;
+  }
+}
