@@ -5,7 +5,7 @@ import Modal from '@/components/ui/Modal/Modal';
 import { useProfile } from '@/hooks/profile';
 
 import ProfileTabProfile from '../tab/ProfileTabProfile';
-import ProfileTabConnections from '../tab/ProfileTabConnections';
+import ProfileTabConnections from '../tab/ProfileTabConnections/ProfileTabConnections';
 import ProfileTabWallet from '../tab/ProfileTabWallet';
 
 import classes from './ModalProfile.module.scss';
