@@ -1,5 +1,11 @@
+import VerificationKick from '../verification/VerificationKick/VerificationKick';
+
 function ProfileTabConnections() {
-  return <></>;
+  return (
+    <>
+      <VerificationKick />
+    </>
+  );
 }
 
 export default ProfileTabConnections;
