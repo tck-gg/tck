@@ -181,6 +181,14 @@ model StakeReloadEntry {
   discordUsername String
 }
 
+model RoobetReloadEntry {
+  id        String @id @default(auto()) @map("_id") @db.ObjectId
+  timestamp Int
+
+  roobetUsername   String
+  discordUsername String
+}
+
 model AccountVerification {
   id String @id @default(auto()) @map("_id") @db.ObjectId
 
