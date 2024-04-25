@@ -3,7 +3,8 @@
 import * as Sentry from '@sentry/node';
 import { ProfilingIntegration } from '@sentry/profiling-node';
 import { Events, Kient } from 'kient';
-import {
+import database from 'database';
+const {
   createKickRaffle,
   endKickRaffle,
   enterKickRaffle,
@@ -11,7 +12,7 @@ import {
   getUserPointsByKickId,
   updateKickUsername,
   validateKickVerification
-} from 'database';
+} = database;
 import OTP from 'otp';
 
 if(!process.env.KICK_CHANNEL || !process.env.KICK_VERIFY_CHANNEL || !process.env.KICK_EMAIL || !process.env.KICK_PASSWORD || !process.env.KICK_2FA || !process.env.KICK_AUTH) {
