@@ -65,56 +65,56 @@ export async function getLeaderboard(type: LeaderboardType) {
 
   let spots: LeaderboardSpot[] = [];
 
-  if (type === 'gamdom') {
-    if (!process.env.GAMDOM_API_KEY) {
-      return {
-        id: '0',
-        type,
-        spots: []
-      };
-    }
+  // if (type === 'gamdom') {
+  //   if (!process.env.GAMDOM_API_KEY) {
+  //     return {
+  //       id: '0',
+  //       type,
+  //       spots: []
+  //     };
+  //   }
 
-    const response = await axios.get(
-      `https://gamdom.com/api/affiliates/leaderboard?apikey=${process.env.GAMDOM_API_KEY}&after=${monthStart}`,
-      {
-        validateStatus: () => {
-          return true;
-        }
-      }
-    );
+  //   const response = await axios.get(
+  //     `https://gamdom.com/api/affiliates/leaderboard?apikey=${process.env.GAMDOM_API_KEY}&after=${monthStart}`,
+  //     {
+  //       validateStatus: () => {
+  //         return true;
+  //       }
+  //     }
+  //   );
 
-    if (response.status === 200) {
-      const data: GamdomLeaderboardApiResponse = response.data;
-      const yearAndMonth = monthStart.split('-').slice(0, 2).join('-');
+  //   if (response.status === 200) {
+  //     const data: GamdomLeaderboardApiResponse = response.data;
+  //     const yearAndMonth = monthStart.split('-').slice(0, 2).join('-');
 
-      let dataSpots = data.data;
-      dataSpots = dataSpots
-        .map((spot) => {
-          return {
-            ...spot,
-            wager_data: spot.wager_data.filter((wager) => {
-              return wager.month === yearAndMonth;
-            })
-          };
-        })
-        .filter((spot) => {
-          return spot.wager_data.length > 0;
-        });
+  //     let dataSpots = data.data;
+  //     dataSpots = dataSpots
+  //       .map((spot) => {
+  //         return {
+  //           ...spot,
+  //           wager_data: spot.wager_data.filter((wager) => {
+  //             return wager.month === yearAndMonth;
+  //           })
+  //         };
+  //       })
+  //       .filter((spot) => {
+  //         return spot.wager_data.length > 0;
+  //       });
 
-      spots = dataSpots
-        .sort((a, b) => {
-          return b.wager_data[0].total_wager_usd - a.wager_data[0].total_wager_usd;
-        })
-        .splice(0, 10)
-        .map((spot) => {
-          return {
-            username: spot.username,
-            amount: Math.round(spot.wager_data[0].total_wager_usd),
-            avatar: ''
-          };
-        });
-    }
-  }
+  //     spots = dataSpots
+  //       .sort((a, b) => {
+  //         return b.wager_data[0].total_wager_usd - a.wager_data[0].total_wager_usd;
+  //       })
+  //       .splice(0, 10)
+  //       .map((spot) => {
+  //         return {
+  //           username: spot.username,
+  //           amount: Math.round(spot.wager_data[0].total_wager_usd),
+  //           avatar: ''
+  //         };
+  //       });
+  //   }
+  // }
 
   if (type === 'packdraw') {
     const prevSunday = previousSunday(new Date());
@@ -213,7 +213,6 @@ export async function getLeaderboard(type: LeaderboardType) {
 
 export async function getAllLeaderboards() {
   return {
-    gamdom: await getLeaderboard('gamdom'),
     csgobig: await getLeaderboard('csgobig'),
     packdraw: await getLeaderboard('packdraw'),
     roobet: await getLeaderboard('roobet')

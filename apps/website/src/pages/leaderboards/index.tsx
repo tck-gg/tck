@@ -56,10 +56,10 @@ function Leaderboards({
   const [weeklyDays, weeklyHours, weeklyMinutes] = useCountdown(
     new Date(sunday.getFullYear(), sunday.getMonth(), sunday.getDate())
   );
-  const [selectedLeaderboard, setSelectedLeaderboard] = useState<ThemedLeaderboard>('csgobig');
+  const [selectedLeaderboard, setSelectedLeaderboard] = useState<ThemedLeaderboard>('roobet');
 
   useEffect(() => {
-    theme.setTheme('csgobig');
+    theme.setTheme('roobet');
   }, []);
   useEffect(() => {
     theme.setTheme(selectedLeaderboard);
@@ -71,6 +71,22 @@ function Leaderboards({
         <PageHeader title='Leaderboards' />
 
         <div className={classes.affiliates}>
+          <Image
+            src={roobetLogo}
+            alt='Roobet'
+            width={100}
+            height={60}
+            style={{
+              objectFit: 'contain'
+            }}
+            onClick={() => {
+              setSelectedLeaderboard('roobet');
+            }}
+            className={clsx(
+              classes.affiliate,
+              selectedLeaderboard === 'roobet' && classes.selected
+            )}
+          />
           <Image
             src={csgobigLogo}
             alt='CSGOBIG'
@@ -101,38 +117,6 @@ function Leaderboards({
             className={clsx(
               classes.affiliate,
               selectedLeaderboard === 'packdraw' && classes.selected
-            )}
-          />
-          <Image
-            src={gamdomLogo}
-            alt='Gamdom'
-            width={100}
-            height={60}
-            style={{
-              objectFit: 'contain'
-            }}
-            onClick={() => {
-              setSelectedLeaderboard('gamdom');
-            }}
-            className={clsx(
-              classes.affiliate,
-              selectedLeaderboard === 'gamdom' && classes.selected
-            )}
-          />
-          <Image
-            src={roobetLogo}
-            alt='Roobet'
-            width={100}
-            height={60}
-            style={{
-              objectFit: 'contain'
-            }}
-            onClick={() => {
-              setSelectedLeaderboard('roobet');
-            }}
-            className={clsx(
-              classes.affiliate,
-              selectedLeaderboard === 'roobet' && classes.selected
             )}
           />
         </div>
@@ -225,9 +209,9 @@ function Leaderboards({
               {selectedLeaderboard === 'csgobig' && (
                 <CountdownTimer days={monthlyDays} hours={monthlyHours} minutes={monthlyMinutes} />
               )}
-              {selectedLeaderboard === 'gamdom' && (
+              {/* {selectedLeaderboard === 'gamdom' && (
                 <CountdownTimer days={monthlyDays} hours={monthlyHours} minutes={monthlyMinutes} />
-              )}
+              )} */}
               {selectedLeaderboard === 'roobet' && (
                 <CountdownTimer days={monthlyDays} hours={monthlyHours} minutes={monthlyMinutes} />
               )}
