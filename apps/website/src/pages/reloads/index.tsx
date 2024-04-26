@@ -7,13 +7,13 @@ import Layout from '@/components/Layout/Layout';
 import JaggedBackgroundItem from '@/components/JaggedBackgroundItem/JaggedBackgroundItem';
 import Button from '@/components/ui/Button/Button';
 import AffiliateBoxCodeBox from '@/components/AffiliateBoxCodeBox/AffiliateBoxCodeBox';
-
-import stakeDemo from '@/images/affiliate/stake/demo.png';
-
-import classes from './stake.module.scss';
 import RoobetFormBox from '@/components/RoobetFormBox/RoobetFormBox';
 
-function OfferStake() {
+import roobetDemo from '@/images/affiliate/roobet/demo.png';
+
+import classes from './stake.module.scss';
+
+function OfferRoobet() {
   const router = useRouter();
 
   return (
@@ -59,8 +59,8 @@ function OfferStake() {
           </div>
           <div className={classes.stakeSectionRight}>
             <Image
-              src={stakeDemo}
-              alt='Stake Demo'
+              src={roobetDemo}
+              alt='Roobet Demo'
               width={640}
               className={classes.stakeDemoImage}
             />
@@ -115,4 +115,4 @@ function OfferStake() {
   );
 }
 
-export default OfferStake;
+export default OfferRoobet;

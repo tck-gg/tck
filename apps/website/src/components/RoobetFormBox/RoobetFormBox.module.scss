@@ -73,6 +73,31 @@ $breakpoint: 635px;
   width: 100%;
 }
 
+.imageWrapper {
+  
+
+  width: 100%;
+}
+
+.imageSection {
+  position: relative;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+
+  .promo {
+    position: absolute;
+    top: -118px;
+    left: 0;
+
+    width: 100%;
+
+  }
+}
+
 @media screen and (max-width: $breakpoint) {
   .left {
     display: none;
