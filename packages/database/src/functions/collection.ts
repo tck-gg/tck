@@ -73,3 +73,7 @@ export async function collectRoobetReload(
 export async function getStakeReloadEntries() {
   return await prisma.stakeReloadEntry.findMany();
 }
+
+export async function getRoobetReloadEntries() {
+  return await prisma.roobetReloadEntry.findMany();
+}
