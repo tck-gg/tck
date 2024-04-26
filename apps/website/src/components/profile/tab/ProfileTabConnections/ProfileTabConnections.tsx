@@ -7,6 +7,7 @@ import VerificationKick from '@/components/profile/verification/VerificationKick
 import { useProfile } from '@/hooks/profile';
 
 import classes from './ProfileTabConnections.module.scss';
+import ProfileAffiliateConnection from '../../ProfileAffiliateConnection';
 
 function ProfileTabConnections() {
   const profile = useProfile();
@@ -22,9 +23,14 @@ function ProfileTabConnections() {
       </div>
       <hr className={classes.hr} />
       <div className={classes.group}>
-        <ProfileBoxBase>
-          <p>TODO</p>
-        </ProfileBoxBase>
+        <ProfileAffiliateConnection
+          name='Roobet'
+          httpAddress='/api/v1/user/accounts/update-roobet'
+        />
+        <ProfileAffiliateConnection
+          name='CSGOBig'
+          httpAddress='/api/v1/user/accounts/update-csgobig'
+        />
       </div>
       <Button rightIcon={faChevronRight} onClick={close} variant='gradient'>
         Save Changes
