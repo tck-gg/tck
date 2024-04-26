@@ -5,6 +5,7 @@ import Modal from '@/components/ui/Modal/Modal';
 import { useProfile } from '@/hooks/profile';
 
 import ProfileTabProfile from '../tab/ProfileTabProfile';
+import ProfileTabConnections from '../tab/ProfileTabConnections/ProfileTabConnections';
 import ProfileTabWallet from '../tab/ProfileTabWallet/ProfileTabWallet';
 
 import classes from './ModalProfile.module.scss';
@@ -12,7 +13,7 @@ import classes from './ModalProfile.module.scss';
 function ModalProfile() {
   const profile = useProfile();
 
-  const [tab, setTab] = useState<'profile' | 'wallet'>('profile');
+  const [tab, setTab] = useState<'profile' | 'connections' | 'wallet'>('profile');
 
   useEffect(() => {
     setTab('profile');
@@ -31,6 +32,13 @@ function ModalProfile() {
           </button>
           <button
             onClick={() => {
+              setTab('connections');
+            }}
+          >
+            Connections
+          </button>
+          <button
+            onClick={() => {
               setTab('wallet');
             }}
           >
@@ -40,6 +48,7 @@ function ModalProfile() {
         {
           {
             profile: <ProfileTabProfile />,
+            connections: <ProfileTabConnections />,
             wallet: <ProfileTabWallet />
           }[tab]
         }
