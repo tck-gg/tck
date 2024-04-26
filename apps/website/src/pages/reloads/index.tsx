@@ -27,7 +27,7 @@ function OfferRoobet() {
   }, []);
 
   return (
-    <Layout title='$14 Stake Reload'>
+    <Layout title='$15 Roobet Reload'>
       <div className={classes.header}>
         <JaggedBackgroundItem fill='#52431d'>
           <p className={classes.jaggedText}>Roobet Exclusive</p>
