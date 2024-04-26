@@ -1,4 +1,4 @@
-import { StakeReloadEntry, getStakeReloadEntries } from 'database';
+import { RoobetReloadEntry, getRoobetReloadEntries } from 'database';
 import { useEffect, useState } from 'react';
 import { Button, Group, Text, Title } from '@mantine/core';
 import { useRouter } from 'next/router';
@@ -10,19 +10,19 @@ import { usePermissions } from '@/hooks/permissions';
 export async function getServerSideProps() {
   return {
     props: {
-      reloads: await getStakeReloadEntries()
+      reloads: await getRoobetReloadEntries()
     }
   };
 }
 
-function Raffles({ reloads }: { reloads: StakeReloadEntry[] }) {
+function Raffles({ reloads }: { reloads: RoobetReloadEntry[] }) {
   const permissions = usePermissions();
   const router = useRouter();
   const [data, setData] = useState(
-    ['Stake Username,Discord Username']
+    ['Roobet Username,Discord Username']
       .concat(
         reloads.map((reload) => {
-          return `${reload.stakeUsername},${reload.discordUsername}`;
+          return `${reload.roobetUsername},${reload.discordUsername}`;
         })
       )
       .join('\n')
@@ -40,7 +40,7 @@ function Raffles({ reloads }: { reloads: StakeReloadEntry[] }) {
     <Layout>
       {permissions.permissions.includes('MANAGE_RELOADS') ? (
         <>
-          <Title mb='sm'>Stake Reloads</Title>
+          <Title mb='sm'>Roobet Reloads</Title>
 
           <Text mb='sm'>CSV. Copy and paste as CSV.</Text>
 
@@ -68,7 +68,7 @@ function Raffles({ reloads }: { reloads: StakeReloadEntry[] }) {
                   'href',
                   `data:text/plain;charset=utf-8,${encodeURIComponent(data)}`
                 );
-                element.setAttribute('download', 'stake-reloads.csv');
+                element.setAttribute('download', 'roobet-reloads.csv');
 
                 element.style.display = 'none';
                 document.body.appendChild(element);

@@ -30,6 +30,12 @@ const UNDERLINES: {
       <stop stopColor='#DDB43F' />
       <stop offset='1' stopColor='#9B7C25' />
     </>
+  ),
+  packdraw: (
+    <>
+      <stop stopColor='#18A9FF' />
+      <stop offset='1' stopColor='#9229FF' />
+    </>
   )
 };
 
