@@ -10,7 +10,7 @@ function Input({
   icon,
   onChange
 }: {
-  label: string;
+  label?: string;
   placeholder: string;
   value: string;
   icon?: IconDefinition;
@@ -18,10 +18,12 @@ function Input({
 }) {
   return (
     <div className={classes.root}>
-      <div className={classes.labelGroup}>
-        {icon && <FontAwesomeIcon icon={icon} width={15} height={15} color='#989eae' />}
-        <p className={classes.label}>{label}</p>
-      </div>
+      {label && (
+        <div className={classes.labelGroup}>
+          {icon && <FontAwesomeIcon icon={icon} width={15} height={15} color='#989eae' />}
+          <p className={classes.label}>{label}</p>
+        </div>
+      )}
       <input
         className={classes.input}
         placeholder={placeholder}

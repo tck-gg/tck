@@ -3,13 +3,24 @@
 import { useEffect, useState } from 'react';
 import { useDebounce } from 'use-debounce';
 import axios from 'axios';
+import Image, { StaticImageData } from 'next/image';
 
-import ProfileBoxBase from './ProfileBoxBase/ProfileBoxBase';
+import ProfileBoxBase from '@/components/profile/ProfileBoxBase/ProfileBoxBase';
 import Input from '@/components/ui/Input/Input';
 
 import { useAuth } from '@/hooks/auth';
 
-function ProfileAffiliateConnection({ name, httpAddress }: { name: string; httpAddress: string }) {
+import classes from './ProfileAffiliateConnection.module.scss';
+
+function ProfileAffiliateConnection({
+  name,
+  image,
+  httpAddress
+}: {
+  name: string;
+  image: StaticImageData;
+  httpAddress: string;
+}) {
   const auth = useAuth();
 
   const [hasChanged, setHasChanged] = useState<boolean>(false);
@@ -46,13 +57,13 @@ function ProfileAffiliateConnection({ name, httpAddress }: { name: string; httpA
 
   return (
     <ProfileBoxBase>
-      <Input
-        label={name}
-        // icon={icon}
-        placeholder='Username'
-        value={username}
-        onChange={onAddressChange}
-      />
+      <div className={classes.wrapper}>
+        <div className={classes.label}>
+          <Image src={image} alt={name} height={14} />
+          <p>{name}</p>
+        </div>
+        <Input placeholder='Username' value={username} onChange={onAddressChange} />
+      </div>
     </ProfileBoxBase>
   );
 }

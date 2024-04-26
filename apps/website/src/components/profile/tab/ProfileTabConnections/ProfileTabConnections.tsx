@@ -1,13 +1,15 @@
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
 import Button from '@/components/ui/Button/Button';
-import ProfileBoxBase from '@/components/profile/ProfileBoxBase/ProfileBoxBase';
 import VerificationKick from '@/components/profile/verification/VerificationKick/VerificationKick';
+import ProfileAffiliateConnection from '@/components/profile/ProfileAffiliateConnection/ProfileAffiliateConnection';
 
 import { useProfile } from '@/hooks/profile';
 
+import roobetMiniImage from '@/images/affiliate/roobet-mini.png';
+import csgoBigMiniImage from '@/images/affiliate/csgobig-mini.png';
+
 import classes from './ProfileTabConnections.module.scss';
-import ProfileAffiliateConnection from '../../ProfileAffiliateConnection';
 
 function ProfileTabConnections() {
   const profile = useProfile();
@@ -25,10 +27,12 @@ function ProfileTabConnections() {
       <div className={classes.group}>
         <ProfileAffiliateConnection
           name='Roobet'
+          image={roobetMiniImage}
           httpAddress='/api/v1/user/accounts/update-roobet'
         />
         <ProfileAffiliateConnection
           name='CSGOBig'
+          image={csgoBigMiniImage}
           httpAddress='/api/v1/user/accounts/update-csgobig'
         />
       </div>
