@@ -16,7 +16,7 @@ import roobetDemo from '@/images/affiliate/roobet/demo.png';
 
 import { useTheme } from '@/hooks/theme';
 
-import classes from './stake.module.scss';
+import classes from './reloads.module.scss';
 
 function OfferRoobet() {
   const router = useRouter();
@@ -29,7 +29,7 @@ function OfferRoobet() {
   return (
     <Layout title='$14 Stake Reload'>
       <div className={classes.header}>
-        <JaggedBackgroundItem fill='#252567'>
+        <JaggedBackgroundItem fill='#52431d'>
           <p className={classes.jaggedText}>Roobet Exclusive</p>
         </JaggedBackgroundItem>
         <div className={classes.heroContent}>
