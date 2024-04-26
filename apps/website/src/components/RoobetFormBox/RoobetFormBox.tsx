@@ -147,7 +147,7 @@ function RoobetFormBox() {
         </div>
         <Button
           rightIcon={faAngleRight}
-          background='linear-gradient(90deg, #6B6AF2 0%, #3F419B 100%)'
+          background='linear-gradient(90deg, #DDB43F 0%, #9B7C25 100%)'
           fullWidth
           onClick={onClick}
           disabled={disabled}

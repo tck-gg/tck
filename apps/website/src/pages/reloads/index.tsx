@@ -1,3 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+
+import { useEffect } from 'react';
 import Image from 'next/image';
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import { useRouter } from 'next/router';
@@ -11,10 +14,17 @@ import RoobetFormBox from '@/components/RoobetFormBox/RoobetFormBox';
 
 import roobetDemo from '@/images/affiliate/roobet/demo.png';
 
+import { useTheme } from '@/hooks/theme';
+
 import classes from './stake.module.scss';
 
 function OfferRoobet() {
   const router = useRouter();
+  const theme = useTheme();
+
+  useEffect(() => {
+    theme.setTheme('roobet');
+  }, []);
 
   return (
     <Layout title='$14 Stake Reload'>
@@ -46,7 +56,7 @@ function OfferRoobet() {
                 <AffiliateBoxCodeBox fill='#161623'>TCK</AffiliateBoxCodeBox>
               </div>
               <Button
-                background='linear-gradient(90deg, #6B6AF2 0%, #3F419B 100%)'
+                background='linear-gradient(90deg, #DDB43F 0%, #9B7C25 100%)'
                 rightIcon={faAngleRight}
                 width={265}
                 onClick={() => {
