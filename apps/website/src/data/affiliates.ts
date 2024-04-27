@@ -52,7 +52,7 @@ export const AFFILIATES: IAffiliate[] = [
     ],
     tags: ['Slots', 'Live Games', 'Originals', 'Crypto'],
     featured: true
-  },
+  }
   // {
   //   image: gamdomLogo,
   //   reward: '15% Instant Rakeback',
@@ -66,19 +66,19 @@ export const AFFILIATES: IAffiliate[] = [
   //   tags: ['Slots', 'Live Games', 'Originals', 'Crypto'],
   //   featured: true
   // },
-  {
-    image: stakeLogo,
-    reward: '10% Rakeback & VIP Rewards',
-    name: 'Stake',
-    codes: [
-      {
-        code: 'TCK',
-        link: 'https://stake.com/?c=TCK'
-      }
-    ],
-    tags: ['Slots', 'Live Games', 'Originals', 'Crypto'],
-    featured: false
-  },
+  // {
+  //   image: stakeLogo,
+  //   reward: '10% Rakeback & VIP Rewards',
+  //   name: 'Stake',
+  //   codes: [
+  //     {
+  //       code: 'TCK',
+  //       link: 'https://stake.com/?c=TCK'
+  //     }
+  //   ],
+  //   tags: ['Slots', 'Live Games', 'Originals', 'Crypto'],
+  //   featured: false
+  // },
   // {
   //   image: hypeDropLogo,
   //   reward: '3 Free Boxes',
@@ -105,30 +105,30 @@ export const AFFILIATES: IAffiliate[] = [
   //   tags: ['CS:GO', 'Crypto', 'Battles', 'Originals'],
   //   featured: true
   // },
-  {
-    image: rollbitLogo,
-    reward: '5% Rakeback & Daily/Weekly Cash Challenges',
-    name: 'Rollbit',
-    codes: [
-      {
-        code: 'TCK',
-        link: 'https://rollbit.com/referral/TCK'
-      }
-    ],
-    tags: ['Slots', 'Live Games', 'Originals', 'Crypto'],
-    featured: false
-  },
-  {
-    image: csgo500Logo,
-    reward: '10% Rakeback & VIP Rewards',
-    name: '500 Casino',
-    codes: [
-      {
-        code: 'TCK',
-        link: 'https://csgo500.com/r/TCK'
-      }
-    ],
-    tags: ['Slots', 'Live Games', 'Originals', 'Crypto'],
-    featured: false
-  }
+  // {
+  //   image: rollbitLogo,
+  //   reward: '5% Rakeback & Daily/Weekly Cash Challenges',
+  //   name: 'Rollbit',
+  //   codes: [
+  //     {
+  //       code: 'TCK',
+  //       link: 'https://rollbit.com/referral/TCK'
+  //     }
+  //   ],
+  //   tags: ['Slots', 'Live Games', 'Originals', 'Crypto'],
+  //   featured: false
+  // },
+  // {
+  //   image: csgo500Logo,
+  //   reward: '10% Rakeback & VIP Rewards',
+  //   name: '500 Casino',
+  //   codes: [
+  //     {
+  //       code: 'TCK',
+  //       link: 'https://csgo500.com/r/TCK'
+  //     }
+  //   ],
+  //   tags: ['Slots', 'Live Games', 'Originals', 'Crypto'],
+  //   featured: false
+  // }
 ];

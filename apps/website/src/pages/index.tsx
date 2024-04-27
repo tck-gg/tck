@@ -122,7 +122,7 @@ function Home() {
           </div>
           <div className={clsx(classes.affiliateWrapper, classes.fadedAffiliateWrapper)}>
             {AFFILIATES.filter((affiliate) => {
-              return !affiliate.featured;
+              return affiliate.featured;
             })
               .map((affiliate) => {
                 return (
