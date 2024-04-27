@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import Modal from '@/components/ui/Modal/Modal';
+import Button from '@/components/ui/Button/Button';
 
 import { useProfile } from '@/hooks/profile';
 
@@ -22,29 +23,32 @@ function ModalProfile() {
   return (
     <Modal isOpen={profile.isOpen} open={profile.open} close={profile.close}>
       <div className={classes.wrapper}>
-        <span>
-          <button
+        <div className={classes.buttons}>
+          <Button
             onClick={() => {
               setTab('profile');
             }}
+            variant={tab === 'profile' ? 'primary' : 'secondary'}
           >
             Profile
-          </button>
-          <button
+          </Button>
+          <Button
             onClick={() => {
               setTab('connections');
             }}
+            variant={tab === 'connections' ? 'primary' : 'secondary'}
           >
             Connections
-          </button>
-          <button
+          </Button>
+          <Button
             onClick={() => {
               setTab('wallet');
             }}
+            variant={tab === 'wallet' ? 'primary' : 'secondary'}
           >
-            Wallet
-          </button>
-        </span>
+            Profile
+          </Button>
+        </div>
         {
           {
             profile: <ProfileTabProfile />,
