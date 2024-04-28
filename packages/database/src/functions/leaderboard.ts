@@ -1,7 +1,5 @@
 import axios from 'axios';
 import {
-  CsgoBigLeaderboardApiResponse,
-  GamdomLeaderboardApiResponse,
   LeaderboardSpot,
   LeaderboardType,
   PackdrawLeaderboardApiData,
@@ -140,23 +138,23 @@ export async function getLeaderboard(type: LeaderboardType) {
     });
   }
 
-  if (type === 'csgobig') {
-    const start = new Date(new Date().getFullYear(), new Date().getMonth(), 1).getTime();
+  // if (type === 'csgobig') {
+  //   const start = new Date(new Date().getFullYear(), new Date().getMonth(), 1).getTime();
 
-    const response = await axios.get(
-      `https://csgobig.com/api/partners/wagerStats/tckn3e9HBsu8HjjMAqBv33y?time=${start}`
-    );
+  //   const response = await axios.get(
+  //     `https://csgobig.com/api/partners/wagerStats/tckn3e9HBsu8HjjMAqBv33y?time=${start}`
+  //   );
 
-    const data: CsgoBigLeaderboardApiResponse = response.data;
+  //   const data: CsgoBigLeaderboardApiResponse = response.data;
 
-    spots = data.results.splice(0, 10).map((spot) => {
-      return {
-        username: spot.name,
-        amount: Math.round(spot.total),
-        avatar: spot.img || ''
-      };
-    });
-  }
+  //   spots = data.results.splice(0, 10).map((spot) => {
+  //     return {
+  //       username: spot.name,
+  //       amount: Math.round(spot.total),
+  //       avatar: spot.img || ''
+  //     };
+  //   });
+  // }
 
   if (type === 'roobet') {
     if (!process.env.ROOBET_API_KEY) {
@@ -213,7 +211,6 @@ export async function getLeaderboard(type: LeaderboardType) {
 
 export async function getAllLeaderboards() {
   return {
-    csgobig: await getLeaderboard('csgobig'),
     packdraw: await getLeaderboard('packdraw'),
     roobet: await getLeaderboard('roobet')
   };
