@@ -20,8 +20,6 @@ import { useCountdown } from '@/hooks/countdown';
 
 import classes from './leaderboards.module.scss';
 
-import gamdomLogo from '../../images/affiliate/gamdom.png';
-import csgobigLogo from '../../images/affiliate/csgobig.png';
 import packDrawLogo from '../../images/affiliate/packdraw.png';
 import roobetLogo from '../../images/affiliate/roobet.png';
 
@@ -85,22 +83,6 @@ function Leaderboards({
             className={clsx(
               classes.affiliate,
               selectedLeaderboard === 'roobet' && classes.selected
-            )}
-          />
-          <Image
-            src={csgobigLogo}
-            alt='CSGOBIG'
-            width={100}
-            height={60}
-            style={{
-              objectFit: 'contain'
-            }}
-            onClick={() => {
-              setSelectedLeaderboard('csgobig');
-            }}
-            className={clsx(
-              classes.affiliate,
-              selectedLeaderboard === 'csgobig' && classes.selected
             )}
           />
           <Image
@@ -206,9 +188,9 @@ function Leaderboards({
             </div>
 
             <div className={clsx(classes.timerWrapper, classes.hideOnMobile)}>
-              {selectedLeaderboard === 'csgobig' && (
+              {/* {selectedLeaderboard === 'csgobig' && (
                 <CountdownTimer days={monthlyDays} hours={monthlyHours} minutes={monthlyMinutes} />
-              )}
+              )} */}
               {/* {selectedLeaderboard === 'gamdom' && (
                 <CountdownTimer days={monthlyDays} hours={monthlyHours} minutes={monthlyMinutes} />
               )} */}
