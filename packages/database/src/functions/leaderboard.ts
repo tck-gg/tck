@@ -129,7 +129,7 @@ export async function getLeaderboard(type: LeaderboardType) {
     );
     const data: PackdrawLeaderboardApiData = response.data;
 
-    spots = data.leaderboard.map((spot) => {
+    spots = data.leaderboard.splice(0, 10).map((spot) => {
       return {
         username: spot.username,
         amount: Math.round(spot.wagerAmount),

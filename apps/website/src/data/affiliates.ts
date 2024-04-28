@@ -1,14 +1,14 @@
 import { IAffiliate } from '@/types/affiliate';
 
-import gamdomLogo from '../images/affiliate/gamdom.png';
-import stakeLogo from '../images/affiliate/stake.png';
-import hypeDropLogo from '../images/affiliate/hypedrop.png';
-import csgorollLogo from '../images/affiliate/csgoroll.png';
+// import gamdomLogo from '../images/affiliate/gamdom.png';
+// import stakeLogo from '../images/affiliate/stake.png';
+// import hypeDropLogo from '../images/affiliate/hypedrop.png';
+// import csgorollLogo from '../images/affiliate/csgoroll.png';
 import packDrawLogo from '../images/affiliate/packdraw.png';
-import datDropLogo from '../images/affiliate/datdrop.png';
-import rollbitLogo from '../images/affiliate/rollbit.png';
+// import datDropLogo from '../images/affiliate/datdrop.png';
+// import rollbitLogo from '../images/affiliate/rollbit.png';
 import roobetLogo from '../images/affiliate/roobet.png';
-import csgo500Logo from '../images/affiliate/csgo500.png';
+// import csgo500Logo from '../images/affiliate/csgo500.png';
 
 /**
  * The affiliates to display on the affiliates page.
@@ -22,19 +22,6 @@ export const AFFILIATES: IAffiliate[] = [
       {
         code: 'TCK',
         link: 'https://roobet.com/?ref=TCK'
-      }
-    ],
-    tags: ['Slots', 'Live Games', 'Originals', 'Crypto'],
-    featured: true
-  },
-  {
-    image: datDropLogo,
-    reward: '5% Deposit Bonus',
-    name: 'DatDrop',
-    codes: [
-      {
-        code: 'TCK',
-        link: 'https://datdrop.com/'
       }
     ],
     tags: ['Slots', 'Live Games', 'Originals', 'Crypto'],
