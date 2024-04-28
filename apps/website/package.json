@@ -50,7 +50,8 @@
     "react-ga4": "^2.1.0",
     "react-parallax-tilt": "^1.7.151",
     "sharp": "^0.32.1",
-    "types": "*"
+    "types": "*",
+    "use-debounce": "^10.0.0"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",

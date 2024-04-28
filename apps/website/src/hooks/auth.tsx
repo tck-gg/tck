@@ -8,6 +8,7 @@ export type IUser = Prisma.UserGetPayload<{
     accounts: {
       include: { kick: true };
     };
+    wallets: true;
     kickVerification: true;
   };
 }>;
@@ -22,6 +23,7 @@ export function useAuth(): {
   setNewUser: (user: SafeUser) => void;
   login: (email: string, password: string) => Promise<SafeUser | null>;
   logOut: () => void;
+  refresh: () => void;
 } {
   return useContext(AuthContext);
 }
@@ -64,11 +66,21 @@ function useProvideAuth() {
     });
   }
 
+  async function refresh() {
+    const response = await axios.get('/api/v1/user/refresh', {
+      headers: {
+        authorization: cookie.authorization
+      }
+    });
+    setUser(response.data.user);
+  }
+
   return {
     setNewUser,
     user,
     login,
-    logOut
+    logOut,
+    refresh
   };
 }
 

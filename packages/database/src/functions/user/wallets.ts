@@ -10,11 +10,15 @@ export async function updateBitcoinWallet(wallet: string, userId: string): Promi
     return false;
   }
 
-  await prisma.userWallets.update({
+  await prisma.userWallets.upsert({
     where: {
       userId
     },
-    data: {
+    update: {
+      bitcoin: wallet
+    },
+    create: {
+      userId,
       bitcoin: wallet
     }
   });

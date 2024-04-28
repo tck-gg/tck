@@ -13,6 +13,7 @@ import AffiliateBoxCodeBox from '@/components/AffiliateBoxCodeBox/AffiliateBoxCo
 import RoobetFormBox from '@/components/RoobetFormBox/RoobetFormBox';
 
 import roobetDemo from '@/images/affiliate/roobet/demo.png';
+import roobetRedeem from '@/images/affiliate/roobet/redeem.png';
 
 import { useTheme } from '@/hooks/theme';
 
@@ -75,6 +76,10 @@ function OfferRoobet() {
               className={classes.stakeDemoImage}
             />
           </div>
+        </div>
+
+        <div className={classes.redeemWrapper}>
+          <Image src={roobetRedeem} alt='Roobet Redeem' width={640} />
         </div>
 
         <RoobetFormBox />
