@@ -1,4 +1,5 @@
 import { prisma } from '../../client';
+import { getUserById } from './fetch';
 
 export async function updateRoobetUsername(username: string, userId: string): Promise<boolean> {
   const existingAccount = await prisma.userAccounts.findFirst({
@@ -7,6 +8,11 @@ export async function updateRoobetUsername(username: string, userId: string): Pr
     }
   });
   if (existingAccount) {
+    return false;
+  }
+
+  const user = await getUserById(userId);
+  if (!user) {
     return false;
   }
 
@@ -31,6 +37,11 @@ export async function updateGamdomUsername(username: string, userId: string): Pr
     return false;
   }
 
+  const user = await getUserById(userId);
+  if (!user) {
+    return false;
+  }
+
   await prisma.userAccounts.update({
     where: {
       userId
@@ -49,6 +60,11 @@ export async function updateCsgobigUsername(username: string, userId: string): P
     }
   });
   if (existingAccount) {
+    return false;
+  }
+
+  const user = await getUserById(userId);
+  if (!user) {
     return false;
   }
 

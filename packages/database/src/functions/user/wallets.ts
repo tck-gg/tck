@@ -1,4 +1,5 @@
 import { prisma } from '../../client';
+import { getUserById } from './fetch';
 
 export async function updateBitcoinWallet(wallet: string, userId: string): Promise<boolean> {
   const existing = await prisma.userWallets.findFirst({
@@ -7,6 +8,11 @@ export async function updateBitcoinWallet(wallet: string, userId: string): Promi
     }
   });
   if (existing) {
+    return false;
+  }
+
+  const user = await getUserById(userId);
+  if (!user) {
     return false;
   }
 
@@ -35,6 +41,11 @@ export async function updateEthereumWallet(wallet: string, userId: string): Prom
     return false;
   }
 
+  const user = await getUserById(userId);
+  if (!user) {
+    return false;
+  }
+
   await prisma.userWallets.upsert({
     where: {
       userId
@@ -60,6 +71,11 @@ export async function updateLitecoinWallet(wallet: string, userId: string): Prom
     return false;
   }
 
+  const user = await getUserById(userId);
+  if (!user) {
+    return false;
+  }
+
   await prisma.userWallets.upsert({
     where: {
       userId
@@ -82,6 +98,11 @@ export async function updateSteamTradeUrl(steamTradeUrl: string, userId: string)
     }
   });
   if (existing) {
+    return false;
+  }
+
+  const user = await getUserById(userId);
+  if (!user) {
     return false;
   }
 
