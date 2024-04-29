@@ -54,6 +54,7 @@ function ProfileAffiliateConnection({
         }
       );
       await auth.refresh();
+      setHasChanged(false);
     })();
   }, [debouncedUsername]);
 

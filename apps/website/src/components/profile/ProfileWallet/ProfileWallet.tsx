@@ -53,6 +53,7 @@ function ProfileWallet({
         }
       );
       await auth.refresh();
+      setHasChanged(false);
     })();
   }, [debouncedAddress]);
 
