@@ -35,11 +35,15 @@ export async function updateEthereumWallet(wallet: string, userId: string): Prom
     return false;
   }
 
-  await prisma.userWallets.update({
+  await prisma.userWallets.upsert({
     where: {
       userId
     },
-    data: {
+    update: {
+      ethereum: wallet
+    },
+    create: {
+      userId,
       ethereum: wallet
     }
   });
@@ -56,12 +60,16 @@ export async function updateLitecoinWallet(wallet: string, userId: string): Prom
     return false;
   }
 
-  await prisma.userWallets.update({
+  await prisma.userWallets.upsert({
     where: {
       userId
     },
-    data: {
-      ethereum: wallet
+    update: {
+      litecoin: wallet
+    },
+    create: {
+      userId,
+      litecoin: wallet
     }
   });
   return true;
@@ -77,11 +85,15 @@ export async function updateSteamTradeUrl(steamTradeUrl: string, userId: string)
     return false;
   }
 
-  await prisma.userWallets.update({
+  await prisma.userWallets.upsert({
     where: {
       userId
     },
-    data: {
+    update: {
+      steamTradeUrl
+    },
+    create: {
+      userId,
       steamTradeUrl
     }
   });
