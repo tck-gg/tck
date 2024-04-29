@@ -46,7 +46,7 @@ function ModalProfile() {
             }}
             variant={tab === 'wallet' ? 'primary' : 'secondary'}
           >
-            Profile
+            Wallet
           </Button>
         </div>
         {
