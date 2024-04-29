@@ -7,7 +7,6 @@ import ProfileAffiliateConnection from '@/components/profile/ProfileAffiliateCon
 import { useProfile } from '@/hooks/profile';
 
 import roobetMiniImage from '@/images/affiliate/roobet-mini.png';
-import csgoBigMiniImage from '@/images/affiliate/csgobig-mini.png';
 
 import classes from './ProfileTabConnections.module.scss';
 
@@ -29,11 +28,6 @@ function ProfileTabConnections() {
           name='Roobet'
           image={roobetMiniImage}
           httpAddress='/api/v1/user/accounts/update-roobet'
-        />
-        <ProfileAffiliateConnection
-          name='CSGOBig'
-          image={csgoBigMiniImage}
-          httpAddress='/api/v1/user/accounts/update-csgobig'
         />
       </div>
       <Button rightIcon={faChevronRight} onClick={close} variant='gradient'>
