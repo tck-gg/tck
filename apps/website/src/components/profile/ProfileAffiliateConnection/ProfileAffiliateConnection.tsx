@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useDebounce } from 'use-debounce';
 import axios from 'axios';
 import Image, { StaticImageData } from 'next/image';
+import { camelCase } from 'custom-util';
 
 import ProfileBoxBase from '@/components/profile/ProfileBoxBase/ProfileBoxBase';
 import Input from '@/components/ui/Input/Input';
@@ -28,6 +29,12 @@ function ProfileAffiliateConnection({
   const [debouncedUsername] = useDebounce(username, 300);
 
   useEffect(() => {
+    const accounts = auth.user?.accounts || {};
+    const field = camelCase(name);
+    setUsername(accounts[field as keyof typeof accounts] || '');
+  }, [auth.user?.accounts]);
+
+  useEffect(() => {
     if (!hasChanged) {
       return;
     }
@@ -47,6 +54,7 @@ function ProfileAffiliateConnection({
         }
       );
       await auth.refresh();
+      setHasChanged(false);
     })();
   }, [debouncedUsername]);
 
