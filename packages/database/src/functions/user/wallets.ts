@@ -97,7 +97,7 @@ export async function updateSteamTradeUrl(steamTradeUrl: string, userId: string)
       steamTradeUrl
     }
   });
-  if (wallet && existing) {
+  if (steamTradeUrl && existing) {
     return false;
   }
 
