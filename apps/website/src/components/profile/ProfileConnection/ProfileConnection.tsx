@@ -1,4 +1,4 @@
-import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
+import { IconDefinition, faAngleRight } from '@fortawesome/free-solid-svg-icons';
 
 import Button from '@/components/ui/Button/Button';
 import ProfileBoxBase from '@/components/profile/ProfileBoxBase/ProfileBoxBase';
@@ -34,7 +34,7 @@ function ProfileConnection({
       <Button
         background={color}
         disabled={!!username || disabled}
-        rightIcon={username ? faAngleRight : (null as any)}
+        {...(username ? { rightIcon: faAngleRight } : {})}
         color='#000000'
         onClick={onClick}
       >

@@ -7,7 +7,7 @@ export async function updateBitcoinWallet(wallet: string, userId: string): Promi
       bitcoin: wallet
     }
   });
-  if (existing) {
+  if (wallet && existing) {
     return false;
   }
 
@@ -37,7 +37,7 @@ export async function updateEthereumWallet(wallet: string, userId: string): Prom
       ethereum: wallet
     }
   });
-  if (existing) {
+  if (wallet && existing) {
     return false;
   }
 
@@ -67,7 +67,7 @@ export async function updateLitecoinWallet(wallet: string, userId: string): Prom
       litecoin: wallet
     }
   });
-  if (existing) {
+  if (wallet && existing) {
     return false;
   }
 
@@ -97,7 +97,7 @@ export async function updateSteamTradeUrl(steamTradeUrl: string, userId: string)
       steamTradeUrl
     }
   });
-  if (existing) {
+  if (wallet && existing) {
     return false;
   }
 

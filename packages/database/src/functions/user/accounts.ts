@@ -7,7 +7,7 @@ export async function updateRoobetUsername(username: string, userId: string): Pr
       roobet: username
     }
   });
-  if (existingAccount) {
+  if (username && existingAccount) {
     return false;
   }
 
@@ -33,7 +33,7 @@ export async function updateGamdomUsername(username: string, userId: string): Pr
       gamdom: username
     }
   });
-  if (existingAccount) {
+  if (username && existingAccount) {
     return false;
   }
 
@@ -59,7 +59,7 @@ export async function updateCsgobigUsername(username: string, userId: string): P
       csgobig: username
     }
   });
-  if (existingAccount) {
+  if (username && existingAccount) {
     return false;
   }
 
