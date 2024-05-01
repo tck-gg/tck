@@ -49,7 +49,7 @@ function LeaderboardPodiumBox({
               )}
               <p className={classes.rewardText}>
                 {rewardType === 'cash' && '$'}
-                {rewardType === 'roobet' && [1000, 500, 250][position - 1]}
+                {rewardType === 'roobet' && [2000, 1000, 500][position - 1]}
                 {rewardType === 'csgobig' && [500, 250, 100][position - 1]}
               </p>
             </div>
