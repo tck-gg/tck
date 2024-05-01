@@ -34,7 +34,7 @@ function ProfileConnection({
       <Button
         background={color}
         disabled={!!username || disabled}
-        {...(username ? { rightIcon: faAngleRight } : {})}
+        {...(username ? {} : { rightIcon: faAngleRight })}
         color='#000000'
         onClick={onClick}
       >
