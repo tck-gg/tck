@@ -2,6 +2,7 @@ import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
 import Button from '@/components/ui/Button/Button';
 import VerificationKick from '@/components/profile/verification/VerificationKick/VerificationKick';
+import VerificationDiscord from '@/components/profile/verification/VerificationDiscord';
 import ProfileAffiliateConnection from '@/components/profile/ProfileAffiliateConnection/ProfileAffiliateConnection';
 
 import { useProfile } from '@/hooks/profile';
@@ -21,6 +22,7 @@ function ProfileTabConnections() {
   return (
     <>
       <div className={classes.group}>
+        <VerificationDiscord />
         <VerificationKick />
       </div>
       <hr className={classes.hr} />
