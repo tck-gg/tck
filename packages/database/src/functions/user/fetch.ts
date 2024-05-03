@@ -3,6 +3,7 @@ import { prisma } from '../../client';
 const includes = {
   accounts: {
     include: {
+      discord: true,
       kick: true
     }
   },

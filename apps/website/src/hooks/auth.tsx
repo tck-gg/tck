@@ -6,7 +6,10 @@ import { Prisma } from 'database';
 export type IUser = Prisma.UserGetPayload<{
   include: {
     accounts: {
-      include: { kick: true };
+      include: {
+        discord: true;
+        kick: true;
+      };
     };
     wallets: true;
     kickVerification: true;

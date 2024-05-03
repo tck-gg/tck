@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import ProfileConnection from '@/components/profile/ProfileConnection/ProfileConnection';
 import DiscordColored from '@/components/svg/DiscordColored';
@@ -25,7 +25,7 @@ function ConnectionDiscord() {
       name='Discord'
       color='#5865f2'
       icon={<DiscordColored />}
-      username={null}
+      username={auth.user?.accounts?.discord?.discordUsername}
       onClick={handleClick}
       disabled={disabled}
     />

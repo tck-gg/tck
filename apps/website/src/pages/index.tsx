@@ -48,6 +48,9 @@ function Home() {
           }
         }
       );
+
+      window.location.hash = '';
+
       if (response.status === 200) {
         auth.refresh();
       }
