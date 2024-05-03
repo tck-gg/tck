@@ -37,7 +37,9 @@ import {
   IconSend,
   IconTrash,
   IconX,
-  IconCheck
+  IconCheck,
+  IconLink,
+  IconWallet
 } from '@tabler/icons-react';
 import axios from 'axios';
 import { useCookies } from 'react-cookie';
@@ -201,6 +203,12 @@ function Users({ users }: { users: IUser[] }) {
 
   const [points, setPoints] = useState<number>(0);
   const [isPointsModalOpen, { open: openPointsModal, close: closePointsModal }] =
+    useDisclosure(false);
+
+  const [isConnectionsModalOpen, { open: openConnectionsModal, close: closeConnectionsModal }] =
+    useDisclosure(false);
+
+  const [isWalletModalOpen, { open: openWalletModal, close: closeWalletModal }] =
     useDisclosure(false);
 
   useEffect(() => {
@@ -748,6 +756,28 @@ function Users({ users }: { users: IUser[] }) {
                                         }}
                                       >
                                         Change Permissions
+                                      </Menu.Item>
+                                    )}
+                                    {permissions.permissions.includes('USER_VIEW_CONNECTIONS') && (
+                                      <Menu.Item
+                                        icon={<IconLink size='1rem' stroke={1.5} />}
+                                        onClick={() => {
+                                          openConnectionsModal();
+                                          setSelectedUser(user);
+                                        }}
+                                      >
+                                        View Connections
+                                      </Menu.Item>
+                                    )}
+                                    {permissions.permissions.includes('USER_VIEW_WALLET') && (
+                                      <Menu.Item
+                                        icon={<IconWallet size='1rem' stroke={1.5} />}
+                                        onClick={() => {
+                                          openWalletModal();
+                                          setSelectedUser(user);
+                                        }}
+                                      >
+                                        View Wallet
                                       </Menu.Item>
                                     )}
                                     {user.isBanned
