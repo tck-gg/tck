@@ -1,5 +1,14 @@
 @use 'hero';
 
+.kickSectionDescription {
+  @extend .sectionDescription;
+
+  background: linear-gradient(90deg, #53FC18 0%, #369F11 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
 .hero {
   height: 450px;
 
@@ -102,6 +111,23 @@
   opacity: 0.75;
 
   animation: float 10s ease-in-out infinite;
+}
+
+.livestreamBox {
+  background: #11111F;
+  border-radius: 10px;
+  
+  width: 100%;
+  padding: 16px;
+
+  aspect-ratio: 16 / 9;
+}
+
+.livestream {
+  border-radius: 10px;
+
+  width: 100%;
+  height: 100%;
 }
 
 @keyframes float {
