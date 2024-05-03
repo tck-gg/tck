@@ -39,7 +39,15 @@ function Home() {
         return;
       }
 
-      const response = await axios.post('/api/v1/user/verify-discord', { accessToken, userId });
+      const response = await axios.post(
+        '/api/v1/user/verify-discord',
+        { accessToken, userId },
+        {
+          validateStatus: () => {
+            return true;
+          }
+        }
+      );
       if (response.status === 200) {
         auth.refresh();
       }

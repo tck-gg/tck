@@ -64,7 +64,9 @@ export async function createUser(
       accounts: {
         create: {
           twitch: null,
-          discord: null,
+          discord: {
+            create: undefined
+          },
           kick: {
             create: undefined
           }
