@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { getUserByAuthorization, prisma, validateAuthorization } from 'database';
+import { Action, getUserByAuthorization, prisma, validateAuthorization } from 'database';
 import NextCors from 'nextjs-cors';
 
 import { getIp } from '@/util/ip';
@@ -13,7 +13,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
 
   const ip = getIp(req);
 
-  const data: { authorization: string } = req.body;
+  const data: { authorization: string; note: string | undefined } = req.body;
   const isValid = await validateAuthorization(data.authorization);
   if (!isValid) {
     res.status(401).end();
@@ -28,6 +28,21 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
 
   // Don't send the password hash to the client.
   user.password = undefined as any;
+
+  // Add user action.
+  await prisma.user.update({
+    where: { id: user.id },
+    data: {
+      actions: {
+        create: {
+          action: Action.ACCOUNT_LOGIN,
+          ip,
+          timestamp: Date.now(),
+          description: data.note || undefined
+        }
+      }
+    }
+  });
 
   // If the user exists in the end.
   res.send({ user });
