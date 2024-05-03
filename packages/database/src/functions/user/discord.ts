@@ -23,6 +23,7 @@ export async function verifyDiscord(
   const discordId = data.id;
   const discordUsername = data.username;
   const discordAvatar = data.avatar;
+  const discordEmail = data.email;
 
   // TODO: Database work.
   const user = await prisma.user.findFirst({
@@ -53,7 +54,8 @@ export async function verifyDiscord(
         create: {
           discordId,
           discordUsername,
-          discordAvatar
+          discordAvatar,
+          discordEmail
         }
       }
     }

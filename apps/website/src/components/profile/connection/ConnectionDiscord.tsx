@@ -5,6 +5,8 @@ import DiscordColored from '@/components/svg/DiscordColored';
 
 import { useAuth } from '@/hooks/auth';
 
+const SCOPE = 'identify+email';
+
 function ConnectionDiscord() {
   const auth = useAuth();
 
@@ -14,9 +16,9 @@ function ConnectionDiscord() {
     setDisabled(true);
 
     if (process.env.NODE_ENV === 'development') {
-      window.location.href = `https://discord.com/oauth2/authorize?client_id=1235825492872007791&response_type=token&redirect_uri=http%3A%2F%2Flocalhost%3A8000&scope=identify&state=${auth.user?.id}`;
+      window.location.href = `https://discord.com/oauth2/authorize?client_id=1235825492872007791&response_type=token&redirect_uri=http%3A%2F%2Flocalhost%3A8000&scope=${SCOPE}&state=${auth.user?.id}`;
     } else if (process.env.NODE_ENV === 'production') {
-      window.location.href = `https://discord.com/oauth2/authorize?client_id=1235825492872007791&response_type=token&redirect_uri=https%3A%2F%2Ftck.gg&scope=identify&state=${auth.user?.id}`;
+      window.location.href = `https://discord.com/oauth2/authorize?client_id=1235825492872007791&response_type=token&redirect_uri=https%3A%2F%2Ftck.gg&scope=${SCOPE}&state=${auth.user?.id}`;
     }
   }
 

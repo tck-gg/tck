@@ -76,6 +76,7 @@ model DiscordAccount {
   discordId String @unique
   discordUsername String @unique
   discordAvatar String @unique
+  discordEmail String @unique
 }
 
 model UserAccounts {
