@@ -93,7 +93,6 @@ type IUser = Omit<
   }
 > & {
   accounts: IUserAccounts | null;
-  actions: UserAction[];
 };
 
 function filterBySearch(users: IUser[], search: string) {
@@ -593,8 +592,8 @@ function Users({ users }: { users: IUser[] }) {
                       <th>User</th>
                       <th>Email</th>
                       <th>Points</th>
-                      <th>Joined</th>
-                      <th>Last Active</th>
+                      {/* <th>Joined</th>
+                      <th>Last Active</th> */}
                       {permissions.permissions.includes('USER_VIEW_ACTIVITY') && <th>Activity</th>}
                       <th>Actions</th>
                     </tr>
@@ -695,7 +694,7 @@ function Users({ users }: { users: IUser[] }) {
                                 )}
                               </div>
                             </td>
-                            <td>
+                            {/* <td>
                               {dateformat(
                                 user.actions.find((action) => {
                                   return action.action === 'ACCOUNT_CREATE';
@@ -714,7 +713,7 @@ function Users({ users }: { users: IUser[] }) {
                                   })[0]?.timestamp,
                                 'yyyy-mm-dd, HH:MM:ss'
                               )}
-                            </td>
+                            </td> */}
                             {permissions.permissions.includes('USER_VIEW_ACTIVITY') && (
                               <td>
                                 <Anchor
