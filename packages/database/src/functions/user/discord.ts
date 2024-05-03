@@ -1,8 +1,13 @@
 import axios from 'axios';
+import { Action } from '@prisma/client';
 
 import { prisma } from '../../client';
 
-export async function verifyDiscord(accessToken: string, userId: string): Promise<boolean> {
+export async function verifyDiscord(
+  accessToken: string,
+  userId: string,
+  ip: string
+): Promise<boolean> {
   const response = await axios.get('https://discord.com/api/users/@me', {
     headers: {
       Authorization: `Bearer ${accessToken}`
@@ -51,6 +56,21 @@ export async function verifyDiscord(accessToken: string, userId: string): Promis
           discordAvatar
         }
       }
+    }
+  });
+
+  // Add user action.
+  await prisma.userAction.create({
+    data: {
+      user: {
+        connect: {
+          id: user.id
+        }
+      },
+      action: Action.LINK_DISCORD,
+      ip,
+      timestamp: Date.now(),
+      description: `Linked Discord account "${discordUsername}".`
     }
   });
 

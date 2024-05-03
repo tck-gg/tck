@@ -1,8 +1,12 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { getUserById, verifyDiscord } from 'database';
 
+import { getIp } from '@/util/ip';
+
 async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { accessToken, userId } = req.body;
+
+  const ip = getIp(req);
 
   const user = await getUserById(userId);
   if (!user) {
@@ -15,7 +19,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     return;
   }
 
-  const result = await verifyDiscord(accessToken, userId);
+  const result = await verifyDiscord(accessToken, userId, ip);
   if (!result) {
     res.status(500).end();
     return;
