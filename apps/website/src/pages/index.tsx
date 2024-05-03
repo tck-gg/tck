@@ -1,3 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+
+import { useEffect } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import clsx from 'clsx';
@@ -11,6 +14,7 @@ import SocialBox from '@/components/SocialBox/SocialBox';
 import HomeSectionRaffles from '@/components/HomeSectionRaffles/HomeSectionRaffles';
 
 import { useAgeVerification } from '@/hooks/age-verification';
+import { useAuth } from '@/hooks/auth';
 
 import { AFFILIATES } from '@/data/affiliates';
 import { SOCIALS_DATA } from '@/data/socials';
@@ -37,6 +41,35 @@ export async function getServerSideProps() {
 function Home({ isLive }: { isLive: boolean }) {
   const router = useRouter();
   const ageVerification = useAgeVerification();
+  const auth = useAuth();
+
+  useEffect(() => {
+    (async () => {
+      const urlParams = new URLSearchParams(window.location.hash.substring(1));
+
+      const accessToken = urlParams.get('access_token');
+      const userId = urlParams.get('state');
+      if (!accessToken || !userId) {
+        return;
+      }
+
+      const response = await axios.post(
+        '/api/v1/user/verify-discord',
+        { accessToken, userId },
+        {
+          validateStatus: () => {
+            return true;
+          }
+        }
+      );
+
+      window.location.hash = '';
+
+      if (response.status === 200) {
+        auth.refresh();
+      }
+    })();
+  }, []);
 
   return (
     <Layout>

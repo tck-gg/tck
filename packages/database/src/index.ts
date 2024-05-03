@@ -14,6 +14,7 @@ export * from './functions/leaderboard';
 export * from './functions/permissions';
 export * from './functions/user/accounts';
 export * from './functions/user/auth';
+export * from './functions/user/discord';
 export * from './functions/user/fetch';
 export * from './functions/user/points';
 export * from './functions/user/user';
