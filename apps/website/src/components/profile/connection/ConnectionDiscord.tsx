@@ -3,7 +3,7 @@ import { useState } from 'react';
 import ProfileConnection from '@/components/profile/ProfileConnection/ProfileConnection';
 import DiscordColored from '@/components/svg/DiscordColored';
 
-function VerificationDiscord() {
+function ConnectionDiscord() {
   const [disabled, setDisabled] = useState<boolean>(false);
 
   function handleClick() {
@@ -26,4 +26,4 @@ function VerificationDiscord() {
   );
 }
 
-export default VerificationDiscord;
+export default ConnectionDiscord;
