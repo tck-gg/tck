@@ -1,5 +1,14 @@
 @use 'hero';
 
+.kickSectionDescription {
+  @extend .sectionDescription;
+
+  background: linear-gradient(90deg, #53FC18 0%, #369F11 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
 .hero {
   height: 450px;
 
