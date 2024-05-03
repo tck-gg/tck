@@ -197,6 +197,9 @@ function Leaderboards({
               {selectedLeaderboard === 'roobet' && (
                 <CountdownTimer days={monthlyDays} hours={monthlyHours} minutes={monthlyMinutes} />
               )}
+              {selectedLeaderboard === 'packdraw' && (
+                <CountdownTimer days={monthlyDays} hours={monthlyHours} minutes={monthlyMinutes} />
+              )}
             </div>
 
             {leaderboards[selectedLeaderboard].spots.length > 3 && (
