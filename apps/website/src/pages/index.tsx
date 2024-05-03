@@ -20,9 +20,10 @@ import classes from './index.module.scss';
 import ak from '@/images/ak.png';
 import knife from '@/images/knife.png';
 
+const CHANNEL = 'tck';
+
 export async function getServerSideProps() {
-  const channel = 'motivation';
-  const response = await axios.get(`https://kick.com/api/v2/channels/${channel}/livestream`);
+  const response = await axios.get(`https://kick.com/api/v2/channels/${CHANNEL}/livestream`);
   const data = response.data;
   const isLive = !!data.data;
 
@@ -115,6 +116,16 @@ function Home({ isLive }: { isLive: boolean }) {
             <div className={classes.sectionHeader}>
               <p className={classes.kickSectionDescription}>I AM LIVE ON KICK</p>
               <p className={classes.sectionTitle}>Livestream</p>
+            </div>
+
+            <div className={classes.livestreamBox}>
+              <iframe
+                src={`https://player.kick.com/${CHANNEL}`}
+                frameborder='0'
+                scrolling='no'
+                allowfullscreen='true'
+                className={classes.livestream}
+              ></iframe>
             </div>
           </div>
         )}
