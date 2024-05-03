@@ -68,39 +68,50 @@ function Leaderboards({
       <div className={classes.root}>
         <PageHeader title='Leaderboards' />
 
-        <div className={classes.affiliates}>
-          <Image
-            src={roobetLogo}
-            alt='Roobet'
-            width={100}
-            height={60}
-            style={{
-              objectFit: 'contain'
-            }}
-            onClick={() => {
-              setSelectedLeaderboard('roobet');
-            }}
-            className={clsx(
-              classes.affiliate,
-              selectedLeaderboard === 'roobet' && classes.selected
-            )}
-          />
-          <Image
-            src={packDrawLogo}
-            alt='PackDraw'
-            width={100}
-            height={60}
-            style={{
-              objectFit: 'contain'
-            }}
-            onClick={() => {
-              setSelectedLeaderboard('packdraw');
-            }}
-            className={clsx(
-              classes.affiliate,
-              selectedLeaderboard === 'packdraw' && classes.selected
-            )}
-          />
+        <div className={classes.top}>
+          <div className={classes.affiliates}>
+            <Image
+              src={roobetLogo}
+              alt='Roobet'
+              width={100}
+              height={60}
+              style={{
+                objectFit: 'contain'
+              }}
+              onClick={() => {
+                setSelectedLeaderboard('roobet');
+              }}
+              className={clsx(
+                classes.affiliate,
+                selectedLeaderboard === 'roobet' && classes.selected
+              )}
+            />
+            <Image
+              src={packDrawLogo}
+              alt='PackDraw'
+              width={100}
+              height={60}
+              style={{
+                objectFit: 'contain'
+              }}
+              onClick={() => {
+                setSelectedLeaderboard('packdraw');
+              }}
+              className={clsx(
+                classes.affiliate,
+                selectedLeaderboard === 'packdraw' && classes.selected
+              )}
+            />
+          </div>
+
+          <p className={classes.codePromo}>
+            Wager Under Code{' '}
+            <span
+              className={clsx(classes.code, selectedLeaderboard === 'roobet' && classes.roobetText)}
+            >
+              TCK
+            </span>
+          </p>
         </div>
 
         {leaderboards[selectedLeaderboard].spots.length === 0 && (
