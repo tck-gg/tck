@@ -1,22 +1,32 @@
 import axios from 'axios';
 import clsx from 'clsx';
 import { faAngleRight, faUser } from '@fortawesome/free-solid-svg-icons';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { faDiscord } from '@fortawesome/free-brands-svg-icons';
 import Image from 'next/image';
 
 import Button from '@/components/ui/Button/Button';
 import Input from '@/components/ui/Input/Input';
 
+import { useAuth } from '@/hooks/auth';
+
 import roobetPromo from '@/images/affiliate/roobet/promo.png';
 
 import classes from './RoobetFormBox.module.scss';
 
 function RoobetFormBox() {
+  const auth = useAuth();
+
   const [roobetUsername, setRoobetUsername] = useState('');
   const [discordUsername, setDiscordUsername] = useState('');
   const [disabled, setDisabled] = useState(false);
   const [status, setStatus] = useState('');
+
+  useEffect(() => {
+    if (!auth.user) {
+      setDisabled(true);
+    }
+  }, [auth.user]);
 
   async function onClick() {
     if (!roobetUsername.trim() || !discordUsername.trim()) {
@@ -124,26 +134,32 @@ function RoobetFormBox() {
           </p>
         </div>
         <div className={classes.formInputs}>
-          <Input
-            label='Roobet Username'
-            placeholder='Type your Roobet username...'
-            value={roobetUsername}
-            icon={faUser}
-            onChange={(event) => {
-              return setRoobetUsername(event.target.value);
-            }}
-          />
-          <Input
-            label='Discord Username'
-            placeholder='Type your Discord username...'
-            value={discordUsername}
-            icon={faDiscord}
-            onChange={(event) => {
-              return setDiscordUsername(event.target.value);
-            }}
-          />
+          {auth.user ? (
+            <>
+              <Input
+                label='Roobet Username'
+                placeholder='Type your Roobet username...'
+                value={roobetUsername}
+                icon={faUser}
+                onChange={(event) => {
+                  return setRoobetUsername(event.target.value);
+                }}
+              />
+              <Input
+                label='Discord Username'
+                placeholder='Type your Discord username...'
+                value={discordUsername}
+                icon={faDiscord}
+                onChange={(event) => {
+                  return setDiscordUsername(event.target.value);
+                }}
+              />
 
-          {status && <p>{status}</p>}
+              {status && <p>{status}</p>}
+            </>
+          ) : (
+            <p>You must be logged in to be eligible for this offer.</p>
+          )}
         </div>
         <Button
           rightIcon={faAngleRight}
