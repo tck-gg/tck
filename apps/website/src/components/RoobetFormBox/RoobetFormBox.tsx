@@ -25,13 +25,22 @@ function RoobetFormBox() {
   useEffect(() => {
     if (!auth.user) {
       setDisabled(true);
+      return;
     }
+    if (!auth.user?.accounts?.discord) {
+      setStatus('You must link your Discord account to be eligible for this offer.');
+      return;
+    }
+    setDiscordUsername(auth.user.accounts.discord.discordUsername);
   }, [auth.user]);
 
   async function onClick() {
-    if (!roobetUsername.trim() || !discordUsername.trim()) {
+    if (!roobetUsername.trim()) {
       setStatus('Please fill out all fields.');
-
+      return;
+    }
+    if (!discordUsername.trim()) {
+      setStatus('You must link your Discord account to be eligible for this offer.');
       return;
     }
 
@@ -147,12 +156,10 @@ function RoobetFormBox() {
               />
               <Input
                 label='Discord Username'
-                placeholder='Type your Discord username...'
+                placeholder='Link your Discord account...'
                 value={discordUsername}
                 icon={faDiscord}
-                onChange={(event) => {
-                  return setDiscordUsername(event.target.value);
-                }}
+                disabled={true}
               />
 
               {status && <p>{status}</p>}

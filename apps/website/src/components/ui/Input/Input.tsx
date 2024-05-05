@@ -17,7 +17,7 @@ function Input({
   value: string;
   icon?: IconDefinition;
   disabled?: boolean;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }) {
   return (
     <div className={classes.root}>
