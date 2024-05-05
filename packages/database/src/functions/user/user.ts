@@ -305,3 +305,31 @@ export async function getConnections(username: string) {
 
   return accounts;
 }
+
+export async function getWallet(username: string) {
+  const wallet = {
+    bitcoin: '',
+    ethereum: '',
+    litecoin: '',
+    steamTradeUrl: ''
+  };
+
+  const user = await getUserByUsername(username);
+  if (!user) {
+    return wallet;
+  }
+
+  const fetchedWallet = await prisma.userWallets.findFirst({
+    where: { userId: user.id }
+  });
+  if (!fetchedWallet) {
+    return wallet;
+  }
+
+  wallet.bitcoin = fetchedWallet.bitcoin || '';
+  wallet.ethereum = fetchedWallet.ethereum || '';
+  wallet.litecoin = fetchedWallet.litecoin || '';
+  wallet.steamTradeUrl = fetchedWallet.steamTradeUrl || '';
+
+  return wallet;
+}
