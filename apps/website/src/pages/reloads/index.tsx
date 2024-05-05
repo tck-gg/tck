@@ -34,7 +34,7 @@ function OfferRoobet() {
           <p className={classes.jaggedText}>Roobet Exclusive</p>
         </JaggedBackgroundItem>
         <div className={classes.heroContent}>
-          <p className={classes.title}>$15 Reload</p>
+          <p className={classes.title}>$15 Reload - Deposit $15, Earn $15</p>
           <p className={classes.subtitle}>
             This reward is available for seven days upon redemption.
           </p>
