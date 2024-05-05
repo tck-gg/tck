@@ -293,7 +293,8 @@ export async function getConnections(username: string) {
   const fetchedAccounts = await prisma.userAccounts.findFirst({
     where: { userId: user.id },
     include: {
-      kick: true
+      kick: true,
+      discord: true
     }
   });
 
@@ -302,7 +303,7 @@ export async function getConnections(username: string) {
   }
 
   accounts.kick = fetchedAccounts.kick?.kickUsername || '';
-  // TODO: Add Discord.
+  accounts.discord = fetchedAccounts.discord?.discordUsername || '';
   accounts.roobet = fetchedAccounts.roobet || '';
 
   return accounts;
