@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import { IconDefinition } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -8,12 +9,14 @@ function Input({
   placeholder,
   value,
   icon,
+  disabled,
   onChange
 }: {
   label?: string;
   placeholder: string;
   value: string;
   icon?: IconDefinition;
+  disabled?: boolean;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }) {
   return (
@@ -25,10 +28,11 @@ function Input({
         </div>
       )}
       <input
-        className={classes.input}
+        className={clsx(classes.input, disabled && classes.disabled)}
         placeholder={placeholder}
         value={value}
         onChange={onChange}
+        disabled={disabled}
       />
     </div>
   );
