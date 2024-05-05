@@ -22,6 +22,8 @@ https://discord.com/oauth2/authorize?client_id=1188676912525090837&scope=bot&per
 - `USER_POINTS_REMOVE`
 - `USER_POINTS_SET`
 - `USER_VIEW_ACTIVITY`
+- `USER_VIEW_CONNECTIONS`
+- `USER_VIEW_WALLET`
 
 ## `.env`
 ### Required

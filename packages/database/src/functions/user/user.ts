@@ -277,3 +277,61 @@ export async function deleteUser(userId: string, ip: string) {
 
   return true;
 }
+
+export async function getConnections(username: string) {
+  const accounts = {
+    kick: '',
+    discord: '',
+    roobet: ''
+  };
+
+  const user = await getUserByUsername(username);
+  if (!user) {
+    return accounts;
+  }
+
+  const fetchedAccounts = await prisma.userAccounts.findFirst({
+    where: { userId: user.id },
+    include: {
+      kick: true
+    }
+  });
+
+  if (!fetchedAccounts) {
+    return accounts;
+  }
+
+  accounts.kick = fetchedAccounts.kick?.kickUsername || '';
+  // TODO: Add Discord.
+  accounts.roobet = fetchedAccounts.roobet || '';
+
+  return accounts;
+}
+
+export async function getWallet(username: string) {
+  const wallet = {
+    bitcoin: '',
+    ethereum: '',
+    litecoin: '',
+    steamTradeUrl: ''
+  };
+
+  const user = await getUserByUsername(username);
+  if (!user) {
+    return wallet;
+  }
+
+  const fetchedWallet = await prisma.userWallets.findFirst({
+    where: { userId: user.id }
+  });
+  if (!fetchedWallet) {
+    return wallet;
+  }
+
+  wallet.bitcoin = fetchedWallet.bitcoin || '';
+  wallet.ethereum = fetchedWallet.ethereum || '';
+  wallet.litecoin = fetchedWallet.litecoin || '';
+  wallet.steamTradeUrl = fetchedWallet.steamTradeUrl || '';
+
+  return wallet;
+}
