@@ -12,12 +12,20 @@
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
   font-size: 66px;
   font-weight: 800;
+  text-align: center;
+}
+
+.urlTitle {
+  @extend .title;
+
+  text-align: left;
 }
 
 .subtitle {
   color: #989eae;
   font-size: 14px;
   font-weight: 400;
+  text-align: center;
 }
 
 .jaggedText {

@@ -45,7 +45,7 @@ function OfferRoobet() {
         <div className={classes.stakeSection}>
           <div className={classes.stakeSectionLeft}>
             <div>
-              <p className={classes.title}>Visit Roobet.com</p>
+              <p className={classes.urlTitle}>Visit Roobet.com</p>
             </div>
             <div className={classes.stakeSectionLeftBottom}>
               <div
