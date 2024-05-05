@@ -71,21 +71,36 @@ export async function getServerSideProps() {
   return {
     props: {
       users: users.map((user) => {
+        const createAction = user.actions.find((action) => {
+          return action.action === 'ACCOUNT_CREATE';
+        });
+        const lastActiveAction = user.actions
+          .filter((action) => {
+            return action.action === 'ACCOUNT_LOGIN';
+          })
+          .sort((a, b) => {
+            return b.timestamp - a.timestamp;
+          })[0];
+
+        const joined = createAction
+          ? dateformat(createAction?.timestamp, 'yyyy-mm-dd, HH:MM:ss')
+          : 'Unknown';
+        const lastActive = lastActiveAction
+          ? dateformat(lastActiveAction?.timestamp, 'yyyy-mm-dd, HH:MM:ss')
+          : 'Unknown';
+
         return {
           ...user,
           apiKey: null,
-          password: null
+          password: null,
+          actions: null,
+          joined,
+          lastActive
         };
       })
     }
   };
 }
-
-type IUserAccounts = Prisma.UserAccountsGetPayload<{
-  include: {
-    kick: true;
-  };
-}>;
 
 type IUser = Omit<
   User,
@@ -94,8 +109,8 @@ type IUser = Omit<
     password: string;
   }
 > & {
-  accounts: IUserAccounts | null;
-  actions: UserAction[];
+  joined: string;
+  lastActive: string;
 };
 
 function filterBySearch(users: IUser[], search: string) {
@@ -697,26 +712,8 @@ function Users({ users }: { users: IUser[] }) {
                                 )}
                               </div>
                             </td>
-                            <td>
-                              {dateformat(
-                                user.actions.find((action) => {
-                                  return action.action === 'ACCOUNT_CREATE';
-                                })?.timestamp,
-                                'yyyy-mm-dd, HH:MM:ss'
-                              )}
-                            </td>
-                            <td>
-                              {dateformat(
-                                user.actions
-                                  .filter((action) => {
-                                    return action.action === 'ACCOUNT_LOGIN';
-                                  })
-                                  .sort((a, b) => {
-                                    return b.timestamp - a.timestamp;
-                                  })[0]?.timestamp,
-                                'yyyy-mm-dd, HH:MM:ss'
-                              )}
-                            </td>
+                            <td>{user.joined}</td>
+                            <td>{user.lastActive}</td>
                             {permissions.permissions.includes('USER_VIEW_ACTIVITY') && (
                               <td>
                                 <Anchor
