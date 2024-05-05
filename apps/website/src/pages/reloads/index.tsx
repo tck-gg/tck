@@ -79,7 +79,7 @@ function OfferRoobet() {
         </div>
 
         <div className={classes.redeemWrapper}>
-          <Image src={roobetRedeem} alt='Roobet Redeem' width={640} />
+          <Image src={roobetRedeem} alt='Roobet Redeem' className={classes.redeemImage} />
         </div>
 
         <RoobetFormBox />
