@@ -23,7 +23,7 @@ import {
   TransferListData
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import { Permission, Prisma, User, UserAccounts, UserAction, getAllUsers } from 'database';
+import { Permission, Prisma, User, UserAction, getAllUsers } from 'database';
 import dateformat from 'dateformat';
 import { useRouter } from 'next/router';
 import { useEffect, useRef, useState } from 'react';
@@ -45,10 +45,12 @@ import axios from 'axios';
 import { useCookies } from 'react-cookie';
 import { notifications } from '@mantine/notifications';
 
-import { usePermissions } from '@/hooks/permissions';
-
 import Layout from '@/components/Layout';
 import AccountActivity from '@/components/users/AccountActivity';
+import AccountConnections from '@/components/users/AccountConnections';
+import AccountWallet from '@/components/users/AccountWallet';
+
+import { usePermissions } from '@/hooks/permissions';
 
 function getUrl() {
   if (process.env.NODE_ENV === 'production') {
@@ -950,6 +952,24 @@ function Users({ users }: { users: IUser[] }) {
                 Update
               </Button>
             </Group>
+          </Modal>
+
+          <Modal
+            opened={isConnectionsModalOpen}
+            onClose={closeConnectionsModal}
+            title={`Connections for ${selectedUser?.username || 'Unknown'}`}
+            centered
+          >
+            <AccountConnections username={selectedUser?.username || 'Unknown'} />
+          </Modal>
+
+          <Modal
+            opened={isWalletModalOpen}
+            onClose={closeWalletModal}
+            title={`Wallet for ${selectedUser?.username || 'Unknown'}`}
+            centered
+          >
+            <AccountWallet username={selectedUser?.username || 'Unknown'} />
           </Modal>
         </>
       ) : (
