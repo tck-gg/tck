@@ -23,24 +23,18 @@ function RoobetFormBox() {
   const [status, setStatus] = useState('');
 
   useEffect(() => {
-    if (!auth.user) {
-      setDisabled(true);
-      return;
-    }
     if (!auth.user?.accounts?.discord) {
       setStatus('You must link your Discord account to be eligible for this offer.');
       return;
     }
+    setStatus('');
+
     setDiscordUsername(auth.user.accounts.discord.discordUsername);
-  }, [auth.user]);
+  }, [auth]);
 
   async function onClick() {
     if (!roobetUsername.trim()) {
       setStatus('Please fill out all fields.');
-      return;
-    }
-    if (!discordUsername.trim()) {
-      setStatus('You must link your Discord account to be eligible for this offer.');
       return;
     }
 
@@ -61,11 +55,10 @@ function RoobetFormBox() {
 
     if (response.status === 201) {
       setRoobetUsername('');
-      setDiscordUsername('');
 
       setStatus('Submitted!');
     } else {
-      setStatus('Error! Try again.');
+      setStatus('Error! Try again. Note, you can only submit once.');
     }
 
     setDisabled(false);
