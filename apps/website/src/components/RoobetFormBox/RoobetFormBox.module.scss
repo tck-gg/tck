@@ -99,6 +99,10 @@ $breakpoint: 635px;
   }
 }
 
+.error {
+  color: #f50404;
+}
+
 @media screen and (max-width: $breakpoint) {
   .left {
     display: none;

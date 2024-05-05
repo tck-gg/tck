@@ -162,10 +162,16 @@ function RoobetFormBox() {
                 disabled={true}
               />
 
-              {status && <p>{status}</p>}
+              {status && (
+                <p className={clsx(status !== 'Submitted!' && classes.error)}>
+                  <strong>{status}</strong>
+                </p>
+              )}
             </>
           ) : (
-            <p>You must be logged in to be eligible for this offer.</p>
+            <p className={classes.error}>
+              <strong>You must be logged in to be eligible for this offer.</strong>
+            </p>
           )}
         </div>
         <Button
