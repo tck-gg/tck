@@ -73,7 +73,7 @@ function AccountConnections({ username }: { username: string }) {
           }).length === 0 && <div>No connections found.</div>}
         </>
       ) : (
-        <div>Loading...</div>
+        <p>Loading...</p>
       )}
     </>
   );

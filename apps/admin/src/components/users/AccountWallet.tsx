@@ -83,7 +83,7 @@ function AccountWallet({ username }: { username: string }) {
           }).length === 0 && <div>No wallets found.</div>}
         </>
       ) : (
-        <div>Loading...</div>
+        <p>Loading...</p>
       )}
     </>
   );
