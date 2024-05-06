@@ -88,6 +88,7 @@ function Raffles({ reloads }: { reloads: RoobetReloadEntry[] }) {
               width: '100%',
               height: '500px'
             }}
+            readOnly
           />
         </>
       ) : (
