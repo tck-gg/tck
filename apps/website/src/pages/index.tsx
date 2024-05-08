@@ -154,9 +154,11 @@ function Home({ isLive }: { isLive: boolean }) {
             <div className={classes.livestreamBox}>
               <iframe
                 src={`https://player.kick.com/${CHANNEL}`}
-                frameborder='0'
-                scrolling='no'
-                allowfullscreen='true'
+                allowFullScreen={true}
+                style={{
+                  overflow: 'hidden',
+                  border: 0
+                }}
                 className={classes.livestream}
               ></iframe>
             </div>
