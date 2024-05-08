@@ -23,7 +23,7 @@ import {
   TransferListData
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import { Permission, Prisma, User, UserAction, getAllUsers } from 'database';
+import { Permission, User, getAllUsers } from 'database';
 import dateformat from 'dateformat';
 import { useRouter } from 'next/router';
 import { useEffect, useRef, useState } from 'react';
@@ -119,10 +119,7 @@ function filterBySearch(users: IUser[], search: string) {
       user.username.toLowerCase().includes(search.toLowerCase()) ||
       user.email.includes(search) ||
       user.displayName.toLowerCase().includes(search.toLowerCase()) ||
-      user.id.includes(search) ||
-      user.accounts?.discord?.includes(search) ||
-      user.accounts?.kick?.kickUsername.includes(search) ||
-      user.accounts?.twitch?.includes(search)
+      user.id.includes(search)
     );
   });
 }
