@@ -26,28 +26,18 @@ import knife from '@/images/knife.png';
 
 const CHANNEL = 'tck';
 
-function getUrl() {
-  if (process.env.NODE_ENV === 'production') {
-    if (!window.location.hostname.includes('localhost')) {
-      return 'https://tck.gg';
-    }
-    return 'http://localhost:8007';
-  }
-  if (process.env.NODE_ENV === 'development') {
-    return 'http://localhost:8000';
-  }
-  return '';
-}
-
 export async function getServerSideProps() {
-  const response = await axios.get(`${getUrl()}/api/v1/live`);
-  const data: {
-    isLive: boolean;
-  } = response.data;
+  const response = await axios.get(`https://kick.com/api/v2/channels/${CHANNEL}/livestream`, {
+    headers: {
+      'x-kick-auth': process.env.KICK_AUTH
+    }
+  });
+  const data = response.data;
+  const isLive = !!data.data;
 
   return {
     props: {
-      isLive: data.isLive
+      isLive
     }
   };
 }
