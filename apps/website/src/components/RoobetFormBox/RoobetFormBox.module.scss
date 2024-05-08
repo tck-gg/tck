@@ -66,6 +66,7 @@ $breakpoint: 635px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   gap: 28px;
 
   flex-grow: 1;
@@ -96,6 +97,10 @@ $breakpoint: 635px;
     width: 100%;
 
   }
+}
+
+.error {
+  color: #f50404;
 }
 
 @media screen and (max-width: $breakpoint) {

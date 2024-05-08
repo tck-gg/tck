@@ -23,8 +23,8 @@ function getUrl() {
 function AccountActivity({ username }: { username: string }) {
   const [cookie, setCookie] = useCookies(['authorization']);
 
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [rows, setRows] = useState<JSX.Element[]>([]);
-
   const [shouldShowLogins, setShouldShowLogins] = useState<boolean>(false);
 
   useEffect(() => {
@@ -60,10 +60,12 @@ function AccountActivity({ username }: { username: string }) {
             })
         );
       }
+
+      setIsLoading(false);
     })();
   }, [username, shouldShowLogins]);
 
-  return (
+  return !isLoading ? (
     <>
       <Checkbox
         label='Show logins'
@@ -85,6 +87,8 @@ function AccountActivity({ username }: { username: string }) {
         <tbody>{rows}</tbody>
       </Table>
     </>
+  ) : (
+    <p>Loading...</p>
   );
 }
 

@@ -20,6 +20,7 @@ enum Action {
   GIVEAWAY_JOIN
   JOIN_KICK_RAFFLE
   LINK_KICK
+  LINK_DISCORD
   UPDATE_KICK
   USER_POINTS_ADD
   USER_POINTS_REMOVE
@@ -43,6 +44,8 @@ enum Permission {
   USER_POINTS_REMOVE
   USER_POINTS_SET
   USER_VIEW_ACTIVITY
+  USER_VIEW_CONNECTIONS
+  USER_VIEW_WALLET
 }
 
 model UserAction {
@@ -66,6 +69,18 @@ model KickAccount {
   kickUsername String @unique
 }
 
+model DiscordAccount {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  userAccount   UserAccounts @relation(fields: [userAccountId], references: [id], onDelete: Cascade)
+  userAccountId String       @unique @db.ObjectId
+
+  discordId String @unique
+  discordUsername String @unique
+  discordAvatar String @unique
+  discordEmail String @unique
+}
+
 model UserAccounts {
   id String @id @default(auto()) @map("_id") @db.ObjectId
 
@@ -73,9 +88,9 @@ model UserAccounts {
   userId String @unique @db.ObjectId
 
   kick   KickAccount?
+  discord DiscordAccount?
 
   csgobig String?
-  discord String?
   gamdom  String?
   roobet  String?
   twitch  String?

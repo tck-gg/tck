@@ -37,7 +37,8 @@ function Auth({ children }: { children: React.ReactNode }) {
         try {
           const url = getUrl();
           response = await axios.post(`${url}/api/v1/user/validate-authorization`, {
-            authorization: cookie.authorization
+            authorization: cookie.authorization,
+            note: 'Admin panel access request.'
           });
         } catch (error) {
           setCookie('authorization', '', {

@@ -34,7 +34,7 @@ function OfferRoobet() {
           <p className={classes.jaggedText}>Roobet Exclusive</p>
         </JaggedBackgroundItem>
         <div className={classes.heroContent}>
-          <p className={classes.title}>$15 Reload</p>
+          <p className={classes.title}>$15 Reload - Deposit $15, Earn $15</p>
           <p className={classes.subtitle}>
             This reward is available for seven days upon redemption.
           </p>
@@ -45,7 +45,7 @@ function OfferRoobet() {
         <div className={classes.stakeSection}>
           <div className={classes.stakeSectionLeft}>
             <div>
-              <p className={classes.title}>Visit Roobet.com</p>
+              <p className={classes.urlTitle}>Visit Roobet.com</p>
             </div>
             <div className={classes.stakeSectionLeftBottom}>
               <div
@@ -79,7 +79,7 @@ function OfferRoobet() {
         </div>
 
         <div className={classes.redeemWrapper}>
-          <Image src={roobetRedeem} alt='Roobet Redeem' width={640} />
+          <Image src={roobetRedeem} alt='Roobet Redeem' className={classes.redeemImage} />
         </div>
 
         <RoobetFormBox />

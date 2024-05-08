@@ -20,13 +20,19 @@
   filter: drop-shadow(0px 3px 0px rgba(0, 0, 0, 0.25));
 }
 
+.top {
+  margin-bottom: 32px;
+
+  display: flex;  
+  flex-direction: column;
+  gap: 20px;
+}
+
 .affiliates {
   display: flex;
   gap: 24px;
   flex-wrap: wrap;
   justify-content: center;
-
-  margin-bottom: 32px;
 }
 
 .affiliate {
@@ -45,6 +51,21 @@
 .timerWrapper {
   position: relative;
   top: -80px;
+}
+
+.codePromo {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.code {
+  font-size: 1.5em;
+
+  text-shadow: rgba(221, 180, 63, 0.66) 0px 0px 0.5rem;
+}
+
+.roobetText {
+  color: #f6c730;
 }
 
 @media screen and (max-width: 950px) {
