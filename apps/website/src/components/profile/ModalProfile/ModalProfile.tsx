@@ -8,13 +8,14 @@ import { useProfile } from '@/hooks/profile';
 import ProfileTabProfile from '../tab/ProfileTabProfile';
 import ProfileTabConnections from '../tab/ProfileTabConnections/ProfileTabConnections';
 import ProfileTabWallet from '../tab/ProfileTabWallet/ProfileTabWallet';
+import ProfileTabHistory from '../tab/ProfileTabHistory/ProfileTabHistory';
 
 import classes from './ModalProfile.module.scss';
 
 function ModalProfile() {
   const profile = useProfile();
 
-  const [tab, setTab] = useState<'profile' | 'connections' | 'wallet'>('profile');
+  const [tab, setTab] = useState<'profile' | 'connections' | 'wallet' | 'history'>('profile');
 
   useEffect(() => {
     setTab('profile');
@@ -48,12 +49,21 @@ function ModalProfile() {
           >
             Wallet
           </Button>
+          <Button
+            onClick={() => {
+              setTab('history');
+            }}
+            variant={tab === 'history' ? 'primary' : 'secondary'}
+          >
+            History
+          </Button>
         </div>
         {
           {
             profile: <ProfileTabProfile />,
             connections: <ProfileTabConnections />,
-            wallet: <ProfileTabWallet />
+            wallet: <ProfileTabWallet />,
+            history: <ProfileTabHistory />
           }[tab]
         }
       </div>
