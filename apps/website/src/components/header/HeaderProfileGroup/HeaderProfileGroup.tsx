@@ -22,6 +22,11 @@ function HeaderProfileGroup({ styles }: { styles?: React.CSSProperties }) {
           cursor: 'pointer'
         }}
         onClick={profile.open}
+        src={
+          auth.user.accounts?.discord?.discordAvatar
+            ? `https://cdn.discordapp.com/avatars/${auth.user?.accounts?.discord?.discordId}/${auth.user?.accounts?.discord?.discordAvatar}.png`
+            : undefined
+        }
       >
         {(auth.user.displayName || auth.user.username)
           .split(' ')
