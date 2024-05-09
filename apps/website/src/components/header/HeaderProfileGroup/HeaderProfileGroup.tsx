@@ -2,6 +2,8 @@ import { Avatar } from '@mantine/core';
 
 import CoinsDisplay from '../CoinsDisplay/CoinsDisplay';
 
+import { getProfilePicture } from '@/util/discord';
+
 import { useAuth } from '@/hooks/auth';
 import { useProfile } from '@/hooks/profile';
 
@@ -24,7 +26,7 @@ function HeaderProfileGroup({ styles }: { styles?: React.CSSProperties }) {
         onClick={profile.open}
         src={
           auth.user.accounts?.discord?.discordAvatar
-            ? `https://cdn.discordapp.com/avatars/${auth.user?.accounts?.discord?.discordId}/${auth.user?.accounts?.discord?.discordAvatar}.png`
+            ? getProfilePicture(auth.user.accounts?.discord)
             : undefined
         }
       >
