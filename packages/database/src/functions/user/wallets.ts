@@ -123,6 +123,11 @@ export async function updateSteamTradeUrl(steamTradeUrl: string, userId: string)
     return false;
   }
 
+  const valid = steamTradeUrl.includes('steamcommunity.com/tradeoffer/new');
+  if (!valid) {
+    return false;
+  }
+
   await prisma.userWallets.upsert({
     where: {
       userId
