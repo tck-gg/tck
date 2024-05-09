@@ -20,7 +20,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
 
   const result = await updateSteamTradeUrl(cleanAddress, user.id);
   if (!result) {
-    res.status(403).end();
+    res.status(400).end();
     return;
   }
   res.status(200).end();
