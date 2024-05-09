@@ -27,10 +27,14 @@ function ProfileWallet({
   const [address, setAddress] = useState<string>('');
   const [debouncedAddress] = useDebounce(address, 300);
 
-  useEffect(() => {
+  function resetWallet() {
     const wallets = auth.user?.wallets || {};
     const field = camelCase(name);
     setAddress(wallets[field as keyof typeof wallets] || '');
+  }
+
+  useEffect(() => {
+    resetWallet();
   }, [auth.user?.wallets]);
 
   useEffect(() => {
@@ -38,7 +42,7 @@ function ProfileWallet({
       return;
     }
     (async () => {
-      await axios.post(
+      const response = await axios.post(
         httpAddress,
         {
           address: debouncedAddress
@@ -52,8 +56,16 @@ function ProfileWallet({
           }
         }
       );
-      await auth.refresh();
+
       setHasChanged(false);
+
+      if (response.status !== 200) {
+        resetWallet();
+
+        return;
+      }
+
+      await auth.refresh();
     })();
   }, [debouncedAddress]);
 
