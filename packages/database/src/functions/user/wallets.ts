@@ -1,3 +1,5 @@
+import { validate } from 'multicoin-address-validator';
+
 import { prisma } from '../../client';
 import { getUserById } from './fetch';
 
@@ -13,6 +15,11 @@ export async function updateBitcoinWallet(wallet: string, userId: string): Promi
 
   const user = await getUserById(userId);
   if (!user) {
+    return false;
+  }
+
+  const valid = validate(wallet, 'btc');
+  if (!valid) {
     return false;
   }
 
@@ -46,6 +53,11 @@ export async function updateEthereumWallet(wallet: string, userId: string): Prom
     return false;
   }
 
+  const valid = validate(wallet, 'eth');
+  if (!valid) {
+    return false;
+  }
+
   await prisma.userWallets.upsert({
     where: {
       userId
@@ -76,6 +88,11 @@ export async function updateLitecoinWallet(wallet: string, userId: string): Prom
     return false;
   }
 
+  const valid = validate(wallet, 'ltc');
+  if (!valid) {
+    return false;
+  }
+
   await prisma.userWallets.upsert({
     where: {
       userId
@@ -103,6 +120,11 @@ export async function updateSteamTradeUrl(steamTradeUrl: string, userId: string)
 
   const user = await getUserById(userId);
   if (!user) {
+    return false;
+  }
+
+  const valid = steamTradeUrl.includes('steamcommunity.com/tradeoffer/new');
+  if (!valid) {
     return false;
   }
 

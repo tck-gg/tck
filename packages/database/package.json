@@ -31,6 +31,7 @@
     "custom-util": "*",
     "date-fns": "^2.30.0",
     "mongodb": "^6.0.0",
+    "multicoin-address-validator": "^0.5.16",
     "proxycheck-ts": "^0.0.9",
     "random-org": "^2.2.0",
     "sanitize-html": "^2.11.0",
@@ -40,6 +41,7 @@
   },
   "devDependencies": {
     "@types/backblaze-b2": "^1.5.2",
+    "@types/multicoin-address-validator": "^0.5.2",
     "@types/sanitize-html": "^2.9.5",
     "cross-env": "^7.0.3",
     "eslint-config-custom": "*",
