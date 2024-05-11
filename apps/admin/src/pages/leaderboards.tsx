@@ -27,7 +27,8 @@ export async function getServerSideProps() {
   return {
     props: {
       roobetData
-    }
+    },
+    revalidate: 3600
   };
 }
 
