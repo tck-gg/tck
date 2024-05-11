@@ -8,7 +8,7 @@ import { usePermissions } from '@/hooks/permissions';
 import { Paper, SegmentedControl, Table, Title } from '@mantine/core';
 import { RoobetLeaderboardSpot } from 'types';
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   const monthStart = new Date(new Date().getFullYear(), new Date().getMonth(), 1)
     .toISOString()
     .split('T')[0];
