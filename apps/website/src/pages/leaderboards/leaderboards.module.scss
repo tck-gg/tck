@@ -68,6 +68,18 @@
   text-shadow: rgba(221, 180, 63, 0.66) 0px 0px 0.5rem;
 }
 
+.disclaimer {
+  text-align: center;
+  font-size: 12px;
+
+  opacity: 0.5;
+
+  max-width: 727px;
+
+
+  margin-bottom: 1em;
+}
+
 @media screen and (max-width: 950px) {
   .hideOnMobile {
     display: none;
