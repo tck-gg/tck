@@ -137,6 +137,8 @@ model User {
   kickVerification KickVerification?
 
   createdKickRaffles KickRaffle[]
+
+  submittedCommunityWinVideos CommunityWinVideo[]
 }
 
 model BannedIp {
@@ -235,4 +237,19 @@ model KickRaffle {
   creatorId String @db.ObjectId
 
   timestamp Int
+}
+
+model CommunityWinVideo {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  submitter User @relation(fields: [submitterId], references: [id])
+  submitterId String @db.ObjectId
+
+  link String @unique
+  thumbnail String @unique
+
+  upvotes String[]
+  downvotes String[]
+
+  isVerified Boolean @default(false)
 }
