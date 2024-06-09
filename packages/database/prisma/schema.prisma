@@ -138,7 +138,8 @@ model User {
 
   createdKickRaffles KickRaffle[]
 
-  submittedCommunityWinVideos CommunityWinVideo[]
+  submittedCommunityWinVideos CommunityWinVideoSubmission[]
+  communityWinVideos          CommunityWinVideo[]
 }
 
 model BannedIp {
@@ -237,6 +238,15 @@ model KickRaffle {
   creatorId String @db.ObjectId
 
   timestamp Int
+}
+
+model CommunityWinVideoSubmission {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  submitter User @relation(fields: [submitterId], references: [id])
+  submitterId String @db.ObjectId
+
+  link String
 }
 
 model CommunityWinVideo {
