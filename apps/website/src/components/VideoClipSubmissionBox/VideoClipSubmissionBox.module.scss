@@ -29,21 +29,29 @@
 
 
 .body {
-  padding: 24px 16px;
+  padding: 24px 16px 0px 16px;
 
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  gap: 18px;
 
   flex-grow: 1;
 }
 
 .footer {
-  height: 48px;
-
-  padding: 16px;
+  padding: 24px;
 
   color: #989EAE;
   font-size: 13px;
   font-weight: 400;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.center {
+  text-align: center;
 }

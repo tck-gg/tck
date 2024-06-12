@@ -26,7 +26,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     return;
   }
 
-  const success = await submitClip(clipLink.trim());
+  const success = await submitClip(clipLink.trim(), user.id);
 
   res.status(success ? 201 : 409).end();
 }
