@@ -8,6 +8,7 @@ https://discord.com/oauth2/authorize?client_id=1188676912525090837&scope=bot&per
 
 ## User Permissions
 - `ACCESS_ADMIN_PANEL`
+- `MANAGE_CLIPS`
 - `MANAGE_USERS`
 - `MANAGE_LEADERBOARDS`
 - `MANAGE_RAFFLES`

@@ -1,3 +1,5 @@
+import { AdminPanelClip } from 'types';
+
 import { prisma } from '../client';
 
 export async function submitClip(clipLink: string, userId: string): Promise<boolean> {
@@ -13,4 +15,14 @@ export async function submitClip(clipLink: string, userId: string): Promise<bool
   });
 
   return true;
+}
+
+export async function getAdminPanelClips(): Promise<AdminPanelClip[]> {
+  const clips = await prisma.communityWinVideoSubmission.findMany({
+    select: {
+      id: true,
+      link: true
+    }
+  });
+  return clips;
 }

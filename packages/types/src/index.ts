@@ -1,5 +1,6 @@
 export * from './types/csgobig';
 export * from './types/clash';
+export * from './types/clips';
 export * from './types/gamdom';
 export * from './types/giveaway';
 export * from './types/ip';

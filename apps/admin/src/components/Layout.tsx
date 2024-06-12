@@ -18,7 +18,8 @@ import {
   IconHome,
   IconMedal,
   IconUsers,
-  IconDevicesPc
+  IconDevicesPc,
+  IconMovie
 } from '@tabler/icons-react';
 import { useState } from 'react';
 import Link from 'next/link';
@@ -100,7 +101,8 @@ const SIDEBAR_DATA: {
     icon: IconMedal,
     permission: 'MANAGE_LEADERBOARDS'
   },
-  { link: '/ips', label: 'IPs', icon: IconDevicesPc, permission: 'MANAGE_IPS' }
+  { link: '/ips', label: 'IPs', icon: IconDevicesPc, permission: 'MANAGE_IPS' },
+  { link: '/clips', label: 'Clips', icon: IconMovie, permission: 'MANAGE_CLIPS' }
 ];
 
 function Layout({ title, children }: { title?: string; children: React.ReactNode }) {
