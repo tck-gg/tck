@@ -216,6 +216,14 @@ function Leaderboards({
             {leaderboards[selectedLeaderboard].spots.length > 3 && (
               <Leaderboard leaderboard={leaderboards[selectedLeaderboard]} />
             )}
+
+            {selectedLeaderboard === 'roobet' && (
+              <p className={classes.disclaimer}>
+                Any table game wager abuse that Roobet detects is subject to disqualification. For
+                example: $5-$100 wager per Blackjack hand and throughout the leaderboard the user
+                performed 100,000+ bets, opposite betting on roulette/baccarat, etc.
+              </p>
+            )}
           </>
         )}
       </div>
