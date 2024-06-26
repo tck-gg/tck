@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 
+import { Agent } from 'https';
 import * as Sentry from '@sentry/node';
 import { ProfilingIntegration } from '@sentry/profiling-node';
 import { Events, Kient } from 'kient';
@@ -14,6 +15,55 @@ const {
   validateKickVerification
 } = database;
 import OTP from 'otp';
+import * as cheerio from 'cheerio';
+import axios from 'axios';
+
+function cleanText(text: string) {
+  return text.replace(/\s+/g, ' ').trim();
+}
+
+export async function fetchUpcomingSlots(count: number) {
+  try {
+    const { data } = await axios.get('https://www.bigwinboard.com/upcoming-slots/', { httpsAgent: new Agent({ rejectUnauthorized: false }) });
+    const $ = cheerio.load(data);
+
+    const slots: string[] = [];
+    const dates: string[] = [];
+    const providers: string[] = [];
+
+
+    $('.pt-cv-title').each((i, elem) => {
+      if (i < count) slots.push(cleanText($(elem).text()));
+    });
+
+    $('.pt-cv-ctf-value').each((i, elem) => {
+      if (i < count) dates.push(cleanText($(elem).text()));
+    });
+
+    $('span.terms').each((i, elem) => {
+      if (i < count) providers.push(cleanText($(elem).text()));
+    });
+
+    const upcoming: {
+      slot: string;
+      date: string;
+      provider: string;
+    
+    }[] = [];
+    for (let i = 0; i < count; i++) {
+      upcoming.push({
+        slot: slots[i],
+        date: dates[i],
+        provider: providers[i]
+      });
+    }
+
+    return upcoming;
+  } catch (error) {
+    console.error(`Error fetching data: ${error}`);
+  }
+  return []
+}
 
 if(!process.env.KICK_CHANNEL || !process.env.KICK_VERIFY_CHANNEL || !process.env.KICK_EMAIL || !process.env.KICK_PASSWORD || !process.env.KICK_2FA || !process.env.KICK_AUTH) {
   console.log('Missing environment variables. Not starting Kick bot...');
@@ -170,6 +220,22 @@ if(process.env.NODE_ENV === 'production') {
       const points = await getUserPointsByKickId(kickId);
 
       await client.api.chat.sendMessage(channel.data.chatroom.id, `@${kickUsername} You have ${points} point${points !== 1 ? 's' : ''}!`);
+    }
+
+    if(content === '!upcoming') {
+      const upcoming = await fetchUpcomingSlots(5);
+
+      if(upcoming.length === 0) {
+        await client.api.chat.sendMessage(channel.data.chatroom.id, `No upcoming slots found.`);
+        return;
+      }
+
+      const toSend = upcoming.map((slot) => `${slot.slot} on ${slot.date}`);
+
+      await client.api.chat.sendMessage(channel.data.chatroom.id, toSend.slice(0, 3).join(', '));
+      if(upcoming.length > 3) {
+        await client.api.chat.sendMessage(channel.data.chatroom.id, toSend.slice(3).join(', '));
+      }
     }
   });
 
