@@ -1,0 +1,75 @@
+.mainWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.tasksTypeWrapper {
+}
+
+.headerWrapper {
+  position: relative;
+  padding-bottom: 24px;
+  display: flex;
+  align-items: center;
+  height: 32px;
+}
+
+.headerAcc {
+  position: absolute;
+}
+
+.tasksHeader {
+  position: relative;
+  font-size: 17px;
+  font-style: italic;
+  font-weight: bolder;
+  text-transform: uppercase;
+  padding-left: 12px;
+}
+
+.tasksWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.taskWrapper {
+  display: flex;
+  align-items: center;
+  border-radius: 8px;
+  background-color: #161625;
+  height: 80px;
+  min-height: 80px;
+  overflow: hidden;
+}
+
+.taskLogo {
+  height: 100%;
+  width: 200px;
+  min-width: 200px;
+  background-color: #040710bb;
+  padding: 20px;
+}
+
+.taskContent {
+  padding: 20px;
+  flex: auto;
+}
+
+.taskTitle {
+  font-size: 14px;
+  color: white;
+  font-weight: bold;
+  padding-bottom: 6px;
+}
+
+.taskDescription {
+  font-weight: 500;
+  font-size: 12px;
+  color: #989eae;
+}
+
+.taskButton {
+  padding: 20px;
+}
