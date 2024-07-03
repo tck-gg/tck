@@ -181,6 +181,9 @@ export async function getLeaderboard(type: LeaderboardType) {
       .sort((a, b) => {
         return b.wagered - a.wagered;
       })
+      .filter((spot) => {
+        return spot.username !== 'TCKgg';
+      })
       .splice(0, 10)
       .map((spot) => {
         return {
