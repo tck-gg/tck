@@ -30,6 +30,9 @@ export async function getServerSideProps() {
   const response = await axios.get(`https://kick.com/api/v2/channels/${CHANNEL}/livestream`, {
     headers: {
       'x-kick-auth': process.env.KICK_AUTH
+    },
+    validateStatus: () => {
+      return true;
     }
   });
   const data = response.data;
