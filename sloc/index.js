@@ -1,4 +1,5 @@
 const sloc = require('node-sloc');
+const chalk = require('chalk');
 
 const PATHS = [
   'apps/admin/src',
@@ -27,13 +28,36 @@ async function getSloc(path) {
     ],
     ignoreDefault: true
   });
-  return result.sloc;
+
+  return {
+    sloc: result.sloc,
+    comments: result.comments,
+    blank: result.blank,
+    files: result.files
+  };
 }
 
 (async () => {
-  let sum = 0;
+  let totals = {
+    sloc: 0,
+    comments: 0,
+    blank: 0,
+    files: 0
+  };
   for(const path of PATHS) {
-    sum += await getSloc(path);
+    const result = (await getSloc(path))
+    totals.sloc += result.sloc;
+    totals.comments += result.comments;
+    totals.blank += result.blank;
+    totals.files += result.files;
   }
-  console.log(`SLOC: ${sum} (${sum - 18138})`);
+
+  const total = totals.sloc + totals.comments + totals.blank;
+
+  console.log(chalk.bold(chalk.underline(`Total`) +  `: ${total} Lines of Code (${total - 18138})`));
+  console.log(`> Source: ${totals.sloc}`);
+  console.log(`> Comment: ${totals.comments}`);
+  console.log(`> Blank: ${totals.blank}`);
+  console.log();
+  console.log(`> Files: ${totals.files}`);
 })();
