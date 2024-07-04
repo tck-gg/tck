@@ -3,6 +3,9 @@ import PageHeader from '@/components/PageHeader/PageHeader';
 import classes from './tasks.module.scss';
 import Image from 'next/image';
 import header from '../../images/tasks/tasks-header.png';
+import coinBackground from '../../images/tasks/coin-background.png';
+import Button from '@/components/ui/Button/Button';
+import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
 function Tasks() {
   const data = [
@@ -138,7 +141,18 @@ function Tasks() {
                         <div className={classes.taskTitle}>{task.title}</div>
                         <div className={classes.taskDescription}>{task.description}</div>
                       </div>
-                      <div className={classes.taskButton}></div>
+                      <div className={classes.actionWrapper}>
+                        <div className={classes.rewardWrapper}>
+                          <div className={classes.reward}>{task.reward}</div>
+                          <Image
+                            src={coinBackground}
+                            className={classes.coinBackground}
+                            alt='Coin background'
+                            width={150}
+                          />
+                        </div>
+                        <Button rightIcon={faChevronRight}>{task.buttonText ?? ''}</Button>
+                      </div>
                     </div>
                   );
                 })}

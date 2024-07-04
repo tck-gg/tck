@@ -73,3 +73,25 @@
 .taskButton {
   padding: 20px;
 }
+
+.actionWrapper {
+  padding: 20px;
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  overflow: hidden;
+}
+
+.rewardWrapper {
+  position: relative;
+}
+
+.reward {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.coinBackground {
+  position: relative;
+}
