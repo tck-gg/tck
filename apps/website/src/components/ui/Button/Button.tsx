@@ -51,6 +51,7 @@ function Button({
         borderRadius,
         background,
         width,
+        minWidth: width,
         color
       }}
     >

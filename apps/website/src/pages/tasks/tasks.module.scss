@@ -44,17 +44,21 @@
   overflow: hidden;
 }
 
-.taskLogo {
+.taskLogoWrapper {
   height: 100%;
-  width: 200px;
-  min-width: 200px;
+  width: 180px;
+  min-width: 180px;
   background-color: #040710bb;
   padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .taskContent {
   padding: 20px;
-  flex: auto;
+  flex: 1 1 0%;
 }
 
 .taskTitle {
@@ -74,24 +78,90 @@
   padding: 20px;
 }
 
+.taskButtonText {
+  font-size: '14px';
+}
+
 .actionWrapper {
   padding: 20px;
   display: flex;
-  gap: 16px;
+  gap: 12px;
   align-items: center;
   overflow: hidden;
+  justify-content: center;
 }
 
 .rewardWrapper {
+  width: 120px;
+  min-width: 120px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  justify-content: center;
+  height: 50px;
+  gap: 6px;
+}
+
+.coinImage {
   position: relative;
 }
 
 .reward {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
+  position: relative;
+  font-size: 14px;
+  font-weight: 800;
 }
 
 .coinBackground {
+  position: absolute;
+}
+
+.doneWrapper {
   position: relative;
+  display: flex;
+  align-items: center;
+  height: 32px;
+  width: 90px;
+  justify-content: center;
+  gap: 4px;
+}
+
+.doneAcc {
+  position: absolute;
+  left: 8px;
+}
+
+.doneText {
+  font-size: 14px;
+  font-weight: 800;
+  text-transform: uppercase;
+  font-style: italic;
+  color: #00ff86;
+}
+
+.doneOpacity {
+  opacity: 0.7;
+}
+
+.checkIcon {
+  color: #00ff86;
+}
+
+@media screen and (max-width: 1024px) {
+  .taskWrapper {
+    height: fit-content;
+    min-height: fit-content;
+  }
+
+  .taskLogoWrapper {
+    display: none;
+  }
+
+  .actionWrapper {
+    flex-direction: column;
+    gap: 6px;
+    align-items: end;
+  }
 }

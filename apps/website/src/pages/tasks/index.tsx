@@ -3,9 +3,19 @@ import PageHeader from '@/components/PageHeader/PageHeader';
 import classes from './tasks.module.scss';
 import Image from 'next/image';
 import header from '../../images/tasks/tasks-header.png';
+import done from '../../images/tasks/done.png';
 import coinBackground from '../../images/tasks/coin-background.png';
+import youtube from '../../images/tasks/youtube.png';
+import tiktok from '../../images/tasks/tiktok.png';
+import instagram from '../../images/tasks/instagram.png';
+import kick from '../../images/tasks/kick.png';
+import x from '../../images/tasks/x.png';
+import discord from '../../images/tasks/discord.png';
+import stake from '../../images/tasks/stake.png';
+import coin from '../../images/coin.png';
 import Button from '@/components/ui/Button/Button';
-import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import { faChevronRight, faCheck } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 function Tasks() {
   const data = [
@@ -121,6 +131,27 @@ function Tasks() {
     }
   ];
 
+  const handleGetLogo = (type: string) => {
+    switch (type.toLowerCase()) {
+      case 'youtube':
+        return youtube;
+      case 'tiktok':
+        return tiktok;
+      case 'instagram':
+        return instagram;
+      case 'kick':
+        return kick;
+      case 'x':
+        return x;
+      case 'discord':
+        return discord;
+      case 'stake':
+        return stake;
+      default:
+        return youtube;
+    }
+  };
+
   return (
     <Layout title='Tasks'>
       <PageHeader title='Tasks' />
@@ -135,23 +166,51 @@ function Tasks() {
               <div className={classes.tasksWrapper}>
                 {data.tasks.map((task) => {
                   return (
-                    <div key={task.id} className={classes.taskWrapper}>
-                      <div className={classes.taskLogo}></div>
+                    <div
+                      key={task.id}
+                      className={`${classes.taskWrapper} ${task.done ? classes.doneOpacity : ''}`}
+                    >
+                      <div className={classes.taskLogoWrapper}>
+                        <Image
+                          src={handleGetLogo(task.type)}
+                          className={classes.logoImage}
+                          alt={task.type}
+                          width={80}
+                          height={20}
+                          style={{ objectFit: 'contain' }}
+                        />
+                      </div>
                       <div className={classes.taskContent}>
                         <div className={classes.taskTitle}>{task.title}</div>
                         <div className={classes.taskDescription}>{task.description}</div>
                       </div>
                       <div className={classes.actionWrapper}>
                         <div className={classes.rewardWrapper}>
-                          <div className={classes.reward}>{task.reward}</div>
                           <Image
                             src={coinBackground}
                             className={classes.coinBackground}
                             alt='Coin background'
-                            width={150}
+                            width={120}
                           />
+                          <Image src={coin} className={classes.coinImage} alt='Coin' width={20} />
+                          <div className={classes.reward}>{task.reward}</div>
                         </div>
-                        <Button rightIcon={faChevronRight}>{task.buttonText ?? ''}</Button>
+                        {task.done ? (
+                          <div className={classes.doneWrapper}>
+                            <Image
+                              src={done}
+                              className={classes.doneAcc}
+                              alt='Done acc'
+                              width={30}
+                            />
+                            <FontAwesomeIcon icon={faCheck} className={classes.checkIcon} />
+                            <span className={classes.doneText}>Done</span>
+                          </div>
+                        ) : (
+                          <Button width={90} rightIcon={faChevronRight}>
+                            <span className={classes.taskButtonText}>{task.buttonText ?? ''}</span>
+                          </Button>
+                        )}
                       </div>
                     </div>
                   );
