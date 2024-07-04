@@ -34,7 +34,7 @@ function Tasks() {
           reward: 250000,
           url: 'https://google.com',
           buttonText: 'Like',
-          shadowColor: '#123123'
+          shadowColor: '#CD3234'
         },
         {
           id: 2,
@@ -46,7 +46,7 @@ function Tasks() {
           reward: 250000,
           url: 'https://google.com',
           buttonText: 'Like',
-          shadowColor: '#123123'
+          shadowColor: '#B8B8B8'
         },
         {
           id: 3,
@@ -58,7 +58,7 @@ function Tasks() {
           reward: 250000,
           url: 'https://google.com',
           buttonText: 'Like',
-          shadowColor: '#123123'
+          shadowColor: '#ED0192'
         },
         {
           id: 4,
@@ -70,7 +70,7 @@ function Tasks() {
           reward: 250000,
           url: 'https://google.com',
           buttonText: 'Watch',
-          shadowColor: '#123123'
+          shadowColor: '#2B8011'
         }
       ]
     },
@@ -89,7 +89,7 @@ function Tasks() {
           reward: 250000,
           url: 'https://google.com',
           buttonText: 'Follow',
-          shadowColor: '#123123'
+          shadowColor: '#B8B8B8'
         },
         {
           id: 2,
@@ -101,7 +101,7 @@ function Tasks() {
           reward: 250000,
           url: 'https://google.com',
           buttonText: 'Follow',
-          shadowColor: '#123123'
+          shadowColor: '#B8B8B8'
         },
         {
           id: 3,
@@ -113,7 +113,7 @@ function Tasks() {
           reward: 250000,
           url: 'https://google.com',
           buttonText: 'Join',
-          shadowColor: '#123123'
+          shadowColor: '#5865F2'
         },
         {
           id: 4,
@@ -125,7 +125,7 @@ function Tasks() {
           reward: 250000,
           url: 'https://google.com',
           buttonText: 'Register',
-          shadowColor: '#123123'
+          shadowColor: '#B8B8B8'
         }
       ]
     }
@@ -171,11 +171,17 @@ function Tasks() {
                       className={`${classes.taskWrapper} ${task.done ? classes.doneOpacity : ''}`}
                     >
                       <div className={classes.taskLogoWrapper}>
+                        <div
+                          className={classes.shadow}
+                          style={{
+                            background: `radial-gradient(circle, ${task.shadowColor}99 0%, #00000000 50%)`
+                          }}
+                        ></div>
                         <Image
                           src={handleGetLogo(task.type)}
                           className={classes.logoImage}
                           alt={task.type}
-                          width={80}
+                          width={90}
                           height={20}
                           style={{ objectFit: 'contain' }}
                         />
