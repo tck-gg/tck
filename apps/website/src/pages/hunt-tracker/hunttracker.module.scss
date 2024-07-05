@@ -1,0 +1,443 @@
+.mainWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+/* index.module.css */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  color: #989eae;
+}
+
+.sideTableContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  @media (min-width: 1024px) {
+    flex-direction: row;
+  }
+}
+
+.leftSideContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 300px;
+
+  min-height: 80vh;
+  max-height: 80vh;
+
+  @media (max-width: 1024px) {
+    min-height: auto;
+    width: 100%;
+  }
+}
+
+.halfHeight {
+  background-color: #161625;
+  overflow: hidden;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  height: 50%;
+}
+
+.p1rem {
+  padding: 16px;
+}
+
+.predictionHeader {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  background-image: linear-gradient(to right, #18a9ff, #9229ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.icon {
+  color: transparent;
+}
+
+.predictionText {
+  font-weight: 600;
+  font-size: 12px;
+  color: transparent;
+}
+
+.title {
+  font-weight: 700;
+  font-size: 20px;
+  color: white;
+}
+
+.progressContainer {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.progressBar {
+  flex: 1;
+  height: 4px;
+  background-color: #10101c;
+  border-radius: 9999px;
+  position: relative;
+}
+
+.progress {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  background-image: linear-gradient(to right, #18a9ff, #9229ff);
+}
+
+.time {
+  font-size: 11px;
+  font-weight: 500;
+  color: #989eae;
+}
+
+.voteContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.voteOption {
+  height: 64px;
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
+  justify-content: center;
+  border: 1px solid #2a2a43;
+  border-radius: 6px;
+  background-color: #1c1c2e;
+  position: relative;
+  overflow: hidden;
+}
+
+.voteBackground {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 15%;
+  background-color: #24243a;
+}
+
+.voteText {
+  color: white;
+  font-weight: 700;
+  font-size: 14px;
+  position: relative;
+}
+
+.voteCount {
+  font-weight: 500;
+  font-size: 11px;
+  color: #989eae;
+  position: relative;
+}
+
+.actionContainer {
+  overflow: hidden;
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.profilePictures {
+  display: flex;
+  gap: 4px;
+}
+
+.profilePicture {
+  width: 48px;
+  height: 48px;
+  border-radius: 9999px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: -32px;
+  &:first-child {
+    margin-left: 0;
+  }
+}
+
+.profileDetails {
+  display: flex;
+  flex-direction: column;
+  margin-right: auto;
+}
+
+.profileCount {
+  font-size: 12px;
+  font-weight: 700;
+  color: #989eae;
+}
+
+.moreText {
+  font-size: 12px;
+  font-weight: 700;
+  color: #4f5261;
+}
+
+.awardIcon {
+  color: #1ca5ff;
+  font-size: 12px;
+}
+
+.predictButton {
+  width: 100%;
+  background-color: #ef4444;
+  padding: 8px;
+}
+
+.dateButtonContainer {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  padding: 16px;
+  position: relative;
+}
+
+.dateButton {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 12px;
+  border-top: 1px solid #373756;
+  border-radius: 6px;
+  border: none;
+  background-color: transparent;
+}
+
+.activeDateButton {
+  background-image: linear-gradient(to bottom, #26263a, #161625);
+}
+
+.dateButtonText {
+  color: white;
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.dateButtonSubText {
+  font-size: 11px;
+  font-weight: 500;
+  color: #989eae;
+}
+
+.dateButtonOverlay {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(to right, #16162500, #161625);
+  pointer-events: none;
+}
+
+.statsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+}
+
+.statsRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  font-size: 12px;
+}
+
+.statsLabel {
+  font-weight: 700;
+  color: white;
+}
+
+.statsValue {
+  text-align: right;
+  font-weight: 500;
+}
+
+.averageStatsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  border-top: 1px solid #03040b;
+}
+
+.tableWrapper {
+  display: flex;
+  flex-direction: column;
+  background-color: #161625;
+  flex: 1;
+  border-radius: 8px;
+  min-height: 80vh;
+  max-height: 80vh;
+  overflow: hidden;
+}
+
+.searchBar {
+  display: flex;
+  align-items: center;
+  height: 64px;
+}
+
+.searchInputContainer {
+  position: relative;
+  background-color: #161625;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.searchIcon {
+  position: absolute;
+  color: #989eae;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  bottom: 0;
+}
+
+.searchInput {
+  color: #989eae;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 16px;
+  width: 100%;
+  padding-left: 48px;
+  background-color: transparent;
+  border: none;
+  outline: none;
+}
+
+.searchToggleContainer {
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+  font-size: 14px;
+  gap: 8px;
+  padding: 16px;
+}
+
+.tableContainer {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.table {
+  width: 100%;
+}
+
+.tableRow {
+  &:nth-of-type(odd) {
+    background-color: #11111e;
+  }
+}
+
+.tableCellIndex {
+  text-align: center;
+  font-weight: 800;
+  padding: 16px;
+}
+
+.tableCellName {
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.tableCellDescription,
+.tableCellPrice,
+.tableCellMultiplier,
+.tableCellTotal {
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.tableCellTotal {
+  color: white;
+  font-weight: 700;
+}
+
+.bottomContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  @media (min-width: 1024px) {
+    flex-direction: row;
+  }
+}
+
+.bottomItem {
+  width: 100%;
+  @media (min-width: 1024px) {
+    width: 33.333%;
+  }
+  background-color: #161625;
+  overflow: hidden;
+  border-radius: 8px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.imageContainer {
+  aspect-ratio: 1 / 1;
+  height: 100%;
+}
+
+.itemDetails {
+  display: flex;
+  flex-direction: column;
+}
+
+.itemName {
+  font-weight: 800;
+  color: white;
+}
+
+.itemDescription {
+  font-size: 12px;
+  font-weight: 500;
+  padding-bottom: 8px;
+}
+
+.itemMultiContainer {
+  position: relative;
+  overflow: hidden;
+}
+
+.multiDetails {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  gap: 8px;
+  justify-content: space-between;
+}
+
+.multiType {
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.multiData {
+  font-weight: 800;
+  font-size: 15px;
+  color: white;
+}

@@ -1,6 +1,6 @@
 import Layout from '@/components/Layout/Layout';
 import PageHeader from '@/components/PageHeader/PageHeader';
-import classes from './tasks.module.scss';
+import styles from './tasks.module.scss';
 import Image from 'next/image';
 import header from '../../images/tasks/tasks-header.png';
 import done from '../../images/tasks/done.png';
@@ -33,8 +33,7 @@ function Tasks() {
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
           reward: 250000,
           url: 'https://google.com',
-          buttonText: 'Like',
-          shadowColor: '#CD3234'
+          buttonText: 'Like'
         },
         {
           id: 2,
@@ -45,8 +44,7 @@ function Tasks() {
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
           reward: 250000,
           url: 'https://google.com',
-          buttonText: 'Like',
-          shadowColor: '#B8B8B8'
+          buttonText: 'Like'
         },
         {
           id: 3,
@@ -57,8 +55,7 @@ function Tasks() {
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
           reward: 250000,
           url: 'https://google.com',
-          buttonText: 'Like',
-          shadowColor: '#ED0192'
+          buttonText: 'Like'
         },
         {
           id: 4,
@@ -69,8 +66,7 @@ function Tasks() {
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
           reward: 250000,
           url: 'https://google.com',
-          buttonText: 'Watch',
-          shadowColor: '#2B8011'
+          buttonText: 'Watch'
         }
       ]
     },
@@ -88,8 +84,7 @@ function Tasks() {
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
           reward: 250000,
           url: 'https://google.com',
-          buttonText: 'Follow',
-          shadowColor: '#B8B8B8'
+          buttonText: 'Follow'
         },
         {
           id: 2,
@@ -100,8 +95,7 @@ function Tasks() {
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
           reward: 250000,
           url: 'https://google.com',
-          buttonText: 'Follow',
-          shadowColor: '#B8B8B8'
+          buttonText: 'Follow'
         },
         {
           id: 3,
@@ -112,8 +106,7 @@ function Tasks() {
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
           reward: 250000,
           url: 'https://google.com',
-          buttonText: 'Join',
-          shadowColor: '#5865F2'
+          buttonText: 'Join'
         },
         {
           id: 4,
@@ -124,8 +117,7 @@ function Tasks() {
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
           reward: 250000,
           url: 'https://google.com',
-          buttonText: 'Register',
-          shadowColor: '#B8B8B8'
+          buttonText: 'Register'
         }
       ]
     }
@@ -151,70 +143,92 @@ function Tasks() {
         return youtube;
     }
   };
+  const handleGetShadowHexcode = (type: string) => {
+    switch (type.toLowerCase()) {
+      case 'youtube':
+        return '#CD3234';
+      case 'tiktok':
+        return '#B8B8B8';
+      case 'instagram':
+        return '#ED0192';
+      case 'kick':
+        return '#2B8011';
+      case 'x':
+        return '#B8B8B8';
+      case 'discord':
+        return '#5865F2';
+      case 'stake':
+        return '#B8B8B8';
+      default:
+        return '#FFFFFF';
+    }
+  };
 
   return (
     <Layout title='Tasks'>
       <PageHeader title='Tasks' />
-      <div className={classes.mainWrapper}>
+      <div className={styles.mainWrapper}>
         {data.map((data) => {
           return (
-            <div key={data.id} className={classes.tasksTypeWrapper}>
-              <div className={classes.headerWrapper}>
-                <Image src={header} className={classes.headerAcc} alt='Header Acc' width={50} />
-                <span className={classes.tasksHeader}>{data.type}</span>
+            <div key={data.id} className={styles.tasksTypeWrapper}>
+              <div className={styles.headerWrapper}>
+                <Image src={header} className={styles.headerAcc} alt='Header Acc' width={50} />
+                <span className={styles.tasksHeader}>{data.type}</span>
               </div>
-              <div className={classes.tasksWrapper}>
+              <div className={styles.tasksWrapper}>
                 {data.tasks.map((task) => {
                   return (
                     <div
                       key={task.id}
-                      className={`${classes.taskWrapper} ${task.done ? classes.doneOpacity : ''}`}
+                      className={`${styles.taskWrapper} ${task.done ? styles.doneOpacity : ''}`}
                     >
-                      <div className={classes.taskLogoWrapper}>
+                      <div className={styles.taskLogoWrapper}>
                         <div
-                          className={classes.shadow}
+                          className={styles.shadow}
                           style={{
-                            background: `radial-gradient(circle, ${task.shadowColor}99 0%, #00000000 50%)`
+                            background: `radial-gradient(circle, ${handleGetShadowHexcode(
+                              task.type
+                            )}99 0%, #00000000 50%)`
                           }}
                         ></div>
                         <Image
                           src={handleGetLogo(task.type)}
-                          className={classes.logoImage}
+                          className={styles.logoImage}
                           alt={task.type}
                           width={90}
                           height={20}
                           style={{ objectFit: 'contain' }}
                         />
                       </div>
-                      <div className={classes.taskContent}>
-                        <div className={classes.taskTitle}>{task.title}</div>
-                        <div className={classes.taskDescription}>{task.description}</div>
+                      <div className={styles.taskContent}>
+                        <div className={styles.taskTitle}>{task.title}</div>
+                        <div className={styles.taskDescription}>{task.description}</div>
                       </div>
-                      <div className={classes.actionWrapper}>
-                        <div className={classes.rewardWrapper}>
+                      <div className={styles.actionWrapper}>
+                        <div className={styles.rewardWrapper}>
                           <Image
                             src={coinBackground}
-                            className={classes.coinBackground}
+                            className={styles.coinBackground}
                             alt='Coin background'
                             width={120}
                           />
-                          <Image src={coin} className={classes.coinImage} alt='Coin' width={20} />
-                          <div className={classes.reward}>{task.reward}</div>
+                          <Image src={coin} className={styles.coinImage} alt='Coin' width={20} />
+                          <div className={styles.reward}>{task.reward}</div>
                         </div>
                         {task.done ? (
-                          <div className={classes.doneWrapper}>
+                          <div className={styles.doneWrapper}>
                             <Image
                               src={done}
-                              className={classes.doneAcc}
+                              className={styles.doneAcc}
                               alt='Done acc'
                               width={30}
                             />
-                            <FontAwesomeIcon icon={faCheck} className={classes.checkIcon} />
-                            <span className={classes.doneText}>Done</span>
+                            <FontAwesomeIcon icon={faCheck} className={styles.checkIcon} />
+                            <span className={styles.doneText}>Done</span>
                           </div>
                         ) : (
                           <Button width={90} rightIcon={faChevronRight}>
-                            <span className={classes.taskButtonText}>{task.buttonText ?? ''}</span>
+                            <span className={styles.taskButtonText}>{task.buttonText ?? ''}</span>
                           </Button>
                         )}
                       </div>
