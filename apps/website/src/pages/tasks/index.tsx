@@ -4,7 +4,7 @@ import styles from './tasks.module.scss';
 import Image from 'next/image';
 import header from '../../images/tasks/tasks-header.png';
 import done from '../../images/tasks/done.png';
-import coinBackground from '../../images/tasks/coin-background.png';
+import coinBackground from '../../images/coin-background.png';
 import youtube from '../../images/tasks/youtube.png';
 import tiktok from '../../images/tasks/tiktok.png';
 import instagram from '../../images/tasks/instagram.png';
@@ -210,7 +210,6 @@ function Tasks() {
                             src={coinBackground}
                             className={styles.coinBackground}
                             alt='Coin background'
-                            width={120}
                           />
                           <Image src={coin} className={styles.coinImage} alt='Coin' width={20} />
                           <div className={styles.reward}>{task.reward}</div>

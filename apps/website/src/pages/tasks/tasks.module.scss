@@ -93,7 +93,6 @@
 }
 
 .rewardWrapper {
-  width: 120px;
   min-width: 120px;
   overflow: hidden;
   position: relative;
@@ -102,6 +101,7 @@
   justify-items: center;
   justify-content: center;
   height: 50px;
+  padding: 12px;
   gap: 6px;
 }
 
@@ -117,6 +117,11 @@
 
 .coinBackground {
   position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  object-fit: cover;
 }
 
 .doneWrapper {
