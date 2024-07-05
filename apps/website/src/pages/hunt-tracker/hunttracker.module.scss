@@ -28,8 +28,8 @@
   gap: 16px;
   width: 300px;
 
-  min-height: 80vh;
-  max-height: 80vh;
+  min-height: 800px;
+  max-height: 800px;
 
   @media (max-width: 1024px) {
     min-height: auto;
@@ -282,8 +282,8 @@
   background-color: #161625;
   flex: 1;
   border-radius: 8px;
-  min-height: 80vh;
-  max-height: 80vh;
+  min-height: 800px;
+  max-height: 800px;
   overflow: hidden;
 }
 
