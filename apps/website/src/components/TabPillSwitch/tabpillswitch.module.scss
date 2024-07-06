@@ -1,0 +1,43 @@
+.tabContainer {
+  display: inline-flex;
+  align-items: center;
+  background-color: #19171e;
+  padding: 4px;
+  border-radius: 50px;
+}
+
+.tabButton {
+  padding: 0 20px;
+  height: 40px;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  border-top: 1px solid transparent;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.activeTab {
+  background-color: #26263a;
+  border-color: #474758;
+}
+
+.inactiveTab {
+  background-color: transparent;
+  border-color: transparent;
+}
+
+.logo {
+  width: 128px;
+  height: 40px;
+  padding: 4px;
+  object-fit: contain;
+}
+
+.inactiveLogo {
+  filter: saturate(0);
+  opacity: 0.5;
+}

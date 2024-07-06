@@ -183,6 +183,7 @@ const HuntTrackerPage = () => {
   return (
     <Layout title='Hunt Tracker'>
       <PageHeader title='Hunt Tracker' />
+
       <div className={styles.container}>
         <div className={styles.sideTableContainer}>
           <div className={styles.leftSideContainer}>
