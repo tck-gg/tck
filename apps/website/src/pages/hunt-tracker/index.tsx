@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './hunttracker.module.scss';
 import Layout from '@/components/Layout/Layout';
 import PageHeader from '@/components/PageHeader/PageHeader';
@@ -13,8 +13,11 @@ import Button from '@/components/ui/Button/Button';
 import { faAward, faChevronRight, faSearch } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Switch } from '@mantine/core';
+import PredictioModal from '@/components/Modal/Prediction/PredictioModal';
 
 const HuntTrackerPage = () => {
+  const [showPredictionModal, setShowPredictionModal] = useState(false);
+
   const tableData = [
     {
       id: '2',
@@ -241,7 +244,14 @@ const HuntTrackerPage = () => {
                   <div className={styles.moreText}>more</div>
                 </div>
                 <div className={styles.predictButtonContainer}>
-                  <Button variant='gradient' rightIcon={faChevronRight} color='white'>
+                  <Button
+                    onClick={() => {
+                      setShowPredictionModal(true);
+                    }}
+                    variant='gradient'
+                    rightIcon={faChevronRight}
+                    color='white'
+                  >
                     Predict
                   </Button>
                 </div>
@@ -375,6 +385,16 @@ const HuntTrackerPage = () => {
           })}
         </div>
       </div>
+
+      <PredictioModal
+        isOpen={showPredictionModal}
+        open={() => {
+          setShowPredictionModal(true);
+        }}
+        close={() => {
+          setShowPredictionModal(false);
+        }}
+      />
     </Layout>
   );
 };

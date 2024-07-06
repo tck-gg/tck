@@ -52,10 +52,11 @@
 }
 
 .predictionHeader {
-  display: flex;
+  display: inline-flex;
   gap: 4px;
   align-items: center;
   background-image: linear-gradient(to right, #18a9ff, #9229ff);
+  color: transparent;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;

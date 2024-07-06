@@ -17,6 +17,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import GiveawayEntry from '@/components/giveaway/GiveawayEntry/GiveawayEntry';
+import PredictioModal from '@/components/Modal/Prediction/PredictioModal';
 
 const IndividualRafflePage = () => {
   const [showBackdrop, setShowBackdrop] = useState(true);

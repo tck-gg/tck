@@ -13,7 +13,6 @@ import ModalProfile from '@/components/profile/ModalProfile/ModalProfile';
 
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import '../styles/globals.scss';
-import Authentication from '@/components/Authentication/Authentication';
 
 function App({ Component, pageProps }: AppProps) {
   useEffect(() => {

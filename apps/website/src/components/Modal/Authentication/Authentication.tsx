@@ -1,6 +1,6 @@
 import { useAgeVerification } from '@/hooks/age-verification';
 import { faLock, faMessage, faUser, faChevronRight } from '@fortawesome/free-solid-svg-icons';
-import Button from '../ui/Button/Button';
+import Button from '../../ui/Button/Button';
 import classes from './Authentication.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Image from 'next/image';
