@@ -93,7 +93,7 @@ function Videos({ youtubeVideos }: { youtubeVideos: Video[] }) {
         </div>
 
         <div className={styles.videoSection}>
-          <VideoHeader type='youtube' viewUrl='/videos'>
+          <VideoHeader type='youtube' viewUrl='/videos' showViewAllButton={true}>
             Youtube
           </VideoHeader>
           <div className={styles.videoGrid}>
@@ -140,7 +140,7 @@ function Videos({ youtubeVideos }: { youtubeVideos: Video[] }) {
         </div>
 
         <div className={styles.videoSection}>
-          <VideoHeader type='instagram' viewUrl='/videos'>
+          <VideoHeader type='instagram' viewUrl='/videos' showViewAllButton={true}>
             Instagram
           </VideoHeader>
           <div className={styles.videoGrid}>

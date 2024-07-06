@@ -15,18 +15,26 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import styles from './videoheader.module.scss';
 import Button from '../ui/Button/Button';
-import { faChevronCircleRight, faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import {
+  faChevronCircleRight,
+  faChevronLeft,
+  faChevronRight
+} from '@fortawesome/free-solid-svg-icons';
 
 type HeaderType = 'youtube' | 'x' | 'instagram' | 'tiktok';
 
 const VideoHeader = ({
   type,
   viewUrl,
-  children
+  children,
+  showBackButton,
+  showViewAllButton
 }: {
   type: HeaderType;
   viewUrl?: string;
   children: React.ReactNode;
+  showBackButton?: boolean;
+  showViewAllButton?: boolean;
 }) => {
   const router = useRouter();
 
@@ -68,6 +76,12 @@ const VideoHeader = ({
 
   return (
     <div className={styles.headerContainer}>
+      {showBackButton && (
+        <Button variant='secondary' leftIcon={faChevronLeft}>
+          Back
+        </Button>
+      )}
+
       <div className={styles.logoContainer}>
         <Image className={styles.headerAcc} alt='Header acc' src={getHeaderAcc(type)} />
         <div className={styles.headerContent}>
@@ -76,7 +90,7 @@ const VideoHeader = ({
         </div>
       </div>
 
-      {viewUrl && (
+      {showViewAllButton && viewUrl && (
         <Button
           onClick={handleViewAllButtonClick}
           rightIcon={faChevronRight}
