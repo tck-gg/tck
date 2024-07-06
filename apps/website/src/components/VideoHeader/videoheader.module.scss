@@ -1,0 +1,49 @@
+/* index.module.scss */
+
+.headerContainer {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+}
+
+.logoContainer {
+  padding: 6px 0;
+  display: flex;
+  position: relative;
+  overflow: hidden;
+}
+
+.headerAcc {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  object-fit: contain;
+  width: 56px;
+  height: 36px;
+}
+
+.headerContent {
+  display: flex;
+  gap: 4px;
+  padding-left: 16px;
+  align-items: center;
+  position: relative;
+  padding-top: 0px;
+}
+
+.logo {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+.headerText {
+  position: relative;
+  font-weight: 800;
+  font-style: italic;
+  font-size: 17px;
+  color: white;
+  text-transform: uppercase;
+}

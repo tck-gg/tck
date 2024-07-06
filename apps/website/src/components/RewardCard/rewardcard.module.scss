@@ -1,0 +1,92 @@
+// RewardCard.module.scss
+
+.cardContainer {
+  display: flex;
+  flex-direction: column;
+  background-color: #161625;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.cardContent {
+  position: relative;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1 / 1;
+}
+
+.patternBackground {
+  width: 100%;
+  position: absolute;
+  inset: 0;
+  object-fit: cover;
+}
+
+.gradientBackground {
+  position: absolute;
+  width: 150%;
+  height: 150%;
+  opacity: 0.1;
+  border-radius: 50%;
+}
+
+.prizeContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.prizeText {
+  font-size: 72px;
+  font-weight: 900;
+  // -webkit-background-clip: text;
+  // -moz-background-clip: text;
+  // background-clip: text;
+  // color: transparent;
+  // -webkit-text-fill-color: transparent;
+  // -moz-text-fill-color: transparent;
+  @media screen and (max-width: 1024px) {
+    font-size: 54px;
+  }
+}
+
+.prizeDescription {
+  text-align: center;
+  font-size: 13px;
+}
+
+.cardFooter {
+  padding: 0 12px;
+  background-color: #161625;
+  position: relative;
+}
+
+.footerContent {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px 0;
+  border-top: 1px solid #26263a;
+  justify-content: center;
+  align-items: center;
+}
+
+.uploadContent {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.uploadIcon {
+  width: 12px;
+  height: 12px;
+}
+
+.uploadText {
+  font-weight: 700;
+  font-size: 13px;
+}

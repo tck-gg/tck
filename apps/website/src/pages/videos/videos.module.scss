@@ -1,5 +1,168 @@
-.sectionWrapper {
+// VideosPage.module.scss
+
+.pageContainer {
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: 48px;
+  width: 100%;
+  color: #989eae;
+}
+
+.stepsGrid {
+  display: grid;
+
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+  @media screen and (max-width: 1024px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.stepCard {
+  display: flex;
+  flex-direction: column;
+  background-color: #161625;
+  border-radius: 8px;
+  padding: 12px;
+  overflow: hidden;
+}
+
+.stepHeader {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #26263a;
+  align-items: center;
+  height: 48px;
+}
+
+.stepLabel {
+  font-weight: 800;
+  font-size: 13px;
+  font-style: italic;
+}
+
+.stepNumber {
+  color: white;
+  font-size: 18px;
+  font-weight: 900;
+  font-style: italic;
+}
+
+.stepContent {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-top: 12px;
+  height: 100%;
+}
+
+.stepTitle {
+  font-weight: 800;
+  font-size: 17px;
+  color: white;
+}
+
+.stepDescription {
+  font-size: 13px;
+}
+
+.stepPlaceholder {
+  background-color: #100f1c;
+  height: 128px;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-top: auto;
+}
+
+.participateCard {
+  display: flex;
+  flex-direction: column;
+  background-color: #161625;
+  border-radius: 8px;
+  padding: 12px;
+  overflow: hidden;
+  grid-column: span 2;
+
+  @media screen and (max-width: 1024px) {
+    grid-column: span 1;
+  }
+}
+
+.participateHeader {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #26263a;
+  align-items: center;
+  height: 48px;
+}
+
+.participateLabel {
+  font-weight: 800;
+  font-size: 13px;
+  font-style: italic;
+}
+
+.participateContent {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-top: 12px;
+  height: 100%;
+}
+
+.participateIconRow {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.participateIcon {
+  width: 14px;
+  height: 14px;
+}
+
+.participateText {
+  font-weight: 700;
+  font-size: 14px;
+  color: white;
+}
+
+.participateInput {
+  background-color: #10101b;
+  color: #989eae;
+  height: 56px;
+  padding: 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  outline: none;
+}
+
+.termsText {
+  text-align: left;
+  font-size: 13px;
+  margin-top: auto;
+}
+
+.videoSection {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.videoGrid {
+  display: grid;
+
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+
+  @media screen and (max-width: 1024px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }

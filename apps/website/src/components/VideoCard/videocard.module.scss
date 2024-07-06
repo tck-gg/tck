@@ -1,0 +1,148 @@
+// VideoCard.module.scss
+
+.cardContainer {
+  display: flex;
+  flex-direction: column;
+  background-color: #161625;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.cardContent {
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
+  gap: 12px;
+  height: 100%;
+}
+
+.thumbnail {
+  width: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+  height: 100%;
+}
+
+.videoLink {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.videoTitle {
+  font-size: 15px;
+  font-weight: 800;
+  color: white;
+  width: 100%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.videoViews {
+  color: #989eae;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.cardFooter {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border-top: 1px solid #03030b;
+  background-color: #0e0e1a;
+  margin-top: auto;
+}
+
+.voteContainer {
+  display: flex;
+  border-radius: 8px;
+  overflow: hidden;
+  gap: 1px;
+  font-size: 13px;
+  font-weight: 700;
+  height: 44px;
+}
+
+.voteButton {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  gap: 8px;
+  justify-content: center;
+  position: relative;
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
+
+.upVote {
+  color: #2eff69;
+  background-color: #26263a;
+}
+
+.downVote {
+  color: #ff5126;
+  background-color: #26263a;
+}
+
+.activeUpVote::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, #2eff6950, #2eff6900);
+}
+
+.activeDownVote::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, #ff512650, #ff512600);
+}
+
+.icon {
+  width: 12px;
+  height: 12px;
+}
+
+.userContainer {
+  display: flex;
+  gap: 8px;
+  justify-content: space-between;
+  align-items: center;
+  height: 32px;
+}
+
+.userInfo {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.avatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+}
+
+.userName {
+  font-size: 12px;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.badge {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  font-size: 12px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
