@@ -1,0 +1,453 @@
+/* index.module.css */
+.pageContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  color: #989eae;
+}
+
+.mainContent {
+  display: flex;
+  flex-direction: column;
+
+  gap: 16px;
+  @media (min-width: 1024px) {
+    flex-direction: row;
+  }
+}
+
+.sidebarWrapper {
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+  width: 300px;
+  gap: 16px;
+
+  @media (max-width: 1024px) {
+    width: 100%;
+  }
+}
+
+.sidebar {
+  display: flex;
+  height: fit-content;
+  flex-direction: column;
+  gap: 16px;
+  background-color: #161625;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.sidebarHeader {
+  display: flex;
+  gap: 16px;
+  justify-content: space-between;
+  padding: 16px;
+  border-bottom: 1px solid #03040b;
+}
+
+.itemContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid #03040b;
+}
+
+.itemImageWrapper {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
+}
+
+.itemImage {
+  width: 150px;
+  height: 150px;
+  object-fit: contain;
+}
+
+.itemDetails {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.itemTitle {
+  font-weight: bold;
+  font-size: 16px;
+  color: white;
+}
+
+.itemSubtitle {
+  font-size: 13px;
+}
+
+.coinBackgroundWrapper {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 64px;
+}
+
+.coinBackgroundImage {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+  object-fit: cover;
+}
+
+.coinValueWrapper {
+  position: relative;
+  padding: 8px 12px;
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.coinImage {
+  width: 16px;
+  height: 16px;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+}
+
+.coinValue {
+  font-weight: 800;
+  font-size: 15px;
+  color: white;
+}
+
+.ticketInfoWrapper {
+  display: flex;
+  gap: 16px;
+  width: 100%;
+}
+
+.ticketPriceContainer {
+  display: flex;
+
+  flex-direction: column;
+  padding: 12px;
+  width: 100%;
+  border-radius: 8px;
+  background-color: #10101c;
+  align-items: center;
+  justify-content: center;
+}
+
+.ticketPriceWrapper {
+  display: flex;
+  padding: 8px 12px;
+  align-items: center;
+  gap: 4px;
+  width: 100%;
+}
+
+.ticketPriceLabel {
+  font-size: 11px;
+  font-weight: medium;
+}
+
+.spotsContainer {
+  padding: 12px;
+  width: 100%;
+  border-radius: 8px;
+  background-color: #10101c;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.spotsWrapper {
+  height: 16px;
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.spotsValue {
+  font-weight: 800;
+  font-size: 15px;
+  color: white;
+}
+
+.spotsLimit {
+  font-size: 11px;
+}
+
+.spotsLabel {
+  font-size: 11px;
+  font-weight: medium;
+}
+
+.purchaseSection {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+}
+
+.amountWrapper {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.amountLabel {
+  font-size: 12px;
+  font-weight: medium;
+}
+
+.amountValue {
+  font-weight: bold;
+  font-size: 14px;
+  color: white;
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.ticketsWrapper {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.ticketsLabel {
+  font-size: 12px;
+  font-weight: medium;
+}
+
+.ticketsValue {
+  font-weight: bold;
+  font-size: 14px;
+  color: #989eae;
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.ticketNumber {
+  padding: 0 3px;
+}
+
+.blueColor {
+  color: #546bff;
+}
+
+.ticketIcon {
+  rotate: -45deg;
+  width: 14px;
+}
+
+.totalWrapper {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.totalLabel {
+  font-size: 12px;
+  font-weight: medium;
+}
+
+.totalValue {
+  font-weight: bold;
+  font-size: 14px;
+  color: white;
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.totalValueWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  width: 100%;
+}
+
+.coinImageSmall {
+  width: 16px;
+  height: 16px;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+}
+
+.totalValueText {
+  font-weight: 800;
+  font-size: 14px;
+  color: white;
+}
+
+.buyButton {
+  padding: 8px 16px;
+  background-color: #161625;
+  border-radius: 8px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.ticketsSection {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.myTicketsHeader {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.myTicketsIcon {
+  width: 28px;
+  height: 28px;
+  background-color: #191a23;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.myTicketsTitle {
+  font-weight: 800;
+  font-size: 14px;
+}
+
+.myTicketsWrapper {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.myTicket {
+  padding: 4px 12px;
+  background-color: #191a23;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 14px;
+}
+
+.mainRaffle {
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #161625;
+  flex: 1;
+  border-radius: 8px;
+  overflow: hidden;
+  padding: 16px;
+  position: relative;
+}
+
+.raffleGrid {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: center;
+
+  padding: 16px;
+}
+
+.raffleGridItem {
+  grid-column: span 1;
+  border: 1px solid;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1 / 1;
+}
+
+.raffleDetails {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background-color: #161625d5;
+}
+
+.raffleDetailsContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex: 1;
+}
+
+.raffleImage {
+  width: 100px;
+  height: 100px;
+  border: 1px solid;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  object-fit: contain;
+}
+
+.raffleTitle {
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.raffleTicketWrapper {
+  position: relative;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 20px;
+  font-size: 18px;
+  color: #9391c9;
+  font-weight: bold;
+}
+
+.ticketBackground {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+}
+
+.ticketText {
+  position: relative;
+}
+
+.viewAllEntriesButton {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  position: absolute;
+  bottom: 24px;
+  font-size: 14px;
+  color: #9391c9;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
