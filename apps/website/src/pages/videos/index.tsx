@@ -52,8 +52,8 @@ function Videos({ youtubeVideos }: { youtubeVideos: Video[] }) {
   ];
 
   return (
-    <Layout title='Videos'>
-      <PageHeader title='Videos' />
+    <Layout title='Video Clips'>
+      <PageHeader title='Video Clips' />
       <div className={styles.pageContainer}>
         <div className={styles.stepsGrid}>
           {steps.map((item) => {
