@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import clsx from 'clsx';
-import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
+import { faAngleRight, faExternalLink } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 
 import Layout from '@/components/Layout/Layout';
@@ -21,8 +21,17 @@ import { SOCIALS_DATA } from '@/data/socials';
 
 import classes from './index.module.scss';
 
+import gfuelProducts from '@/images/gfuel-products.png';
+import gfuelWordmark from '@/images/gfuel-wordmark.png';
+import gfuelBackground from '@/images/gfuel-background.png';
 import ak from '@/images/ak.png';
 import knife from '@/images/knife.png';
+import logo from '@/images/logo-hq.png';
+import trophy from '@/images/trophy.png';
+import lollipop from '@/images/lollipop.png';
+import vs from '@/images/vs.png';
+import bags from '@/images/bags.png';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const CHANNEL = 'tck';
 
@@ -88,18 +97,51 @@ function Home({ isLive }: { isLive: boolean }) {
           <div className={classes.knife}>
             <Image
               src={knife}
-              width={250}
-              height={133}
+              width={350}
+              height={350}
               alt='knife'
               style={{ objectFit: 'contain' }}
             />
           </div>
+
+          <div className={classes.trophy}>
+            <Image
+              src={trophy}
+              width={150}
+              height={150}
+              alt='trophy'
+              style={{ objectFit: 'contain' }}
+            />
+          </div>
+
+          <div className={classes.bags}>
+            <Image
+              src={bags}
+              width={220}
+              height={220}
+              alt='bags'
+              style={{ objectFit: 'contain' }}
+            />
+          </div>
+
+          <div className={classes.vs}>
+            <Image src={vs} width={140} height={140} alt='vs' style={{ objectFit: 'contain' }} />
+          </div>
+          <div className={classes.lollipop}>
+            <Image
+              src={lollipop}
+              width={100}
+              height={100}
+              alt='lollipop'
+              style={{ objectFit: 'contain' }}
+            />
+          </div>
+
           <div className={classes.heroTop}>
-            <p className={classes.sectionDescription}>Claim Free Rewards</p>
-            <p className={classes.big}>The Most Rewarding Website</p>
+            <Image src={logo} alt='TCKGG Logo' className='tckggLogo' width={450} height={250} />
             <p className={classes.description}>
-              Elevate Your Game: The Ultimate Destination for Rewarding Players and Viewers for
-              being a part of the TCK Community.
+              Elevate Your Game: The Ultimate Destination for Rewarding Players and Viewers <br />{' '}
+              for being a part of the TCK Community.
             </p>
           </div>
           <div className={classes.buttonGroup}>
@@ -118,11 +160,35 @@ function Home({ isLive }: { isLive: boolean }) {
               variant='primary'
               rightIcon={faAngleRight}
               onClick={() => {
-                router.push('/videos');
+                router.push('/leaderboard');
               }}
             >
-              Watch
+              Join Leaderboard
             </Button>
+          </div>
+        </div>
+
+        <div className={classes.gfuelWrapper}>
+          <Image src={gfuelBackground} alt='Background ' className={classes.gfuelBackground} />
+          <div className={classes.gfuelDetails}>
+            <Image
+              src={gfuelProducts}
+              alt='GFuel Drinks'
+              className={classes.gfuelDrinksImage}
+              width={100}
+              height={100}
+            />
+            <span>Powered by</span>
+            <Image
+              src={gfuelWordmark}
+              alt='GFuel '
+              height={40}
+              width={120}
+              className={classes.objectContain}
+            />
+            <a href='/'>
+              <FontAwesomeIcon icon={faExternalLink} className={classes.externalLinkIcon} />
+            </a>
           </div>
         </div>
 
