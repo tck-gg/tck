@@ -1,0 +1,191 @@
+// index.module.css
+.container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  width: 700px;
+  background-color: #10101c;
+  display: flex;
+  flex-direction: row;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #242439;
+  color: #989eae;
+}
+
+.imageSection {
+  width: 40%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo {
+  width: 96px;
+  height: 48px;
+  object-fit: contain;
+  position: absolute;
+  transform: translateX(50%);
+  right: 50%;
+  top: 32px;
+  z-index: 2;
+}
+
+.backgroundImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.welcomeText {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 3;
+}
+
+.gradientText {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: center;
+  background-clip: text;
+  background: linear-gradient(to right, #18a9ff, #9229ff);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.welcomeTitle {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.welcomeSubtitle {
+  font-size: 26px;
+  font-weight: 800;
+  text-align: center;
+  line-height: 24px;
+  color: #fff;
+}
+
+.welcomeDescription {
+  font-size: 12px;
+  text-align: center;
+  color: #989eae;
+  padding: 0 8px;
+}
+
+.formSection {
+  padding: 16px;
+  background-color: #1b1b2c;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex: 1;
+}
+
+.tabContainer {
+  display: inline-flex;
+  align-items: center;
+  background-color: #0f0f1c;
+  padding: 4px;
+  border-radius: 50px;
+  margin-bottom: 16px;
+}
+
+.tabButton {
+  padding: 0 20px;
+  height: 40px;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top: 1px solid;
+  font-weight: bold;
+  font-size: 14px;
+  transition: background-color 0.3s, border-color 0.3s;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.inactiveTab {
+  border-color: transparent;
+  background-color: transparent;
+  color: #323348;
+}
+
+.activeTab {
+  color: #fff;
+  background-color: #323348;
+  border-color: #474758;
+}
+
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-height: 280px;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.inputLabel {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.icon {
+  width: 12px;
+  height: 12px;
+}
+
+.labelText {
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.inputField {
+  font-weight: bold;
+  font-size: 14px;
+  padding: 16px;
+  background-color: #12121e;
+  color: #989eae;
+  border-radius: 8px;
+  outline: none;
+  border: none;
+}
+
+.recaptchaText {
+  font-weight: medium;
+  font-size: 12px;
+}
+
+.submitButton {
+  padding: 16px;
+  background-color: #323348;
+  border-radius: 8px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.submitButton:hover {
+  background-color: #474758;
+}

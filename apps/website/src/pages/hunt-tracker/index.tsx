@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import styles from './hunttracker.module.scss';
 import Layout from '@/components/Layout/Layout';
 import PageHeader from '@/components/PageHeader/PageHeader';
-
 import profilePicture from '../../images/hunt-tracker/profile-picture.png';
 import sugarRush from '../../images/hunt-tracker/sugar-rush.png';
 import madameDestiny from '../../images/hunt-tracker/madame-destiny.png';
@@ -13,7 +12,7 @@ import Button from '@/components/ui/Button/Button';
 import { faAward, faChevronRight, faSearch } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Switch } from '@mantine/core';
-import PredictioModal from '@/components/Modal/Prediction/PredictioModal';
+import PredictioModal from '@/components/Modal/Prediction/PredictionModal';
 
 const HuntTrackerPage = () => {
   const [showPredictionModal, setShowPredictionModal] = useState(false);
