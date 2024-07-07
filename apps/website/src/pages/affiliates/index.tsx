@@ -76,64 +76,70 @@ function Affiliates() {
     <Layout title='Affiliates'>
       <PageHeader title='Affiliates' />
 
-      <div className={styles.sectionWrapper}>
-        <SectionHeader type='star'>Featured</SectionHeader>
-        <div className={styles.featuredList}>
-          {placeholder.map((item, index) => {
-            return (
-              <div key={item.name} className={styles.featuredItem}>
-                <Image src={item.logo} alt={`${item.name} logo`} className={styles.featuredLogo} />
-                <div className={styles.featuredContent}>
-                  <div className={styles.featuredHeader}>{item.header}</div>
-                  <div className={styles.featuredDescription}>{item.description}</div>
-                </div>
-                <Image src={item.acc} alt={`${item.name}`} className={styles.featuredAcc} />
-                <div className={styles.buttonContainer}>
-                  <button
-                    className={styles.featuredButton}
-                    style={{ background: item.buttonGradient }}
-                  >
-                    <div className={styles.buttonTextWrapper}>
-                      <div>Register Instantly</div>
-                      <FontAwesomeIcon icon={faChevronRight} />
-                    </div>
-                  </button>
-                </div>
-                <span className={styles.featuredTerms}>
-                  Strictly 18+, Terms and Conditions may apply.
-                </span>
-                <div
-                  className={styles.featuredOverlay}
-                  style={{
-                    background: `radial-gradient(circle, ${item.primaryColor} 0%, ${item.primaryColor}00 50%)`
-                  }}
-                ></div>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-
-      <div className={styles.sectionWrapper}>
-        <SectionHeader type='crypto'>Crypto</SectionHeader>
-        <div className={styles.affiliateWrapper}>
-          {isVerified ? (
-            AFFILIATES.map((affiliate: IAffiliate) => {
+      <div className={styles.container}>
+        <div className={styles.sectionWrapper}>
+          <SectionHeader type='star'>Featured</SectionHeader>
+          <div className={styles.featuredList}>
+            {placeholder.map((item, index) => {
               return (
-                <AffiliateBox
-                  key={affiliate.name}
-                  image={affiliate.image}
-                  reward={affiliate.reward}
-                  name={affiliate.name}
-                  codes={affiliate.codes}
-                  tags={affiliate.tags}
-                  featured={affiliate.featured}
-                />
+                <div key={item.name} className={styles.featuredItem}>
+                  <Image
+                    src={item.logo}
+                    alt={`${item.name} logo`}
+                    className={styles.featuredLogo}
+                  />
+                  <div className={styles.featuredContent}>
+                    <div className={styles.featuredHeader}>{item.header}</div>
+                    <div className={styles.featuredDescription}>{item.description}</div>
+                  </div>
+                  <Image src={item.acc} alt={`${item.name}`} className={styles.featuredAcc} />
+                  <div className={styles.buttonContainer}>
+                    <button
+                      className={styles.featuredButton}
+                      style={{ background: item.buttonGradient }}
+                    >
+                      <div className={styles.buttonTextWrapper}>
+                        <div>Register Instantly</div>
+                        <FontAwesomeIcon icon={faChevronRight} />
+                      </div>
+                    </button>
+                  </div>
+                  <span className={styles.featuredTerms}>
+                    Strictly 18+, Terms and Conditions may apply.
+                  </span>
+                  <div
+                    className={styles.featuredOverlay}
+                    style={{
+                      background: `radial-gradient(circle, ${item.primaryColor} 0%, ${item.primaryColor}00 50%)`
+                    }}
+                  ></div>
+                </div>
               );
-            })
-          ) : (
-            <p>You are not permitted to view this content.</p>
-          )}
+            })}
+          </div>
+        </div>
+
+        <div className={styles.sectionWrapper}>
+          <SectionHeader type='crypto'>Crypto</SectionHeader>
+          <div className={styles.affiliateWrapper}>
+            {isVerified ? (
+              AFFILIATES.map((affiliate: IAffiliate) => {
+                return (
+                  <AffiliateBox
+                    key={affiliate.name}
+                    image={affiliate.image}
+                    reward={affiliate.reward}
+                    name={affiliate.name}
+                    codes={affiliate.codes}
+                    tags={affiliate.tags}
+                    featured={affiliate.featured}
+                  />
+                );
+              })
+            ) : (
+              <p>You are not permitted to view this content.</p>
+            )}
+          </div>
         </div>
       </div>
     </Layout>
