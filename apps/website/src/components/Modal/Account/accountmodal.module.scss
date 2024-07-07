@@ -1,0 +1,459 @@
+/* index.module.css */
+
+.contentContainer {
+  width: 100%;
+  max-width: 600px;
+  background-color: #171727;
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #242439;
+  color: #989eae;
+}
+
+.tabContainer {
+  padding: 16px;
+}
+
+.tabWrapper {
+  display: inline-flex;
+  align-items: center;
+  background-color: #0f0f1c;
+  padding: 4px;
+  border-radius: 50px;
+}
+
+.tabButton {
+  padding: 8px 20px;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top: 1px solid transparent;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+
+  border: none;
+  outline: none;
+}
+
+.tabButtonActive {
+  color: white;
+  background-color: #323348;
+  border-color: #474758;
+}
+
+.tabButtonInactive {
+  color: rgba(255, 255, 255, 0.5);
+  background-color: transparent;
+  border-color: transparent;
+}
+
+/* index.module.css */
+.profileContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 0 16px 16px;
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+.profileHeader {
+  display: flex;
+  justify-content: space-between;
+  gap: 4px;
+  align-items: center;
+  padding-bottom: 8px;
+}
+
+.profileDetails {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.profileImage {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.profileText {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.profileName {
+  font-weight: bold;
+  font-size: 15px;
+  color: white;
+}
+
+.profileId {
+  font-weight: medium;
+  font-size: 12px;
+  color: #999da0;
+}
+
+.coinBalanceWrapper {
+  position: relative;
+}
+
+.coinBackgroundImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  inset: 0;
+}
+
+.coinBalance {
+  position: relative;
+  padding: 8px 12px;
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  justify-content: center;
+}
+
+.coinIcon {
+  width: 20px;
+  height: 20px;
+  aspect-ratio: 1 / 1;
+}
+
+.coinValue {
+  font-weight: extrabold;
+  font-size: 14px;
+  color: white;
+}
+
+.settingsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 4px;
+}
+
+.settingsFullWidth {
+  grid-column: span 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #2a2a41;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.cardColumn {
+  display: flex;
+  flex-direction: column;
+  background-color: #2a2a41;
+  border-radius: 8px;
+  padding: 16px;
+  gap: 6px;
+}
+
+.icon {
+  width: 14px;
+  height: 14px;
+}
+.ticketRotate {
+  rotate: -45deg;
+}
+
+.settingsTitle {
+  font-weight: bold;
+  font-size: 14px;
+  color: white;
+}
+
+.settingsSubtitle {
+  font-weight: medium;
+  font-size: 12px;
+  color: #999da0;
+}
+
+.itemListContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-height: 60vh;
+  overflow-y: auto;
+  padding: 0 16px 16px;
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+.itemCard {
+  background-color: #2a2a41;
+  border-radius: 8px;
+}
+
+.itemHeader {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  justify-content: space-between;
+  border-bottom: 1px solid #161625;
+  padding: 16px;
+}
+
+.itemDetails {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.itemImage {
+  width: 96px;
+  object-fit: contain;
+  aspect-ratio: 1 / 1;
+}
+
+.itemText {
+  display: flex;
+  flex-direction: column;
+}
+
+.itemTitle {
+  font-weight: bold;
+  color: white;
+  font-size: 16px;
+}
+
+.itemSubtitle {
+  font-size: 13px;
+  color: #989eae;
+}
+
+.itemPriceWrapper {
+  position: relative;
+}
+
+.itemPriceBackground {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  inset: 0;
+}
+
+.itemPrice {
+  position: relative;
+  padding: 8px 12px;
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  justify-content: center;
+}
+
+.itemPriceValue {
+  font-weight: extrabold;
+  font-size: 14px;
+  color: white;
+}
+
+.itemFooter {
+  display: flex;
+  justify-content: space-between;
+  padding: 16px;
+  gap: 8px;
+  align-items: center;
+}
+
+.winningTicketWrapper {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.winningTicketIcon {
+  position: relative;
+  background-color: #313245;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.winningTicketText {
+  font-weight: extrabold;
+  font-size: 14px;
+  color: #989eae;
+}
+
+.ticketNumbers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.ticketNumber {
+  background-color: #313245;
+  padding: 8px 12px;
+  border-radius: 50px;
+  font-weight: extrabold;
+  font-size: 14px;
+  color: #989eae;
+}
+
+.walletContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 0 16px 16px;
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+.walletItemList {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.walletItemCard {
+  background-color: #2a2a41;
+  border-radius: 8px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.walletItemHeader {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.walletItemLogo {
+  height: 14px;
+  object-fit: contain;
+  width: 14px;
+  aspect-ratio: 1 / 1;
+}
+
+.walletItemName {
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.walletItemInput {
+  background-color: #1a1a2a;
+  color: #989eae;
+  height: 56px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  outline: none;
+  border: none;
+}
+.connectionsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 0 16px 16px;
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+.connectionsSection {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  border-bottom: 1px solid #2a2a41;
+  padding-bottom: 16px;
+}
+
+.socialCard {
+  background-color: #2a2a41;
+  border-radius: 8px;
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+}
+
+.usernameCard {
+  background-color: #2a2a41;
+  border-radius: 8px;
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cardContent {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cardHeader {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  width: 100%;
+}
+
+.logo {
+  height: 20px;
+  object-fit: contain;
+  width: 20px;
+  aspect-ratio: 1 / 1;
+}
+
+.name {
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.description {
+  font-size: 12px;
+  font-weight: 500;
+  color: #999da0;
+}
+
+.connectButton {
+  height: 100%;
+  padding: 8px 16px;
+  border-radius: 8px;
+  background-color: white;
+  outline: none;
+  border: none;
+}
+
+.usernameSection {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.input {
+  background-color: #1a1a2a;
+  color: #989eae;
+  width: 100%;
+  height: 56px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  outline: none;
+  border: none;
+}

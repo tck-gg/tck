@@ -14,6 +14,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Switch } from '@mantine/core';
 import PredictioModal from '@/components/Modal/Prediction/PredictionModal';
 import SponsorFormModal from '@/components/Modal/SponsorForm/SponsorForm';
+import AccountModal from '@/components/Modal/Account/AccountModal';
 
 const HuntTrackerPage = () => {
   const [showPredictionModal, setShowPredictionModal] = useState(false);
@@ -181,12 +182,20 @@ const HuntTrackerPage = () => {
     }
   ];
 
-  // const [isOpen, setIsOpen] = useState<boolean>(true);
+  const [isOpen, setIsOpen] = useState<boolean>(true);
 
   return (
     <Layout title='Hunt Tracker'>
       <PageHeader title='Hunt Tracker' />
-
+      <AccountModal
+        isOpen={isOpen}
+        open={() => {
+          setIsOpen(true);
+        }}
+        close={() => {
+          setIsOpen(false);
+        }}
+      ></AccountModal>
       <div className={styles.container}>
         <div className={styles.sideTableContainer}>
           <div className={styles.leftSideContainer}>
