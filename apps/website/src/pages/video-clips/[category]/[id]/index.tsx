@@ -10,7 +10,7 @@ import Button from '@/components/ui/Button/Button';
 import { faArrowDown, faArrowUp, faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import VideoCard from '@/components/VideoCard/VideoCard';
-import VideoHeader from '@/components/VideoHeader/VideoHeader';
+import SectionHeader from '@/components/SectionHeader/SectionHeader';
 
 const VideoClipPage = () => {
   const [vote, setVote] = useState<'up' | 'down' | undefined>();
@@ -115,7 +115,9 @@ const VideoClipPage = () => {
         </div>
 
         <div className={styles.moreVideoSection}>
-          <VideoHeader type='youtube'>More Video</VideoHeader>
+          <SectionHeader type='youtube' showHeaderAcc={true}>
+            More Video
+          </SectionHeader>
           <div className={styles.moreVideoGrid}>
             <VideoCard
               data={{

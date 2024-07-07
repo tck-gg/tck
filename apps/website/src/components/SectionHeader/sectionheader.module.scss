@@ -28,10 +28,14 @@
 .headerContent {
   display: flex;
   gap: 4px;
-  padding-left: 16px;
+
   align-items: center;
   position: relative;
   padding-top: 0px;
+}
+
+.paddngLeft {
+  padding-left: 16px;
 }
 
 .logo {

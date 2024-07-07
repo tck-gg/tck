@@ -4,7 +4,7 @@ import PageHeader from '@/components/PageHeader/PageHeader';
 import React, { useState } from 'react';
 import styles from './communitywins.module.scss';
 import VideoCard from '@/components/VideoCard/VideoCard';
-import VideoHeader from '@/components/VideoHeader/VideoHeader';
+import SectionHeader from '@/components/SectionHeader/SectionHeader';
 import { Grid } from '@mantine/core';
 
 import colourfulBackground from '../../images/community-wins/colourful-background.png';
@@ -111,9 +111,14 @@ const Index = () => {
         </div>
 
         <div className={styles.videoSection}>
-          <VideoHeader type='trophy' viewUrl='/videos' showViewAllButton={true}>
+          <SectionHeader
+            type='trophy'
+            viewUrl='/videos'
+            showViewAllButton={true}
+            showHeaderAcc={true}
+          >
             Best Clips
-          </VideoHeader>
+          </SectionHeader>
           <div className={styles.bestVideoGrid}>
             {placeholder.map((item, index) => {
               return (
@@ -134,9 +139,14 @@ const Index = () => {
           </div>
         </div>
         <div className={styles.videoSection}>
-          <VideoHeader type='default' viewUrl='/videos' showViewAllButton={true}>
+          <SectionHeader
+            type='default'
+            viewUrl='/videos'
+            showViewAllButton={true}
+            showHeaderAcc={true}
+          >
             Recents
-          </VideoHeader>
+          </SectionHeader>
           <div className={styles.videoGrid}>
             {placeholder2.map((item, index) => {
               return (

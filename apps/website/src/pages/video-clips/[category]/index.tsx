@@ -3,7 +3,7 @@ import styles from './videoclipscategory.module.scss';
 import Layout from '@/components/Layout/Layout';
 import PageHeader from '@/components/PageHeader/PageHeader';
 import VideoCard from '@/components/VideoCard/VideoCard';
-import VideoHeader from '@/components/VideoHeader/VideoHeader';
+import SectionHeader from '@/components/SectionHeader/SectionHeader';
 
 const VideoClipsCategoryPage = () => {
   const counter = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
@@ -12,9 +12,14 @@ const VideoClipsCategoryPage = () => {
       <PageHeader title='Video Clips' />
       <div className={styles.container}>
         <div className={styles.videoSection}>
-          <VideoHeader type='youtube' viewUrl='/videos' showBackButton={true}>
+          <SectionHeader
+            type='youtube'
+            viewUrl='/videos'
+            showBackButton={true}
+            showHeaderAcc={true}
+          >
             Youtube
-          </VideoHeader>
+          </SectionHeader>
           <div className={styles.videoGrid}>
             {counter.map((data, index) => {
               return (

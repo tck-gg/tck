@@ -14,7 +14,7 @@ import { YOUTUBE_CHANNELS } from '@/data/videos';
 import styles from './videoclips.module.scss';
 import VideoCard from '@/components/VideoCard/VideoCard';
 import RewardCard from '@/components/RewardCard/RewardCard';
-import VideoHeader from '@/components/VideoHeader/VideoHeader';
+import SectionHeader from '@/components/SectionHeader/SectionHeader';
 import Button from '@/components/ui/Button/Button';
 import { faVideo } from '@fortawesome/free-solid-svg-icons';
 
@@ -93,9 +93,14 @@ function VideoClipsPage({ youtubeVideos }: { youtubeVideos: Video[] }) {
         </div>
 
         <div className={styles.videoSection}>
-          <VideoHeader type='youtube' viewUrl='/videos' showViewAllButton={true}>
+          <SectionHeader
+            type='youtube'
+            viewUrl='/videos'
+            showViewAllButton={true}
+            showHeaderAcc={true}
+          >
             Youtube
-          </VideoHeader>
+          </SectionHeader>
           <div className={styles.videoGrid}>
             <RewardCard
               type='youtube'
@@ -140,9 +145,14 @@ function VideoClipsPage({ youtubeVideos }: { youtubeVideos: Video[] }) {
         </div>
 
         <div className={styles.videoSection}>
-          <VideoHeader type='instagram' viewUrl='/videos' showViewAllButton={true}>
+          <SectionHeader
+            type='instagram'
+            viewUrl='/videos'
+            showViewAllButton={true}
+            showHeaderAcc={true}
+          >
             Instagram
-          </VideoHeader>
+          </SectionHeader>
           <div className={styles.videoGrid}>
             <RewardCard
               type='instagram'

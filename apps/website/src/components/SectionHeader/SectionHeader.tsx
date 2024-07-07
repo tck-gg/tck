@@ -1,4 +1,4 @@
-// VideoHeader.tsx
+// SectionHeader.tsx
 
 'use client';
 
@@ -9,6 +9,9 @@ import instagramLogo from '../../images/videos/instagram-logo.png';
 import defaultLogo from '../../images/videos/default-logo.png';
 import trophyLogo from '../../images/videos/trophy-logo.png';
 import tiktokLogo from '../../images/videos/tiktok-logo.png';
+import starIcon from '../../images/affiliate/star.png';
+import cryptoIcon from '../../images/affiliate/crypto.png';
+import csgoLogo from '../../images/affiliate/csgo.png';
 import xHeaderAcc from '../../images/videos/x-header-acc.png';
 import youtubeHeaderAcc from '../../images/videos/youtube-header-acc.png';
 import instagramHeaderAcc from '../../images/videos/instagram-header-acc.png';
@@ -17,7 +20,7 @@ import defaultHeaderAcc from '../../images/videos/default-header-acc.png';
 import trophyHeaderAcc from '../../images/videos/trophy-header-acc.png';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import styles from './videoheader.module.scss';
+import styles from './sectionheader.module.scss';
 import Button from '../ui/Button/Button';
 import {
   faChevronCircleRight,
@@ -25,20 +28,31 @@ import {
   faChevronRight
 } from '@fortawesome/free-solid-svg-icons';
 
-type HeaderType = 'youtube' | 'x' | 'instagram' | 'tiktok' | 'trophy' | 'default';
+type HeaderType =
+  | 'youtube'
+  | 'x'
+  | 'instagram'
+  | 'tiktok'
+  | 'trophy'
+  | 'default'
+  | 'star'
+  | 'crypto'
+  | 'csgo';
 
-const VideoHeader = ({
+const SectionHeader = ({
   type,
   viewUrl,
   children,
   showBackButton,
-  showViewAllButton
+  showViewAllButton,
+  showHeaderAcc
 }: {
   type: HeaderType;
   viewUrl?: string;
   children: React.ReactNode;
   showBackButton?: boolean;
   showViewAllButton?: boolean;
+  showHeaderAcc?: boolean;
 }) => {
   const router = useRouter();
 
@@ -77,6 +91,12 @@ const VideoHeader = ({
         return tiktokLogo;
       case 'trophy':
         return trophyLogo;
+      case 'star':
+        return starIcon;
+      case 'crypto':
+        return cryptoIcon;
+      case 'csgo':
+        return csgoLogo;
       default:
         return defaultLogo;
     }
@@ -91,8 +111,11 @@ const VideoHeader = ({
       )}
 
       <div className={styles.logoContainer}>
-        <Image className={styles.headerAcc} alt='Header acc' src={getHeaderAcc(type)} />
-        <div className={styles.headerContent}>
+        {showHeaderAcc && (
+          <Image className={styles.headerAcc} alt='Header acc' src={getHeaderAcc(type)} />
+        )}
+
+        <div className={`${styles.headerContent} ${showHeaderAcc ? styles.paddingLeft : ''}`}>
           <Image className={styles.logo} alt='Header acc' src={getLogo(type)} />
           <div className={styles.headerText}>{children}</div>
         </div>
@@ -112,4 +135,4 @@ const VideoHeader = ({
   );
 };
 
-export default VideoHeader;
+export default SectionHeader;
