@@ -13,6 +13,7 @@ import { faAward, faChevronRight, faSearch } from '@fortawesome/free-solid-svg-i
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Switch } from '@mantine/core';
 import PredictioModal from '@/components/Modal/Prediction/PredictionModal';
+import SponsorFormModal from '@/components/Modal/SponsorForm/SponsorForm';
 
 const HuntTrackerPage = () => {
   const [showPredictionModal, setShowPredictionModal] = useState(false);
@@ -179,6 +180,8 @@ const HuntTrackerPage = () => {
       img: releaseKraken
     }
   ];
+
+  // const [isOpen, setIsOpen] = useState<boolean>(true);
 
   return (
     <Layout title='Hunt Tracker'>

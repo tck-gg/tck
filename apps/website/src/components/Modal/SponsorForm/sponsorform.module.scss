@@ -1,0 +1,92 @@
+// index.module.css
+.container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  width: 100%;
+  background-color: #10101c;
+  display: flex;
+  flex-direction: row;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #242439;
+  color: #989eae;
+}
+
+.header {
+  font-weight: 700;
+  font-size: 20px;
+  color: white;
+}
+
+.formSection {
+  padding: 16px;
+  background-color: #1b1b2c;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex: 1;
+}
+
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.inputLabel {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.icon {
+  width: 12px;
+  height: 12px;
+}
+
+.labelText {
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.inputField {
+  font-weight: bold;
+  font-size: 14px;
+  padding: 16px;
+  background-color: #12121e;
+  color: #989eae;
+  border-radius: 8px;
+  outline: none;
+  border: none;
+}
+
+.descriptionText {
+  font-weight: 500;
+  font-size: 13px;
+}
+
+.submitButton {
+  padding: 16px;
+  background-color: #323348;
+  border-radius: 8px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.submitButton:hover {
+  background-color: #474758;
+}
