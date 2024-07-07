@@ -8,7 +8,7 @@ import Image from 'next/image';
 import coin from '../../../images/coin.png';
 import coinBackground from '../../../images/coin-background.png';
 
-const PredictioModal = ({
+const PredictionModal = ({
   isOpen,
   open,
   close
@@ -82,4 +82,4 @@ const PredictioModal = ({
   );
 };
 
-export default PredictioModal;
+export default PredictionModal;

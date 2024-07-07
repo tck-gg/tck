@@ -182,12 +182,11 @@ const HuntTrackerPage = () => {
     }
   ];
 
-  const [isOpen, setIsOpen] = useState<boolean>(true);
+  // const [isOpen, setIsOpen] = useState<boolean>(true);
 
   return (
     <Layout title='Hunt Tracker'>
-      <PageHeader title='Hunt Tracker' />
-      <AccountModal
+      {/* <AccountModal
         isOpen={isOpen}
         open={() => {
           setIsOpen(true);
@@ -195,7 +194,8 @@ const HuntTrackerPage = () => {
         close={() => {
           setIsOpen(false);
         }}
-      ></AccountModal>
+      ></AccountModal> */}
+      <PageHeader title='Hunt Tracker' />
       <div className={styles.container}>
         <div className={styles.sideTableContainer}>
           <div className={styles.leftSideContainer}>
