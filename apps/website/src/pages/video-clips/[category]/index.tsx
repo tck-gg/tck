@@ -1,11 +1,11 @@
 import React from 'react';
-import styles from './videoscategory.module.scss';
+import styles from './videoclipscategory.module.scss';
 import Layout from '@/components/Layout/Layout';
 import PageHeader from '@/components/PageHeader/PageHeader';
 import VideoCard from '@/components/VideoCard/VideoCard';
 import VideoHeader from '@/components/VideoHeader/VideoHeader';
 
-const VideosCategoryPage = () => {
+const VideoClipsCategoryPage = () => {
   const counter = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
   return (
     <Layout title='Video Clips'>
@@ -39,4 +39,4 @@ const VideosCategoryPage = () => {
   );
 };
 
-export default VideosCategoryPage;
+export default VideoClipsCategoryPage;

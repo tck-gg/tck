@@ -11,7 +11,7 @@ import { Video } from '@/types/video';
 
 import { YOUTUBE_CHANNELS } from '@/data/videos';
 
-import styles from './videos.module.scss';
+import styles from './videoclips.module.scss';
 import VideoCard from '@/components/VideoCard/VideoCard';
 import RewardCard from '@/components/RewardCard/RewardCard';
 import VideoHeader from '@/components/VideoHeader/VideoHeader';
@@ -29,7 +29,7 @@ export async function getStaticProps({ req, res }: { req: any; res: any }) {
   };
 }
 
-function Videos({ youtubeVideos }: { youtubeVideos: Video[] }) {
+function VideoClipsPage({ youtubeVideos }: { youtubeVideos: Video[] }) {
   const steps = [
     {
       id: 1,
@@ -190,4 +190,4 @@ function Videos({ youtubeVideos }: { youtubeVideos: Video[] }) {
   );
 }
 
-export default Videos;
+export default VideoClipsPage;

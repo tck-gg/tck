@@ -2,7 +2,7 @@
 import Layout from '@/components/Layout/Layout';
 import PageHeader from '@/components/PageHeader/PageHeader';
 import React, { useState } from 'react';
-import styles from './video.module.scss';
+import styles from './videoclip.module.scss';
 import Image from 'next/image';
 import tempVideo from '../../../../images/videos/temp-video.png';
 import placeholderAvatar from '../../../../images/videos/placeholder-avatar.jpg';
@@ -11,9 +11,8 @@ import { faArrowDown, faArrowUp, faChevronLeft } from '@fortawesome/free-solid-s
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import VideoCard from '@/components/VideoCard/VideoCard';
 import VideoHeader from '@/components/VideoHeader/VideoHeader';
-import RewardCard from '@/components/RewardCard/RewardCard';
 
-const VideoPage = () => {
+const VideoClipPage = () => {
   const [vote, setVote] = useState<'up' | 'down' | undefined>();
 
   const handleVoteVideo = (type: 'up' | 'down') => {
@@ -169,4 +168,4 @@ const VideoPage = () => {
   );
 };
 
-export default VideoPage;
+export default VideoClipPage;
