@@ -1,7 +1,7 @@
 'use client';
 import { faUser, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import Button from '../../ui/Button/Button';
-import styles from './sponsorform.module.scss';
+import styles from './sponsorformmodal.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ModalLayout from '../Layout/ModalLayout';
 
