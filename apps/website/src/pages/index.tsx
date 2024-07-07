@@ -138,7 +138,6 @@ function Home({ isLive }: { isLive: boolean }) {
           </div>
 
           <div className={classes.heroTop}>
-            <Image src={logo} alt='TCKGG Logo' className='tckggLogo' width={450} height={250} />
             <p className={classes.description}>
               Elevate Your Game: The Ultimate Destination for Rewarding Players and Viewers <br />{' '}
               for being a part of the TCK Community.
