@@ -6,11 +6,15 @@ import React from 'react';
 import youtubeLogo from '../../images/videos/youtube-logo.png';
 import xLogo from '../../images/videos/x-logo.png';
 import instagramLogo from '../../images/videos/instagram-logo.png';
+import defaultLogo from '../../images/videos/default-logo.png';
+import trophyLogo from '../../images/videos/trophy-logo.png';
 import tiktokLogo from '../../images/videos/tiktok-logo.png';
 import xHeaderAcc from '../../images/videos/x-header-acc.png';
 import youtubeHeaderAcc from '../../images/videos/youtube-header-acc.png';
 import instagramHeaderAcc from '../../images/videos/instagram-header-acc.png';
 import tiktokHeaderAcc from '../../images/videos/tiktok-header-acc.png';
+import defaultHeaderAcc from '../../images/videos/default-header-acc.png';
+import trophyHeaderAcc from '../../images/videos/trophy-header-acc.png';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import styles from './videoheader.module.scss';
@@ -21,7 +25,7 @@ import {
   faChevronRight
 } from '@fortawesome/free-solid-svg-icons';
 
-type HeaderType = 'youtube' | 'x' | 'instagram' | 'tiktok';
+type HeaderType = 'youtube' | 'x' | 'instagram' | 'tiktok' | 'trophy' | 'default';
 
 const VideoHeader = ({
   type,
@@ -54,8 +58,10 @@ const VideoHeader = ({
         return instagramHeaderAcc;
       case 'tiktok':
         return tiktokHeaderAcc;
+      case 'trophy':
+        return trophyHeaderAcc;
       default:
-        return youtubeHeaderAcc;
+        return defaultHeaderAcc;
     }
   };
 
@@ -69,8 +75,10 @@ const VideoHeader = ({
         return instagramLogo;
       case 'tiktok':
         return tiktokLogo;
+      case 'trophy':
+        return trophyLogo;
       default:
-        return youtubeLogo;
+        return defaultLogo;
     }
   };
 

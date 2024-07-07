@@ -9,7 +9,13 @@ import placeholderVideo from '../../images/videos/placeholder-video.jpg';
 import Link from 'next/link';
 import styles from './videocard.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowDown, faArrowUp } from '@fortawesome/free-solid-svg-icons';
+import {
+  faArrowDown,
+  faArrowUp,
+  faCertificate,
+  faIdBadge
+} from '@fortawesome/free-solid-svg-icons';
+import ViewsIcon from '../svg/ViewsIcon/ViewsIcon';
 
 interface VideoData {
   id?: string;
@@ -59,7 +65,10 @@ const VideoCard = ({ data }: { data: VideoData }) => {
           />
           <Link href={`/videos/${data.id}`} className={styles.videoLink}>
             <div className={styles.videoTitle}>{data.title ?? '-'}</div>
-            <div className={styles.videoViews}>{data.views ?? '-'} views</div>
+            <div className={styles.viewsWrapper}>
+              <ViewsIcon />
+              <div className={styles.videoViews}>{data.views ?? '-'} views</div>
+            </div>
           </Link>
         </div>
 
@@ -101,15 +110,23 @@ const VideoCard = ({ data }: { data: VideoData }) => {
               <div className={styles.userName}>{data.name ?? '-'}</div>
             </div>
             {data.rank && (data.rank === 1 || data.rank === 2 || data.rank === 3) && (
-              <div
-                className={styles.badge}
-                style={{
-                  backgroundColor: `${getBadgeColor(data.rank)}50`,
-                  color: getBadgeColor(data.rank)
-                }}
-              >
+              <div className={styles.badge}>
+                <FontAwesomeIcon
+                  icon={faCertificate}
+                  className={styles.certificateIcon}
+                  style={{
+                    color: `${getBadgeColor(data.rank)}50`
+                  }}
+                />
                 {/* badge icon  */}
-                <div>{data.rank}</div>
+                <div
+                  className={styles.rankNumber}
+                  style={{
+                    color: getBadgeColor(data.rank)
+                  }}
+                >
+                  {data.rank}
+                </div>
               </div>
             )}
           </div>

@@ -39,6 +39,13 @@
   white-space: nowrap;
 }
 
+.viewsWrapper {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  padding-top: 6px;
+}
+
 .videoViews {
   color: #989eae;
   font-weight: 600;
@@ -137,12 +144,20 @@
 
 .badge {
   position: relative;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  font-size: 12px;
-  font-weight: 800;
+}
+
+.rankNumber {
+  position: absolute;
+  inset: 0;
   display: flex;
   align-items: center;
+  font-size: 12px;
+  font-weight: 800;
   justify-content: center;
+  padding-bottom: 2px;
+}
+
+.certificateIcon {
+  width: 24px;
+  height: 24px;
 }
