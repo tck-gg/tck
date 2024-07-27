@@ -166,6 +166,7 @@ function Home({ isLive }: { isLive: boolean }) {
                   overflow: 'hidden',
                   border: 0
                 }}
+                scrolling='no'
                 className={classes.livestream}
               ></iframe>
             </div>
