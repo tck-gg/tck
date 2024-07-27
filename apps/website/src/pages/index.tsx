@@ -21,9 +21,9 @@ import { SOCIALS_DATA } from '@/data/socials';
 
 import classes from './index.module.scss';
 
-import gfuelProducts from '@/images/gfuel-products.png';
-import gfuelWordmark from '@/images/gfuel-wordmark.png';
-import gfuelBackground from '@/images/gfuel-background.png';
+import gfuelProducts from '@/images/gfuel/gfuel-products.png';
+import gfuelWordmark from '@/images/gfuel/gfuel-wordmark.png';
+import gfuelBackground from '@/images/gfuel/gfuel-background.png';
 import ak from '@/images/ak.png';
 import knife from '@/images/knife.png';
 import logo from '@/images/logo-hq.png';
@@ -160,7 +160,7 @@ function Home({ isLive }: { isLive: boolean }) {
               variant='primary'
               rightIcon={faAngleRight}
               onClick={() => {
-                router.push('/leaderboard');
+                router.push('/leaderboards');
               }}
             >
               Join Leaderboard
@@ -186,7 +186,7 @@ function Home({ isLive }: { isLive: boolean }) {
               width={120}
               className={classes.objectContain}
             />
-            <a href='/'>
+            <a href='https://gfuel.com/' target='_blank'>
               <FontAwesomeIcon icon={faExternalLink} className={classes.externalLinkIcon} />
             </a>
           </div>
