@@ -3,21 +3,25 @@
 .kickSectionDescription {
   @extend .sectionDescription;
 
-  background: linear-gradient(90deg, #53FC18 0%, #369F11 100%);
+  background: linear-gradient(90deg, #53fc18 0%, #369f11 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .hero {
-  height: 450px;
+  height: 70vh;
 
   justify-content: center;
 }
 
+.tckggLogo {
+  object-fit: contain;
+}
+
 .paragraph {
   font-size: 14px;
-  color: #9391C9;
+  color: #9391c9;
 }
 
 .description {
@@ -114,9 +118,9 @@
 }
 
 .livestreamBox {
-  background: #11111F;
+  background: #11111f;
   border-radius: 10px;
-  
+
   width: 100%;
   padding: 16px;
 
@@ -144,16 +148,103 @@
 
 .ak {
   @extend .image;
-
-  top: 270px;
+  bottom: 10%;
   left: 5%;
+}
+
+.trophy {
+  @extend .image;
+  top: 10%;
+  left: 20%;
+  rotate: -25deg;
+  animation-delay: 1.5s;
+  @media screen and (max-width: 1024px) {
+    top: 0;
+    left: 0;
+  }
+}
+
+.bags {
+  @extend .image;
+  top: 30%;
+  left: 0%;
+  rotate: -25deg;
+  @media screen and (max-width: 1024px) {
+    display: none;
+  }
+}
+
+.vs {
+  @extend .image;
+  bottom: 10%;
+  right: 20%;
+  rotate: -15deg;
+  animation-delay: -2s;
+  @media screen and (max-width: 1024px) {
+    display: none;
+  }
+}
+
+.lollipop {
+  @extend .image;
+  bottom: 30%;
+  right: 0%;
+  @media screen and (max-width: 1024px) {
+    display: none;
+  }
 }
 
 .knife {
   @extend .image;
-
-  top: 70px;
-  right: 0;
-
+  rotate: 10deg;
+  top: 2%;
+  right: 8%;
   animation-delay: -3s;
+  @media screen and (max-width: 1024px) {
+    top: 0;
+    right: 0;
+  }
+}
+
+.gfuelWrapper {
+  position: relative;
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.gfuelDetails {
+  position: relative;
+  color: #9391c9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding-left: 100px;
+  padding-right: 24px;
+}
+
+.gfuelDrinksImage {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.gfuelBackground {
+  position: absolute;
+  object-fit: contain;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.objectContain {
+  object-fit: contain;
+}
+
+.externalLinkIcon {
+  color: #9391c9;
 }
