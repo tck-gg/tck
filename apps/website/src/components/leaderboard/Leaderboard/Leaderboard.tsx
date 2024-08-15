@@ -73,7 +73,7 @@ function Leaderboard({ leaderboard }: { leaderboard: ILeaderboard }) {
                             alt='Roobet Icon'
                             className={classes.clashGem}
                           />
-                          <span>{[2500, 1500, 1000, 500, 250, 50, 50, 50, 50, 50][index]}</span>
+                          <span>{[2000, 1000, 500, 200, 100, 40, 40, 40, 40, 40][index]}</span>
                         </>
                       )}
                     </div>
