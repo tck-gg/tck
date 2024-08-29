@@ -86,22 +86,6 @@ function Leaderboards({
                 selectedLeaderboard === 'roobet' && classes.selected
               )}
             />
-            <Image
-              src={packDrawLogo}
-              alt='PackDraw'
-              width={100}
-              height={60}
-              style={{
-                objectFit: 'contain'
-              }}
-              onClick={() => {
-                setSelectedLeaderboard('packdraw');
-              }}
-              className={clsx(
-                classes.affiliate,
-                selectedLeaderboard === 'packdraw' && classes.selected
-              )}
-            />
           </div>
 
           <p className={classes.codePromo}>

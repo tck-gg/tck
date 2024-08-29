@@ -214,7 +214,6 @@ export async function getLeaderboard(type: LeaderboardType) {
 
 export async function getAllLeaderboards() {
   return {
-    packdraw: await getLeaderboard('packdraw'),
     roobet: await getLeaderboard('roobet')
   };
 }
