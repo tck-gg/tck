@@ -13,7 +13,7 @@ export async function getStaticProps() {
     .toISOString()
     .split('T')[0];
   const response = await axios.get(
-    `https://api.roobet.com/affiliate/stats?userId=0401366b-7c9a-4edf-99e5-90db191b54ed&startDate=${new Date(
+    `https://roobetconnect.com/affiliate/stats?userId=0401366b-7c9a-4edf-99e5-90db191b54ed&startDate=${new Date(
       monthStart
     ).toISOString()}`,
     {
