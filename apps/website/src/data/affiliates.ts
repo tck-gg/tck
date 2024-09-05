@@ -9,6 +9,7 @@ import packDrawLogo from '../images/affiliate/packdraw.png';
 // import rollbitLogo from '../images/affiliate/rollbit.png';
 import roobetLogo from '../images/affiliate/roobet.png';
 // import csgo500Logo from '../images/affiliate/csgo500.png';
+import shuffleLogo from '../images/affiliate/shuffle.png';
 
 /**
  * The affiliates to display on the affiliates page.
@@ -91,7 +92,7 @@ export const AFFILIATES: IAffiliate[] = [
     ],
     tags: ['CS:GO', 'Crypto', 'Battles', 'Originals'],
     featured: false
-  }
+  },
   // {
   //   image: rollbitLogo,
   //   reward: '5% Rakeback & Daily/Weekly Cash Challenges',
@@ -117,5 +118,18 @@ export const AFFILIATES: IAffiliate[] = [
   //   ],
   //   tags: ['Slots', 'Live Games', 'Originals', 'Crypto'],
   //   featured: false
-  // }
+  // },
+  {
+    image: shuffleLogo,
+    reward: 'INSTANT DEPOSIT BONUS - GREAT REWARD SYSTEM - SPECIALIZED REWARDS',
+    name: 'Shuffle',
+    codes: [
+      {
+        code: 'TCK',
+        link: 'https://shuffle.com/'
+      }
+    ],
+    tags: ['Slots', 'Live Games', 'Originals', 'Crypto'],
+    featured: false
+  }
 ];
