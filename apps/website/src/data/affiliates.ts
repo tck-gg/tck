@@ -10,6 +10,7 @@ import packDrawLogo from '../images/affiliate/packdraw.png';
 import roobetLogo from '../images/affiliate/roobet.png';
 // import csgo500Logo from '../images/affiliate/csgo500.png';
 import shuffleLogo from '../images/affiliate/shuffle.png';
+import howlLogo from '../images/affiliate/howl.png';
 
 /**
  * The affiliates to display on the affiliates page.
@@ -127,6 +128,19 @@ export const AFFILIATES: IAffiliate[] = [
       {
         code: 'TCK',
         link: 'https://shuffle.com/'
+      }
+    ],
+    tags: ['Slots', 'Live Games', 'Originals', 'Crypto'],
+    featured: false
+  },
+  {
+    image: howlLogo,
+    reward: 'GREAT REWARD SYSTEM - SLOT BATTLES',
+    name: 'Howl.GG',
+    codes: [
+      {
+        code: 'TCK',
+        link: 'https://howl.gg/'
       }
     ],
     tags: ['Slots', 'Live Games', 'Originals', 'Crypto'],
