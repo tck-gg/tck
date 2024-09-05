@@ -8,6 +8,7 @@ import {
 import { format, previousSunday } from 'date-fns';
 
 import { prisma } from '../client';
+import { validate } from 'multicoin-address-validator';
 
 async function ensureLeaderboard(type: LeaderboardType) {
   // Create the leaderboard if it doesn't exist.
@@ -114,29 +115,29 @@ export async function getLeaderboard(type: LeaderboardType) {
   //   }
   // }
 
-  if (type === 'packdraw') {
-    const prevSunday = previousSunday(new Date());
-    const response = await axios.get(
-      `https://packdraw.com/api/v1/affiliates/leaderboard?after=${format(
-        prevSunday,
-        'MM-dd-yyyy'
-      )}&apiKey=${process.env.PACKDRAW_API_KEY}`,
-      {
-        validateStatus: () => {
-          return true;
-        }
-      }
-    );
-    const data: PackdrawLeaderboardApiData = response.data;
+  // if (type === 'packdraw') {
+  //   const prevSunday = previousSunday(new Date());
+  //   const response = await axios.get(
+  //     `https://packdraw.com/api/v1/affiliates/leaderboard?after=${format(
+  //       prevSunday,
+  //       'MM-dd-yyyy'
+  //     )}&apiKey=${process.env.PACKDRAW_API_KEY}`,
+  //     {
+  //       validateStatus: () => {
+  //         return true;
+  //       }
+  //     }
+  //   );
+  //   const data: PackdrawLeaderboardApiData = response.data;
 
-    spots = data.leaderboard.splice(0, 10).map((spot) => {
-      return {
-        username: spot.username,
-        amount: Math.round(spot.wagerAmount),
-        avatar: spot.image
-      };
-    });
-  }
+  //   spots = data.leaderboard.splice(0, 10).map((spot) => {
+  //     return {
+  //       username: spot.username,
+  //       amount: Math.round(spot.wagerAmount),
+  //       avatar: spot.image
+  //     };
+  //   });
+  // }
 
   // if (type === 'csgobig') {
   //   const start = new Date(new Date().getFullYear(), new Date().getMonth(), 1).getTime();
@@ -172,10 +173,20 @@ export async function getLeaderboard(type: LeaderboardType) {
       {
         headers: {
           authorization: `Bearer ${process.env.ROOBET_API_KEY}`
+        },
+        validateStatus: () => {
+          return true;
         }
       }
     );
     const data: RoobetLeaderboardSpot[] = response.data;
+    if (typeof data === 'string') {
+      return {
+        id: '0',
+        type,
+        spots: []
+      };
+    }
 
     spots = data
       .sort((a, b) => {
