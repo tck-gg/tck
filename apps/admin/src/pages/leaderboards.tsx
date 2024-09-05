@@ -27,6 +27,15 @@ export async function getStaticProps() {
   );
   const roobetData: RoobetLeaderboardSpot[] = response.data;
 
+  if (typeof roobetData === 'string') {
+    return {
+      props: {
+        roobetData: []
+      },
+      revalidate: 3600
+    };
+  }
+
   return {
     props: {
       roobetData
