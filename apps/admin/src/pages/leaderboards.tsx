@@ -19,6 +19,9 @@ export async function getStaticProps() {
     {
       headers: {
         authorization: `Bearer ${process.env.ROOBET_API_KEY}`
+      },
+      validateStatus: () => {
+        return true;
       }
     }
   );
