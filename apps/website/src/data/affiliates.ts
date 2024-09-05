@@ -12,6 +12,7 @@ import roobetLogo from '../images/affiliate/roobet.png';
 import shuffleLogo from '../images/affiliate/shuffle.png';
 import howlLogo from '../images/affiliate/howl.png';
 import clashLogo from '../images/affiliate/clash.png';
+import casesggLogo from '../images/affiliate/casesgg.png';
 
 /**
  * The affiliates to display on the affiliates page.
@@ -38,6 +39,19 @@ export const AFFILIATES: IAffiliate[] = [
       {
         code: 'TCK',
         link: 'https://packdraw.com/?ref=TCK'
+      }
+    ],
+    tags: ['Slots', 'Live Games', 'Originals', 'Crypto'],
+    featured: true
+  },
+  {
+    image: casesggLogo,
+    reward: '$1,000 Leaderboard - 1 FREE CASE and 5% Deposit Bonus',
+    name: 'cases.gg',
+    codes: [
+      {
+        code: 'TCK',
+        link: 'https://cases.gg/'
       }
     ],
     tags: ['Slots', 'Live Games', 'Originals', 'Crypto'],
