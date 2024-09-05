@@ -11,6 +11,7 @@ import roobetLogo from '../images/affiliate/roobet.png';
 // import csgo500Logo from '../images/affiliate/csgo500.png';
 import shuffleLogo from '../images/affiliate/shuffle.png';
 import howlLogo from '../images/affiliate/howl.png';
+import clashLogo from '../images/affiliate/clash.png';
 
 /**
  * The affiliates to display on the affiliates page.
@@ -141,6 +142,19 @@ export const AFFILIATES: IAffiliate[] = [
       {
         code: 'TCK',
         link: 'https://howl.gg/'
+      }
+    ],
+    tags: ['Slots', 'Live Games', 'Originals', 'Crypto'],
+    featured: false
+  },
+  {
+    image: clashLogo,
+    reward: '5% DEPOSIT BONUS and FREE CASE',
+    name: 'Clash.gg',
+    codes: [
+      {
+        code: 'TCK',
+        link: 'https://clash.gg/'
       }
     ],
     tags: ['Slots', 'Live Games', 'Originals', 'Crypto'],
