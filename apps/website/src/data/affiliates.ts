@@ -1,14 +1,18 @@
 import { IAffiliate } from '@/types/affiliate';
 
-// import gamdomLogo from '../images/affiliate/gamdom.png';
-// import stakeLogo from '../images/affiliate/stake.png';
-// import hypeDropLogo from '../images/affiliate/hypedrop.png';
-// import csgorollLogo from '../images/affiliate/csgoroll.png';
+import gamdomLogo from '../images/affiliate/gamdom.png';
+import stakeLogo from '../images/affiliate/stake.png';
+import hypeDropLogo from '../images/affiliate/hypedrop.png';
+import csgorollLogo from '../images/affiliate/csgoroll.png';
 import packDrawLogo from '../images/affiliate/packdraw.png';
 // import datDropLogo from '../images/affiliate/datdrop.png';
 // import rollbitLogo from '../images/affiliate/rollbit.png';
 import roobetLogo from '../images/affiliate/roobet.png';
 // import csgo500Logo from '../images/affiliate/csgo500.png';
+import shuffleLogo from '../images/affiliate/shuffle.png';
+import howlLogo from '../images/affiliate/howl.png';
+import clashLogo from '../images/affiliate/clash.png';
+import casesggLogo from '../images/affiliate/casesgg.png';
 
 /**
  * The affiliates to display on the affiliates page.
@@ -16,7 +20,7 @@ import roobetLogo from '../images/affiliate/roobet.png';
 export const AFFILIATES: IAffiliate[] = [
   {
     image: roobetLogo,
-    reward: 'Exclusive rewards and instant rakeback!',
+    reward: '$15 Reloads + $6,000 Leaderboard + Great ROOWARD System + VIP TRANSFERS',
     name: 'Roobet',
     codes: [
       {
@@ -29,7 +33,7 @@ export const AFFILIATES: IAffiliate[] = [
   },
   {
     image: packDrawLogo,
-    reward: '5% Deposit Bonus + Bonus',
+    reward: 'FREE 3 PACKS 5% DEPOSIT BONUS',
     name: 'PackDraw',
     codes: [
       {
@@ -39,59 +43,72 @@ export const AFFILIATES: IAffiliate[] = [
     ],
     tags: ['Slots', 'Live Games', 'Originals', 'Crypto'],
     featured: true
-  }
-  // {
-  //   image: gamdomLogo,
-  //   reward: '15% Instant Rakeback',
-  //   name: 'Gamdom',
-  //   codes: [
-  //     {
-  //       code: 'TCK',
-  //       link: 'https://gamdom.com/landing?tag1=TCK'
-  //     }
-  //   ],
-  //   tags: ['Slots', 'Live Games', 'Originals', 'Crypto'],
-  //   featured: true
-  // },
-  // {
-  //   image: stakeLogo,
-  //   reward: '10% Rakeback & VIP Rewards',
-  //   name: 'Stake',
-  //   codes: [
-  //     {
-  //       code: 'TCK',
-  //       link: 'https://stake.com/?c=TCK'
-  //     }
-  //   ],
-  //   tags: ['Slots', 'Live Games', 'Originals', 'Crypto'],
-  //   featured: false
-  // },
-  // {
-  //   image: hypeDropLogo,
-  //   reward: '3 Free Boxes',
-  //   name: 'Hypedrop',
-  //   codes: [
-  //     {
-  //       code: 'TCK',
-  //       link: 'https://www.hypedrop.com/'
-  //     }
-  //   ],
-  //   tags: ['Slots', 'Live Games', 'Originals', 'Crypto'],
-  //   featured: true
-  // },
-  // {
-  //   image: csgorollLogo,
-  //   reward: '3 Free Cases and 5% Deposit Bonus',
-  //   name: 'CSGORoll',
-  //   codes: [
-  //     {
-  //       code: 'TCK',
-  //       link: 'https://csgoroll.com/r/TCK'
-  //     }
-  //   ],
-  //   tags: ['CS:GO', 'Crypto', 'Battles', 'Originals'],
-  //   featured: true
-  // },
+  },
+  {
+    image: casesggLogo,
+    reward: '$1,000 Leaderboard - 1 FREE CASE and 5% Deposit Bonus',
+    name: 'cases.gg',
+    codes: [
+      {
+        code: 'TCK',
+        link: 'https://cases.gg/'
+      }
+    ],
+    tags: ['Slots', 'Live Games', 'Originals', 'Crypto'],
+    featured: true
+  },
+  {
+    image: gamdomLogo,
+    reward: '15% Instant Rakeback',
+    name: 'Gamdom',
+    codes: [
+      {
+        code: 'TCK',
+        link: 'https://gamdom.com/landing?tag1=TCK'
+      }
+    ],
+    tags: ['Slots', 'Live Games', 'Originals', 'Crypto'],
+    featured: false
+  },
+  {
+    image: stakeLogo,
+    reward: '$15 Reload',
+    name: 'Stake',
+    codes: [
+      {
+        code: 'TCK',
+        link: 'https://stake.com/?c=TCK'
+      }
+    ],
+    tags: ['Slots', 'Live Games', 'Originals', 'Crypto'],
+    featured: false
+  },
+  {
+    image: hypeDropLogo,
+    reward: 'FREE CASES and 5% DEPOSIT BONUS',
+    name: 'Hypedrop',
+    codes: [
+      {
+        code: 'TCK',
+        link: 'https://www.hypedrop.com/'
+      }
+    ],
+    tags: ['Slots', 'Live Games', 'Originals', 'Crypto'],
+    featured: false
+  },
+  {
+    image: csgorollLogo,
+    reward: '3 FREE CASES AND 5% DEPOSIT BONUS',
+    name: 'CSGORoll',
+    codes: [
+      {
+        code: 'TCK',
+        link: 'https://csgoroll.com/r/TCK'
+      }
+    ],
+    tags: ['CS:GO', 'Crypto', 'Battles', 'Originals'],
+    featured: false
+  },
   // {
   //   image: rollbitLogo,
   //   reward: '5% Rakeback & Daily/Weekly Cash Challenges',
@@ -104,7 +121,7 @@ export const AFFILIATES: IAffiliate[] = [
   //   ],
   //   tags: ['Slots', 'Live Games', 'Originals', 'Crypto'],
   //   featured: false
-  // },
+  // }
   // {
   //   image: csgo500Logo,
   //   reward: '10% Rakeback & VIP Rewards',
@@ -117,5 +134,44 @@ export const AFFILIATES: IAffiliate[] = [
   //   ],
   //   tags: ['Slots', 'Live Games', 'Originals', 'Crypto'],
   //   featured: false
-  // }
+  // },
+  {
+    image: shuffleLogo,
+    reward: 'INSTANT DEPOSIT BONUS - GREAT REWARD SYSTEM - SPECIALIZED REWARDS',
+    name: 'Shuffle',
+    codes: [
+      {
+        code: 'TCK',
+        link: 'https://shuffle.com/'
+      }
+    ],
+    tags: ['Slots', 'Live Games', 'Originals', 'Crypto'],
+    featured: false
+  },
+  {
+    image: howlLogo,
+    reward: 'GREAT REWARD SYSTEM - SLOT BATTLES',
+    name: 'Howl.GG',
+    codes: [
+      {
+        code: 'TCK',
+        link: 'https://howl.gg/'
+      }
+    ],
+    tags: ['Slots', 'Live Games', 'Originals', 'Crypto'],
+    featured: false
+  },
+  {
+    image: clashLogo,
+    reward: '5% DEPOSIT BONUS and FREE CASE',
+    name: 'Clash.gg',
+    codes: [
+      {
+        code: 'TCK',
+        link: 'https://clash.gg/'
+      }
+    ],
+    tags: ['Slots', 'Live Games', 'Originals', 'Crypto'],
+    featured: false
+  }
 ];
