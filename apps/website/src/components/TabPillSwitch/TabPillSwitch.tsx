@@ -1,7 +1,7 @@
-'use client';
-import React, { useState } from 'react';
+import React from 'react';
 import Image from 'next/image';
-import styles from './tabpillswitch2.module.scss';
+
+import styles from './TabPillSwitch.module.scss';
 
 type Tabs = {
   name: string;
@@ -30,7 +30,7 @@ const TabPillSwitch = ({ tabs, activeTab, setActiveTab }: Props) => {
           >
             <Image
               src={item.image}
-              alt={`${item.name} logo`}
+              alt={`${item.name}`}
               className={`${styles.logo} ${activeTab === item.name ? '' : styles.inactiveLogo}`}
             />
           </button>
