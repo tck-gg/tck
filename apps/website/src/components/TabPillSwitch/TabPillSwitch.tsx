@@ -1,7 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 import Image from 'next/image';
-import styles from './tabpillswitch.module.scss';
+import styles from './tabpillswitch2.module.scss';
 
 type Tabs = {
   name: string;

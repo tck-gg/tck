@@ -22,6 +22,7 @@ import classes from './leaderboards.module.scss';
 
 import packDrawLogo from '../../images/affiliate/packdraw.png';
 import roobetLogo from '../../images/affiliate/roobet.png';
+import TabPillSwitch from '@/components/TabPillSwitch/TabPillSwitch';
 
 export type ILeaderboard = Prisma.LeaderboardGetPayload<{
   include: { spots: true };
@@ -69,24 +70,18 @@ function Leaderboards({
         <PageHeader title='Leaderboards' />
 
         <div className={classes.top}>
-          <div className={classes.affiliates}>
-            <Image
-              src={roobetLogo}
-              alt='Roobet'
-              width={100}
-              height={60}
-              style={{
-                objectFit: 'contain'
-              }}
-              onClick={() => {
-                setSelectedLeaderboard('roobet');
-              }}
-              className={clsx(
-                classes.affiliate,
-                selectedLeaderboard === 'roobet' && classes.selected
-              )}
-            />
-          </div>
+          <TabPillSwitch
+            tabs={[
+              {
+                image: roobetLogo,
+                name: 'roobet'
+              }
+            ]}
+            activeTab={selectedLeaderboard}
+            setActiveTab={(name: string) => {
+              setSelectedLeaderboard(name as ThemedLeaderboard);
+            }}
+          />
 
           <p className={classes.codePromo}>
             Wager Under Code{' '}
