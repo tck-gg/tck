@@ -22,6 +22,7 @@ import classes from './leaderboards.module.scss';
 
 import packDrawLogo from '../../images/affiliate/packdraw.png';
 import roobetLogo from '../../images/affiliate/roobet.png';
+import hypedropLogo from '../../images/affiliate/hypedrop.png';
 
 export type ILeaderboard = Prisma.LeaderboardGetPayload<{
   include: { spots: true };
@@ -84,6 +85,22 @@ function Leaderboards({
               className={clsx(
                 classes.affiliate,
                 selectedLeaderboard === 'roobet' && classes.selected
+              )}
+            />
+            <Image
+              src={hypedropLogo}
+              alt='HypeDrop'
+              width={100}
+              height={60}
+              style={{
+                objectFit: 'contain'
+              }}
+              onClick={() => {
+                setSelectedLeaderboard('hypedrop');
+              }}
+              className={clsx(
+                classes.affiliate,
+                selectedLeaderboard === 'hypedrop' && classes.selected
               )}
             />
           </div>
@@ -193,6 +210,9 @@ function Leaderboards({
                 <CountdownTimer days={monthlyDays} hours={monthlyHours} minutes={monthlyMinutes} />
               )}
               {selectedLeaderboard === 'packdraw' && (
+                <CountdownTimer days={monthlyDays} hours={monthlyHours} minutes={monthlyMinutes} />
+              )}
+              {selectedLeaderboard === 'hypedrop' && (
                 <CountdownTimer days={monthlyDays} hours={monthlyHours} minutes={monthlyMinutes} />
               )}
             </div>

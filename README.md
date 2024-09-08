@@ -50,6 +50,7 @@ https://discord.com/oauth2/authorize?client_id=1188676912525090837&scope=bot&per
 - `KICK_AUTH`
 - `RANDOM_ORG_API_KEY` (signed)
 - `ROOBET_API_KEY`
+- `HYPEDROP_API_KEY`
 - `SENTRY_AUTH_TOKEN`
 - `YOUTUBE_API_KEY`
 - `PACKDRAW_API_KEY`

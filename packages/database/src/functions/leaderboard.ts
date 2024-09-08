@@ -8,7 +8,6 @@ import {
 import { format, previousSunday } from 'date-fns';
 
 import { prisma } from '../client';
-import { validate } from 'multicoin-address-validator';
 
 async function ensureLeaderboard(type: LeaderboardType) {
   // Create the leaderboard if it doesn't exist.
@@ -61,7 +60,9 @@ export async function getLeaderboard(type: LeaderboardType) {
   const monthStart = new Date(new Date().getFullYear(), new Date().getMonth(), 1)
     .toISOString()
     .split('T')[0];
-
+  const monthEnd = new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0)
+    .toISOString()
+    .split('T')[0];
   let spots: LeaderboardSpot[] = [];
 
   // if (type === 'gamdom') {
@@ -158,7 +159,60 @@ export async function getLeaderboard(type: LeaderboardType) {
   // }
 
   if (type === 'roobet') {
-    if (!process.env.ROOBET_API_KEY) {
+    return {
+      id: '0',
+      type,
+      spots: []
+    };
+    // if (!process.env.ROOBET_API_KEY) {
+    //   return {
+    //     id: '0',
+    //     type,
+    //     spots: []
+    //   };
+    // }
+
+    // const response = await axios.get(
+    //   `https://roobetconnect.com/affiliate/stats?userId=0401366b-7c9a-4edf-99e5-90db191b54ed&startDate=${new Date(
+    //     monthStart
+    //   ).toISOString()}`,
+    //   {
+    //     headers: {
+    //       authorization: `Bearer ${process.env.ROOBET_API_KEY}`
+    //     },
+    //     validateStatus: () => {
+    //       return true;
+    //     }
+    //   }
+    // );
+    // const data: RoobetLeaderboardSpot[] = response.data;
+    // if (typeof data === 'string') {
+    //   return {
+    //     id: '0',
+    //     type,
+    //     spots: []
+    //   };
+    // }
+
+    // spots = data
+    //   .sort((a, b) => {
+    //     return b.wagered - a.wagered;
+    //   })
+    //   .filter((spot) => {
+    //     return spot.username !== 'TCKgg';
+    //   })
+    //   .splice(0, 10)
+    //   .map((spot) => {
+    //     return {
+    //       username: spot.username,
+    //       amount: Math.round(spot.wagered),
+    //       avatar: ''
+    //     };
+    //   });
+  }
+
+  if (type === 'hypedrop') {
+    if (!process.env.HYPEDROP_API_KEY) {
       return {
         id: '0',
         type,
@@ -166,21 +220,38 @@ export async function getLeaderboard(type: LeaderboardType) {
       };
     }
 
-    const response = await axios.get(
-      `https://roobetconnect.com/affiliate/stats?userId=0401366b-7c9a-4edf-99e5-90db191b54ed&startDate=${new Date(
-        monthStart
-      ).toISOString()}`,
-      {
-        headers: {
-          authorization: `Bearer ${process.env.ROOBET_API_KEY}`
-        },
-        validateStatus: () => {
-          return true;
+    const graphqlQuery = {
+      operationName: 'AffiliateEarningsByReferee',
+      query: `query AffiliateEarningsByReferee {
+        affiliateEarningsByReferee(
+          affiliateUserId: 178,
+          startDate: "${monthStart} 00:00:00",
+          endDate: "${monthEnd} 00:00:00",
+          orderBy: WAGERED_TOTAL_DESC
+        ){
+          edges {
+            node {
+              commission,
+              deposited
+            }
+          }
         }
+      }`,
+      variables: {}
+    };
+
+    const response = await axios.post(`https://api.hypedrop.com/graphql`, graphqlQuery, {
+      headers: {
+        Authorization: `Bearer ${process.env.HYPEDROP_API_KEY}`
+      },
+      validateStatus: () => {
+        return true;
       }
-    );
-    const data: RoobetLeaderboardSpot[] = response.data;
-    if (typeof data === 'string') {
+    });
+
+    if (typeof response.data === 'string') {
+      console.log(response.data);
+
       return {
         id: '0',
         type,
@@ -188,21 +259,15 @@ export async function getLeaderboard(type: LeaderboardType) {
       };
     }
 
-    spots = data
-      .sort((a, b) => {
-        return b.wagered - a.wagered;
-      })
-      .filter((spot) => {
-        return spot.username !== 'TCKgg';
-      })
-      .splice(0, 10)
-      .map((spot) => {
-        return {
-          username: spot.username,
-          amount: Math.round(spot.wagered),
-          avatar: ''
-        };
-      });
+    const data = response.data.data.affiliateEarningsByReferee.edges.map((edge: any) => {
+      return {
+        username: 'Unknown',
+        amount: edge.node.deposited,
+        avatar: ''
+      };
+    });
+
+    spots = data;
   }
 
   if (type !== 'stake' && spots.length > 0) {
@@ -225,6 +290,7 @@ export async function getLeaderboard(type: LeaderboardType) {
 
 export async function getAllLeaderboards() {
   return {
-    roobet: await getLeaderboard('roobet')
+    roobet: await getLeaderboard('roobet'),
+    hypedrop: await getLeaderboard('hypedrop')
   };
 }
