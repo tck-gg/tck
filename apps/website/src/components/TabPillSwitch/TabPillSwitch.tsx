@@ -1,7 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 
-import styles from './TabPillSwitch.module.scss';
+import classes from './TabPillSwitch.module.scss';
 
 type Tabs = {
   name: string;
@@ -16,7 +16,7 @@ interface Props {
 
 const TabPillSwitch = ({ tabs, activeTab, setActiveTab }: Props) => {
   return (
-    <div className={styles.tabContainer}>
+    <div className={classes.tabContainer}>
       {tabs.map((item, index) => {
         return (
           <button
@@ -24,14 +24,14 @@ const TabPillSwitch = ({ tabs, activeTab, setActiveTab }: Props) => {
             onClick={() => {
               setActiveTab(item.name);
             }}
-            className={`${styles.tabButton} ${
-              activeTab === item.name ? styles.activeTab : styles.inactiveTab
+            className={`${classes.tabButton} ${
+              activeTab === item.name ? classes.activeTab : classes.inactiveTab
             }`}
           >
             <Image
               src={item.image}
               alt={`${item.name}`}
-              className={`${styles.logo} ${activeTab === item.name ? '' : styles.inactiveLogo}`}
+              className={`${classes.logo} ${activeTab === item.name ? '' : classes.inactiveLogo}`}
             />
           </button>
         );

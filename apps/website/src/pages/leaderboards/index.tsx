@@ -14,15 +14,14 @@ import PageHeader from '@/components/PageHeader/PageHeader';
 import Leaderboard from '@/components/leaderboard/Leaderboard/Leaderboard';
 import LeaderboardPodiumBox from '@/components/leaderboard/LeaderboardPodiumBox/LeaderboardPodiumBox';
 import CountdownTimer from '@/components/ui/CountdownTimer/CountdownTimer';
+import TabPillSwitch from '@/components/TabPillSwitch/TabPillSwitch';
 
 import { useTheme } from '@/hooks/theme';
 import { useCountdown } from '@/hooks/countdown';
 
 import classes from './leaderboards.module.scss';
 
-import packDrawLogo from '../../images/affiliate/packdraw.png';
 import roobetLogo from '../../images/affiliate/roobet.png';
-import TabPillSwitch from '@/components/TabPillSwitch/TabPillSwitch';
 
 export type ILeaderboard = Prisma.LeaderboardGetPayload<{
   include: { spots: true };
