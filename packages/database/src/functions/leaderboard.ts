@@ -159,56 +159,51 @@ export async function getLeaderboard(type: LeaderboardType) {
   // }
 
   if (type === 'roobet') {
-    return {
-      id: '0',
-      type,
-      spots: []
-    };
-    // if (!process.env.ROOBET_API_KEY) {
-    //   return {
-    //     id: '0',
-    //     type,
-    //     spots: []
-    //   };
-    // }
+    if (!process.env.ROOBET_API_KEY) {
+      return {
+        id: '0',
+        type,
+        spots: []
+      };
+    }
 
-    // const response = await axios.get(
-    //   `https://roobetconnect.com/affiliate/stats?userId=0401366b-7c9a-4edf-99e5-90db191b54ed&startDate=${new Date(
-    //     monthStart
-    //   ).toISOString()}`,
-    //   {
-    //     headers: {
-    //       authorization: `Bearer ${process.env.ROOBET_API_KEY}`
-    //     },
-    //     validateStatus: () => {
-    //       return true;
-    //     }
-    //   }
-    // );
-    // const data: RoobetLeaderboardSpot[] = response.data;
-    // if (typeof data === 'string') {
-    //   return {
-    //     id: '0',
-    //     type,
-    //     spots: []
-    //   };
-    // }
+    const response = await axios.get(
+      `https://roobetconnect.com/affiliate/stats?userId=0401366b-7c9a-4edf-99e5-90db191b54ed&startDate=${new Date(
+        monthStart
+      ).toISOString()}`,
+      {
+        headers: {
+          authorization: `Bearer ${process.env.ROOBET_API_KEY}`
+        },
+        validateStatus: () => {
+          return true;
+        }
+      }
+    );
+    const data: RoobetLeaderboardSpot[] = response.data;
+    if (typeof data === 'string') {
+      return {
+        id: '0',
+        type,
+        spots: []
+      };
+    }
 
-    // spots = data
-    //   .sort((a, b) => {
-    //     return b.wagered - a.wagered;
-    //   })
-    //   .filter((spot) => {
-    //     return spot.username !== 'TCKgg';
-    //   })
-    //   .splice(0, 10)
-    //   .map((spot) => {
-    //     return {
-    //       username: spot.username,
-    //       amount: Math.round(spot.wagered),
-    //       avatar: ''
-    //     };
-    //   });
+    spots = data
+      .sort((a, b) => {
+        return b.wagered - a.wagered;
+      })
+      .filter((spot) => {
+        return spot.username !== 'TCKgg';
+      })
+      .splice(0, 10)
+      .map((spot) => {
+        return {
+          username: spot.username,
+          amount: Math.round(spot.wagered),
+          avatar: ''
+        };
+      });
   }
 
   if (type === 'hypedrop') {
@@ -227,12 +222,14 @@ export async function getLeaderboard(type: LeaderboardType) {
           affiliateUserId: 178,
           startDate: "${monthStart} 00:00:00",
           endDate: "${monthEnd} 00:00:00",
-          orderBy: WAGERED_TOTAL_DESC
+          orderBy: WAGERED_TOTAL_DESC,
+          first: 10
         ){
           edges {
             node {
               commission,
-              deposited
+              deposited,
+              referee { displayName }
             }
           }
         }
@@ -250,8 +247,6 @@ export async function getLeaderboard(type: LeaderboardType) {
     });
 
     if (typeof response.data === 'string') {
-      console.log(response.data);
-
       return {
         id: '0',
         type,
@@ -261,8 +256,8 @@ export async function getLeaderboard(type: LeaderboardType) {
 
     const data = response.data.data.affiliateEarningsByReferee.edges.map((edge: any) => {
       return {
-        username: 'Unknown',
-        amount: edge.node.deposited,
+        username: edge.node.referee.displayName,
+        amount: Math.round(edge.node.deposited),
         avatar: ''
       };
     });

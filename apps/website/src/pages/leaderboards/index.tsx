@@ -122,8 +122,8 @@ function Leaderboards({
                     rewardType={
                       selectedLeaderboard === 'roobet'
                         ? 'roobet'
-                        : selectedLeaderboard === 'csgobig'
-                        ? 'csgobig'
+                        : selectedLeaderboard === 'hypedrop'
+                        ? 'hypedrop'
                         : 'none'
                     }
                   />
@@ -147,8 +147,8 @@ function Leaderboards({
                     rewardType={
                       selectedLeaderboard === 'roobet'
                         ? 'roobet'
-                        : selectedLeaderboard === 'csgobig'
-                        ? 'csgobig'
+                        : selectedLeaderboard === 'hypedrop'
+                        ? 'hypedrop'
                         : 'none'
                     }
                   />
@@ -172,8 +172,8 @@ function Leaderboards({
                     rewardType={
                       selectedLeaderboard === 'roobet'
                         ? 'roobet'
-                        : selectedLeaderboard === 'csgobig'
-                        ? 'csgobig'
+                        : selectedLeaderboard === 'hypedrop'
+                        ? 'hypedrop'
                         : 'none'
                     }
                   />

@@ -48,9 +48,10 @@ function LeaderboardPodiumBox({
                 <Image width={16} height={16} src={roobetIcon} alt='Roobet Icon' />
               )}
               <p className={classes.rewardText}>
-                {rewardType === 'cash' && '$'}
+                {['cash', 'hypedrop'].includes(rewardType) && '$'}
                 {rewardType === 'roobet' && [2500, 1500, 1000][position - 1]}
                 {rewardType === 'csgobig' && [500, 250, 100][position - 1]}
+                {rewardType === 'hypedrop' && [2250, 1250, 750][position - 1]}
               </p>
             </div>
           </JaggedBackgroundItem>
