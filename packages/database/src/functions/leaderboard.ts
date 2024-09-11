@@ -8,7 +8,6 @@ import {
 import { format, previousSunday } from 'date-fns';
 
 import { prisma } from '../client';
-import { validate } from 'multicoin-address-validator';
 
 async function ensureLeaderboard(type: LeaderboardType) {
   // Create the leaderboard if it doesn't exist.
@@ -61,7 +60,9 @@ export async function getLeaderboard(type: LeaderboardType) {
   const monthStart = new Date(new Date().getFullYear(), new Date().getMonth(), 1)
     .toISOString()
     .split('T')[0];
-
+  const monthEnd = new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0)
+    .toISOString()
+    .split('T')[0];
   let spots: LeaderboardSpot[] = [];
 
   // if (type === 'gamdom') {
@@ -205,6 +206,65 @@ export async function getLeaderboard(type: LeaderboardType) {
       });
   }
 
+  if (type === 'hypedrop') {
+    if (!process.env.HYPEDROP_API_KEY) {
+      return {
+        id: '0',
+        type,
+        spots: []
+      };
+    }
+
+    const graphqlQuery = {
+      operationName: 'AffiliateEarningsByReferee',
+      query: `query AffiliateEarningsByReferee {
+        affiliateEarningsByReferee(
+          affiliateUserId: 178,
+          startDate: "${monthStart} 00:00:00",
+          endDate: "${monthEnd} 00:00:00",
+          orderBy: WAGERED_TOTAL_DESC,
+          first: 10
+        ){
+          edges {
+            node {
+              commission,
+              deposited,
+              referee { displayName }
+            }
+          }
+        }
+      }`,
+      variables: {}
+    };
+
+    const response = await axios.post(`https://api.hypedrop.com/graphql`, graphqlQuery, {
+      headers: {
+        Authorization: `Bearer ${process.env.HYPEDROP_API_KEY}`
+      },
+      validateStatus: () => {
+        return true;
+      }
+    });
+
+    if (typeof response.data === 'string') {
+      return {
+        id: '0',
+        type,
+        spots: []
+      };
+    }
+
+    const data = response.data.data.affiliateEarningsByReferee.edges.map((edge: any) => {
+      return {
+        username: edge.node.referee.displayName,
+        amount: Math.round(edge.node.deposited),
+        avatar: ''
+      };
+    });
+
+    spots = data;
+  }
+
   if (type !== 'stake' && spots.length > 0) {
     await updateLeaderboard(type, spots);
   }
@@ -225,6 +285,7 @@ export async function getLeaderboard(type: LeaderboardType) {
 
 export async function getAllLeaderboards() {
   return {
-    roobet: await getLeaderboard('roobet')
+    roobet: await getLeaderboard('roobet'),
+    hypedrop: await getLeaderboard('hypedrop')
   };
 }

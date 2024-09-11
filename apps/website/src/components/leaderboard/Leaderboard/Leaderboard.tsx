@@ -13,7 +13,7 @@ export type ILeaderboard = Prisma.LeaderboardGetPayload<{
 }>;
 
 function Leaderboard({ leaderboard }: { leaderboard: ILeaderboard }) {
-  const hasPrize = leaderboard.type === 'roobet' || leaderboard.type === 'csgobig';
+  const hasPrize = leaderboard.type === 'roobet' || leaderboard.type === 'hypedrop';
 
   return (
     <div className={classes.root}>
@@ -75,6 +75,9 @@ function Leaderboard({ leaderboard }: { leaderboard: ILeaderboard }) {
                           />
                           <span>{[2500, 1500, 1000, 500, 250, 50, 50, 50, 50, 50][index]}</span>
                         </>
+                      )}
+                      {leaderboard.type === 'hypedrop' && (
+                        <span>${[2250, 1250, 750, 250, 150, 100, 50, 50, 50, 50][index]}</span>
                       )}
                     </div>
                   </td>

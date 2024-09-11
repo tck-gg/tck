@@ -14,14 +14,15 @@ import PageHeader from '@/components/PageHeader/PageHeader';
 import Leaderboard from '@/components/leaderboard/Leaderboard/Leaderboard';
 import LeaderboardPodiumBox from '@/components/leaderboard/LeaderboardPodiumBox/LeaderboardPodiumBox';
 import CountdownTimer from '@/components/ui/CountdownTimer/CountdownTimer';
+import TabPillSwitch from '@/components/TabPillSwitch/TabPillSwitch';
 
 import { useTheme } from '@/hooks/theme';
 import { useCountdown } from '@/hooks/countdown';
 
 import classes from './leaderboards.module.scss';
 
-import packDrawLogo from '../../images/affiliate/packdraw.png';
 import roobetLogo from '../../images/affiliate/roobet.png';
+import hypedropLogo from '../../images/affiliate/hypedrop.png';
 
 export type ILeaderboard = Prisma.LeaderboardGetPayload<{
   include: { spots: true };
@@ -69,24 +70,22 @@ function Leaderboards({
         <PageHeader title='Leaderboards' />
 
         <div className={classes.top}>
-          <div className={classes.affiliates}>
-            <Image
-              src={roobetLogo}
-              alt='Roobet'
-              width={100}
-              height={60}
-              style={{
-                objectFit: 'contain'
-              }}
-              onClick={() => {
-                setSelectedLeaderboard('roobet');
-              }}
-              className={clsx(
-                classes.affiliate,
-                selectedLeaderboard === 'roobet' && classes.selected
-              )}
-            />
-          </div>
+          <TabPillSwitch
+            tabs={[
+              {
+                image: roobetLogo,
+                name: 'roobet'
+              },
+              {
+                image: hypedropLogo,
+                name: 'hypedrop'
+              }
+            ]}
+            activeTab={selectedLeaderboard}
+            setActiveTab={(name: string) => {
+              setSelectedLeaderboard(name as ThemedLeaderboard);
+            }}
+          />
 
           <p className={classes.codePromo}>
             Wager Under Code{' '}
@@ -123,8 +122,8 @@ function Leaderboards({
                     rewardType={
                       selectedLeaderboard === 'roobet'
                         ? 'roobet'
-                        : selectedLeaderboard === 'csgobig'
-                        ? 'csgobig'
+                        : selectedLeaderboard === 'hypedrop'
+                        ? 'hypedrop'
                         : 'none'
                     }
                   />
@@ -148,8 +147,8 @@ function Leaderboards({
                     rewardType={
                       selectedLeaderboard === 'roobet'
                         ? 'roobet'
-                        : selectedLeaderboard === 'csgobig'
-                        ? 'csgobig'
+                        : selectedLeaderboard === 'hypedrop'
+                        ? 'hypedrop'
                         : 'none'
                     }
                   />
@@ -173,8 +172,8 @@ function Leaderboards({
                     rewardType={
                       selectedLeaderboard === 'roobet'
                         ? 'roobet'
-                        : selectedLeaderboard === 'csgobig'
-                        ? 'csgobig'
+                        : selectedLeaderboard === 'hypedrop'
+                        ? 'hypedrop'
                         : 'none'
                     }
                   />
@@ -193,6 +192,9 @@ function Leaderboards({
                 <CountdownTimer days={monthlyDays} hours={monthlyHours} minutes={monthlyMinutes} />
               )}
               {selectedLeaderboard === 'packdraw' && (
+                <CountdownTimer days={monthlyDays} hours={monthlyHours} minutes={monthlyMinutes} />
+              )}
+              {selectedLeaderboard === 'hypedrop' && (
                 <CountdownTimer days={monthlyDays} hours={monthlyHours} minutes={monthlyMinutes} />
               )}
             </div>
