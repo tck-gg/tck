@@ -173,7 +173,7 @@ export async function getLeaderboard(type: LeaderboardType) {
       ).toISOString()}`,
       {
         headers: {
-          authorization: `Bearer ${process.env.NEW_ROOBET_API_KEY}`
+          authorization: `Bearer ${process.env.ROOBET_API_KEY}`
         },
         validateStatus: () => {
           return true;
