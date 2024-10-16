@@ -87,6 +87,10 @@ function Leaderboards({
             }}
           />
 
+          {(selectedLeaderboard === 'roobet' || selectedLeaderboard === 'hypedrop') && (
+            <p className={classes.leaderboardsPromo}>$10,000 LEADERBOARD</p>
+          )}
+
           <p className={classes.codePromo}>
             Wager Under Code{' '}
             <span
