@@ -228,7 +228,7 @@ export async function getLeaderboard(type: LeaderboardType) {
           edges {
             node {
               commission,
-              wageredTotal,
+              deposited,
               referee { displayName }
             }
           }
@@ -257,7 +257,7 @@ export async function getLeaderboard(type: LeaderboardType) {
     const data = response.data.data.affiliateEarningsByReferee.edges.map((edge: any) => {
       return {
         username: edge.node.referee.displayName,
-        amount: Math.round(edge.node.wageredTotal),
+        amount: Math.round(edge.node.deposited),
         avatar: ''
       };
     });
