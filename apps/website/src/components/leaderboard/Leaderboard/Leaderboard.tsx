@@ -21,7 +21,7 @@ function Leaderboard({ leaderboard }: { leaderboard: ILeaderboard }) {
         <thead className={classes.header}>
           <tr>
             <th>User</th>
-            <th>Wagered</th>
+            <th>{leaderboard.type === 'hypedrop' ? 'Deposited' : 'Wagered'}</th>
             {hasPrize && <th>Prize</th>}
           </tr>
         </thead>
