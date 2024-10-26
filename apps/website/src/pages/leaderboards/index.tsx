@@ -92,7 +92,7 @@ function Leaderboards({
           )}
 
           <p className={classes.codePromo}>
-            Wager Under Code{' '}
+            {selectedLeaderboard === 'hypedrop' ? 'Deposit' : 'Wager'} Under Code{' '}
             <span
               className={clsx(classes.code, selectedLeaderboard === 'roobet' && classes.roobetText)}
             >
