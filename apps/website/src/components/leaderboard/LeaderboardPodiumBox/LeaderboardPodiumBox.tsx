@@ -58,7 +58,8 @@ function LeaderboardPodiumBox({
         )}
         <JaggedBackgroundItem fill='#242438' fullWidth>
           <p className={classes.wagered}>
-            ${leaderboardSpot.amount.toLocaleString('en-US')} wagered
+            ${leaderboardSpot.amount.toLocaleString('en-US')}{' '}
+            {rewardType === 'hypedrop' ? 'deposited' : 'wagered'}
           </p>
         </JaggedBackgroundItem>
       </div>
