@@ -22,7 +22,6 @@ import { useCountdown } from '@/hooks/countdown';
 import classes from './leaderboards.module.scss';
 
 import roobetLogo from '../../images/affiliate/roobet.png';
-import hypedropLogo from '../../images/affiliate/hypedrop.png';
 import csgobigLogo from '../../images/affiliate/csgobig.png';
 
 export type ILeaderboard = Prisma.LeaderboardGetPayload<{
@@ -93,9 +92,13 @@ function Leaderboards({
           )}
 
           <p className={classes.codePromo}>
-            {selectedLeaderboard === 'hypedrop' ? 'Deposit' : 'Wager'} Under Code{' '}
+            {selectedLeaderboard === 'csgobig' ? 'Deposit' : 'Wager'} Under Code{' '}
             <span
-              className={clsx(classes.code, selectedLeaderboard === 'roobet' && classes.roobetText)}
+              className={clsx(
+                classes.code,
+                selectedLeaderboard === 'roobet' && classes.roobetText,
+                selectedLeaderboard === 'csgobig' && classes.csgobigText
+              )}
             >
               TCK
             </span>
@@ -172,21 +175,12 @@ function Leaderboards({
               {selectedLeaderboard === 'csgobig' && (
                 <CountdownTimer days={monthlyDays} hours={monthlyHours} minutes={monthlyMinutes} />
               )}
-              {/* {selectedLeaderboard === 'gamdom' && (
-                <CountdownTimer days={monthlyDays} hours={monthlyHours} minutes={monthlyMinutes} />
-              )} */}
               {selectedLeaderboard === 'roobet' && (
-                <CountdownTimer days={monthlyDays} hours={monthlyHours} minutes={monthlyMinutes} />
-              )}
-              {selectedLeaderboard === 'packdraw' && (
-                <CountdownTimer days={monthlyDays} hours={monthlyHours} minutes={monthlyMinutes} />
-              )}
-              {selectedLeaderboard === 'hypedrop' && (
                 <CountdownTimer days={monthlyDays} hours={monthlyHours} minutes={monthlyMinutes} />
               )}
             </div>
 
-            {leaderboards[selectedLeaderboard].spots.length > 3 && (
+            {leaderboards[selectedLeaderboard].spots.length && (
               <Leaderboard leaderboard={leaderboards[selectedLeaderboard]} />
             )}
 
