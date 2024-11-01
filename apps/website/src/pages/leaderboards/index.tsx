@@ -78,10 +78,6 @@ function Leaderboards({
                 name: 'roobet'
               },
               {
-                image: hypedropLogo,
-                name: 'hypedrop'
-              },
-              {
                 image: csgobigLogo,
                 name: 'csgobig'
               }

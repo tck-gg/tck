@@ -287,7 +287,6 @@ export async function getLeaderboard(type: LeaderboardType) {
 export async function getAllLeaderboards() {
   return {
     roobet: await getLeaderboard('roobet'),
-    hypedrop: await getLeaderboard('hypedrop'),
     csgobig: await getLeaderboard('csgobig')
   };
 }
