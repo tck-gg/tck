@@ -23,6 +23,7 @@ import classes from './leaderboards.module.scss';
 
 import roobetLogo from '../../images/affiliate/roobet.png';
 import hypedropLogo from '../../images/affiliate/hypedrop.png';
+import csgobigLogo from '../../images/affiliate/csgobig.png';
 
 export type ILeaderboard = Prisma.LeaderboardGetPayload<{
   include: { spots: true };
@@ -79,6 +80,10 @@ function Leaderboards({
               {
                 image: hypedropLogo,
                 name: 'hypedrop'
+              },
+              {
+                image: csgobigLogo,
+                name: 'csgobig'
               }
             ]}
             activeTab={selectedLeaderboard}
@@ -182,9 +187,9 @@ function Leaderboards({
             </div>
 
             <div className={clsx(classes.timerWrapper, classes.hideOnMobile)}>
-              {/* {selectedLeaderboard === 'csgobig' && (
+              {selectedLeaderboard === 'csgobig' && (
                 <CountdownTimer days={monthlyDays} hours={monthlyHours} minutes={monthlyMinutes} />
-              )} */}
+              )}
               {/* {selectedLeaderboard === 'gamdom' && (
                 <CountdownTimer days={monthlyDays} hours={monthlyHours} minutes={monthlyMinutes} />
               )} */}

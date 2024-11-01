@@ -1,8 +1,10 @@
 export interface CsgoBigLeaderboardEntry {
   id: string;
   name: string;
-  img: string;
-  total: number;
+  level: number;
+  wagerTotal: number;
+  totalDeposits: number;
+  totalRewards: number;
 }
 
 export interface CsgoBigLeaderboardApiResponse {
