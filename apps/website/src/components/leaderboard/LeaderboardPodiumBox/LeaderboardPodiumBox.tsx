@@ -41,17 +41,13 @@ function LeaderboardPodiumBox({
         {rewardType !== 'none' && (
           <JaggedBackgroundItem fill='#0b0c17' fullWidth>
             <div className={classes.reward}>
-              {rewardType === 'csgobig' && (
-                <Image width={16} height={16} src={coinImage} alt='TCK Coin' />
-              )}
               {rewardType === 'roobet' && (
                 <Image width={16} height={16} src={roobetIcon} alt='Roobet Icon' />
               )}
               <p className={classes.rewardText}>
-                {['cash', 'hypedrop'].includes(rewardType) && '$'}
-                {rewardType === 'roobet' && [5000, 2500, 1500][position - 1]}
-                {rewardType === 'csgobig' && [500, 250, 100][position - 1]}
-                {rewardType === 'hypedrop' && [5000, 2500, 1500][position - 1]}
+                {['cash', 'csgobig'].includes(rewardType) && '$'}
+                {rewardType === 'roobet' && [3750, 2250, 1500][position - 1]}
+                {rewardType === 'csgobig' && [3750, 2250, 1500][position - 1]}
               </p>
             </div>
           </JaggedBackgroundItem>
@@ -59,7 +55,7 @@ function LeaderboardPodiumBox({
         <JaggedBackgroundItem fill='#242438' fullWidth>
           <p className={classes.wagered}>
             ${leaderboardSpot.amount.toLocaleString('en-US')}{' '}
-            {rewardType === 'hypedrop' ? 'deposited' : 'wagered'}
+            {rewardType === 'csgobig' ? 'deposited' : 'wagered'}
           </p>
         </JaggedBackgroundItem>
       </div>

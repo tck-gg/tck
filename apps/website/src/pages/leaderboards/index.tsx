@@ -22,7 +22,7 @@ import { useCountdown } from '@/hooks/countdown';
 import classes from './leaderboards.module.scss';
 
 import roobetLogo from '../../images/affiliate/roobet.png';
-import hypedropLogo from '../../images/affiliate/hypedrop.png';
+import csgobigLogo from '../../images/affiliate/csgobig.png';
 
 export type ILeaderboard = Prisma.LeaderboardGetPayload<{
   include: { spots: true };
@@ -77,8 +77,8 @@ function Leaderboards({
                 name: 'roobet'
               },
               {
-                image: hypedropLogo,
-                name: 'hypedrop'
+                image: csgobigLogo,
+                name: 'csgobig'
               }
             ]}
             activeTab={selectedLeaderboard}
@@ -87,14 +87,18 @@ function Leaderboards({
             }}
           />
 
-          {(selectedLeaderboard === 'roobet' || selectedLeaderboard === 'hypedrop') && (
+          {(selectedLeaderboard === 'roobet' || selectedLeaderboard === 'csgobig') && (
             <p className={classes.leaderboardsPromo}>$10,000 LEADERBOARD</p>
           )}
 
           <p className={classes.codePromo}>
-            {selectedLeaderboard === 'hypedrop' ? 'Deposit' : 'Wager'} Under Code{' '}
+            {selectedLeaderboard === 'csgobig' ? 'Deposit' : 'Wager'} Under Code{' '}
             <span
-              className={clsx(classes.code, selectedLeaderboard === 'roobet' && classes.roobetText)}
+              className={clsx(
+                classes.code,
+                selectedLeaderboard === 'roobet' && classes.roobetText,
+                selectedLeaderboard === 'csgobig' && classes.csgobigText
+              )}
             >
               TCK
             </span>
@@ -123,13 +127,7 @@ function Leaderboards({
                   <LeaderboardPodiumBox
                     leaderboardSpot={leaderboards[selectedLeaderboard].spots[1]}
                     position={2}
-                    rewardType={
-                      selectedLeaderboard === 'roobet'
-                        ? 'roobet'
-                        : selectedLeaderboard === 'hypedrop'
-                        ? 'hypedrop'
-                        : 'none'
-                    }
+                    rewardType={selectedLeaderboard}
                   />
                 </Tilt>
               )}
@@ -148,13 +146,7 @@ function Leaderboards({
                   <LeaderboardPodiumBox
                     leaderboardSpot={leaderboards[selectedLeaderboard].spots[0]}
                     position={1}
-                    rewardType={
-                      selectedLeaderboard === 'roobet'
-                        ? 'roobet'
-                        : selectedLeaderboard === 'hypedrop'
-                        ? 'hypedrop'
-                        : 'none'
-                    }
+                    rewardType={selectedLeaderboard}
                   />
                 </Tilt>
               )}
@@ -173,37 +165,22 @@ function Leaderboards({
                   <LeaderboardPodiumBox
                     leaderboardSpot={leaderboards[selectedLeaderboard].spots[2]}
                     position={3}
-                    rewardType={
-                      selectedLeaderboard === 'roobet'
-                        ? 'roobet'
-                        : selectedLeaderboard === 'hypedrop'
-                        ? 'hypedrop'
-                        : 'none'
-                    }
+                    rewardType={selectedLeaderboard}
                   />
                 </Tilt>
               )}
             </div>
 
             <div className={clsx(classes.timerWrapper, classes.hideOnMobile)}>
-              {/* {selectedLeaderboard === 'csgobig' && (
+              {selectedLeaderboard === 'csgobig' && (
                 <CountdownTimer days={monthlyDays} hours={monthlyHours} minutes={monthlyMinutes} />
-              )} */}
-              {/* {selectedLeaderboard === 'gamdom' && (
-                <CountdownTimer days={monthlyDays} hours={monthlyHours} minutes={monthlyMinutes} />
-              )} */}
+              )}
               {selectedLeaderboard === 'roobet' && (
-                <CountdownTimer days={monthlyDays} hours={monthlyHours} minutes={monthlyMinutes} />
-              )}
-              {selectedLeaderboard === 'packdraw' && (
-                <CountdownTimer days={monthlyDays} hours={monthlyHours} minutes={monthlyMinutes} />
-              )}
-              {selectedLeaderboard === 'hypedrop' && (
                 <CountdownTimer days={monthlyDays} hours={monthlyHours} minutes={monthlyMinutes} />
               )}
             </div>
 
-            {leaderboards[selectedLeaderboard].spots.length > 3 && (
+            {leaderboards[selectedLeaderboard].spots.length && (
               <Leaderboard leaderboard={leaderboards[selectedLeaderboard]} />
             )}
 
