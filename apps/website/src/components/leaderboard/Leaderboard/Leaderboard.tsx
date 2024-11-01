@@ -13,7 +13,7 @@ export type ILeaderboard = Prisma.LeaderboardGetPayload<{
 }>;
 
 function Leaderboard({ leaderboard }: { leaderboard: ILeaderboard }) {
-  const hasPrize = leaderboard.type === 'roobet' || leaderboard.type === 'hypedrop';
+  const hasPrize = leaderboard.type === 'roobet' || leaderboard.type === 'csgobig';
 
   return (
     <div className={classes.root}>
@@ -21,7 +21,7 @@ function Leaderboard({ leaderboard }: { leaderboard: ILeaderboard }) {
         <thead className={classes.header}>
           <tr>
             <th>User</th>
-            <th>{leaderboard.type === 'hypedrop' ? 'Deposited' : 'Wagered'}</th>
+            <th>{leaderboard.type === 'csgobig' ? 'Deposited' : 'Wagered'}</th>
             {hasPrize && <th>Prize</th>}
           </tr>
         </thead>
@@ -52,18 +52,6 @@ function Leaderboard({ leaderboard }: { leaderboard: ILeaderboard }) {
                 {hasPrize && (
                   <td className={clsx(classes.shrink, classes.amount)}>
                     <div className={classes.gemsAmount}>
-                      {leaderboard.type === 'csgobig' && (
-                        <>
-                          <Image
-                            width={12}
-                            height={12}
-                            src={coinImage}
-                            alt='TCK Coin'
-                            className={classes.clashGem}
-                          />
-                          <span>{[500, 250, 100, 50, 25, 10, 10, 10, 10, 10][index]}</span>
-                        </>
-                      )}
                       {leaderboard.type === 'roobet' && (
                         <>
                           <Image
@@ -73,11 +61,13 @@ function Leaderboard({ leaderboard }: { leaderboard: ILeaderboard }) {
                             alt='Roobet Icon'
                             className={classes.clashGem}
                           />
-                          <span>{[5000, 2500, 1500, 500, 200, 100, 50, 50, 50, 50][index]}</span>
+                          <span>
+                            {[3750, 2250, 1500, 750, 550, 400, 300, 250, 150, 100][index]}
+                          </span>
                         </>
                       )}
-                      {leaderboard.type === 'hypedrop' && (
-                        <span>${[5000, 2500, 1500, 500, 200, 100, 50, 50, 50, 50][index]}</span>
+                      {leaderboard.type === 'csgobig' && (
+                        <span>${[3750, 2250, 1500, 750, 550, 400, 300, 250, 150, 100][index]}</span>
                       )}
                     </div>
                   </td>

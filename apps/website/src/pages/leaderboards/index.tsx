@@ -88,7 +88,7 @@ function Leaderboards({
             }}
           />
 
-          {(selectedLeaderboard === 'roobet' || selectedLeaderboard === 'hypedrop') && (
+          {(selectedLeaderboard === 'roobet' || selectedLeaderboard === 'csgobig') && (
             <p className={classes.leaderboardsPromo}>$10,000 LEADERBOARD</p>
           )}
 
@@ -124,13 +124,7 @@ function Leaderboards({
                   <LeaderboardPodiumBox
                     leaderboardSpot={leaderboards[selectedLeaderboard].spots[1]}
                     position={2}
-                    rewardType={
-                      selectedLeaderboard === 'roobet'
-                        ? 'roobet'
-                        : selectedLeaderboard === 'hypedrop'
-                        ? 'hypedrop'
-                        : 'none'
-                    }
+                    rewardType={selectedLeaderboard}
                   />
                 </Tilt>
               )}
@@ -149,13 +143,7 @@ function Leaderboards({
                   <LeaderboardPodiumBox
                     leaderboardSpot={leaderboards[selectedLeaderboard].spots[0]}
                     position={1}
-                    rewardType={
-                      selectedLeaderboard === 'roobet'
-                        ? 'roobet'
-                        : selectedLeaderboard === 'hypedrop'
-                        ? 'hypedrop'
-                        : 'none'
-                    }
+                    rewardType={selectedLeaderboard}
                   />
                 </Tilt>
               )}
@@ -174,13 +162,7 @@ function Leaderboards({
                   <LeaderboardPodiumBox
                     leaderboardSpot={leaderboards[selectedLeaderboard].spots[2]}
                     position={3}
-                    rewardType={
-                      selectedLeaderboard === 'roobet'
-                        ? 'roobet'
-                        : selectedLeaderboard === 'hypedrop'
-                        ? 'hypedrop'
-                        : 'none'
-                    }
+                    rewardType={selectedLeaderboard}
                   />
                 </Tilt>
               )}
