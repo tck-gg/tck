@@ -169,7 +169,7 @@ export async function getLeaderboard(type: LeaderboardType) {
     }
 
     const response = await axios.get(
-      `https://roobetconnect.com/affiliate/stats?userId=0401366b-7c9a-4edf-99e5-90db191b54ed&startDate=${new Date(
+      `https://roobetconnect.com/affiliate/v2/stats?userId=0401366b-7c9a-4edf-99e5-90db191b54ed&startDate=${new Date(
         monthStart
       ).toISOString()}`,
       {

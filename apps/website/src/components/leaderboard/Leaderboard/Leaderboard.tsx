@@ -21,7 +21,7 @@ function Leaderboard({ leaderboard }: { leaderboard: ILeaderboard }) {
         <thead className={classes.header}>
           <tr>
             <th>User</th>
-            <th>Wagered</th>
+            <th>{leaderboard.type === 'hypedrop' ? 'Deposited' : 'Wagered'}</th>
             {hasPrize && <th>Prize</th>}
           </tr>
         </thead>
@@ -73,11 +73,11 @@ function Leaderboard({ leaderboard }: { leaderboard: ILeaderboard }) {
                             alt='Roobet Icon'
                             className={classes.clashGem}
                           />
-                          <span>{[2500, 1500, 1000, 500, 250, 50, 50, 50, 50, 50][index]}</span>
+                          <span>{[5000, 2500, 1500, 500, 200, 100, 50, 50, 50, 50][index]}</span>
                         </>
                       )}
                       {leaderboard.type === 'hypedrop' && (
-                        <span>${[2250, 1250, 750, 250, 150, 100, 50, 50, 50, 50][index]}</span>
+                        <span>${[5000, 2500, 1500, 500, 200, 100, 50, 50, 50, 50][index]}</span>
                       )}
                     </div>
                   </td>
