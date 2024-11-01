@@ -149,6 +149,13 @@ export async function getLeaderboard(type: LeaderboardType) {
     );
 
     const data: CsgoBigLeaderboardApiResponse = response.data;
+    if (!data.success) {
+      return {
+        id: '0',
+        type,
+        spots
+      };
+    }
 
     spots = data.results.splice(0, 10).map((spot) => {
       return {
