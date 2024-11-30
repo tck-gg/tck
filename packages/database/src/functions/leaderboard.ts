@@ -157,13 +157,18 @@ export async function getLeaderboard(type: LeaderboardType) {
       };
     }
 
-    spots = data.results.splice(0, 10).map((spot) => {
-      return {
-        username: spot.name,
-        amount: Math.round(spot.totalDeposits),
-        avatar: ''
-      };
-    });
+    spots = data.results
+      .sort((a, b) => {
+        return b.totalDeposits - a.totalDeposits;
+      })
+      .splice(0, 10)
+      .map((spot) => {
+        return {
+          username: spot.name,
+          amount: Math.round(spot.totalDeposits),
+          avatar: ''
+        };
+      });
   }
 
   if (type === 'roobet') {
