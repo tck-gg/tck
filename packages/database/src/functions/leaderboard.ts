@@ -142,7 +142,7 @@ export async function getLeaderboard(type: LeaderboardType) {
   // }
 
   if (type === 'csgobig') {
-    const start = new Date(new Date().getFullYear(), new Date().getMonth(), 1).getTime() * 1000;
+    const start = new Date(new Date().getFullYear(), new Date().getMonth(), 1).getTime();
 
     const response = await axios.get(
       `https://csgobig.com/api/partners/getRefDetails/tckn3e9HBsu8HjjMAqBv33y?from=${start}`
