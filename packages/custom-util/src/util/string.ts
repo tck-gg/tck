@@ -4,3 +4,9 @@ export function camelCase(input: string) {
     return s + (c.charAt(0).toUpperCase() + c.slice(1));
   });
 }
+
+export function censor(input: string, visibleLength: number) {
+  return input.replace(/./g, (_, i) => {
+    return i < visibleLength ? input[i] : '*';
+  });
+}

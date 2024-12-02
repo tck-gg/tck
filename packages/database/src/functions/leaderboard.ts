@@ -6,9 +6,9 @@ import {
   PackdrawLeaderboardApiData,
   RoobetLeaderboardSpot
 } from 'types';
-import { format, previousSunday } from 'date-fns';
 
 import { prisma } from '../client';
+import { censor } from 'custom-util';
 
 async function ensureLeaderboard(type: LeaderboardType) {
   // Create the leaderboard if it doesn't exist.
@@ -164,7 +164,7 @@ export async function getLeaderboard(type: LeaderboardType) {
       .splice(0, 10)
       .map((spot) => {
         return {
-          username: spot.name,
+          username: censor(spot.name, 4),
           amount: Math.round(spot.totalDeposits),
           avatar: ''
         };
@@ -212,7 +212,7 @@ export async function getLeaderboard(type: LeaderboardType) {
       .splice(0, 10)
       .map((spot) => {
         return {
-          username: spot.username,
+          username: censor(spot.username, 4),
           amount: Math.round(spot.wagered),
           avatar: ''
         };
