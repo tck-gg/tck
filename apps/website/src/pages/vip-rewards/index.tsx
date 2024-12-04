@@ -25,10 +25,36 @@ import jaggedBackground from '../../images/coin-background.png';
 import JaggedBackgroundItem from '@/components/JaggedBackgroundItem/JaggedBackgroundItem';
 import SectionHeader from '@/components/SectionHeader/SectionHeader';
 
-import silver1 from '../../images/vip-rewards/silver-1.png';
-import silver2 from '../../images/vip-rewards/silver-2.png';
-import silver3 from '../../images/vip-rewards/silver-3.png';
-import silver4 from '../../images/vip-rewards/silver-4.png';
+import silver1 from '../../images/rank/silver-1.png';
+import silver2 from '../../images/rank/silver-2.png';
+import silver3 from '../../images/rank/silver-3.png';
+import silver4 from '../../images/rank/silver-4.png';
+import gold1 from '../../images/rank/gold-1.png';
+import gold2 from '../../images/rank/gold-2.png';
+import gold3 from '../../images/rank/gold-3.png';
+import gold4 from '../../images/rank/gold-4.png';
+import diamond1 from '../../images/rank/diamond-1.png';
+import diamond2 from '../../images/rank/diamond-2.png';
+import diamond3 from '../../images/rank/diamond-3.png';
+import ruby1 from '../../images/rank/ruby-1.png';
+import ruby2 from '../../images/rank/ruby-2.png';
+import ruby3 from '../../images/rank/ruby-3.png';
+import emerald1 from '../../images/rank/emerald-1.png';
+import emerald2 from '../../images/rank/emerald-2.png';
+import emerald3 from '../../images/rank/emerald-3.png';
+import legend1 from '../../images/rank/legend-1.png';
+import legend2 from '../../images/rank/legend-2.png';
+import legend3 from '../../images/rank/legend-3.png';
+import champion1 from '../../images/rank/champion-1.png';
+import champion2 from '../../images/rank/champion-2.png';
+import champion3 from '../../images/rank/champion-3.png';
+import master1 from '../../images/rank/master-1.png';
+import master2 from '../../images/rank/master-2.png';
+import master3 from '../../images/rank/master-3.png';
+import grandmaster1 from '../../images/rank/grandmaster-1.png';
+import grandmaster2 from '../../images/rank/grandmaster-2.png';
+import grandmaster3 from '../../images/rank/grandmaster-3.png';
+import immortal from '../../images/rank/immortal.png';
 import PageHeaderGlow from '@/components/PageHeaderGlow/PageHeaderGlow';
 import Grid from '@/components/Grid/Grid';
 import AccountModal from '@/components/Modal/Account/AccountModal';
@@ -39,38 +65,297 @@ const Index = () => {
   const theme = useTheme();
   const [authenticated, setAuthenticated] = useState(false);
 
+  const [activeLeagueIndex, setActiveLeagueIndex] = useState(0);
   const rewards = [
     {
-      name: 'Silver 1',
-      description: 'Wager $50.000',
-      reward: '$5.00',
-      logo: silver1,
-      claimed: true,
-      active: false
+      name: 'Silver',
+      ranks: [
+        {
+          name: 'Silver 1',
+          description: 'Wager $50.000',
+          reward: '$5.00',
+          logo: silver1,
+          claimed: true,
+          active: false
+        },
+        {
+          name: 'Silver 2',
+          description: 'Wager $50.000',
+          reward: '$5.00',
+          logo: silver2,
+          claimed: true,
+          active: false
+        },
+        {
+          name: 'Silver 3',
+          description: 'Wager $50.000',
+          reward: '$5.00',
+          logo: silver3,
+          claimed: false,
+          active: true
+        },
+        {
+          name: 'Silver 4',
+          description: 'Wager $50.000',
+          reward: '$5.00',
+          logo: silver4,
+          claimed: false,
+          active: false
+        }
+      ]
     },
     {
-      name: 'Silver 2',
-      description: 'Wager $50.000',
-      reward: '$5.00',
-      logo: silver2,
-      claimed: true,
-      active: false
+      name: 'Gold',
+      ranks: [
+        {
+          name: 'Gold 1',
+          description: 'Wager $50.000',
+          reward: '$5.00',
+          logo: gold1,
+          claimed: false,
+          active: false
+        },
+        {
+          name: 'Gold 2',
+          description: 'Wager $50.000',
+          reward: '$5.00',
+          logo: gold2,
+          claimed: false,
+          active: false
+        },
+        {
+          name: 'Gold 3',
+          description: 'Wager $50.000',
+          reward: '$5.00',
+          logo: gold3,
+          claimed: false,
+          active: false
+        },
+        {
+          name: 'Gold 4',
+          description: 'Wager $50.000',
+          reward: '$5.00',
+          logo: gold4,
+          claimed: false,
+          active: false
+        }
+      ]
     },
     {
-      name: 'Silver 3',
-      description: 'Wager $50.000',
-      reward: '$5.00',
-      logo: silver3,
-      claimed: false,
-      active: true
+      name: 'Diamond',
+      ranks: [
+        {
+          name: 'Diamond 1',
+          description: 'Wager $50.000',
+          reward: '$5.00',
+          logo: diamond1,
+          claimed: false,
+          active: false
+        },
+        {
+          name: 'Diamond 2',
+          description: 'Wager $50.000',
+          reward: '$5.00',
+          logo: diamond2,
+          claimed: false,
+          active: false
+        },
+        {
+          name: 'Diamond 3',
+          description: 'Wager $50.000',
+          reward: '$5.00',
+          logo: diamond3,
+          claimed: false,
+          active: false
+        }
+      ]
     },
     {
-      name: 'Silver 4',
-      description: 'Wager $50.000',
-      reward: '$5.00',
-      logo: silver4,
-      claimed: false,
-      active: false
+      name: 'Ruby',
+      ranks: [
+        {
+          name: 'Ruby 1',
+          description: 'Wager $50.000',
+          reward: '$5.00',
+          logo: ruby1,
+          claimed: false,
+          active: false
+        },
+        {
+          name: 'Ruby 2',
+          description: 'Wager $50.000',
+          reward: '$5.00',
+          logo: ruby2,
+          claimed: false,
+          active: false
+        },
+        {
+          name: 'Ruby 3',
+          description: 'Wager $50.000',
+          reward: '$5.00',
+          logo: ruby3,
+          claimed: false,
+          active: false
+        }
+      ]
+    },
+    {
+      name: 'Emerald',
+      ranks: [
+        {
+          name: 'Emerald 1',
+          description: 'Wager $50.000',
+          reward: '$5.00',
+          logo: emerald1,
+          claimed: false,
+          active: false
+        },
+        {
+          name: 'Emerald 2',
+          description: 'Wager $50.000',
+          reward: '$5.00',
+          logo: emerald2,
+          claimed: false,
+          active: false
+        },
+        {
+          name: 'Emerald 3',
+          description: 'Wager $50.000',
+          reward: '$5.00',
+          logo: emerald3,
+          claimed: false,
+          active: false
+        }
+      ]
+    },
+    {
+      name: 'legend',
+      ranks: [
+        {
+          name: 'legend 1',
+          description: 'Wager $50.000',
+          reward: '$5.00',
+          logo: legend1,
+          claimed: false,
+          active: false
+        },
+        {
+          name: 'legend 2',
+          description: 'Wager $50.000',
+          reward: '$5.00',
+          logo: legend2,
+          claimed: false,
+          active: false
+        },
+        {
+          name: 'legend 3',
+          description: 'Wager $50.000',
+          reward: '$5.00',
+          logo: legend3,
+          claimed: false,
+          active: false
+        }
+      ]
+    },
+    {
+      name: 'champion',
+      ranks: [
+        {
+          name: 'champion 1',
+          description: 'Wager $50.000',
+          reward: '$5.00',
+          logo: champion1,
+          claimed: false,
+          active: false
+        },
+        {
+          name: 'champion 2',
+          description: 'Wager $50.000',
+          reward: '$5.00',
+          logo: champion2,
+          claimed: false,
+          active: false
+        },
+        {
+          name: 'champion 3',
+          description: 'Wager $50.000',
+          reward: '$5.00',
+          logo: champion3,
+          claimed: false,
+          active: false
+        }
+      ]
+    },
+    {
+      name: 'master',
+      ranks: [
+        {
+          name: 'master 1',
+          description: 'Wager $50.000',
+          reward: '$5.00',
+          logo: master1,
+          claimed: false,
+          active: false
+        },
+        {
+          name: 'master 2',
+          description: 'Wager $50.000',
+          reward: '$5.00',
+          logo: master2,
+          claimed: false,
+          active: false
+        },
+        {
+          name: 'master 3',
+          description: 'Wager $50.000',
+          reward: '$5.00',
+          logo: master3,
+          claimed: false,
+          active: false
+        }
+      ]
+    },
+    {
+      name: 'grandmaster',
+      ranks: [
+        {
+          name: 'grandmaster 1',
+          description: 'Wager $50.000',
+          reward: '$5.00',
+          logo: grandmaster1,
+          claimed: false,
+          active: false
+        },
+        {
+          name: 'grandmaster 2',
+          description: 'Wager $50.000',
+          reward: '$5.00',
+          logo: grandmaster2,
+          claimed: false,
+          active: false
+        },
+        {
+          name: 'grandmaster 3',
+          description: 'Wager $50.000',
+          reward: '$5.00',
+          logo: grandmaster3,
+          claimed: false,
+          active: false
+        }
+      ]
+    },
+    {
+      name: 'immortal',
+      ranks: [
+        {
+          name: 'immortal ',
+          description: 'Wager $50.000',
+          reward: '$5.00',
+          logo: immortal,
+          claimed: false,
+          active: false
+        }
+      ]
     }
   ];
 
@@ -288,22 +573,52 @@ const Index = () => {
             <div className={styles.card}>
               <div className={styles.levelUpRewardsHeader}>
                 <div className=''>
-                  <div className={`${styles.subHeader} ${styles.italic}`}>SILVER</div>
+                  <div className={`${styles.subHeader} ${styles.italic}`}>
+                    {rewards[activeLeagueIndex].name}
+                  </div>
                   <div className={styles.rankRewardsText}>Rewards</div>
                 </div>
 
                 <div className={styles.buttonWrapper}>
-                  <button type='button' className={`${styles.arrowButton} ${styles.disabled}`}>
+                  <button
+                    onClick={() => {
+                      setActiveLeagueIndex((current) => {
+                        const newIndex = current - 1;
+                        if (newIndex < 0) {
+                          return 0;
+                        }
+                        return newIndex;
+                      });
+                    }}
+                    type='button'
+                    className={`${styles.arrowButton} ${
+                      activeLeagueIndex === 0 ? styles.disabled : ''
+                    }`}
+                  >
                     <FontAwesomeIcon icon={faArrowUp} />
                   </button>
-                  <button type='button' className={styles.arrowButton}>
+                  <button
+                    onClick={() => {
+                      setActiveLeagueIndex((current) => {
+                        const newIndex = current + 1;
+                        if (newIndex > rewards.length - 1) {
+                          return current;
+                        }
+                        return newIndex;
+                      });
+                    }}
+                    type='button'
+                    className={`${styles.arrowButton} ${
+                      activeLeagueIndex === rewards.length - 1 ? styles.disabled : ''
+                    }`}
+                  >
                     <FontAwesomeIcon icon={faArrowDown} />
                   </button>
                 </div>
               </div>
 
               <div className={styles.levelUpRewardsContent}>
-                {rewards.map((reward) => {
+                {rewards[activeLeagueIndex].ranks.map((reward) => {
                   return (
                     <div
                       key={reward.name}

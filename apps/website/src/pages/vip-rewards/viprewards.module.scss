@@ -338,8 +338,9 @@
 }
 
 .card {
+  height: 460px;
+  min-height: 460px;
   overflow: hidden;
-  height: 100%;
   background-color: #161625;
   border-radius: 8px;
   padding: 24px;
@@ -348,11 +349,13 @@
   position: relative;
   width: 100%;
   align-items: center;
-  justify-content: center;
+  justify-content: start;
   gap: 12px;
   margin-top: 24px;
   @media screen and (max-width: 1024px) {
     padding: 16px;
+    height: fit-content;
+    min-height: auto;
   }
 }
 
@@ -431,6 +434,7 @@
   font-weight: 800;
   font-size: 20px;
   color: white;
+  text-transform: uppercase;
 }
 
 .italic {
