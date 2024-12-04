@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import classes from './Button.module.scss';
 
-type ButtonVariants = 'primary' | 'secondary' | 'gradient';
+type ButtonVariants = 'primary' | 'secondary' | 'gradient' | 'roobet';
 
 function Button({
   children,
@@ -42,7 +42,8 @@ function Button({
     <div
       className={clsx(
         classes.root,
-        disabled ? classes.secondary : classes[variant],
+        classes[variant],
+        // disabled ? classes.secondary : classes[variant],
         fullWidth && classes.fullWidth,
         disabled && classes.disabled
       )}

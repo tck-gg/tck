@@ -31,7 +31,7 @@
 
 .primary {
   color: #000000;
-  
+
   background: #ffffff;
 }
 
@@ -40,11 +40,17 @@
 }
 
 .gradient {
-  background: linear-gradient(90deg, #18A9FF 0%, #7E06FF 50%, #18A9FF 100%);
+  background: linear-gradient(90deg, #18a9ff 0%, #7e06ff 50%, #18a9ff 100%);
   background-size: 200% 100%;
-
   background-position: 0% 0%;
 }
+
+.roobet {
+  background: linear-gradient(#ddb43f, #9b7c25);
+  background-size: 200% 100%;
+  background-position: 0% 0%;
+}
+
 .gradient:hover {
   @keyframes gradient {
     0% {
@@ -64,7 +70,7 @@
   width: 100%;
 }
 
-.disabled { 
+.disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }

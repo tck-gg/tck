@@ -1,0 +1,637 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  width: 100%;
+  color: #989eae;
+}
+
+.heroSection {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  margin-top: 60px;
+  min-height: 30vh;
+}
+
+.paragraph {
+  font-size: 14px;
+  color: #989eae;
+  font-weight: normal;
+}
+
+.description {
+  @extend .paragraph;
+  line-height: 1.2rem;
+}
+
+.textCenter {
+  text-align: center;
+}
+
+.header {
+  font-weight: 800;
+  color: white;
+  font-size: 66px;
+  padding-top: 16px;
+  padding-bottom: 8px;
+  position: relative;
+}
+
+.subHeader {
+  font-weight: 800;
+  color: white;
+  font-size: 40px;
+  padding-bottom: 0px;
+  position: relative;
+}
+
+.com {
+  font-weight: 800;
+  color: #989eae;
+  font-size: 24px;
+}
+
+.mainSection {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  width: 100%;
+  align-items: center;
+  gap: 16px;
+  @media screen and (max-width: 1024px) {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 48px;
+  }
+}
+
+.mainLeftWrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.mainRightWrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.bottomCtaWrapper {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  @media screen and (max-width: 1024px) {
+    flex-direction: column;
+  }
+}
+
+.bottomCtaLeftWrapper {
+  display: flex;
+  flex-direction: column;
+  // align-items: center;
+  justify-content: center;
+  width: 50%;
+  gap: 8px;
+  padding-right: 36px;
+  @media screen and (max-width: 1024px) {
+    width: 100%;
+    padding: 0px;
+    padding-bottom: 16px;
+  }
+}
+
+.bottomCtaRightWrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 50%;
+
+  padding: 6px;
+  border-radius: 8px;
+  min-height: 600px;
+  overflow: hidden;
+  @media screen and (max-width: 1024px) {
+    width: 100%;
+    min-height: auto;
+  }
+}
+
+.affiliateBox {
+  height: 48px;
+  width: 160px;
+  max-width: 200px;
+  margin-bottom: 12px;
+  position: relative;
+}
+
+.affiliateBox2 {
+  height: 48px;
+  width: 160px;
+  max-width: 200px;
+  position: relative;
+  border-radius: 4px;
+}
+
+.jaggedBackground {
+  width: 100%;
+  object-fit: cover;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  user-select: none;
+}
+
+.marginBottom {
+  margin-bottom: 24px;
+}
+
+.formsWrapper {
+  width: 100%;
+  background-color: #10101c;
+  display: flex;
+
+  flex-direction: row;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #242439;
+  color: #989eae;
+
+  @media screen and (max-width: 1024px) {
+    flex-direction: column;
+  }
+}
+
+.formBackground {
+  position: absolute;
+
+  bottom: 0;
+  object-fit: contain;
+  object-position: bottom;
+  width: 100%;
+  height: 60%;
+
+  z-index: 10;
+}
+
+.formTitle {
+  font-size: 26px;
+  font-weight: 800;
+  color: #fff;
+  text-align: center;
+}
+
+.formDescription {
+  font-size: 13px;
+  color: #989eae;
+  text-align: center;
+}
+
+.formSection {
+  display: flex;
+  flex-direction: column;
+  background: #161625;
+  border-radius: 8px;
+  padding: 16px;
+  gap: 16px;
+
+  width: 50%;
+  overflow: hidden;
+
+  @media screen and (max-width: 1024px) {
+    width: 100%;
+    min-height: 50vh;
+  }
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.formLabel {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.icon {
+  width: 14px;
+  height: 14px;
+}
+
+.labelText {
+  font-weight: bold;
+  font-size: 14px;
+  color: #fff;
+}
+
+.inputField {
+  background: #10101b;
+  height: 56px;
+  padding: 8px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #fff;
+  outline: none;
+  border: none;
+}
+
+.buttonTextWrapper {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.gradientOverlay {
+  position: absolute;
+  transform: translateX(50%);
+  right: 50%;
+  top: 30%;
+  pointer-events: none;
+  width: 150%;
+  height: 150%;
+  opacity: 0.2;
+  border-radius: 50%;
+}
+
+.wFull {
+  width: 100%;
+}
+
+.siteImage {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+  object-position: center;
+  border-radius: 8px;
+  flex: 1 1 0%;
+}
+
+@keyframes float {
+  0% {
+    transform: skew(-15deg, 15deg) translate(0px, 0px) scale(1);
+  }
+  50% {
+    transform: skew(-20deg, 20deg) translate(0px, 20px) scale(1.02);
+  }
+  100% {
+    transform: skew(-15deg, 15deg) translate(0px, 0px) scale(1);
+  }
+}
+
+.image {
+  position: absolute;
+
+  z-index: -1;
+  opacity: 0.75;
+
+  animation: float 10s ease-in-out infinite;
+}
+
+.item1 {
+  @extend .image;
+  bottom: 10%;
+  left: 25%;
+  opacity: 0.5;
+}
+
+.item2 {
+  @extend .image;
+  top: 10%;
+  left: 28%;
+  rotate: -25deg;
+  animation-delay: 1.5s;
+
+  @media screen and (max-width: 1024px) {
+    top: 0;
+    left: 0;
+  }
+}
+
+.item3 {
+  @extend .image;
+  top: 20%;
+  right: 30%;
+  opacity: 0.4;
+  rotate: 45deg;
+  @media screen and (max-width: 1024px) {
+    display: none;
+  }
+}
+
+.item4 {
+  @extend .image;
+  bottom: 20%;
+  right: 23%;
+  rotate: 25deg;
+  animation-delay: -2s;
+  @media screen and (max-width: 1024px) {
+    display: none;
+  }
+}
+
+.card {
+  overflow: hidden;
+  height: 100%;
+  background-color: #161625;
+  border-radius: 8px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 24px;
+  @media screen and (max-width: 1024px) {
+    padding: 16px;
+  }
+}
+
+.textCenter {
+  text-align: center;
+}
+
+.ctaCard {
+  position: relative;
+  margin-top: 24px;
+  display: flex;
+  flex-direction: row;
+  background-color: #161625;
+  border-radius: 8px;
+  padding: 24px;
+  overflow: hidden;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+
+  @media screen and (max-width: 1024px) {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+  }
+}
+
+.ctaCardInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  font-weight: 800;
+  color: white;
+  font-size: 20px;
+  gap: 10px;
+}
+
+.ctaCardAction {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+.gradientBackground {
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  left: -15%;
+  opacity: 0.1;
+  border-radius: 50%;
+}
+
+.gradientBackground2 {
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  opacity: 0.1;
+  top: -40%;
+  border-radius: 50%;
+}
+
+.levelUpRewardsHeader {
+  width: 100%;
+  min-width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+}
+
+.subHeader {
+  font-weight: 800;
+  font-size: 20px;
+  color: white;
+}
+
+.italic {
+  font-style: italic;
+}
+
+.rankRewardsText {
+  color: #989eae;
+  font-style: italic;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.rankLogoContainer {
+  border-radius: 8px;
+  background-color: #161625;
+  padding: 6px;
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
+  min-height: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.rankLogo {
+  object-fit: contain;
+  object-position: center;
+}
+
+.buttonWrapper {
+  display: flex;
+  gap: 8px;
+}
+
+.arrowButton {
+  padding: 10px;
+
+  color: #989eae;
+  background-color: #26263a;
+  font-size: 12px;
+
+  box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  cursor: pointer;
+  user-select: none;
+
+  outline: none;
+  border: none;
+  transition: opacity 0.15s ease-in-out;
+
+  white-space: nowrap;
+}
+
+.arrowButton:hover {
+  opacity: 0.85;
+}
+
+.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.disabled:hover {
+  opacity: 0.5;
+}
+
+.levelUpRewardsContent {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 12px;
+}
+
+.rewardBox {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  align-items: center;
+  background-color: #202032;
+  padding: 16px;
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+  justify-content: space-between;
+
+  @media screen and (max-width: 1024px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+.rewardInfo {
+  display: flex;
+  gap: 2px;
+  flex-direction: column;
+}
+
+.rewardText {
+  font-weight: 800;
+  font-size: 16px;
+  color: white;
+  font-style: italic;
+}
+
+.rewardDescription {
+  font-size: 14px;
+}
+
+.rewardAmount {
+  position: relative;
+  border-radius: 8px;
+  width: 100px;
+  justify-items: center;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  padding-left: 6px;
+  padding-right: 6px;
+  margin-left: auto;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.rewardAmountText {
+  position: relative;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.currentRankWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.currentRankText {
+  font-weight: 800;
+  font-size: 24px;
+  color: white;
+  padding-bottom: 6px;
+}
+
+.progressBarContainer {
+  background-color: #202032;
+  width: 100%;
+  border-radius: 8px;
+  padding: 16px;
+  margin-top: auto;
+  gap: 8px;
+  display: flex;
+  flex-direction: column;
+}
+
+.progressTextWrapper {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  justify-content: space-between;
+  font-family: 'Archivo';
+}
+
+.progressText {
+  font-size: 16px;
+  font-weight: 700;
+  font-style: italic;
+  color: white;
+}
+
+.progressBar {
+  height: 10px;
+  border-radius: 16px;
+  width: 100%;
+  background-color: #12121e;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 6px;
+}
+
+.progressBarInner {
+  height: 10px;
+  border-radius: 16px;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.activeLeftBar {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 4px;
+}
+
+.rewardBoxInnerWrapper {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}

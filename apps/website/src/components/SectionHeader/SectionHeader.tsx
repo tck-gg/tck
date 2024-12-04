@@ -18,6 +18,11 @@ import instagramHeaderAcc from '../../images/videos/instagram-header-acc.png';
 import tiktokHeaderAcc from '../../images/videos/tiktok-header-acc.png';
 import defaultHeaderAcc from '../../images/videos/default-header-acc.png';
 import trophyHeaderAcc from '../../images/videos/trophy-header-acc.png';
+import vipRewardsHeaderAcc from '../../images/vip-rewards/icon-background.png';
+import giftLogo from '../../images/vip-rewards/gift.svg';
+import roobetLogo from '../../images/vip-rewards/roobet.svg';
+import userLogo from '../../images/vip-rewards/user.svg';
+
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import styles from './sectionheader.module.scss';
@@ -37,7 +42,10 @@ type HeaderType =
   | 'default'
   | 'star'
   | 'crypto'
-  | 'csgo';
+  | 'csgo'
+  | 'viproobet'
+  | 'vipgift'
+  | 'vipuser';
 
 const SectionHeader = ({
   type,
@@ -74,6 +82,10 @@ const SectionHeader = ({
         return tiktokHeaderAcc;
       case 'trophy':
         return trophyHeaderAcc;
+      case 'viproobet':
+      case 'vipgift':
+      case 'vipuser':
+        return vipRewardsHeaderAcc;
       default:
         return defaultHeaderAcc;
     }
@@ -97,6 +109,12 @@ const SectionHeader = ({
         return cryptoIcon;
       case 'csgo':
         return csgoLogo;
+      case 'viproobet':
+        return roobetLogo;
+      case 'vipgift':
+        return giftLogo;
+      case 'vipuser':
+        return userLogo;
       default:
         return defaultLogo;
     }
