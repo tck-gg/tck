@@ -9,6 +9,7 @@ import classes from './LeaderboardPodiumBox.module.scss';
 
 import coinImage from '@/images/coin.png';
 import roobetIcon from '@/images/affiliate/roobet-icon.png';
+import bigcoinIcon from '@/images/affiliate/big-coin.png';
 
 function LeaderboardPodiumBox({
   leaderboardSpot,
@@ -44,11 +45,13 @@ function LeaderboardPodiumBox({
               {rewardType === 'roobet' && (
                 <Image width={16} height={16} src={roobetIcon} alt='Roobet Icon' />
               )}
+              {rewardType === 'csgobig' && (
+                <Image width={16} height={16} src={bigcoinIcon} alt='Big Coin Icon' />
+              )}
               <p className={classes.rewardText}>
-                {['cash'].includes(rewardType) && '$'}
+                {rewardType === 'cash' && '$'}
                 {rewardType === 'roobet' && [3750, 2250, 1500][position - 1]}
                 {rewardType === 'csgobig' && [1875, 1125, 750][position - 1]}
-                {['csgobig'].includes(rewardType) && ' COINS'}
               </p>
             </div>
           </JaggedBackgroundItem>
