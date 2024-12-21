@@ -67,7 +67,7 @@ function Leaderboard({ leaderboard }: { leaderboard: ILeaderboard }) {
                         </>
                       )}
                       {leaderboard.type === 'csgobig' && (
-                        <span>${[3750, 2250, 1500, 750, 550, 400, 300, 250, 150, 100][index]}</span>
+                        <span>COINS {[1875, 1125, 750, 375, 275, 200, 150, 125, 75, 50][index]}</span>
                       )}
                     </div>
                   </td>
