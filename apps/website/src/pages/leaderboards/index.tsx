@@ -89,20 +89,21 @@ function Leaderboards({
             }}
           />
 
-          {(selectedLeaderboard === 'roobet' || selectedLeaderboard === 'csgobig') && (
+          {selectedLeaderboard === 'roobet' && (
+            <p className={classes.leaderboardsPromo}>$10,000 LEADERBOARD</p>
+          )}
+          {selectedLeaderboard === 'csgobig' && (
             <p className={classes.leaderboardsPromo}>
-              {selectedLeaderboard === 'roobet' ? '$10,000' : (
-                <>
-                  <Image
-                    src={bigcoinIcon}
-                    alt="Big Coin"
-                    width={20}
-                    height={20}
-                    style={{ verticalAlign: 'middle', marginRight: '4px' }}
-                  />
-                  5,000
-                </>
-              )} LEADERBOARD
+              <>
+                <Image
+                  src={bigcoinIcon}
+                  alt='Big Coin'
+                  width={48}
+                  height={48}
+                  style={{ verticalAlign: 'middle', marginRight: '4px' }}
+                />
+                5,000 LEADERBOARD
+              </>
             </p>
           )}
 
