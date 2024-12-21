@@ -5,8 +5,8 @@ import Image from 'next/image';
 
 import classes from './Leaderboard.module.scss';
 
-import coinImage from '@/images/coin.png';
 import roobetIcon from '@/images/affiliate/roobet-icon.png';
+import bigcoinIcon from '@/images/affiliate/big-coin.png';
 
 export type ILeaderboard = Prisma.LeaderboardGetPayload<{
   include: { spots: true };
@@ -67,7 +67,16 @@ function Leaderboard({ leaderboard }: { leaderboard: ILeaderboard }) {
                         </>
                       )}
                       {leaderboard.type === 'csgobig' && (
-                        <span>${[3750, 2250, 1500, 750, 550, 400, 300, 250, 150, 100][index]}</span>
+                        <>
+                          <Image
+                            width={12}
+                            height={12}
+                            src={bigcoinIcon}
+                            alt='Big Coin Icon'
+                            className={classes.clashGem}
+                          />
+                          <span>{[1875, 1125, 750, 375, 275, 200, 150, 125, 75, 50][index]}</span>
+                        </>
                       )}
                     </div>
                   </td>

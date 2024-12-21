@@ -24,6 +24,8 @@ import classes from './leaderboards.module.scss';
 import roobetLogo from '../../images/affiliate/roobet.png';
 import csgobigLogo from '../../images/affiliate/csgobig.png';
 
+import bigcoinIcon from '@/images/affiliate/big-coin.png';
+
 export type ILeaderboard = Prisma.LeaderboardGetPayload<{
   include: { spots: true };
 }>;
@@ -87,8 +89,22 @@ function Leaderboards({
             }}
           />
 
-          {(selectedLeaderboard === 'roobet' || selectedLeaderboard === 'csgobig') && (
+          {selectedLeaderboard === 'roobet' && (
             <p className={classes.leaderboardsPromo}>$10,000 LEADERBOARD</p>
+          )}
+          {selectedLeaderboard === 'csgobig' && (
+            <p className={classes.leaderboardsPromo}>
+              <>
+                <Image
+                  src={bigcoinIcon}
+                  alt='Big Coin'
+                  width={48}
+                  height={48}
+                  style={{ verticalAlign: 'middle', marginRight: '4px' }}
+                />
+                5,000 LEADERBOARD
+              </>
+            </p>
           )}
 
           <p className={classes.codePromo}>
