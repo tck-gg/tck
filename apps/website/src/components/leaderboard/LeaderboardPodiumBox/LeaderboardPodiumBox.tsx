@@ -46,9 +46,9 @@ function LeaderboardPodiumBox({
               )}
               <p className={classes.rewardText}>
                 {['cash'].includes(rewardType) && '$'}
-                {['csgobig'].includes(rewardType) && 'COINS '}
                 {rewardType === 'roobet' && [3750, 2250, 1500][position - 1]}
                 {rewardType === 'csgobig' && [1875, 1125, 750][position - 1]}
+                {['csgobig'].includes(rewardType) && ' COINS'}
               </p>
             </div>
           </JaggedBackgroundItem>
