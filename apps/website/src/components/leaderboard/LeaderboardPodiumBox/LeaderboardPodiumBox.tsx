@@ -7,9 +7,10 @@ import JaggedBackgroundItem from '@/components/JaggedBackgroundItem/JaggedBackgr
 
 import classes from './LeaderboardPodiumBox.module.scss';
 
-import coinImage from '@/images/coin.png';
 import roobetIcon from '@/images/affiliate/roobet-icon.png';
 import bigcoinIcon from '@/images/affiliate/big-coin.png';
+
+import { CSGOBIG_PRIZES, ROOBET_PRIZES } from '@/data/leaderboard';
 
 function LeaderboardPodiumBox({
   leaderboardSpot,
@@ -50,8 +51,8 @@ function LeaderboardPodiumBox({
               )}
               <p className={classes.rewardText}>
                 {rewardType === 'cash' && '$'}
-                {rewardType === 'roobet' && [3750, 2250, 1500][position - 1]}
-                {rewardType === 'csgobig' && [1875, 1125, 750][position - 1]}
+                {rewardType === 'roobet' && ROOBET_PRIZES[position - 1]}
+                {rewardType === 'csgobig' && CSGOBIG_PRIZES[position - 1]}
               </p>
             </div>
           </JaggedBackgroundItem>
