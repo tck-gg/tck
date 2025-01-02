@@ -10,3 +10,7 @@ export function censor(input: string, visibleLength: number) {
     return i < visibleLength ? input[i] : '*';
   });
 }
+
+export function commaNumber(input: number) {
+  return input.toLocaleString('en-US');
+}

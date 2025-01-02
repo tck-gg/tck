@@ -25,6 +25,8 @@ import roobetLogo from '../../images/affiliate/roobet.png';
 import csgobigLogo from '../../images/affiliate/csgobig.png';
 
 import bigcoinIcon from '@/images/affiliate/big-coin.png';
+import { CSGOBIG_PRIZES_TOTAL, ROOBET_PRIZES_TOTAL } from '@/data/leaderboard';
+import { commaNumber } from 'custom-util';
 
 export type ILeaderboard = Prisma.LeaderboardGetPayload<{
   include: { spots: true };
@@ -90,7 +92,9 @@ function Leaderboards({
           />
 
           {selectedLeaderboard === 'roobet' && (
-            <p className={classes.leaderboardsPromo}>$10,000 LEADERBOARD</p>
+            <p className={classes.leaderboardsPromo}>
+              ${commaNumber(ROOBET_PRIZES_TOTAL)} LEADERBOARD
+            </p>
           )}
           {selectedLeaderboard === 'csgobig' && (
             <p className={classes.leaderboardsPromo}>
@@ -102,7 +106,7 @@ function Leaderboards({
                   height={48}
                   style={{ verticalAlign: 'middle', marginRight: '4px' }}
                 />
-                5,000 LEADERBOARD
+                {commaNumber(CSGOBIG_PRIZES_TOTAL)} LEADERBOARD
               </>
             </p>
           )}

@@ -8,6 +8,8 @@ import classes from './Leaderboard.module.scss';
 import roobetIcon from '@/images/affiliate/roobet-icon.png';
 import bigcoinIcon from '@/images/affiliate/big-coin.png';
 
+import { CSGOBIG_PRIZES, ROOBET_PRIZES } from '@/data/leaderboard';
+
 export type ILeaderboard = Prisma.LeaderboardGetPayload<{
   include: { spots: true };
 }>;
@@ -61,9 +63,7 @@ function Leaderboard({ leaderboard }: { leaderboard: ILeaderboard }) {
                             alt='Roobet Icon'
                             className={classes.clashGem}
                           />
-                          <span>
-                            {[3750, 2250, 1500, 750, 550, 400, 300, 250, 150, 100][index]}
-                          </span>
+                          <span>{ROOBET_PRIZES[index]}</span>
                         </>
                       )}
                       {leaderboard.type === 'csgobig' && (
@@ -75,7 +75,7 @@ function Leaderboard({ leaderboard }: { leaderboard: ILeaderboard }) {
                             alt='Big Coin Icon'
                             className={classes.clashGem}
                           />
-                          <span>{[1875, 1125, 750, 375, 275, 200, 150, 125, 75, 50][index]}</span>
+                          <span>{CSGOBIG_PRIZES[index]}</span>
                         </>
                       )}
                     </div>
