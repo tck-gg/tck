@@ -90,7 +90,7 @@ function Leaderboards({
           />
 
           {selectedLeaderboard === 'roobet' && (
-            <p className={classes.leaderboardsPromo}>$10,000 LEADERBOARD</p>
+            <p className={classes.leaderboardsPromo}>$15,000 LEADERBOARD</p>
           )}
           {selectedLeaderboard === 'csgobig' && (
             <p className={classes.leaderboardsPromo}>

@@ -62,7 +62,7 @@ function Leaderboard({ leaderboard }: { leaderboard: ILeaderboard }) {
                             className={classes.clashGem}
                           />
                           <span>
-                            {[3750, 2250, 1500, 750, 550, 400, 300, 250, 150, 100][index]}
+                            {[5625, 3375, 2250, 1125, 825, 600, 450, 375, 225, 150][index]}
                           </span>
                         </>
                       )}
